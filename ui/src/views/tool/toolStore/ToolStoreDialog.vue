@@ -179,11 +179,9 @@ function open(id: string) {
   folderId.value = id
   filterList.value = null
   dialogVisible.value = true
-}
 
-onBeforeMount(() => {
   getList()
-})
+}
 
 async function getList() {
   if (toolType.value === 'INTERNAL') {
@@ -219,17 +217,20 @@ async function getStoreToolList() {
     const res = await ToolStoreApi.getStoreToolList({ name: searchValue.value }, loading)
     const tags = res.data.additionalProperties.tags
     const storeTools = res.data.apps
-
-    if (storeTools.length === 0) {
-      filterList.value = []
-      return
+    //
+    storeTools.forEach((tool: any) => {
+      tool.desc = tool.description
+    })
+    if (searchValue.value.length) {
+      filterList.value = res.data.apps
+    } else {
+      filterList.value = null
+      categories.value = tags.map((tag: any) => ({
+        id: tag.key,
+        title: tag.name, // 国际化
+        tools: storeTools.filter((tool: any) => tool.label === tag.key),
+      }))
     }
-
-    categories.value = tags.map((tag: any) => ({
-      id: tag.key,
-      title: tag.name, // 国际化
-      tools: storeTools.filter((tool: any) => tool.label === tag.key),
-    }))
   } catch (error) {
     console.error(error)
   }
@@ -305,6 +306,7 @@ async function handleStoreAdd(tool: any) {
 }
 
 function radioChange() {
+  searchValue.value = ''
   getList()
 }
 
@@ -335,6 +337,11 @@ defineExpose({ open })
 
   .layout-container__left {
     background-color: var(--app-layout-bg-color);
+    border-radius: 0 0 0 8px;
+  }
+  .layout-container__right {
+    background-color: var(--app-layout-bg-color);
+    border-radius: 0 0 8px 0;
   }
 
   .el-anchor {
