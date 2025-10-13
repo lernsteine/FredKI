@@ -12,7 +12,7 @@ export default {
   views,
   theme,
   components,
-  en,
+  de,
   common,
   dynamicsForm,
   chat
