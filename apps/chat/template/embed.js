@@ -10,11 +10,11 @@ const guideHtml=`
           </svg>
   </div>
 
-  <div class="maxkb-title"> 🌟 遇见问题，不再有障碍！</div>
-  <p>你好，我是你的智能小助手。<br/>
-      点我，开启高效解答模式，让问题变成过去式。</p>
+  <div class="maxkb-title"> 🌟 Hurra hier bin ich!</div>
+  <p>Lass uns gemeinsam Neues aufbauen,<br/>
+      als Team sind wir erfolgreich!</p>
   <div class="maxkb-button">
-      <button>我知道了</button>
+      <button>Los geht's</button>
   </div>
   <span class="maxkb-arrow" ></span>
 </div>
