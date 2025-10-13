@@ -7,7 +7,7 @@ import common from './common'
 import dynamicsForm from './dynamics-form'
 import chat from './ai-chat'
 export default {
-  lang: 'English',
+  lang: 'Deutsch',
   layout,
   views,
   theme,
