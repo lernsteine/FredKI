@@ -112,6 +112,7 @@ export default {
           documentText: '需要使用“文档内容提取”节点解析文档内容',
           imageText: '需要使用“视觉模型”节点解析图片内容',
           audioText: '需要使用“语音转文本”节点解析音频内容',
+          videoText: '需要使用“视频理解”节点解析视频内容',
           otherText: '需要自行解析该类型文件',
         },
       },
@@ -286,6 +287,19 @@ export default {
         placeholder: '请描述不想生成的视频内容，比如：颜色、血腥内容',
       },
     },
+    videoUnderstandNode: {
+      label: '视频理解',
+      text: '识别出视频中的对象、场景等信息回答用户问题',
+      answer: 'AI 回答内容',
+      model: {
+        label: '视觉模型',
+        requiredMessage: '请选择视觉模型',
+      },
+      image: {
+        label: '选择视频',
+        requiredMessage: '请选择视频',
+      },
+    },
     imageToVideoGenerate: {
       label: '图生视频',
       text: '根据提供的图片生成视频',
@@ -395,6 +409,16 @@ export default {
       label: 'Break',
       text: '终止当前循环，跳出循环体',
       isBreak: 'Break',
+    },
+    variableSplittingNode: {
+      label: '变量拆分',
+      text: '用于拆分变量',
+      result: '结果',
+      splitVariables: '拆分变量',
+      expression: {
+        label: '表达式',
+        placeholder: '请输入表达式',
+      },
     },
   },
   compare: {

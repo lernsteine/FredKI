@@ -108,6 +108,7 @@ export default {
           label: 'File types allowed for upload',
           documentText: 'Requires "Document Content Extraction" node to parse document content',
           imageText: 'Requires "Image Understanding" node to parse image content',
+          videoText: 'Requires "Video Understanding" node to parse video content',
           audioText: 'Requires "Speech-to-Text" node to parse audio content',
         },
       },
@@ -395,6 +396,16 @@ You are a master of problem optimization, adept at accurately inferring user int
       label: 'Break',
       text: 'Terminate the current loop and exit the loop body',
       isBreak: 'Break',
+    },
+    variableSplittingNode: {
+      label: 'Variable Splitting',
+      text: 'Used to split variables',
+      result: 'Result',
+      splitVariables: 'Split Variables',
+      expression: {
+        label: 'Expression',
+        placeholder: 'Please enter expression',
+      },
     },
   },
   compare: {

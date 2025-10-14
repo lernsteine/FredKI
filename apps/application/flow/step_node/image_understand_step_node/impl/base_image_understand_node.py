@@ -169,13 +169,16 @@ class BaseImageUnderstandNode(IImageUnderstandNode):
             # 处理多张图片
             images = []
             for img in image:
-                file_id = img['file_id']
-                file = QuerySet(File).filter(id=file_id).first()
-                image_bytes = file.get_bytes()
-                base64_image = base64.b64encode(image_bytes).decode("utf-8")
-                image_format = what(None, image_bytes)
-                images.append(
-                    {'type': 'image_url', 'image_url': {'url': f'data:image/{image_format};base64,{base64_image}'}})
+                if isinstance(img, str) and img.startswith('http'):
+                    images.append({'type': 'image_url', 'image_url': {'url': img}})
+                else:
+                    file_id = img['file_id']
+                    file = QuerySet(File).filter(id=file_id).first()
+                    image_bytes = file.get_bytes()
+                    base64_image = base64.b64encode(image_bytes).decode("utf-8")
+                    image_format = what(None, image_bytes)
+                    images.append(
+                        {'type': 'image_url', 'image_url': {'url': f'data:image/{image_format};base64,{base64_image}'}})
             messages = [HumanMessage(
                 content=[
                     {'type': 'text', 'text': self.workflow_manage.generate_prompt(prompt)},
