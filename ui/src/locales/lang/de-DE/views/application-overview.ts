@@ -27,7 +27,7 @@ export default {
     },
     EmbedDialog: {
       fullscreenModeTitle: 'Vollbildmodus',
-      copyInstructions: 'Kopieren Sie den folgenden Code zum Einbetten',
+      copyInstructions: 'Zum Einbetten kopieren',
       floatingModeTitle: 'Schwebemodus',
       mobileModeTitle: 'Mobilmodus',
     },
