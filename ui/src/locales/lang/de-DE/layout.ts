@@ -21,6 +21,12 @@ export default {
     remark: 'Bemerkungen',
     update: 'Aktualisieren',
     authorize: 'Autorisiert',
+	inner_admin: 'System Admin',
+    inner_wsm: 'Workspace Manager',
+    inner_user: 'Nutzer/in',
+    root: 'Root Directory',
+    default_workspace: 'Default Workspace',
+    default_user_group: 'Default Nutzergruppe',
   },
   time: {
     daysLater: 'Tage später',
