@@ -55,7 +55,7 @@
         />
       </g>
     </svg>
-    <img v-else src="@/assets/logo/MaxKB-logo.svg" :height="height" />
+    <img v-else src="@/assets/logo/fredki_logo.png" :height="height" />
   </template>
 </template>
 <script setup lang="ts">
