@@ -6,7 +6,7 @@
     <div class="flex-between mb-16">
       <div>
         <el-button type="primary" @click="openCreateTagDialog()"
-          >{{ $t('views.document.tag.create') }}
+        >{{ $t('views.document.tag.create') }}
         </el-button>
         <el-button :disabled="multipleSelection.length === 0" @click="batchDelete">
           {{ $t('common.delete') }}
@@ -26,49 +26,65 @@
       :span-method="spanMethod"
       v-loading="loading"
       @selection-change="handleSelectionChange"
+      @cell-mouse-enter="cellMouseEnter"
+      @cell-mouse-leave="cellMouseLeave"
     >
-      <el-table-column type="selection" width="55" />
+      <el-table-column type="selection" width="55"/>
       <el-table-column :label="$t('views.document.tag.key')">
         <template #default="{ row }">
           <div class="flex-between">
             {{ row.key }}
-            <div>
-              <el-button link>
-                <AppIcon
-                  iconName="app-add-outlined"
-                  class="mr-4"
-                  @click="openCreateTagDialog(row)"
-                />
-              </el-button>
-              <el-button link>
-                <AppIcon iconName="app-edit" class="mr-4" @click="editTagKey(row)" />
-              </el-button>
-              <el-button link>
-                <AppIcon iconName="app-delete" class="mr-4" @click="delTag(row)" />
-              </el-button>
+            <div v-if="currentMouseId === row.id">
+              <span class="mr-4">
+                <el-tooltip effect="dark" :content="$t('views.document.tag.addValue')">
+                  <el-button type="primary" text @click.stop="openCreateTagDialog(row)">
+                    <AppIcon iconName="app-add-outlined" />
+                  </el-button>
+                </el-tooltip>
+              </span>
+              <span class="mr-4">
+                <el-tooltip effect="dark" :content="$t('views.document.tag.edit')">
+                  <el-button type="primary" text @click.stop="editTagKey(row)">
+                    <AppIcon iconName="app-edit" />
+                  </el-button>
+                </el-tooltip>
+              </span>
+              <el-tooltip effect="dark" :content="$t('common.delete')">
+                <el-button type="primary" text @click.stop="delTag(row)">
+                  <AppIcon iconName="app-delete" />
+                </el-button>
+              </el-tooltip>
             </div>
           </div>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('views.document.tag.value')">
+      <el-table-column :label="$t('views.document.tag.value')" class-name="border-l">
         <template #default="{ row }">
           <div class="flex-between">
             {{ row.value }}
-            <div>
-              <el-button link>
-                <AppIcon iconName="app-edit" class="mr-4" @click="editTagValue(row)" />
-              </el-button>
-              <el-button link>
-                <AppIcon iconName="app-delete" class="mr-4" @click="delTagValue(row)" />
-              </el-button>
-            </div>
           </div>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('common.operation')" align="left" width="100" fixed="right">
+        <template #default="{ row }">
+          <span class="mr-4">
+            <el-tooltip effect="dark" :content="$t('views.document.tag.editValue')">
+              <el-button type="primary" text @click.stop="editTagValue(row)">
+                <AppIcon iconName="app-edit" />
+              </el-button>
+            </el-tooltip>
+          </span>
+          <el-tooltip effect="dark" :content="$t('common.delete')">
+            <el-button type="primary" text @click.stop="delTagValue(row)">
+              <AppIcon iconName="app-delete" />
+            </el-button>
+          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
   </el-drawer>
-  <CreateTagDialog ref="createTagDialogRef" @refresh="getList" />
-  <EditTagDialog ref="editTagDialogRef" @refresh="getList" />
+  <CreateTagDialog ref="createTagDialogRef" @refresh="getList"/>
+  <EditTagDialog ref="editTagDialogRef" @refresh="getList"/>
 </template>
 
 <script setup lang="ts">
@@ -84,8 +100,12 @@ const emit = defineEmits(['refresh'])
 
 const route = useRoute()
 const {
-  params: { id }, // id为knowledgeID
+  params: {id, folderId}, // id为knowledgeID
 } = route as any
+
+const isShared = computed(() => {
+  return folderId === 'share'
+})
 
 const apiType = computed(() => {
   if (route.path.includes('shared')) {
@@ -101,6 +121,15 @@ const loading = ref(false)
 const debugVisible = ref(false)
 const filterText = ref('')
 const tags = ref<Array<any>>([])
+const currentMouseId = ref<number | null>(null)
+
+function cellMouseEnter(row: any) {
+  currentMouseId.value = row.id
+}
+
+function cellMouseLeave() {
+  currentMouseId.value = null
+}
 
 // 将原始数据转换为表格数据
 const tableData = computed(() => {
@@ -121,7 +150,7 @@ const tableData = computed(() => {
 })
 
 // 合并单元格方法
-const spanMethod = ({ row, column, rowIndex, columnIndex }: any) => {
+const spanMethod = ({row, column, rowIndex, columnIndex}: any) => {
   if (columnIndex === 0 || columnIndex === 1) {
     // key列 (由于添加了选择列，索引变为1)
     if (row.keyIndex === 0) {
@@ -213,9 +242,9 @@ function delTagValue(row: any) {
 
 function getList() {
   const params = {
-    ...(filterText.value && { name: filterText.value }),
+    ...(filterText.value && {name: filterText.value}),
   }
-  loadSharedApi({ type: 'knowledge', systemType: apiType.value })
+  loadSharedApi({type: 'knowledge', systemType: apiType.value, isShared: isShared.value})
     .getTags(id, params, loading)
     .then((res: any) => {
       tags.value = res.data

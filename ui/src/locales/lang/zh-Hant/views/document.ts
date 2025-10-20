@@ -14,6 +14,7 @@ export default {
     cancelGenerate: '取消生成',
     export: '匯出',
     download: '下載原文件',
+    replace: '替換原文件',
   },
   tip: {
     saveMessage: '當前的更改尚未保存，確認退出嗎?',
@@ -100,10 +101,12 @@ export default {
     label: '標籤管理',
     key: '標籤',
     value: '標籤值',
-    add: '添加標籤',
+    addTag: '添加標籤',
     setting: '標籤設置',
     create: '創建標籤',
+    createValue: '創建標籤值',
     edit: '編輯標籤',
+    editValue: '編輯標籤值',
     deleteConfirm: '是否刪除標籤: ',
     deleteTip: '刪除後使用該標籤的資源將會刪除該標籤，請謹慎操作!',
     requiredMessage1: '請輸入標籤',
@@ -168,8 +171,8 @@ export default {
       requiredMessage: '请输入相似度',
     },
     allow_download: {
-     label: '允許在知識庫來源下載',
-    }
+      label: '允許在知識庫來源下載',
+    },
   },
   hitHandlingMethod: {
     optimization: '模型優化',

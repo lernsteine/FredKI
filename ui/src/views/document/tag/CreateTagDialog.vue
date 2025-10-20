@@ -1,5 +1,10 @@
 <template>
-  <el-dialog v-model="dialogVisible" :title="$t('views.document.tag.create')" :before-close="close">
+  <el-dialog
+    v-model="dialogVisible"
+    :title="currentTagKey ? $t('views.document.tag.addValue') : $t('views.document.tag.create')"
+    :before-close="close"
+    append-to-body
+  >
     <el-form
       ref="FormRef"
       :model="{ tags }"
@@ -8,7 +13,7 @@
       @submit.prevent
     >
       <el-scrollbar>
-        <el-row :gutter="8" align="bottom" style="margin-right: 10px" class="tag-list-max-list">
+        <el-row :gutter="8" style="margin-right: 10px" class="tag-list-max-list">
           <template v-for="(tag, index) in tags" :key="tag">
             <el-col :span="12">
               <el-form-item
@@ -22,7 +27,7 @@
               >
                 <el-input
                   v-model="tag.key"
-                  :disabled="currentTagKey"
+                  :disabled="currentTagKey? true : false"
                   class="w-full"
                   :placeholder="$t('views.document.tag.requiredMessage1')"
                 ></el-input>
@@ -51,7 +56,7 @@
                 link
                 type="info"
                 @click="deleteTag(index)"
-                class="mb-24"
+                :style="{ marginTop: index === 0 ? '35px' : '5px' }"
               >
                 <AppIcon iconName="app-delete"></AppIcon>
               </el-button>
@@ -76,7 +81,6 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import AppIcon from '@/components/app-icon/AppIcon.vue'
 import { useRoute } from 'vue-router'
 import { loadSharedApi } from '@/utils/dynamics-api/shared-api.ts'
 import { cloneDeep } from 'lodash'
@@ -121,7 +125,7 @@ const submit = () => {
       .postTags(id, tags.value, loading)
       .then((res: any) => {
         close()
-        emit('refresh')
+        emit('refresh', currentTagKey.value)
       })
   })
 }
