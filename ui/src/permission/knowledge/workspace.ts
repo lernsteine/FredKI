@@ -232,6 +232,26 @@ const workspace = {
       ],
       'OR',
     ), 
+  doc_tag: (source_id:string) =>
+    hasPermission(
+      [
+        new ComplexPermission([RoleConst.USER],[PermissionConst.KNOWLEDGE.getKnowledgeWorkspaceResourcePermission(source_id)],[],'AND'),
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.KNOWLEDGE_DOCUMENT_TAG.getKnowledgeWorkspaceResourcePermission(source_id),
+        PermissionConst.KNOWLEDGE_DOCUMENT_TAG.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
+  doc_replace: (source_id:string) =>
+    hasPermission(
+      [
+        new ComplexPermission([RoleConst.USER],[PermissionConst.KNOWLEDGE.getKnowledgeWorkspaceResourcePermission(source_id)],[],'AND'),
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.KNOWLEDGE_DOCUMENT_REPLACE.getKnowledgeWorkspaceResourcePermission(source_id),
+        PermissionConst.KNOWLEDGE_DOCUMENT_REPLACE.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
   knowledge_chat_user_read: (source_id:string) => false,  
   knowledge_chat_user_edit: (source_id:string) => 
     hasPermission(
@@ -290,6 +310,46 @@ const workspace = {
         RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
         PermissionConst.KNOWLEDGE_PROBLEM_EDIT.getKnowledgeWorkspaceResourcePermission(source_id),
         PermissionConst.KNOWLEDGE_PROBLEM_EDIT.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
+  tag_read: (source_id:string) => 
+    hasPermission(
+      [
+        new ComplexPermission([RoleConst.USER],[PermissionConst.KNOWLEDGE.getKnowledgeWorkspaceResourcePermission(source_id)],[],'AND'),
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.KNOWLEDGE_TAG_READ.getKnowledgeWorkspaceResourcePermission(source_id),
+        PermissionConst.KNOWLEDGE_TAG_READ.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
+  tag_create: (source_id:string) => 
+    hasPermission(
+      [
+        new ComplexPermission([RoleConst.USER],[PermissionConst.KNOWLEDGE.getKnowledgeWorkspaceResourcePermission(source_id)],[],'AND'),
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.KNOWLEDGE_TAG_CREATE.getKnowledgeWorkspaceResourcePermission(source_id),
+        PermissionConst.KNOWLEDGE_TAG_CREATE.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
+  tag_edit: (source_id:string) => 
+    hasPermission(
+      [
+        new ComplexPermission([RoleConst.USER],[PermissionConst.KNOWLEDGE.getKnowledgeWorkspaceResourcePermission(source_id)],[],'AND'),
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.KNOWLEDGE_TAG_EDIT.getKnowledgeWorkspaceResourcePermission(source_id),
+        PermissionConst.KNOWLEDGE_TAG_EDIT.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
+  tag_delete: (source_id:string) => 
+    hasPermission(
+      [
+        new ComplexPermission([RoleConst.USER],[PermissionConst.KNOWLEDGE.getKnowledgeWorkspaceResourcePermission(source_id)],[],'AND'),
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.KNOWLEDGE_TAG_DELETE.getKnowledgeWorkspaceResourcePermission(source_id),
+        PermissionConst.KNOWLEDGE_TAG_DELETE.getWorkspacePermissionWorkspaceManageRole,
       ],
       'OR',
     ),

@@ -8731,3 +8731,18 @@ msgstr ""
 
 msgid "Captcha is required"
 msgstr ""
+
+msgid "Tag"
+msgstr ""
+
+msgid "Tag Setting"
+msgstr ""
+
+msgid "Download Original Document"
+msgstr ""
+
+msgid "Replace Original Document"
+msgstr ""
+
+msgid "Update License"
+msgstr ""

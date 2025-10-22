@@ -175,7 +175,10 @@ class Operate(Enum):
     TO_CHAT = "READ+TO_CHAT"  # 去对话
     SETTING = "READ+SETTING"  # 管理
     DOWNLOAD = "READ+DOWNLOAD"  # 下载
-    AUTH = "READ+AUTH"
+    AUTH = "READ+AUTH" # 资源授权
+    TAG = "READ+TAG" # 标签设置
+    REPLACE = "READ+REPLACE" # 标签设置
+    UPDATE = "READ+UPDATE" # 更新license
 
 
 class RoleGroup(Enum):
@@ -325,6 +328,7 @@ Permission_Label = {
     Group.APPLICATION.value: _("Application"),
     Group.KNOWLEDGE.value: _("Knowledge"),
     Group.KNOWLEDGE_DOCUMENT.value: _("Document"),
+    Group.KNOWLEDGE_TAG.value: _("Tag"),
     Group.KNOWLEDGE_PROBLEM.value: _("Problem"),
     Group.KNOWLEDGE_HIT_TEST.value: _("Hit-Test"),
     Operate.IMPORT.value: _("Import"),
@@ -338,7 +342,7 @@ Permission_Label = {
     Operate.RELATE.value: _("Relate"),
     Operate.ANNOTATION.value: _("Annotation"),
     Operate.CLEAR_POLICY.value: _("Clear Policy"),
-    Operate.DOWNLOAD.value: _('Download'),
+    Operate.DOWNLOAD.value: _('Download Original Document'),
     Operate.EMBED.value: _('Embed third party'),
     Operate.ACCESS.value: _('Access restrictions'),
     Operate.DISPLAY.value: _('Display Settings'),
@@ -350,6 +354,9 @@ Permission_Label = {
     Operate.WEIXIN_PUBLIC_ACCOUNT.value: _('Weixin Public Account'),
     Operate.ADD_KNOWLEDGE.value: _('Add to Knowledge Base'),
     Operate.AUTH.value: _('resource authorization'),
+    Operate.TAG.value: _('Tag Setting'),
+    Operate.REPLACE.value: _('Replace Original Document'),
+
     Group.APPLICATION_OVERVIEW.value: _('Overview'),
     Group.APPLICATION_ACCESS.value: _('Application Access'),
     Group.APPLICATION_CHAT_USER.value: _('Dialogue users'),
@@ -368,6 +375,7 @@ Permission_Label = {
     Group.SYSTEM_MODEL.value: _("Model"),
     Group.SYSTEM_KNOWLEDGE.value: _("Knowledge"),
     Group.SYSTEM_KNOWLEDGE_DOCUMENT.value: _("Document"),
+    Group.SYSTEM_KNOWLEDGE_TAG.value: _("Tag"),
     Group.SYSTEM_KNOWLEDGE_PROBLEM.value: _("Problem"),
     Group.SYSTEM_KNOWLEDGE_HIT_TEST.value: _("Hit-Test"),
     Group.SYSTEM_KNOWLEDGE_CHAT_USER.value: _("Dialogue users"),
@@ -375,6 +383,7 @@ Permission_Label = {
     Group.SYSTEM_RES_MODEL.value: _("Model"),
     Group.SYSTEM_RES_KNOWLEDGE.value: _("Knowledge"),
     Group.SYSTEM_RES_KNOWLEDGE_DOCUMENT.value: _("Document"),
+    Group.SYSTEM_RES_KNOWLEDGE_TAG.value: _("Tag"),
     Group.SYSTEM_RES_KNOWLEDGE_PROBLEM.value: _("Problem"),
     Group.SYSTEM_RES_KNOWLEDGE_HIT_TEST.value: _("Hit-Test"),
     Group.SYSTEM_RES_KNOWLEDGE_CHAT_USER.value: _("Dialogue users"),
@@ -393,7 +402,6 @@ Permission_Label = {
     Group.SYSTEM_RES_APPLICATION_CHAT_LOG.value: _("Conversation log"),
     # SystemGroup.RESOURCE.value: _("Resource"),
 }
-
 
 class Permission:
     """
@@ -661,6 +669,18 @@ class PermissionConstants(Enum):
     )
     KNOWLEDGE_DOCUMENT_MIGRATE = Permission(
         group=Group.KNOWLEDGE_DOCUMENT, operate=Operate.MIGRATE,
+        role_list=[RoleConstants.ADMIN, RoleConstants.USER],
+        resource_permission_group_list=[ResourcePermissionConst.KNOWLEDGE_MANGE],
+        parent_group=[WorkspaceGroup.KNOWLEDGE, UserGroup.KNOWLEDGE]
+    )
+    KNOWLEDGE_DOCUMENT_TAG = Permission(
+        group=Group.KNOWLEDGE_DOCUMENT, operate=Operate.TAG,
+        role_list=[RoleConstants.ADMIN, RoleConstants.USER],
+        resource_permission_group_list=[ResourcePermissionConst.KNOWLEDGE_MANGE],
+        parent_group=[WorkspaceGroup.KNOWLEDGE, UserGroup.KNOWLEDGE]
+    )
+    KNOWLEDGE_DOCUMENT_REPLACE = Permission(
+        group=Group.KNOWLEDGE_DOCUMENT, operate=Operate.REPLACE,
         role_list=[RoleConstants.ADMIN, RoleConstants.USER],
         resource_permission_group_list=[ResourcePermissionConst.KNOWLEDGE_MANGE],
         parent_group=[WorkspaceGroup.KNOWLEDGE, UserGroup.KNOWLEDGE]
@@ -995,9 +1015,14 @@ class PermissionConstants(Enum):
                                                     )
 
     ABOUT_READ = Permission(group=Group.OTHER, operate=Operate.READ,
+                            role_list=[RoleConstants.ADMIN, RoleConstants.USER],
+                            parent_group=[SystemGroup.OTHER, WorkspaceGroup.OTHER, UserGroup.OTHER],
+                            label=_('About')
+                            )
+    ABOUT_UPDATE = Permission(group=Group.OTHER, operate=Operate.UPDATE,
                             role_list=[RoleConstants.ADMIN],
                             parent_group=[SystemGroup.OTHER],
-                            label=_('About')
+                            label=_('Update License')
                             )
     SWITCH_LANGUAGE = Permission(group=Group.OTHER, operate=Operate.EDIT,
                                  role_list=[RoleConstants.ADMIN, RoleConstants.USER],
@@ -1224,6 +1249,14 @@ class PermissionConstants(Enum):
         group=Group.SYSTEM_KNOWLEDGE_DOCUMENT, operate=Operate.MIGRATE, role_list=[RoleConstants.ADMIN],
         parent_group=[SystemGroup.SHARED_KNOWLEDGE], is_ee=settings.edition == "EE"
     )
+    SHARED_KNOWLEDGE_DOCUMENT_TAG = Permission(
+        group=Group.SYSTEM_KNOWLEDGE_DOCUMENT, operate=Operate.TAG, role_list=[RoleConstants.ADMIN],
+        parent_group=[SystemGroup.SHARED_KNOWLEDGE], is_ee=settings.edition == "EE"
+    )
+    SHARED_KNOWLEDGE_DOCUMENT_REPLACE = Permission(
+        group=Group.SYSTEM_KNOWLEDGE_DOCUMENT, operate=Operate.REPLACE, role_list=[RoleConstants.ADMIN],
+        parent_group=[SystemGroup.SHARED_KNOWLEDGE], is_ee=settings.edition == "EE"
+    )
     SHARED_KNOWLEDGE_TAG_READ = Permission(
         group=Group.SYSTEM_KNOWLEDGE_TAG, operate=Operate.READ, role_list=[RoleConstants.ADMIN],
         parent_group=[SystemGroup.SHARED_KNOWLEDGE], is_ee=settings.edition == "EE"
@@ -1442,6 +1475,14 @@ class PermissionConstants(Enum):
     )
     RESOURCE_KNOWLEDGE_DOCUMENT_MIGRATE = Permission(
         group=Group.SYSTEM_RES_KNOWLEDGE_DOCUMENT, operate=Operate.MIGRATE, role_list=[RoleConstants.ADMIN],
+        parent_group=[SystemGroup.RESOURCE_KNOWLEDGE], is_ee=settings.edition == "EE"
+    )
+    RESOURCE_KNOWLEDGE_DOCUMENT_TAG = Permission(
+        group=Group.SYSTEM_RES_KNOWLEDGE_DOCUMENT, operate=Operate.TAG, role_list=[RoleConstants.ADMIN],
+        parent_group=[SystemGroup.RESOURCE_KNOWLEDGE], is_ee=settings.edition == "EE"
+    )
+    RESOURCE_KNOWLEDGE_DOCUMENT_REPLACE = Permission(
+        group=Group.SYSTEM_RES_KNOWLEDGE_DOCUMENT, operate=Operate.REPLACE, role_list=[RoleConstants.ADMIN],
         parent_group=[SystemGroup.RESOURCE_KNOWLEDGE], is_ee=settings.edition == "EE"
     )
     RESOURCE_KNOWLEDGE_HIT_TEST = Permission(
