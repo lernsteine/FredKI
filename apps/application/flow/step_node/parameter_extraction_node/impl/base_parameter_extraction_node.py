@@ -46,7 +46,7 @@ def get_default_model_params_setting(model_id):
 
 
 def generate_properties(variable_list):
-    return {variable['field']: {'type': variable['parameter_type'], 'description': variable['desc'],
+    return {variable['field']: {'type': variable['parameter_type'], 'description': (variable.get('desc') or ""),
                                 'title': variable['label']} for variable in
             variable_list}
 
@@ -86,7 +86,7 @@ class BaseParameterExtractionNode(IParameterExtractionNode):
 
     def save_context(self, details, workflow_manage):
         for key, value in details.get('result').items():
-            self.context['key'] = value
+            self.context[key] = value
         self.context['result'] = details.get('result')
 
     def execute(self, input_variable, variable_list, model_params_setting, model_id, **kwargs) -> NodeResult:
