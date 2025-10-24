@@ -82,6 +82,10 @@ export const aiChatNode = {
           label: t('views.applicationWorkflow.nodes.aiChatNode.think'),
           value: 'reasoning_content',
         },
+        {
+          label: t('views.applicationWorkflow.nodes.aiChatNode.historyMessage'),
+          value: 'history_message',
+        },
       ],
     },
   },
@@ -341,7 +345,9 @@ export const variableAggregationNode = {
   height: 252,
   properties: {
     stepName: t('views.applicationWorkflow.nodes.variableAggregationNode.label'),
-    config: {},
+    config: {
+      fields: [],
+    },
   },
 }
 
@@ -656,14 +662,14 @@ export const applicationLoopMenuNodes = [
     list: [
       aiChatNode,
       intentNode,
-      questionNode,
-      imageGenerateNode,
-      videoUnderstandNode,
-      imageUnderstandNode,
       textToSpeechNode,
       speechToTextNode,
+      imageGenerateNode,
+      imageUnderstandNode,
       textToVideoNode,
       imageToVideoNode,
+      videoUnderstandNode,
+      questionNode,
     ],
   },
   {
@@ -672,11 +678,11 @@ export const applicationLoopMenuNodes = [
   },
   {
     label: t('views.applicationWorkflow.nodes.classify.businessLogic'),
-    list: [conditionNode, formNode, variableAssignNode, replyNode, loopContinueNode, loopBreakNode],
+    list: [conditionNode, formNode, replyNode, loopContinueNode, loopBreakNode],
   },
   {
     label: t('views.applicationWorkflow.nodes.classify.dataProcessing', '数据处理'),
-    list: [variableSplittingNode, parameterExtractionNode],
+    list: [variableAssignNode, variableSplittingNode, parameterExtractionNode],
   },
   {
     label: t('views.applicationWorkflow.nodes.classify.other'),
