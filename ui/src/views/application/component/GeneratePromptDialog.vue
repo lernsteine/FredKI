@@ -405,7 +405,7 @@ function generatePrompt(inputValue: any) {
 const reAnswerClick = () => {
   if (originalUserInput.value) {
     generatePrompt(
-      `上一次回答不满意。请针对原始问题"${originalUserInput.value}"并结合对话记录，严格按照格式规范重新生成。`,
+      `Die vorherige Antwort ist unbefriedigend. Bitte generieren Sie sie basierend auf der ursprünglichen Frage"${originalUserInput.value}" und dem Gesprächsverlauf neu und halten Sie sich dabei strikt an die Formatierungsvorgaben.`,
     )
   }
 }
