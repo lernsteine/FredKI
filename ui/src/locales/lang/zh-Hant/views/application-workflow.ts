@@ -50,13 +50,14 @@ export default {
     beautify: '一鍵美化',
   },
   variable: {
-    label: '變量',
     global: '全局變量',
     Referencing: '引用變量',
     ReferencingRequired: '引用變量必填',
     ReferencingError: '引用變量錯誤',
     NoReferencing: '不存在的引用變量',
     placeholder: '請選擇變量',
+    inputPlaceholder: '請輸入變量',
+    loop: '循環變量',
   },
   condition: {
     title: '執行條件',
@@ -156,7 +157,7 @@ export default {
       result: '檢索結果',
       searchParam: '檢索參數',
       select_variable: '選擇變數',
-      valueMessage: `值或{name}`,
+      valueMessage: `值或變量`,
       showKnowledge: {
         label: '結果顯示在知識來源',
         requiredMessage: '請設定參數',
@@ -200,11 +201,7 @@ export default {
     replyNode: {
       label: '指定回覆',
       text: '指定回覆內容，引用變量會轉換為字符串進行輸出',
-      content: '內容',
-      replyContent: {
-        label: '回覆內容',
-        reference: '引用變量',
-      },
+      replyContent: '回覆內容',
     },
     rerankerNode: {
       label: '多路召回',
@@ -262,16 +259,16 @@ export default {
     },
     variableAggregationNode: {
       label: '變量聚合',
-      text: '對多個分支的輸出進行聚合處理',
+      text: '按聚合策略聚合每組的變量',
       Strategy: '聚合策略',
       placeholder: '返回每組的第一個非空值',
-      placeholder1: '結構化聚合每組變量',
+      placeholder1: '返回每組變量的集合',
       group: {
-        placeholder: '請選擇變量',
         noneError: '名稱不能為空',
         dupError: '名稱不能重複',
       },
-      add: '新增分組',
+      addGroup: '添加分組',
+      editGroup: '編輯分組',
     },
     mcpNode: {
       label: 'MCP 調用',
@@ -414,7 +411,6 @@ export default {
       label: '循環開始',
       loopIndex: '下標',
       loopItem: '循環元素',
-      loopVariable: '循環變量',
     },
     loopBodyNode: { label: '循環體', text: '循環體' },
     loopContinueNode: {
@@ -425,17 +421,17 @@ export default {
     loopBreakNode: { label: 'Break', text: '終止當前循環，跳出循環體', isBreak: 'Break' },
     variableSplittingNode: {
       label: '變量拆分',
-      text: '用於拆分變量',
+      text: '通過配置 JSON Path 表達式，對輸入的 JSON 格式變量進行解析和拆分',
       result: '結果',
       splitVariables: '拆分變量',
       inputVariables: '輸入變量',
       addVariables: '添加變量',
       editVariables: '編輯變量',
-      variablePlaceholder: '請輸入變量',
       variableListPlaceholder: '請添加折開變數',
       expression: {
         label: '表達式',
         placeholder: '請輸入表達式',
+        tooltip: '請使用JSON Path 表達式拆分變量，例如：$.store.book',
       },
     },
     parameterExtractionNode: {

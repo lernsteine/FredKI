@@ -1,10 +1,6 @@
 <template>
   <el-dialog
-    :title="
-      isEdit
-        ? $t('views.applicationWorkflow.nodes.variableSplittingNode.editVariables')
-        : $t('views.applicationWorkflow.nodes.variableSplittingNode.addVariables')
-    "
+    :title="isEdit ? $t('views.applicationWorkflow.nodes.variableAggregationNode.editGroup') : $t('views.applicationWorkflow.nodes.variableAggregationNode.addGroup')"
     v-model="dialogVisible"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
@@ -18,15 +14,11 @@
       :rules="rules"
       :model="form"
       require-asterisk-position="right"
-      hide-required-asterisk
     >
-      <el-form-item prop="field">
-        <template #label>
-          <div class="flex align-center">
-            <span class="mr-4">{{ $t('common.variable') }}</span>
-            <span class="color-danger">*</span>
-          </div>
-        </template>
+      <el-form-item
+        :label="$t('common.variable')"
+        prop="field"
+      >
         <el-input
           v-model="form.field"
           :maxlength="64"
@@ -34,13 +26,10 @@
           show-word-limit
         />
       </el-form-item>
-      <el-form-item prop="label">
-        <template #label>
-          <div class="flex align-center">
-            <span class="mr-4">{{ $t('dynamicsForm.paramForm.name.label') }}</span>
-            <span class="color-danger">*</span>
-          </div>
-        </template>
+      <el-form-item
+        :label="$t('dynamicsForm.paramForm.name.label')"
+        prop="label"
+      >
         <el-input
           v-model="form.label"
           :maxlength="64"
@@ -48,39 +37,12 @@
           :placeholder="$t('dynamicsForm.paramForm.name.placeholder')"
         />
       </el-form-item>
-      <el-form-item prop="expression">
-        <template #label>
-          <div class="flex align-center">
-            <span class="mr-4"
-              >{{ $t('views.applicationWorkflow.nodes.variableSplittingNode.expression.label') }}
-              <span class="color-danger">*</span></span
-            >
-            <el-tooltip
-              effect="dark"
-              :content="
-                $t('views.applicationWorkflow.nodes.variableSplittingNode.expression.tooltip')
-              "
-              placement="right"
-            >
-              <AppIcon iconName="app-warning" class="app-warning-icon"></AppIcon>
-            </el-tooltip>
-          </div>
-        </template>
-        <el-input
-          v-model="form.expression"
-          :maxlength="64"
-          show-word-limit
-          :placeholder="
-            $t('views.applicationWorkflow.nodes.variableSplittingNode.expression.placeholder')
-          "
-        />
-      </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click.prevent="close"> {{ $t('common.cancel') }} </el-button>
         <el-button type="primary" @click="submit(fieldFormRef)" :loading="loading">
-          {{ $t('common.save') }}
+          {{ isEdit ? $t('common.save') : $t('common.add') }}
         </el-button>
       </span>
     </template>
@@ -100,7 +62,6 @@ const currentIndex = ref(null)
 const form = ref<any>({
   field: '',
   label: '',
-  expression: '',
 })
 
 const rules = reactive({
@@ -108,21 +69,10 @@ const rules = reactive({
     { required: true, message: t('dynamicsForm.paramForm.name.placeholder'), trigger: 'blur' },
   ],
   field: [
-    {
-      required: true,
-      message: t('views.applicationWorkflow.variable.inputPlaceholder'),
-      trigger: 'blur',
-    },
+    { required: true, message: t('views.applicationWorkflow.variable.inputPlaceholder'), trigger: 'blur' },
     {
       pattern: /^[a-zA-Z0-9_]+$/,
       message: t('dynamicsForm.paramForm.field.requiredMessage2'),
-      trigger: 'blur',
-    },
-  ],
-  expression: [
-    {
-      required: true,
-      message: t('views.applicationWorkflow.nodes.variableSplittingNode.expression.placeholder'),
       trigger: 'blur',
     },
   ],
@@ -130,9 +80,9 @@ const rules = reactive({
 
 const dialogVisible = ref<boolean>(false)
 
-const open = (row: any, index?: any) => {
-  if (row) {
-    form.value = cloneDeep(row)
+const open = (data: any, index?: any) => {
+  if (data) {
+    form.value = cloneDeep(data)
     isEdit.value = true
     currentIndex.value = index
   }

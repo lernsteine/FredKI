@@ -2,154 +2,149 @@
   <NodeContainer :nodeModel="nodeModel">
     <h5 class="title-decoration-1 mb-8">{{ $t('views.applicationWorkflow.nodeSetting') }}</h5>
     <el-form
-        @submit.prevent
-        :model="form_data"
-        label-position="top"
-        require-asterisk-position="right"
-        label-width="auto"
-        ref="VariableAggregationRef"
-        hide-required-asterisk
-      >
+      @submit.prevent
+      :model="form_data"
+      label-position="top"
+      require-asterisk-position="right"
+      label-width="auto"
+      ref="VariableAggregationRef"
+      hide-required-asterisk
+    >
       <el-form-item
-          :label="$t('views.applicationWorkflow.nodes.variableAggregationNode.Strategy')"
-          :rules="{
-            required: true,
-            trigger: 'change',
-          }"
-        >
-          <template #label>
-            <div class="flex-between">
-              <div>
-                <span>{{ $t('views.applicationWorkflow.nodes.variableAggregationNode.Strategy') }}
-                  <span class="color-danger">*</span>
-                </span>
-              </div>
+        :label="$t('views.applicationWorkflow.nodes.variableAggregationNode.Strategy')"
+        :rules="{
+          required: true,
+          trigger: 'change',
+        }"
+      >
+        <template #label>
+          <div class="flex-between">
+            <div>
+              <span
+                >{{ $t('views.applicationWorkflow.nodes.variableAggregationNode.Strategy') }}
+                <span class="color-danger">*</span>
+              </span>
             </div>
-          </template>
-          <el-select
-            v-model="form_data.strategy"
-          >
-            <el-option
-              :label="t('views.applicationWorkflow.nodes.variableAggregationNode.placeholder')"
-              value="first_non_null"
-            />
-            <el-option
-              :label="t('views.applicationWorkflow.nodes.variableAggregationNode.placeholder1')"
-              value="variable_to_json"
-            />
-          </el-select>
+          </div>
+        </template>
+        <el-select v-model="form_data.strategy">
+          <el-option
+            :label="t('views.applicationWorkflow.nodes.variableAggregationNode.placeholder')"
+            value="first_non_null"
+          />
+          <el-option
+            :label="t('views.applicationWorkflow.nodes.variableAggregationNode.placeholder1')"
+            value="variable_to_json"
+          />
+        </el-select>
       </el-form-item>
-      <div v-for="(group_list, gIndex) in form_data.group_list" :key="group_list.id" class="mb-8">
+      <div v-for="(group, gIndex) in form_data.group_list" :key="group.id" class="mb-8">
         <el-card shadow="never" class="card-never" style="--el-card-padding: 12px">
-          
           <div class="flex-between mb-12">
-            <el-form-item
-              v-if="editingGroupIndex === gIndex"
-              :prop="`group_list.${gIndex}.group_name`"
-              :rules="groupNameRules(gIndex)"
-              style="margin-bottom: 0; flex: 1;"
-            >
-              <el-input
-                v-model="form_data.group_list[gIndex].group_name"
-                @blur="finishEditGroupName(gIndex)"
-                @input="validateGroupNameField(gIndex)"
-                ref="groupNameInputRef"
-                size="small"
-                style="width: 200px; font-weight: bold;"
-              >
-              </el-input>
-            </el-form-item>
-            <span v-else class="font-bold">{{ group_list.group_name }}</span>
-            <div class="flex align-center">
-              <el-button @click="editGroupName(gIndex)" size="large" link>
+            <span class="ellipsis" :title="group.label">{{ group.label }}</span>
+            <div class="flex align-center" style="margin-right: -3px">
+              <el-button @click="openAddOrEditDialog(group, gIndex)" link>
                 <el-icon><EditPen /></el-icon>
               </el-button>
-              <el-button @click="deleteGroup(gIndex)" size="large" link :disabled="form_data.group_list.length <= 1">
+              <el-button
+                @click="deleteGroup(gIndex)"
+                link
+                :disabled="form_data.group_list.length <= 1"
+              >
                 <AppIcon iconName="app-delete"></AppIcon>
               </el-button>
             </div>
           </div>
-
-          <div v-for="(item, vIndex) in group_list.variable_list" :key="item.v_id" class="mb-4">
-            <el-row :gutter="8">
-              <el-col :span="21">
-                <el-form-item
-                  :prop="`group_list.${gIndex}.variable_list.${vIndex}.variable`"
-                  :rules="{
-                    type: 'array',
-                    required: true,
-                    message: $t('views.applicationWorkflow.nodes.variableAggregationNode.group.placeholder'),
-                    trigger: 'change',
-                  }"
-                >
-                  <NodeCascader
-                    ref="nodeCascaderRef"
-                    :nodeModel="nodeModel"
-                    class="w-full"
-                    :placeholder="$t('views.applicationWorkflow.nodes.variableAggregationNode.group.placeholder')"
-                    v-model="item.variable"
-                  />
-                </el-form-item>
-              </el-col>
-              <el-col :span="3" style="text-align: center;">
-                <el-button
-                  link
-                  size="large"
-                  class="mt-4"
-                  :disabled="group_list.variable_list.length <= 1"
-                  @click="deleteVariable(gIndex, vIndex)"
-                >
-                  <AppIcon iconName="app-delete"></AppIcon>
-                </el-button>
-              </el-col>
-            </el-row>
-          </div>
-
+          <VueDraggable
+            ref="el"
+            v-bind:modelValue="group.variable_list"
+            :disabled="group.variable_list.length === 1"
+            handle=".handle"
+            :animation="150"
+            ghostClass="ghost"
+            @end="onEnd($event, gIndex)"
+          >
+            <div v-for="(item, vIndex) in group.variable_list" :key="item.v_id" class="drag-card">
+              <el-row class="handle">
+                <el-col :span="22" class="flex">
+                  <img src="@/assets/sort.svg" alt="" height="15" class="mr-4 mt-8" />
+                  <el-form-item
+                    :prop="`group_list.${gIndex}.variable_list.${vIndex}.variable`"
+                    :rules="{
+                      type: 'array',
+                      required: true,
+                      message: $t('views.applicationWorkflow.variable.placeholder'),
+                      trigger: 'change',
+                    }"
+                  >
+                    <NodeCascader
+                      ref="nodeCascaderRef"
+                      :nodeModel="nodeModel"
+                      style="width: 200px"
+                      :placeholder="$t('views.applicationWorkflow.variable.placeholder')"
+                      v-model="item.variable"
+                    />
+                  </el-form-item>
+                </el-col>
+                <el-col :span="2">
+                  <el-button
+                    link
+                    class="mt-4 ml-4"
+                    :disabled="group.variable_list.length <= 1"
+                    @click="deleteVariable(gIndex, vIndex)"
+                  >
+                    <AppIcon iconName="app-delete"></AppIcon>
+                  </el-button>
+                </el-col>
+              </el-row>
+            </div>
+          </VueDraggable>
           <el-button @click="addVariable(gIndex)" type="primary" size="large" link>
-            <AppIcon iconName="app-add-outlined" class="mr-4"/>
+            <AppIcon iconName="app-add-outlined" class="mr-4" />
             {{ $t('common.add') }}
           </el-button>
-          
         </el-card>
       </div>
-      <el-button @click="addGroup" type="primary" size="large" link>
-        <AppIcon iconName="app-add-outlined" class="mr-4"/>
-            {{ $t('views.applicationWorkflow.nodes.variableAggregationNode.add') }}
+      <el-button @click="openAddOrEditDialog()" type="primary" size="large" link>
+        <AppIcon iconName="app-add-outlined" class="mr-4" />
+        {{ $t('views.applicationWorkflow.nodes.variableAggregationNode.addGroup') }}
       </el-button>
-      </el-form>
+    </el-form>
+    <GroupFieldDialog ref="GroupFieldDialogRef" @refresh="refreshFieldList"></GroupFieldDialog>
   </NodeContainer>
 </template>
 <script setup lang="ts">
-import { set, cloneDeep, debounce } from 'lodash'
+import { set, cloneDeep } from 'lodash'
 import NodeCascader from '@/workflow/common/NodeCascader.vue'
 import NodeContainer from '@/workflow/common/NodeContainer.vue'
-
-import { ref, computed, onMounted, nextTick } from 'vue'
+import GroupFieldDialog from './component/GroupFieldDialog.vue'
+import { ref, computed, onMounted } from 'vue'
 import { isLastNode } from '@/workflow/common/data'
 import { t } from '@/locales'
 import { randomId } from '@/utils/common'
+import { MsgError } from '@/utils/message'
+import { VueDraggable } from 'vue-draggable-plus'
 
 const props = defineProps<{ nodeModel: any }>()
 const VariableAggregationRef = ref()
 const nodeCascaderRef = ref()
-const editingGroupIndex = ref<number | null>(null)
-const groupNameInputRef = ref()
-
+const GroupFieldDialogRef = ref()
 
 const form = {
   strategy: 'first_non_null',
   group_list: [
     {
       id: randomId(),
-      group_name: 'Group1',
+      label: 'Group1',
+      field: 'Group1',
       variable_list: [
         {
           v_id: randomId(),
-          variable: []
-        }
-      ]
+          variable: [],
+        },
+      ],
     },
-  ]
+  ],
 }
 const form_data = computed({
   get: () => {
@@ -162,123 +157,107 @@ const form_data = computed({
   },
   set: (value) => {
     set(props.nodeModel.properties, 'node_data', value)
-  }
+  },
 })
 
-const isGroupNameValid = ref<boolean>(true)
-const groupNameErrMsg = ref('')
-const tempGroupName = ref('')
+const inputFieldList = ref<any[]>([])
 
-const editGroupName = async (gIndex: number) => {
-  editingGroupIndex.value = gIndex
-  tempGroupName.value = form_data.value.group_list[gIndex].group_name
-  isGroupNameValid.value = true
-  groupNameErrMsg.value = ''
-  await nextTick()
-  if (groupNameInputRef.value) {
-    groupNameInputRef.value.focus()
+function openAddOrEditDialog(group?: any, index?: any) {
+  let data = null
+  if (group && index !== undefined) {
+    data = {
+      field: group.field,
+      label: group.label,
+    }
   }
+  GroupFieldDialogRef.value.open(data, index)
 }
 
-const groupNameRules = (gIndex: number) => [
-  { 
-    required: true, 
-    message: t('views.applicationWorkflow.nodes.variableAggregationNode.group.noneError'), 
-    trigger: 'blur' 
-  },
-  { 
-    validator: (rule: any, value: string, callback: any) => {
-      const trimmedValue = value?.trim() || ''
-      
-      const hasDuplicate = form_data.value.group_list.some((item: any, index: number) => 
-        index !== gIndex && item.group_name.trim() === trimmedValue
-      )
-      
-      if (hasDuplicate) {
-        callback(new Error(t('views.applicationWorkflow.nodes.variableAggregationNode.group.dupError')))
-      } else {
-        callback()
-      }
-    }, 
-    trigger: 'change'  // 实时触发
+function refreshFieldList(data: any, index: any) {
+  for (let i = 0; i < inputFieldList.value.length; i++) {
+    if (inputFieldList.value[i].field === data.field && index !== i) {
+      MsgError(t('views.applicationWorkflow.tip.paramErrorMessage') + data.field)
+      return
+    }
   }
-]
-
-
-const validateGroupNameField = debounce((gIndex: number) => {
-  VariableAggregationRef.value?.validateField(`group_list.${gIndex}.group_name`)
-}, 500)
-
-const finishEditGroupName = async (gIndex: number) => {
-  try {
-    await VariableAggregationRef.value?.validateField(`group_list.${gIndex}.group_name`)
-    const c_group_list = cloneDeep(form_data.value.group_list)
-    const fields = c_group_list.map((item:any) => ({ label: item.group_name, value: item.group_name}))
-    set(props.nodeModel.properties.config, 'fields', fields)
-    editingGroupIndex.value = null
-  } catch (error) {
-    form_data.value.group_list[gIndex].group_name = tempGroupName.value
-    editingGroupIndex.value = null
+  if ([undefined, null].includes(index)) {
+    inputFieldList.value.push(data)
+    addGroup(data)
+  } else {
+    inputFieldList.value.splice(index, 1, data)
+    editGroupDesc(data, index)
   }
+  GroupFieldDialogRef.value.close()
+  const fields = [...inputFieldList.value.map((item) => ({ label: item.label, value: item.field }))]
+  set(props.nodeModel.properties.config, 'fields', fields)
+}
+
+const editGroupDesc = (data: any, gIndex: any) => {
+  const c_group_list = cloneDeep(form_data.value.group_list)
+  c_group_list[gIndex].field = data.field
+  c_group_list[gIndex].label = data.label
+  form_data.value.group_list = c_group_list
 }
 
 const deleteGroup = (gIndex: number) => {
   const c_group_list = cloneDeep(form_data.value.group_list)
-  c_group_list.splice(gIndex,1)
+  c_group_list.splice(gIndex, 1)
   form_data.value.group_list = c_group_list
-  const fields = c_group_list.map((item:any) => ({ label: item.group_name, value: item.group_name}))
+  inputFieldList.value.splice(gIndex, 1)
+  const fields = c_group_list.map((item: any) => ({ label: item.label, value: item.field }))
   set(props.nodeModel.properties.config, 'fields', fields)
 }
 
 const addVariable = (gIndex: number) => {
   const c_group_list = cloneDeep(form_data.value.group_list)
   c_group_list[gIndex].variable_list.push({
-      v_id: randomId(),
-          variable: []
+    v_id: randomId(),
+    variable: [],
   })
   form_data.value.group_list = c_group_list
 }
 
-const deleteVariable = (gIndex: number,vIndex: number) => {
+const deleteVariable = (gIndex: number, vIndex: number) => {
   const c_group_list = cloneDeep(form_data.value.group_list)
   c_group_list[gIndex].variable_list.splice(vIndex, 1)
   form_data.value.group_list = c_group_list
 }
 
-const addGroup = () => {
-  let group_number = form_data.value.group_list.length + 1
-  let group_name = `Group${group_number}`
-
-  while (form_data.value.group_list.some((item: any) => item.group_name === group_name)) {
-    group_number++
-    group_name = `Group${group_number}`
-  }
-
+const addGroup = (data: any) => {
   const c_group_list = cloneDeep(form_data.value.group_list)
   c_group_list.push({
     id: randomId(),
-      group_name: group_name,
-      variable_list: [{
-          v_id: randomId(),
-          variable: []
-        }]
+    field: data.field,
+    label: data.label,
+    variable_list: [
+      {
+        v_id: randomId(),
+        variable: [],
+      },
+    ],
   })
   form_data.value.group_list = c_group_list
-  const fields = c_group_list.map((item:any) => ({ label: item.group_name, value: item.group_name}))
-  set(props.nodeModel.properties.config, 'fields', fields)
 }
-
-
-
 
 const validate = async () => {
   const validate_list = [
-    ...nodeCascaderRef.value.map((item:any)=>item.validate()),
+    ...nodeCascaderRef.value.map((item: any) => item.validate()),
     VariableAggregationRef.value?.validate(),
   ]
   return Promise.all(validate_list).catch((err) => {
-    return Promise.reject({node: props.nodeModel, errMessage: err})
+    return Promise.reject({ node: props.nodeModel, errMessage: err })
   })
+}
+
+function onEnd(event: any, gIndex: number) {
+  const { oldIndex, newIndex } = event
+  if (oldIndex === undefined || newIndex === undefined) return
+  const list = cloneDeep(props.nodeModel.properties.node_data.group_list[gIndex].variable_list)
+  const newInstance = { ...list[oldIndex] }
+  const oldInstance = { ...list[newIndex] }
+  list[newIndex] = newInstance
+  list[oldIndex] = oldInstance
+  set(props.nodeModel.properties.node_data.group_list[gIndex], 'variable_list', list)
 }
 
 onMounted(() => {
@@ -288,10 +267,17 @@ onMounted(() => {
     }
   }
   set(props.nodeModel, 'validate', validate)
-  const fields = form_data.value.group_list.map((item:any) => ({ label: item.group_name, value: item.group_name}))
+  if (props.nodeModel.properties.node_data.group_list) {
+    inputFieldList.value = form_data.value.group_list.map((item: any) => ({
+      label: item.label,
+      field: item.field,
+    }))
+  }
+  const fields = form_data.value.group_list.map((item: any) => ({
+    label: item.label,
+    value: item.field,
+  }))
   set(props.nodeModel.properties.config, 'fields', fields)
 })
-
-
 </script>
 <style lang="scss" scoped></style>

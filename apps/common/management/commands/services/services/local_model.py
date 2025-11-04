@@ -29,7 +29,6 @@ class GunicornLocalModelService(BaseService):
         cmd = [
             'gunicorn', 'maxkb.wsgi:application',
             '-b', bind,
-            '--preload',
             '-k', 'gthread',
             '--threads', '200',
             '-w', str(worker),
@@ -37,7 +36,8 @@ class GunicornLocalModelService(BaseService):
             '--max-requests-jitter', '2048',
             '--access-logformat', log_format,
             '--access-logfile', '/dev/null',
-            '--error-logfile', '-'
+            '--error-logfile', '-',
+            '-e', 'ENABLE_LOCAL_MODEL=1'
         ]
         if DEBUG:
             cmd.append('--reload')

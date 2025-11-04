@@ -11,7 +11,7 @@
   >
     <div class="generate-prompt-dialog-bg border-r-8">
       <div class="scrollbar-height">
-        <!-- Generierter Inhalt -->
+        <!-- 生成内容 -->
         <div class="p-16 pb-0 lighter">
           <el-scrollbar ref="scrollDiv">
             <div
@@ -32,9 +32,13 @@
               {{ $t('views.application.generateDialog.title') }}
             </p>
           </el-scrollbar>
+
           <div v-if="answer && !loading && !isStreaming && !showContinueButton" class="mt-8">
             <el-button type="primary" @click="() => emit('replace', answer)">
               {{ $t('views.application.generateDialog.replace') }}
+            </el-button>
+            <el-button @click="copyClick(answer)">
+              {{ $t('common.copy') }}
             </el-button>
             <el-button @click="reAnswerClick" :disabled="!answer || loading" :loading="loading">
               {{ $t('views.application.generateDialog.remake') }}
@@ -47,7 +51,7 @@
           </div>
         </div>
 
-        <!-- Texteingabefeld -->
+        <!-- 文本输入框 -->
 
         <div class="generate-prompt-operate p-16">
           <div v-if="showStopButton" class="text-center mb-8">
@@ -101,6 +105,7 @@ import { t } from '@/locales'
 import systemGeneratePromptAPI from '@/api/system-resource-management/application'
 import generatePromptAPI from '@/api/application/application'
 import useStore from '@/stores'
+import { copyClick } from '@/utils/clipboard'
 const emit = defineEmits(['replace'])
 const { user } = useStore()
 const route = useRoute()
@@ -114,7 +119,7 @@ const apiType = computed(() => {
     return 'workspace'
   }
 })
-// Ursprüngliche Eingabe
+// 原始输入
 const originalUserInput = ref<string>('')
 const modelID = ref('')
 const applicationID = ref('')
@@ -124,70 +129,70 @@ const loading = ref<boolean>(false)
 
 const promptTemplates = {
   INIT_TEMPLATE: `
-Bitte generieren Sie eine vollständige KI-Vorlage basierend auf der Beschreibung:
+请根据用户描述生成一个完整的AI角色人设模板:
 
-Anwendungsname: {application_name}
-Anwendungsbeschreibung: {detail}
-Benutzeranforderungen: {userInput}
+应用名称：{application_name}
+应用描述：{detail}
+用户需求：{userInput}
 
-Wichtiger Hinweis:
-1. Der Zeichensatz muss die Kernfunktionalität der Anwendung "{application_name}" erfüllen.
-2. Nutzer dürfen den spezifischen Inhalt des Zeichensatzes anpassen und optimieren.
-3. Bei Änderungswünschen können erforderliche Anpassungen vorgenommen werden.
+重要说明：
+1. 角色设定必须服务于"{application_name}"应用的核心功能
+2. 允许用户对角色设定的具体内容进行调整和优化
+3. 如果用户要求修改某个技能或部分，在保持应用主题的前提下进行相应调整
 
-Bitte beachten Sie das folgende Format:
+请按以下格式生成：
 
-Diese Regeln müssen eingehalten werden:
-1. **Erklärungen, Vorworte und zusätzliche Anweisungen sind untersagt.** Es wird nur das Endergebnis ausgegeben.
-2. **Bitte beachten Sie das folgende Format.** Überschriften und zusätzliche Absätze dürfen nicht weggelassen werden.
-3. **Bei Änderungswünschen zu bestimmten Teilen des Zeichensatzes nehmen wir Anpassungen vor, wobei die Kernfunktionalität der Anwendung erhalten bleibt.**
-4. **Wenn die Anfrage des Nutzers nichts mit der Zeichensatzgenerierung zu tun hat (z. B. Smalltalk oder andere Themen), generieren wir primär einen Standardzeichensatz basierend auf den Anwendungsinformationen. Wir werden Nutzereingaben jedoch nicht vollständig ignorieren und können wertvolle Zusatzinformationen (wie z. B. Domänenhintergrund, Ton und Stil) als sekundäre Referenz heranziehen**.
+必须严格遵循以下规则：
+1. **严格禁止输出解释、前言、额外说明**，只输出最终结果。
+2. **严格使用以下格式**，不能缺少标题、不能多出其他段落。
+3. **如果用户要求修改角色设定的某个部分，在保持应用核心功能的前提下进行调整**。
+4. **如果用户需求与角色设定生成完全无关（如闲聊、其他话题），则主要依据应用信息生成标准角色设定，但不完全忽略用户输入，可从中提取有价值的辅助信息（如领域背景、语气风格等）作为次要参考**。
 
-# Rolle:
-Eine einzeilige Beschreibung der Rolle und der Hauptaufgaben.
+# 角色:
+角色概述和主要职责的一句话描述
 
-## Ziel:
-Die Arbeitsziele der Rolle. Falls mehrere Ziele vorhanden sind, können Sie diese in Stichpunkten auflisten. Es empfiehlt sich jedoch, sich auf ein oder zwei zu konzentrieren.
+## 目标：
+角色的工作目标,如果有多目标可以分点列出,但建议更聚焦1-2个目标
 
-## Kernkompetenzen:
-###  Kompetenz 1: [Bezeichnung der Kompetenz, z. B. Arbeitsempfehlung/Informationsabfrage/Fachanalyse usw.]
-1. [Schritt 1 ausführen – Beschreiben Sie den ersten spezifischen Arbeitsschritt der Kompetenz, einschließlich bedingter Beurteilungen und Verarbeitungsmethoden.]
-2. [Schritt 2 ausführen – Beschreiben Sie den zweiten spezifischen Arbeitsschritt der Kompetenz, einschließlich der Informationsbeschaffung und -verarbeitung.]
-3. [Schritt 3 ausführen – Beschreiben Sie den letzten Ausgabeschritt der Kompetenz und erläutern Sie die Ergebnispräsentation.]
+## 核心技能：
+### 技能 1: [技能名称，如作品推荐/信息查询/专业分析等]
+1. [执行步骤1 - 描述该技能的第一个具体操作步骤，包括条件判断和处理方式]
+2. [执行步骤2 - 描述该技能的第二个具体操作步骤，包括如何获取或处理信息]
+3. [执行步骤3 - 描述该技能的最终输出步骤，说明如何呈现结果]
 
-===Antwortbeispiel===
-- 📋 [Kennung]: <Spezifische Anweisungen zur Inhaltsformatierung>
-- 🎯 [Kennung]: <Spezifische Anweisungen zur Inhaltsformatierung>
-- 💡 [Kennung]: <Spezifische Anweisungen zur Inhaltsformatierung>
-===Ende des Beispiels===
+===回复示例===
+- 📋 [标识符]: <具体内容格式说明>
+- 🎯 [标识符]: <具体内容格式说明>
+- 💡 [标识符]: <具体内容格式说明>
+===示例结束===
 
-### Kompetenz 2: [Bezeichnung der Kompetenz]
-1. [Schritt 1 ausführen – Beschreiben Sie die auslösenden Bedingungen und die anfängliche Verarbeitung.
-2. [Schritt 2 ausführen – Beschreiben Sie die spezifischen Methoden zur Erfassung und Weiterverarbeitung von Informationen.]
-3. [Schritt 3 ausführen – Beschreiben Sie die spezifischen Anforderungen und das Format für die endgültige Ausgabe.]
+### 技能 2: [技能名称]
+1. [执行步骤1 - 描述触发条件和初始处理方式]
+2. [执行步骤2 - 描述信息获取和深化处理的具体方法]
+3. [执行步骤3 - 描述最终输出的具体要求和格式]
 
-### Fähigkeit 3: [Name der Fähigkeit]
-- [Beschreibung der Kernkompetenz – Erläutern Sie den Hauptzweck und die Wissensbasis dieser Fähigkeit.]
-- [Anwendungsmethode – Beschreiben Sie, wie diese Fähigkeit zur Bereitstellung von Diensten für Nutzer eingesetzt wird, einschließlich spezifischer Implementierungsmethoden.]
+### 技能 3: [技能名称]
+- [核心能力描述 - 说明该技能的主要作用和知识基础]
+- [应用方法 - 描述如何运用该技能为用户提供服务，包括具体的实施方式]
 
-## Workflow:
-1. Beschreiben Sie den ersten Schritt des Rollen-Workflows.
-2. Beschreiben Sie den zweiten Schritt des Rollen-Workflows.
-3. Beschreiben Sie den dritten Schritt des Rollen-Workflows.
+## 工作流：
+1. 描述角色工作流程的第一步
+2. 描述角色工作流程的第二步
+3. 描述角色工作流程的第三步
 
-## Ausgabeformat:
-Falls Sie spezifische Anforderungen an das Ausgabeformat der Rolle haben, können Sie diese hier hervorheben und Beispiele für das gewünschte Ausgabeformat angeben.
+## 输出格式：
+如果对角色的输出格式有特定要求，可以在这里强调并举例说明想要的输出格式
 
 
-## Einschränkungen:
-1.  **Antwortumfang streng begrenzen**: Beantworten Sie nur Fragen, die sich auf die Rolleneinstellung beziehen.
-   - Wenn die Frage eines Nutzers nicht mit der Rolle zusammenhängt, muss das folgende feste Antwortformat verwendet werden:
-     „Entschuldigen Sie, ich kann nur Fragen zu [Rolleneinstellung] beantworten. Ihre Frage liegt außerhalb unseres Bereichs.“
-   - Geben Sie keine Antworten, die nicht mit der Rolleneinstellung zusammenhängen.
-2. Beschreiben Sie die Einschränkungen, die der Charakter während der Interaktion einhalten muss.
-3. Beschreiben Sie die Einschränkungen, die der Charakter während der Interaktion einhalten muss.
+## 限制：
+1. **严格限制回答范围**：仅回答与角色设定相关的问题。
+   - 如果用户提问与角色无关，必须使用以下固定格式回复：
+     “对不起，我只能回答与[角色设定]相关的问题，您的问题不在服务范围内。”
+   - 不得提供任何与角色设定无关的回答。
+2. 描述角色在互动过程中需要遵循的限制条件2
+3. 描述角色在互动过程中需要遵循的限制条件3
 
-Die Ausgabe darf keine Erklärungen oder zusätzlichen Anweisungen enthalten. Es dürfen nur Inhalte zurückgegeben werden, die dem oben genannten Format entsprechen.
+输出时不得包含任何解释或附加说明，只能返回符合以上格式的内容。
   `,
 }
 
@@ -198,7 +203,7 @@ const currentDisplayIndex = ref<number>(0) // 当前显示到的字符位置
 let streamTimer: number | null = null // 定时器引用
 const isOutputComplete = ref<boolean>(false)
 
-// Timerfunktion zur Simulation der Streaming-Ausgabe
+// 模拟流式输出的定时器函数
 const startStreamingOutput = () => {
   if (streamTimer) {
     clearInterval(streamTimer)
@@ -209,20 +214,20 @@ const startStreamingOutput = () => {
 
   streamTimer = setInterval(() => {
     if (isApiComplete.value && !isPaused.value) {
-       // Anzeigeinhalt aktualisieren
+      // 更新显示内容
       const currentAnswer = chatMessages.value[chatMessages.value.length - 1]
       if (currentAnswer && currentAnswer.role === 'ai') {
-        currentAnswer.content = fullContent .value
+        currentAnswer.content = fullContent.value
       }
       stopStreaming()
       return
     }
     if (!isPaused.value && currentDisplayIndex.value < fullContent.value.length) {
-      // Geben Sie jedes Mal 1–3 Zeichen aus und simulieren Sie so eine echte Streaming-Ausgabe
+      // 每次输出1-3个字符，模拟真实的流式输出
       const step = Math.min(3, fullContent.value.length - currentDisplayIndex.value)
       currentDisplayIndex.value += step
 
-      // Anzeigeinhalt aktualisieren
+      // 更新显示内容
       const currentAnswer = chatMessages.value[chatMessages.value.length - 1]
       if (currentAnswer && currentAnswer.role === 'ai') {
         currentAnswer.content = fullContent.value.substring(0, currentDisplayIndex.value)
@@ -233,7 +238,7 @@ const startStreamingOutput = () => {
   }, 50) as any
 }
 
-// Streaming-Ausgabe beenden
+// 停止流式输出
 const stopStreaming = () => {
   if (streamTimer) {
     clearInterval(streamTimer)
@@ -249,13 +254,13 @@ const showStopButton = computed(() => {
   return isStreaming.value
 })
 
-// Streaming-Ausgabe anhalten
+// 暂停流式输出
 const pauseStreaming = () => {
   isPaused.value = true
   isStreaming.value = false
 }
 
-// Streaming-Ausgabe fortsetzen
+// 继续流式输出
 const continueStreaming = () => {
   if (currentDisplayIndex.value < fullContent.value.length) {
     startStreamingOutput()
@@ -263,17 +268,17 @@ const continueStreaming = () => {
 }
 
 /**
- * Holen Sie sich eine rekursive Funktion zum Verarbeiten von Streaming-Daten
- * @param chat    Jede Gesprächsaufzeichnung
- * @param reader  Streaming-Daten
- * @param stream  Handelt es sich um Streaming-Daten?
+ * 获取一个递归函数,处理流式数据
+ * @param chat    每一条对话记录
+ * @param reader  流数据
+ * @param stream  是否是流式数据
  */
 const getWrite = (reader: any) => {
   let tempResult = ''
   const middleAnswer = reactive({ content: '', role: 'ai' })
   chatMessages.value.push(middleAnswer)
 
-  // Status initialisieren
+  // 初始化状态并
   fullContent.value = ''
   currentDisplayIndex.value = 0
   isOutputComplete.value = false
@@ -282,20 +287,20 @@ const getWrite = (reader: any) => {
 
   /**
    *
-   * @param done  Ist es vorbei?
-   * @param value Wert
+   * @param done  是否结束
+   * @param value 值
    */
   const write_stream = ({ done, value }: { done: boolean; value: any }) => {
     try {
       if (done) {
-        // Die Stream-Daten werden empfangen, der Timer läuft jedoch weiter, bis der gesamte Inhalt angezeigt wird.
+        // 流数据接收完成，但定时器继续运行直到显示完所有内容
         loading.value = false
         isApiComplete.value = true
         return
       }
       const decoder = new TextDecoder('utf-8')
       let str = decoder.decode(value, { stream: true })
-      // Hier ist eine Erklärung zu „Start“, da der Datenstrom-Rückgabestrom nicht gemäß dem Backend-Block zurückgegeben wird. Der Block, den wir erhalten möchten, ist „data:{xxx}\n\n“, aber er kann auch „data:{ -> xxx}\n\n“ erhalten. Kurz gesagt: „fetch“ kann nicht garantieren, dass jeder Block mit „data:\n\n“ beginnt und mit „data“ endet:
+      // 这里解释一下 start 因为数据流返回流并不是按照后端chunk返回 我们希望得到的chunk是data:{xxx}\n\n 但是它获取到的可能是 data:{ -> xxx}\n\n 总而言之就是 fetch不能保证每个chunk都说以data:开始 \n\n结束
       tempResult += str
       const split = tempResult.match(/data:.*}\n\n/g)
       if (split) {
@@ -304,7 +309,7 @@ const getWrite = (reader: any) => {
       } else {
         return reader.read().then(write_stream)
       }
-      // Hier ist die Erklärung一下 end
+      // 这里解释一下 end
       if (str && str.startsWith('data:')) {
         if (split) {
           for (const index in split) {
@@ -316,7 +321,7 @@ const getWrite = (reader: any) => {
               return Promise.reject(new Error(chunk.error))
             }
             if (!chunk.is_end) {
-              // Neu empfangene Inhalte werden in Echtzeit zum Gesamtinhalt hinzugefügt
+              // 实时将新接收的内容添加到完整内容中
               fullContent.value += chunk.content
               if (!streamingStarted) {
                 streamingStarted = true
@@ -349,7 +354,7 @@ const answer = computed(() => {
   return ''
 })
 
-// Berechnung des Schaltflächenzustands
+// 按钮状态计算
 const showContinueButton = computed(() => {
   return (
     !isStreaming.value && isPaused.value && currentDisplayIndex.value < fullContent.value.length
@@ -357,7 +362,7 @@ const showContinueButton = computed(() => {
 })
 
 function generatePrompt(inputValue: any) {
-  isApiComplete.value=false
+  isApiComplete.value = false
   loading.value = true
   const workspaceId = user.getWorkspaceId() || 'default'
   chatMessages.value.push({ content: inputValue, role: 'user' })
@@ -371,7 +376,7 @@ function generatePrompt(inputValue: any) {
       .then((response) => {
         nextTick(() => {
           if (dialogScrollbar.value) {
-            // 将Scrollen Sie mit der Bildlaufleiste nach unten
+            // 将滚动条滚动到最下面
             scrollDiv.value.setScrollTop(getMaxHeight())
           }
         })
@@ -384,7 +389,7 @@ function generatePrompt(inputValue: any) {
       .then((response) => {
         nextTick(() => {
           if (dialogScrollbar.value) {
-            // Scrollen Sie mit der Bildlaufleiste nach unten
+            // 将滚动条滚动到最下面
             scrollDiv.value.setScrollTop(getMaxHeight())
           }
         })
@@ -394,10 +399,12 @@ function generatePrompt(inputValue: any) {
   }
 }
 
-// Klicks neu generieren
+// 重新生成点击
 const reAnswerClick = () => {
   if (originalUserInput.value) {
-    generatePrompt(`Die vorherige Antwort ist unbefriedigend. Bitte generieren Sie sie basierend auf der ursprünglichen Frage "${originalUserInput.value}" und dem Gesprächsverlauf neu und halten Sie sich dabei strikt an die Formatierungsvorgaben.`)
+    generatePrompt(
+      `上一次回答不满意。请针对原始问题"${originalUserInput.value}"并结合对话记录，严格按照格式规范重新生成。`,
+    )
   }
 }
 
@@ -405,7 +412,7 @@ const quickInputRef = ref()
 
 const handleSubmit = (event?: any) => {
   if (!event?.ctrlKey && !event?.shiftKey && !event?.altKey && !event?.metaKey) {
-    // Wird die Tastenkombination nicht gedrückt, wird das Standardereignis verhindert
+    // 如果没有按下组合键，则会阻止默认事件
     event?.preventDefault()
     if (!inputValue.value.trim() || loading.value || isStreaming.value) {
       return
@@ -421,7 +428,7 @@ const handleSubmit = (event?: any) => {
       inputValue.value = ''
     }
   } else {
-    // Wenn Sie drücken ctrl/shift/cmd/opt +enter，Es wird einwickeln
+    // 如果同时按下ctrl/shift/cmd/opt +enter，则会换行
     insertNewlineAtCursor(event)
   }
 }
@@ -431,12 +438,12 @@ const insertNewlineAtCursor = (event?: any) => {
   ) as HTMLTextAreaElement
   const startPos = textarea.selectionStart
   const endPos = textarea.selectionEnd
-  // Standardverhalten verhindern (zusätzliche Zeilenumbrüche vermeiden)
+  // 阻止默认行为（避免额外的换行符）
   event.preventDefault()
-  // Fügt am Cursor eine neue Zeile ein
+  // 在光标处插入换行符
   inputValue.value = inputValue.value.slice(0, startPos) + '\n' + inputValue.value.slice(endPos)
   nextTick(() => {
-    textarea.setSelectionRange(startPos + 1, startPos + 1) // Der Cursor steht hinter dem Zeilenumbruch
+    textarea.setSelectionRange(startPos + 1, startPos + 1) // 光标定位到换行后位置
   })
 }
 
@@ -456,13 +463,13 @@ const getMaxHeight = () => {
 }
 
 /**
- * Handhabung von Folge-Bildlaufleisten
+ * 处理跟随滚动条
  */
 const handleScroll = () => {
   if (scrollDiv.value) {
-    // Wenn die Innenhöhe kleiner als die Außenhöhe ist, ist eine Bildlaufleiste erforderlich.
+    // 内部高度小于外部高度 就需要出滚动条
     if (scrollDiv.value.wrapRef.offsetHeight < dialogScrollbar.value?.scrollHeight) {
-      // Wenn sich die aktuelle Bildlaufleiste innerhalb des angegebenen Abstands vom unteren Rand befindet, folgt die Bildlaufleiste
+      // 如果当前滚动条距离最下面的距离在 规定距离 滚动条就跟随
       scrollDiv.value.setScrollTop(getMaxHeight())
     }
   }
@@ -470,30 +477,30 @@ const handleScroll = () => {
 
 const handleDialogClose = (done: () => void) => {
   if (answer.value) {
-    // Popup-Nachricht
+    // 弹出 消息
     MsgConfirm(t('common.tip'), t('views.application.generateDialog.exit'), {
       confirmButtonText: t('common.confirm'),
       cancelButtonText: t('common.cancel'),
       distinguishCancelAndClose: true,
     })
       .then(() => {
-        // Klicken Sie auf OK, um den Status zu löschen
+        // 点击确认，清除状态
         stopStreaming()
         chatMessages.value = []
         fullContent.value = ''
         currentDisplayIndex.value = 0
         isOutputComplete.value = false
-        done() // Wirklich geschlossen
+        done() // 真正关闭
       })
       .catch(() => {
-        // Klicken Sie auf „Abbrechen“.
+        // 点击取消
       })
   } else {
     done()
   }
 }
 
-// Timer bereinigen, wenn eine Komponente deinstalliert wird
+// 组件卸载时清理定时器
 onUnmounted(() => {
   stopStreaming()
 })

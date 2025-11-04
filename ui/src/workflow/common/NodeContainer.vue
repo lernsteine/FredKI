@@ -102,7 +102,7 @@
                   @mouseenter="showicon = index"
                   @mouseleave="showicon = null"
                 >
-                  <span style="max-width: 92%">{{ item.label }} {{ '{' + item.value + '}' }}</span>
+                  <span class="break-all">{{ item.label }} {{ '{' + item.value + '}' }}</span>
                   <el-tooltip
                     effect="dark"
                     :content="$t('views.applicationWorkflow.setting.copyParam')"
@@ -269,8 +269,8 @@ const mousedown = (event?: any) => {
   if (!event?.shiftKey) {
     props.nodeModel.graphModel.clearSelectElements()
   }
-  set(props.nodeModel, 'isSelected', true)
-  set(props.nodeModel, 'isHovered', true)
+  set(props.nodeModel, 'isSelected', !props.nodeModel.isSelected)
+  set(props.nodeModel, 'isHovered', !props.nodeModel.isSelected)
   props.nodeModel.graphModel.toFront(props.nodeModel.id)
 }
 const showicon = ref<number | null>(null)
