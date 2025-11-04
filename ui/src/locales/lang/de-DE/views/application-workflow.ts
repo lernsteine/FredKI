@@ -5,7 +5,7 @@ export default {
   nodeSetting: 'Knoten-Einstellungen',
   workflow: 'Workflow',
   searchBar: {
-    placeholder: 'Nach Namen suchen',
+    placeholder: 'Nach Name suchen',
   },
   info: {
     previewVersion: 'Vorschauversion:',
@@ -15,20 +15,20 @@ export default {
     restoreVersion: 'Vorherige Version wiederherstellen"',
     restoreCurrentVersion: 'Auf diese Version wiederherstellen',
     addComponent: 'Hinzufügen',
-    releaseHistory: 'Versionsverlauf',
+    releaseHistory: 'Veröffentlichungshistorie',
     autoSave: 'Automatisches Speichern',
     latestRelease: 'Neueste Veröffentlichung',
     copyParam: 'Parameter kopieren',
     debug: 'Ausführen',
     exit: 'Beenden',
-    exitSave: 'Speichern & Beenden',
+    exitSave: 'Speichern & beenden',
   },
   tip: {
     noData: 'Keine passenden Ergebnisse gefunden',
     nameMessage: 'Name darf nicht leer sein!',
-    onlyRight: 'Verbindungen dürfen nur vom rechten Anker hergestellt werden',
+    onlyRight: 'Verbindungen können nur vom rechten Anker ausgehen',
     notRecyclable: 'Schleifenverbindungen sind nicht erlaubt',
-    onlyLeft: 'Verbindungen dürfen nur zum linken Anker hergestellt werden',
+    onlyLeft: 'Verbindungen können nur zum linken Anker hergestellt werden',
     applicationNodeError: 'Diese Anwendung ist nicht verfügbar',
     toolNodeError: 'Dieser Tool-Knoten ist nicht verfügbar',
     repeatedNodeError: 'Ein Knoten mit diesem Namen existiert bereits',
@@ -50,38 +50,40 @@ export default {
     beautify: 'Automatisch anordnen',
   },
   variable: {
-    label: 'Variable',
     global: 'Globale Variable',
     Referencing: 'Referenzierte Variable',
     ReferencingRequired: 'Referenzierte Variable ist erforderlich',
     ReferencingError: 'Ungültige referenzierte Variable',
     NoReferencing: 'Referenzierte Variable existiert nicht',
-    placeholder: 'Bitte eine Variable auswählen',
+    placeholder: 'Bitte Variable auswählen',
+    inputPlaceholder: 'Bitte Variable eingeben',
+    loop: 'Schleifenvariable',
   },
   condition: {
     title: 'Ausführungsbedingung',
     front: 'Voraussetzung',
     AND: 'Alle',
     OR: 'Beliebige',
-    text: 'Nachdem der verbundene Knoten ausgeführt wurde, den aktuellen Knoten ausführen',
+    text: 'Nach Ausführung des verbundenen Knotens den aktuellen Knoten ausführen',
   },
   validate: {
     startNodeRequired: 'Startknoten ist erforderlich',
-    startNodeOnly: 'Es ist nur ein Startknoten zulässig',
+    startNodeOnly: 'Es ist nur ein Startknoten erlaubt',
     baseNodeRequired: 'Basisknoten ist erforderlich',
-    baseNodeOnly: 'Es ist nur ein Basisknoten zulässig',
+    baseNodeOnly: 'Es ist nur ein Basisknoten erlaubt',
     notInWorkFlowNode: 'Knoten nicht im Workflow',
     noNextNode: 'Nächster Knoten existiert nicht',
     nodeUnavailable: 'Knoten nicht verfügbar',
     needConnect1: 'Der Zweig des Knotens muss verbunden werden',
     cannotEndNode: 'Dieser Knoten kann nicht als Endknoten verwendet werden',
-    loopNodeBreakNodeRequired: 'Endlosschleife muss einen Break-Knoten haben',
+    loopNodeBreakNodeRequired: 'Drahtlose Schleife muss einen Break-Knoten besitzen',
   },
   nodes: {
     classify: {
       aiCapability: 'AI-Fähigkeit',
-      businessLogic: 'Geschäftslogik',
+      businessLogic: 'Business-Logik',
       other: 'Sonstiges',
+      dataProcessing: 'Datenverarbeitung',
     },
     startNode: {
       label: 'Start',
@@ -98,17 +100,18 @@ export default {
       },
       fileUpload: {
         label: 'Datei-Upload',
-        tooltip: 'Wenn aktiviert, wird auf der Q&A-Seite eine Datei-Upload-Schaltfläche angezeigt.',
+        tooltip: 'Wenn aktiviert, erscheint auf der Q&A-Seite eine Schaltfläche zum Datei-Upload.',
       },
       FileUploadSetting: {
-        title: 'Einstellungen für Datei-Upload',
-        maxFiles: 'Max. Anzahl an Dateien pro Upload',
+        title: 'Datei-Upload-Einstellungen',
+        maxFiles: 'Maximale Anzahl an Dateien pro Upload',
         fileLimit: 'Maximale Größe pro Datei (MB)',
         fileUploadType: {
-          label: 'Für Upload zulässige Dateitypen',
-          documentText: 'Erfordert den Knoten „Document Content Extraction“, um Dokumentinhalte zu analysieren',
-          imageText: 'Erfordert den Knoten „Image Understanding“, um Bildinhalte zu analysieren',
-          audioText: 'Erfordert den Knoten „Speech-to-Text“, um Audioinhalte zu analysieren',
+          label: 'Für den Upload zulässige Dateitypen',
+          documentText: 'Benötigt einen „Dokumentinhalt extrahieren“-Knoten zum Parsen von Dokumentinhalten',
+          imageText: 'Benötigt einen „Bildverständnis“-Knoten zum Analysieren von Bildinhalten',
+          videoText: 'Benötigt einen „Videounterstanding“-Knoten zum Analysieren von Videoinhalten',
+          audioText: 'Benötigt einen „Speech-to-Text“-Knoten zum Analysieren von Audioinhalten',
         },
       },
     },
@@ -117,47 +120,73 @@ export default {
       text: 'Mit einem AI-Modell chatten',
       answer: 'AI-Inhalt',
       returnContent: {
-        label: 'Rückgabeinhalt',
+        label: 'Ausgabeinhalt',
         tooltip: `Wenn ausgeschaltet, wird der Inhalt dieses Knotens nicht an den Benutzer ausgegeben.
-                  Wenn der Benutzer die Ausgabe dieses Knotens sehen soll, bitte den Schalter einschalten.`,
+                  Soll der Benutzer die Ausgabe dieses Knotens sehen, bitte den Schalter einschalten.`,
       },
       defaultPrompt: 'Bekannte Informationen',
       think: 'Denkprozess',
+      historyMessage: 'Historische Chat-Aufzeichnungen',
     },
     searchKnowledgeNode: {
       label: 'Wissensrecherche',
-      text: 'Ermöglicht das Abfragen von Textinhalten aus dem Wissen, die sich auf Benutzerfragen beziehen',
-      paragraph_list: 'Liste der abgerufenen Segmente',
-      is_hit_handling_method_list: 'Liste der Segmente, die Kriterien für Direktantwort erfüllen',
+      text: 'Ermöglicht das Abfragen von Textinhalten aus dem Wissen passend zur Benutzerfrage',
+      paragraph_list: 'Liste der gefundenen Abschnitte',
+      is_hit_handling_method_list: 'Liste der Abschnitte mit Direktantwort-Kriterium',
       result: 'Suchergebnis',
-      directly_return: 'Inhalt der Segmente, die Kriterien für Direktantwort erfüllen',
-      searchParam: 'Abrufparameter',
+      directly_return: 'Inhalt der Abschnitte mit Direktantwort-Kriterium',
+      searchParam: 'Suchparameter',
       searchQuestion: {
         label: 'Frage',
-        placeholder: 'Bitte eine Suchfrage auswählen',
-        requiredMessage: 'Bitte eine Suchfrage auswählen',
+        placeholder: 'Bitte Suchfrage auswählen',
+        requiredMessage: 'Bitte Suchfrage auswählen',
+      },
+    },
+    searchDocumentNode: {
+      label: 'Dokument-Tag-Suche',
+      text: 'Suche nach Dokumenten anhand ihrer Labels im angegebenen Suchbereich',
+      selectKnowledge: 'Suchbereich',
+      searchSetting: 'Sucheinstellungen',
+      custom: 'Manuell',
+      customTooltip: 'Tag-Filterbedingungen manuell festlegen',
+      auto: 'Automatisch',
+      autoTooltip: 'Tag-Filterbedingungen automatisch anhand der Suchfrage setzen',
+      document_list: 'Dokumentenliste',
+      knowledge_list: 'Wissensbasis-Liste',
+      result: 'Suchergebnisse',
+      searchParam: 'Suchparameter',
+      select_variable: 'Variable auswählen',
+      valueMessage: `Wert oder Name `,
+      showKnowledge: {
+        label: 'Ergebnisse in der Wissensquelle anzeigen',
+        requiredMessage: 'Bitte Parameter festlegen',
+      },
+      searchQuestion: {
+        label: 'Suchfrage',
+        placeholder: 'Bitte Suchfrage auswählen',
+        requiredMessage: 'Bitte Suchfrage auswählen',
       },
     },
     questionNode: {
       label: 'Fragenoptimierung',
-      text: 'Optimiert die aktuelle Frage basierend auf Chat-Verlauf, um Wissenssegmente besser zuzuordnen',
+      text: 'Optimiert die aktuelle Frage anhand des Chatverlaufs, um besser zu Wissensabschnitten zu passen',
       result: 'Ergebnis der optimierten Frage',
-      systemDefault: `#Role
-You are a master of problem optimization, adept at accurately inferring user intentions based on context and optimizing the questions raised by users.
+      systemDefault: `#Rolle
+Du bist ein Meister der Problemoptimierung und leitest aus dem Kontext präzise die Nutzerintention ab, um die vom Nutzer gestellten Fragen zu optimieren.
 
-##Skills
-###Skill 1: Optimizing Problems
-2. Receive user input questions.
-3. Carefully analyze the meaning of the problem based on the context.
-4. Output optimized problems.
+##Fähigkeiten
+###Fähigkeit 1: Probleme optimieren
+2. Nutze die vom Nutzer eingegebene Frage.
+3. Analysiere die Bedeutung der Frage sorgfältig anhand des Kontexts.
+4. Gib optimierte Fragen aus.
 
-##Limitations:
--Only return the optimized problem without any additional explanation or clarification.
--Ensure that the optimized problem accurately reflects the original problem intent and does not alter the original intention.`,
+##Einschränkungen:
+- Gib nur die optimierte Frage zurück – ohne zusätzliche Erklärungen oder Hinweise.
+- Stelle sicher, dass die optimierte Frage die ursprüngliche Absicht korrekt widerspiegelt und diese nicht verändert.`,
     },
     conditionNode: {
-      label: 'Bedingte Verzweigung',
-      text: 'Verschiedene Knoten basierend auf Bedingungen auslösen',
+      label: 'Bedingter Zweig',
+      text: 'Unterschiedliche Knoten je nach Bedingungen auslösen',
       branch_name: 'Zweigname',
       conditions: {
         label: 'Bedingungen',
@@ -170,25 +199,21 @@ You are a master of problem optimization, adept at accurately inferring user int
     },
     replyNode: {
       label: 'Vorgegebene Antwort',
-      text: 'Antwortinhalt festlegen; referenzierte Variablen werden zur Ausgabe in Zeichenfolgen umgewandelt',
-      content: 'Inhalt',
-      replyContent: {
-        label: 'Antwortinhalt',
-        reference: 'Referenzvariable',
-      },
+      text: 'Antwortinhalt festlegen; referenzierte Variablen werden als Zeichenketten ausgegeben',
+      replyContent: 'Antwortinhalt',
     },
     rerankerNode: {
       label: 'Mehrpfad-Recall',
-      text: 'Verwenden Sie ein Reranking-Modell, um Abrufresultate aus mehreren Wissensquellen zu verfeinern',
-      result_list: 'Liste der neu bewerteten Ergebnisse',
-      result: 'Neubewertungsergebnis',
+      text: 'Re-Ranking-Modell zur Verfeinerung der Ergebnisse aus mehreren Wissensquellen verwenden',
+      result_list: 'Liste der neu gerankten Ergebnisse',
+      result: 'Re-Ranking-Ergebnis',
       rerankerContent: {
-        label: 'Neubewertungsinhalt',
-        requiredMessage: 'Bitte Neubewertungsinhalt auswählen',
+        label: 'Re-Ranking-Inhalt',
+        requiredMessage: 'Bitte Re-Ranking-Inhalt auswählen',
       },
       higher: 'Höher',
       ScoreTooltip: 'Je höher der Score, desto stärker die Relevanz.',
-      max_paragraph_char_number: 'Maximale Zeichenanzahl',
+      max_paragraph_char_number: 'Maximale Zeichen',
       reranker_model: {
         label: 'Rerank',
         placeholder: 'Bitte Rerank auswählen',
@@ -196,31 +221,31 @@ You are a master of problem optimization, adept at accurately inferring user int
     },
     formNode: {
       label: 'Formulareingabe',
-      text: 'Benutzereingaben während Q&A erfassen und in nachfolgenden Prozessen verwenden',
-      form_content_format1: 'Hallo, bitte füllen Sie das folgende Formular aus:',
-      form_content_format2: 'Klicken Sie nach dem Ausfüllen auf [Absenden].',
+      text: 'Nutzereingaben während des Q&A erfassen und im weiteren Ablauf verwenden',
+      form_content_format1: 'Hallo, bitte fülle das folgende Formular aus:',
+      form_content_format2: 'Klicke nach dem Ausfüllen auf [Absenden].',
       form_data: 'Gesamter Formularinhalt',
       formContent: {
         label: 'Ausgabeinhalt des Formulars',
         requiredMessage:
           'Bitte den Ausgabeinhalt dieses Knotens festlegen; { form } ist ein Platzhalter für das Formular.',
-        tooltip: 'Definieren Sie den Ausgabeinhalt dieses Knotens. { form } ist ein Platzhalter für das Formular',
+        tooltip: 'Definiere den Ausgabeinhalt dieses Knotens. { form } ist ein Platzhalter für das Formular.',
       },
       formAllContent: 'Gesamter Formularinhalt',
       formSetting: 'Formularkonfiguration',
     },
     documentExtractNode: {
-      label: 'Dokumentinhalts-Extraktion',
+      label: 'Dokumentinhalt extrahieren',
       text: 'Inhalte aus Dokumenten extrahieren',
       content: 'Dokumentinhalt',
     },
     imageUnderstandNode: {
       label: 'Bildverständnis',
-      text: 'Bilder analysieren, Objekte und Szenen erkennen und Antworten bereitstellen',
+      text: 'Bilder analysieren, Objekte/Szenen erkennen und Antworten liefern',
       answer: 'AI-Inhalt',
       model: {
         label: 'Vision-Modell',
-        requiredMessage: 'Bitte ein Vision-Modell auswählen',
+        requiredMessage: 'Bitte Vision-Modell auswählen',
       },
       image: {
         label: 'Bild auswählen',
@@ -232,100 +257,113 @@ You are a master of problem optimization, adept at accurately inferring user int
       text: 'Wert der globalen Variable aktualisieren',
       assign: 'Wert setzen',
     },
+    variableAggregationNode: {
+      label: 'Variablenaggregation',
+      text: 'Variablen jeder Gruppe gemäß Aggregationsstrategie zusammenführen',
+      Strategy: 'Aggregationsstrategie',
+      placeholder: 'Ersten Nicht-Null-Wert jeder Gruppe zurückgeben',
+      placeholder1: 'Menge der Variablen jeder Gruppe zurückgeben',
+      group: {
+        noneError: 'Name darf nicht leer sein',
+        dupError: 'Name darf nicht doppelt sein',
+      },
+      addGroup: 'Gruppe hinzufügen',
+      editGroup: 'Gruppe bearbeiten',
+    },
     mcpNode: {
       label: 'MCP-Knoten',
-      text: 'Externe MCP-Dienste aufrufen, um Daten zu verarbeiten',
+      text: 'Externe MCP-Dienste zum Verarbeiten von Daten aufrufen',
       getToolsSuccess: 'Tools erfolgreich abgerufen',
       getTool: 'Tools abrufen',
       toolParam: 'Tool-Parameter',
       mcpServerTip: 'Bitte MCP-Serverkonfiguration im JSON-Format eingeben',
-      mcpToolTip: 'Bitte ein Tool auswählen',
-      configLabel: 'MCP-Serverkonfiguration (nur SSE/Streamable HTTP-Aufrufe werden unterstützt)',
-      reference: 'MCP referenzieren',
+      mcpToolTip: 'Bitte Tool auswählen',
+      configLabel: 'MCP-Serverkonfig (nur SSE/streambare HTTP-Aufrufe werden unterstützt)',
+      reference: 'MCP-Referenz',
     },
     imageGenerateNode: {
       label: 'Bildgenerierung',
-      text: 'Bilder auf Basis des bereitgestellten Textinhalts generieren',
+      text: 'Bilder basierend auf Textinhalt generieren',
       answer: 'AI-Inhalt',
       model: {
         label: 'Bildgenerierungsmodell',
-        requiredMessage: 'Bitte ein Bildgenerierungsmodell auswählen',
+        requiredMessage: 'Bitte Bildgenerierungsmodell auswählen',
       },
       prompt: {
         label: 'Positiver Prompt',
-        tooltip: 'Beschreiben Sie Elemente und visuelle Merkmale, die im generierten Bild enthalten sein sollen',
+        tooltip: 'Beschreibe Elemente und visuelle Eigenschaften, die das Bild enthalten soll',
       },
       negative_prompt: {
         label: 'Negativer Prompt',
-        tooltip: 'Beschreiben Sie Elemente, die im generierten Bild ausgeschlossen werden sollen',
+        tooltip: 'Beschreibe Elemente, die ausgeschlossen werden sollen',
         placeholder:
-          'Bitte Inhalte beschreiben, die nicht generiert werden sollen, z. B. Farbe, blutige Inhalte',
+          'Bitte beschreibe Inhalte, die nicht generiert werden sollen, z. B. Farbe, blutige Inhalte',
       },
     },
     textToVideoGenerate: {
       label: 'Text-zu-Video',
-      text: 'Video basierend auf bereitgestelltem Textinhalt generieren',
+      text: 'Video basierend auf Textinhalt generieren',
       answer: 'AI-Antwortinhalt',
       model: {
         label: 'Text-zu-Video-Modell',
-        requiredMessage: 'Bitte ein Text-zu-Video-Modell auswählen',
+        requiredMessage: 'Bitte Text-zu-Video-Modell auswählen',
       },
       prompt: {
         label: 'Prompt (Positiv)',
         tooltip:
-          'Positiver Prompt, zur Beschreibung der erwarteten Elemente und visuellen Merkmale im generierten Video',
+          'Positiver Prompt – beschreibt erwartete Elemente und visuelle Eigenschaften des Videos',
       },
       negative_prompt: {
         label: 'Prompt (Negativ)',
         tooltip:
-          "Negativer Prompt, zur Beschreibung von Inhalten, die Sie im Video nicht sehen möchten und die die Videogenerierung einschränken können",
+          'Negativer Prompt – beschreibt Inhalte, die im Video nicht erscheinen sollen und die Generierung einschränken',
         placeholder:
-          "Bitte Videoinhalte beschreiben, die nicht generiert werden sollen, z. B.: Farben, blutige Inhalte",
+          'Bitte unerwünschte Videoinhalte beschreiben, z. B.: Farben, blutige Inhalte',
       },
     },
     imageToVideoGenerate: {
-      label: 'Image-to-Video',
-      text: 'Video basierend auf bereitgestellten Bildern generieren',
+      label: 'Bild-zu-Video',
+      text: 'Video basierend auf Bildern generieren',
       answer: 'AI-Antwortinhalt',
       model: {
-        label: 'Image-to-Video-Modell',
-        requiredMessage: 'Bitte ein Image-to-Video-Modell auswählen',
+        label: 'Bild-zu-Video-Modell',
+        requiredMessage: 'Bitte Bild-zu-Video-Modell auswählen',
       },
       prompt: {
         label: 'Prompt (Positiv)',
         tooltip:
-          'Positiver Prompt, zur Beschreibung der erwarteten Elemente und visuellen Merkmale im generierten Video',
+          'Positiver Prompt – beschreibt erwartete Elemente und visuelle Eigenschaften des Videos',
       },
       negative_prompt: {
         label: 'Prompt (Negativ)',
         tooltip:
-          "Negativer Prompt, zur Beschreibung von Inhalten, die Sie im Video nicht sehen möchten und die die Videogenerierung einschränken können",
+          'Negativer Prompt – beschreibt Inhalte, die im Video nicht erscheinen sollen und die Generierung einschränken',
         placeholder:
-          "Bitte Videoinhalte beschreiben, die nicht generiert werden sollen, z. B.: Farben, blutige Inhalte",
+          'Bitte unerwünschte Videoinhalte beschreiben, z. B.: Farben, blutige Inhalte',
       },
       first_frame: {
-        label: 'Erstes Einzelbild',
-        requiredMessage: 'Bitte das erste Einzelbild auswählen',
+        label: 'Erstes Frame-Bild',
+        requiredMessage: 'Bitte das erste Frame-Bild auswählen',
       },
       last_frame: {
-        label: 'Letztes Einzelbild',
-        requiredMessage: 'Bitte das letzte Einzelbild auswählen',
+        label: 'Letztes Frame-Bild',
+        requiredMessage: 'Bitte das letzte Frame-Bild auswählen',
       },
     },
     speechToTextNode: {
       label: 'Speech2Text',
-      text: 'Audio mittels Spracherkennungsmodell in Text umwandeln',
+      text: 'Audio per Spracherkennungsmodell in Text umwandeln',
       stt_model: {
         label: 'Spracherkennungsmodell',
       },
       audio: {
         label: 'Audiodatei auswählen',
-        placeholder: 'Bitte eine Audiodatei auswählen',
+        placeholder: 'Bitte Audiodatei auswählen',
       },
     },
     textToSpeechNode: {
       label: 'TTS',
-      text: 'Text mittels Sprachsynthesemodell in Audio umwandeln',
+      text: 'Text per Sprachsynthesemodell in Audio umwandeln',
       tts_model: {
         label: 'Sprachsynthesemodell',
       },
@@ -335,16 +373,16 @@ You are a master of problem optimization, adept at accurately inferring user int
     },
     toolNode: {
       label: 'Benutzerdefiniertes Tool',
-      text: 'Benutzerdefinierte Skripte ausführen, um Daten zu verarbeiten',
+      text: 'Eigene Skripte ausführen, um Daten zu verarbeiten',
     },
     intentNode: {
-      label: 'IntentNode',
-      text: 'Benutzerfragen mit benutzerdefinierten Intent-Klassifikationen abgleichen',
-      other: 'andere',
-      error2: 'Intent wiederholt',
+      label: 'Intent-Knoten',
+      text: 'Benutzerfragen mit benutzerdefinierten Intent-Klassen abgleichen',
+      other: 'Andere',
+      error2: 'Intent doppelt vorhanden',
       placeholder: 'Bitte eine Klassifikationsoption wählen',
       classify: {
-        label: 'Intent klassifizieren',
+        label: 'Intent-Klassifizierung',
         placeholder: 'Bitte eingeben',
       },
       input: {
@@ -355,18 +393,18 @@ You are a master of problem optimization, adept at accurately inferring user int
       label: 'APP-Knoten',
     },
     loopNode: {
-      label: 'Schleifen-Knoten',
-      text: 'Eine Reihe von Aufgaben wiederholen, indem Anzahl und Logik der Schleifen festgelegt werden',
+      label: 'Schleifenknoten',
+      text: 'Eine Aufgabenfolge mit Anzahl und Logik wiederholen',
       loopType: {
         label: 'Schleifentyp',
-        requiredMessage: 'Bitte einen Schleifentyp auswählen',
+        requiredMessage: 'Bitte Schleifentyp auswählen',
         arrayLoop: 'Array-Schleife',
-        numberLoop: 'Schleife für eine festgelegte Anzahl',
+        numberLoop: 'Anzahlgesteuerte Schleife',
         infiniteLoop: 'Endlosschleife',
       },
       loopNumber: {
         label: 'Schleifenanzahl',
-        requiredMessage: 'Bitte die Anzahl der Schleifen eingeben',
+        requiredMessage: 'Bitte Anzahl der Schleifen eingeben',
       },
       loopArray: {
         label: 'Zirkuläres Array',
@@ -380,32 +418,55 @@ You are a master of problem optimization, adept at accurately inferring user int
       label: 'Schleifenstart',
       loopIndex: 'Index',
       loopItem: 'Schleifenelement',
-      loopVariable: 'Schleifenvariable',
     },
     loopBodyNode: {
-      label: 'Schleifenkörper',
-      text: 'Schleifenkörper',
+      label: 'Schleifenrumpf',
+      text: 'Schleifenrumpf',
     },
     loopContinueNode: {
       label: 'Fortsetzen',
-      text: 'Wird verwendet, um die aktuelle Schleife zu beenden und zur nächsten fortzufahren.',
+      text: 'Beendet die aktuelle Iteration und fährt mit der nächsten fort.',
       isContinue: 'Fortsetzen',
     },
     loopBreakNode: {
       label: 'Abbrechen',
-      text: 'Aktuelle Schleife beenden und den Schleifenkörper verlassen',
+      text: 'Beendet die aktuelle Schleife und verlässt den Schleifenrumpf',
       isBreak: 'Abbrechen',
+    },
+    variableSplittingNode: {
+      label: 'Variablensplitting',
+      text: 'Eingangsvariable im JSON-Format per JSON-Path-Ausdrücken parsen und aufteilen',
+      result: 'Ergebnis',
+      splitVariables: 'Variablen aufteilen',
+      inputVariables: 'Eingangsvariable',
+      addVariables: 'Variablen hinzufügen',
+      editVariables: 'Variablen bearbeiten',
+      variableListPlaceholder: 'Bitte aufzuteilende Variablen hinzufügen',
+      expression: {
+        label: 'Ausdruck',
+        placeholder: 'Bitte Ausdruck eingeben',
+        tooltip: 'Nutze JSON-Path-Ausdrücke zum Aufteilen, z. B.: $.store.book',
+      },
+    },
+    parameterExtractionNode: {
+      label: 'Parameterextraktion',
+      text: 'Strukturierte Parameter mit AI-Modellen extrahieren',
+      extractParameters: {
+        label: 'Parameter extrahieren',
+        variableListPlaceholder: 'Bitte Extraktionsparameter hinzufügen',
+        parameterType: 'Parametertyp',
+      },
     },
   },
   compare: {
-    is_null: 'Ist null',
-    is_not_null: 'Ist nicht null',
+    is_null: 'Ist leer',
+    is_not_null: 'Ist nicht leer',
     contain: 'Enthält',
     not_contain: 'Enthält nicht',
     eq: 'Gleich',
-    ge: 'Größer gleich',
+    ge: 'Größer/gleich',
     gt: 'Größer als',
-    le: 'Kleiner gleich',
+    le: 'Kleiner/gleich',
     lt: 'Kleiner als',
     len_eq: 'Länge gleich',
     len_ge: 'Länge größer/gleich',
@@ -413,6 +474,6 @@ You are a master of problem optimization, adept at accurately inferring user int
     len_le: 'Länge kleiner/gleich',
     len_lt: 'Länge kleiner als',
   },
-  SystemPromptPlaceholder: 'System-Prompt, kann Variablen im System referenzieren, wie',
-  UserPromptPlaceholder: 'User-Prompt, kann Variablen im System referenzieren, wie',
+  SystemPromptPlaceholder: 'System Prompt – Systemvariablen können referenziert werden, z. B.',
+  UserPromptPlaceholder: 'User Prompt – Systemvariablen können referenziert werden, z. B.',
 }

@@ -2,7 +2,7 @@ export default {
   title: 'Wissen',
   relatedApplications: 'Verknüpfte App',
   document_count: 'Dokumente',
-  relatedApp_count: 'Verknüpfte Apps',
+  relatedApp_count: 'verknüpfte Apps',
   searchBar: {
     placeholder: 'Nach Name suchen',
   },
@@ -12,15 +12,15 @@ export default {
   },
   tip: {
     professionalMessage:
-      'Die Community Edition unterstützt bis zu 50 Wissenseinträge. Für mehr Wissenseinträge bitte auf die Professional Edition upgraden.',
+      'Die Community Edition unterstützt bis zu 50 Wissenseinträge. Für mehr Wissen bitte auf die Professional Edition upgraden.',
     syncSuccess: 'Synchronisierungsauftrag erfolgreich gesendet',
     updateModeMessage:
-      'Nach Änderung des Wissens-Vektormodells muss das Wissen erneut vektorisiert werden. Möchten Sie das Speichern fortsetzen?',
+      'Nach Änderung des Wissens-Vektormodells muss das Wissen neu vektorisiert werden. Möchtest du trotzdem speichern?',
   },
   delete: {
-    confirmTitle: 'Löschung des Wissens bestätigen:',
+    confirmTitle: 'Löschen des Wissenseintrags bestätigen:',
     confirmMessage1: 'Dieses Wissen ist verknüpft mit',
-    confirmMessage2: 'APP. Das Löschen ist unwiderruflich. Bitte vorsichtig fortfahren.',
+    confirmMessage2: 'APP. Das Löschen ist irreversibel – bitte mit Vorsicht fortfahren.',
   },
   knowledgeType: {
     label: 'Typ',
@@ -30,8 +30,8 @@ export default {
     yuqueKnowledge: 'Yuque-Wissen',
     generalInfo: 'Lokale Dokumente hochladen',
     webInfo: 'Textdaten von einer Website synchronisieren',
-    larkInfo: 'Wissen über Lark-Dokumente erstellen',
-    yuqueInfo: 'Wissen über Yuque-Dokumente erstellen',
+    larkInfo: 'Wissen aus Lark-Dokumenten aufbauen',
+    yuqueInfo: 'Wissen aus Yuque-Dokumenten aufbauen',
     createGeneralKnowledge: 'Allgemeines Wissen erstellen',
     createWebKnowledge: 'Web-Wissen erstellen',
     createLarkKnowledge: 'Lark-Wissen erstellen',
@@ -40,19 +40,19 @@ export default {
   form: {
     knowledgeName: {
       label: 'Name',
-      placeholder: 'Bitte den Wissensnamen eingeben',
-      requiredMessage: 'Bitte den Wissensnamen eingeben',
+      placeholder: 'Bitte Wissensnamen eingeben',
+      requiredMessage: 'Bitte Wissensnamen eingeben',
     },
     knowledgeDescription: {
       label: 'Beschreibung',
       placeholder:
-        'Beschreiben Sie den Inhalt des Wissens. Eine detaillierte Beschreibung hilft der AI, den Inhalt besser zu verstehen und die Genauigkeit der Abfrageergebnisse zu verbessern.',
-      requiredMessage: 'Bitte die Wissensbeschreibung eingeben',
+        'Beschreibe den Inhalt des Wissens. Eine detaillierte Beschreibung hilft der KI, den Inhalt besser zu verstehen und die Treffgenauigkeit zu verbessern.',
+      requiredMessage: 'Bitte Wissensbeschreibung eingeben',
     },
     EmbeddingModel: {
-      label: 'Embedding Model',
-      placeholder: 'Bitte ein Embedding Model auswählen',
-      requiredMessage: 'Bitte das Embedding Model auswählen',
+      label: 'Embedding-Modell',
+      placeholder: 'Bitte ein Embedding-Modell auswählen',
+      requiredMessage: 'Bitte ein Embedding-Modell auswählen',
     },
 
     source_url: {
@@ -61,15 +61,15 @@ export default {
       requiredMessage: 'Bitte die Web-Root-URL eingeben',
     },
     selector: {
-      label: 'Selektor',
-      placeholder: 'Standard ist body; kann .classname / #idname / tagname enthalten',
+      label: 'Selector',
+      placeholder: 'Standard ist body; alternativ .classname/#idname/tagname',
     },
     file_count_limit: {
       label: 'Maximale Anzahl gleichzeitig hochgeladener Dateien',
     },
     file_size_limit: {
-      label: 'Maximale Dateigröße pro Dokument (MB)',
-      placeholder: 'Empfohlen entsprechend der Serverkonfiguration, um Ausfälle zu vermeiden',
+      label: 'Maximale Größe pro Dokument (MB)',
+      placeholder: 'Abhängig von der Serverkonfiguration, sonst kann es zu Ausfällen kommen',
     },
   },
 
@@ -78,7 +78,7 @@ export default {
     paragraph: 'Segmente',
     paragraph_count: 'Segmente',
     documentList: 'Dokumentenliste',
-    loading: 'Importieren',
+    loading: 'Import läuft',
     buttons: {
       toKnowledge: 'Zur Wissensliste zurückkehren',
       toDocument: 'Zum Dokument wechseln',
@@ -87,10 +87,11 @@ export default {
   syncWeb: {
     title: 'Wissen synchronisieren',
     syncMethod: 'Synchronisierungsmethode',
-    replace: 'Ersetzen',
-    replaceText: 'Website-Dokumente erneut abrufen und lokale Wissensdokumente ersetzen',
+    replace: 'Ersetzen & synchronisieren',
+    replaceText: 'Website-Dokumente erneut abrufen und lokale Dokumente ersetzen',
     complete: 'Vollständige Synchronisierung',
-    completeText: 'Alle lokalen Wissensdokumente löschen und Website-Dokumente erneut abrufen',
-    tip: 'Hinweis: Alle Synchronisierungen löschen bestehende Daten und rufen neue Daten ab. Bitte vorsichtig fortfahren.',
+    completeText:
+      'Alle lokalen Dokumente löschen und Website-Dokumente erneut abrufen',
+    tip: 'Hinweis: Jede Synchronisierung löscht bestehende Daten und ruft neue ab. Bitte mit Vorsicht fortfahren.',
   },
 }

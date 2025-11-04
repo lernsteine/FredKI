@@ -1,10 +1,10 @@
 export default {
   github: 'Projektadresse',
   wiki: 'Benutzerhandbuch',
-  forum: 'Forum für Unterstützung',
+  forum: 'Forum & Hilfe',
   logout: 'Abmelden',
   apiKey: 'API-Schlüssel',
-  apiServiceAddress: 'API-Serviceadresse',
+  apiServiceAddress: 'API-Serveradresse',
   language: 'Sprache',
   isExpire: 'Lizenz nicht hochgeladen oder abgelaufen',
   about: {
@@ -21,20 +21,20 @@ export default {
     remark: 'Bemerkungen',
     update: 'Aktualisieren',
     authorize: 'Autorisiert',
-	inner_admin: 'System Admin',
-    inner_wsm: 'Workspace Manager',
-    inner_user: 'Nutzer/in',
-    root: 'Root Directory',
-    default_workspace: 'Default Workspace',
-    default_user_group: 'Default Nutzergruppe',
+    inner_admin: 'Systemadministrator',
+    inner_wsm: 'Workspace-Manager',
+    inner_user: 'Standardbenutzer',
+    root: 'Stammverzeichnis',
+    default_workspace: 'Standardarbeitsbereich',
+    default_user_group: 'Standardbenutzergruppe',
   },
   time: {
-    daysLater: 'Tage später',
-    hoursLater: 'Stunden später',
-    expired: 'abgelaufen',
-    expiringSoon: 'läuft bald ab'
+    daysLater: 'Tage verbleibend',
+    hoursLater: 'Stunden verbleibend',
+    expired: 'Abgelaufen',
+    expiringSoon: 'Läuft bald ab'
   },
-  copyright: 'Copyright © 2014–2025 FIT2CLOUD, Alle Rechte vorbehalten.',
+  copyright: 'Copyright © 2014–2025 FIT2CLOUD. Alle Rechte vorbehalten.',
   userManualUrl: 'http://docs.maxkb.hk/',
   forumUrl: 'https://github.com/1Panel-dev/MaxKB/discussions'
 }

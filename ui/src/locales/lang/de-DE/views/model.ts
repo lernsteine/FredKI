@@ -1,5 +1,5 @@
 export default {
-  title: 'Modelle',
+  title: 'Modell',
   provider: 'Anbieter',
   providerPlaceholder: 'Anbieter auswählen',
   addModel: 'Modell hinzufügen',
@@ -7,14 +7,14 @@ export default {
   delete: {
     confirmTitle: 'Modell löschen:',
     confirmMessage:
-      'Das Löschen dieses Modells wirkt sich auf derzeit verwendete Ressourcen aus. Bitte vorsichtig fortfahren.',
+      'Das Löschen des Modells wirkt sich auf aktuell verwendete Ressourcen aus. Bitte mit Vorsicht fortfahren.',
   },
   tip: {
     createSuccessMessage: 'Modell erfolgreich erstellt',
-    createErrorMessage: 'Fehler in den Basisinformationen vorhanden',
+    createErrorMessage: 'Fehler in den Basisinformationen',
     errorMessage: 'Variable existiert bereits: ',
-    emptyMessage1: 'Bitte zuerst den Modelltyp und das Basismodell in den Basisinformationen auswählen',
-    emptyMessage2: 'Das ausgewählte Modell unterstützt keine Parametereinstellungen',
+    emptyMessage1: 'Bitte zuerst in den Basisinformationen Modelltyp und Basismodell auswählen',
+    emptyMessage2: 'Das ausgewählte Modell unterstützt keine Parameter-Einstellungen',
     updateSuccessMessage: 'Modell erfolgreich aktualisiert',
     saveSuccessMessage: 'Modellparameter erfolgreich gespeichert',
     downloadError: 'Download fehlgeschlagen',
@@ -25,14 +25,14 @@ export default {
     publicModel: 'Öffentliche Modelle',
     privateModel: 'Private Modelle',
     LLM: 'LLM',
-    EMBEDDING: 'Embedding Model',
+    EMBEDDING: 'Embedding-Modell',
     RERANKER: 'Rerank',
     STT: 'Speech2Text',
     TTS: 'TTS',
-    IMAGE: 'Vision Model',
-    TTI: 'Image Generation',
-    TTV: 'Text-to-Video',
-    ITV: 'Image-to-Video',
+    IMAGE: 'Vision-Modell',
+    TTI: 'Bildgenerierung',
+    TTV: 'Text-zu-Video',
+    ITV: 'Bild-zu-Video',
   },
   modelForm: {
     title: {
@@ -50,7 +50,7 @@ export default {
     },
     permissionType: {
       label: 'Berechtigung',
-      privateDesc: 'Nur für den aktuellen Benutzer verfügbar',
+      privateDesc: 'Nur für aktuellen Benutzer verfügbar',
       publicDesc: 'Für alle Benutzer verfügbar',
       requiredMessage: 'Berechtigung darf nicht leer sein',
     },
@@ -58,30 +58,30 @@ export default {
       label: 'Modelltyp',
       placeholder: 'Modelltyp auswählen',
       tooltip1: 'LLM: Inferenzmodell für AI-Chats in der APP.',
-      tooltip2: 'Embedding Model: Modell zur Vektorisierung von Dokumentinhalten im Wissen.',
-      tooltip3: 'Speech2Text: Modell zur Spracherkennung in der APP.',
-      tooltip4: 'TTS: Modell zur Sprachausgabe (Text-to-Speech) in der APP.',
+      tooltip2: 'Embedding-Modell: Für die Vektorisierung von Dokumentinhalten im Wissen.',
+      tooltip3: 'Speech2Text: Für Spracherkennung in der APP.',
+      tooltip4: 'TTS: Für Text-zu-Sprache in der APP.',
       tooltip5:
-        'Rerank: Modell zur Neuordnung von Kandidatensegmenten bei der Multi-Route-Abfrage in fortgeschrittenen Orchestrierungs-APPs.',
+        'Rerank: Zum Neuordnen von Kandidatenabschnitten bei Mehrwege-Recall in Advanced-Orchestration-APPs.',
       tooltip6:
-        'Vision Model: Visuelles Modell zur Bildinterpretation in fortgeschrittenen Orchestrierungs-APPs.',
+        'Vision-Modell: Visuelles Modell für Bildverständnis in Advanced-Orchestration-APPs.',
       tooltip7:
-        'Image Generation: Visuelles Modell zur Bildgenerierung in fortgeschrittenen Orchestrierungs-APPs.',
+        'Bildgenerierung: Visuelles Modell zur Bilderzeugung in Advanced-Orchestration-APPs.',
       tooltip8:
-        'Text-to-Video: Visuelles Modell zur Text-zu-Video-Generierung in der APP.',
+        'Text-zu-Video: Visuelles Modell für Text-zu-Video in der APP.',
       tooltip9:
-        'Image-to-Video: Visuelles Modell zur Bild-zu-Video-Generierung in der APP.',
+        'Bild-zu-Video: Visuelles Modell für Bild-zu-Video in der APP.',
       requiredMessage: 'Modelltyp darf nicht leer sein',
     },
     base_model: {
       label: 'Basismodell',
-      tooltip: 'Für Modelle, die nicht aufgelistet sind, den Modellnamen eingeben und Enter drücken',
-      placeholder: 'Basismodellnamen eingeben und Enter drücken, um hinzuzufügen',
+      tooltip: 'Für nicht gelistete Modelle den Modellnamen eingeben und Enter drücken',
+      placeholder: 'Basismodell eingeben und mit Enter hinzufügen',
       requiredMessage: 'Basismodell darf nicht leer sein',
     },
   },
   download: {
-    downloading: 'Wird heruntergeladen...',
+    downloading: 'Wird heruntergeladen …',
     cancelDownload: 'Download abbrechen',
   },
 }

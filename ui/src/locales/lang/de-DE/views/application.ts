@@ -5,13 +5,13 @@ export default {
   importApplication: 'APP importieren',
   copyApplication: 'APP kopieren',
   workflow: 'WORKFLOW',
-  simple: 'EINFACH',
+  simple: 'SIMPLE',
   simplePlaceholder: 'Geeignet für Einsteiger, um einen Assistenten über Formulareinstellungen zu erstellen',
   workflowPlaceholder:
-    'Geeignet für fortgeschrittene Benutzer, um komplexe logische AI-Assistenten mit Low-Code-Drag-and-Drop zu erstellen',
+    'Geeignet für fortgeschrittene Nutzer, um komplexe AI-Assistenten mit Low-Code-Drag-and-Drop zu gestalten',
   appTest: 'Debug-Vorschau',
   searchBar: {
-    placeholder: 'Nach Namen suchen',
+    placeholder: 'Nach Name suchen',
   },
   status: {
     published: 'Veröffentlicht',
@@ -23,176 +23,175 @@ export default {
     publish: 'Veröffentlichen',
   },
   delete: {
-    confirmTitle: 'Sind Sie sicher, dass Sie diese APP löschen möchten: ',
+    confirmTitle: 'Möchtest du diese APP wirklich löschen: ',
     confirmMessage:
-      'Das Löschen dieser APP beendet deren Dienste. Bitte gehen Sie vorsichtig vor.',
+      'Nach dem Löschen steht diese APP nicht mehr zur Verfügung. Bitte mit Vorsicht fortfahren.',
   },
   tip: {
     publishSuccess: 'Erfolgreich veröffentlicht',
     ExportError: 'Export fehlgeschlagen',
     professionalMessage:
-      'Die Community Edition unterstützt bis zu 5 APPs. Wenn Sie mehr benötigen, aktualisieren Sie bitte auf die Professional Edition.',
-    saveErrorMessage: 'Speichern fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben oder versuchen Sie es später erneut.',
-    loadingErrorMessage: 'Konfiguration konnte nicht geladen werden. Bitte überprüfen Sie Ihre Eingaben oder versuchen Sie es später erneut.',
+      'Die Community Edition unterstützt bis zu 5 APPs. Wenn du mehr benötigst, upgrade bitte auf die Professional Edition.',
+    saveErrorMessage: 'Speichern fehlgeschlagen – bitte Eingaben prüfen oder später erneut versuchen.',
+    loadingErrorMessage: 'Konfiguration konnte nicht geladen werden – bitte Eingaben prüfen oder später erneut versuchen.',
   },
 
   form: {
     appName: {
       label: 'Name',
-      placeholder: 'Bitte den APP-Namen eingeben',
+      placeholder: 'Bitte APP-Namen eingeben',
       requiredMessage: 'APP-Name ist erforderlich',
     },
     appDescription: {
-      label: 'Beschreibung',
       placeholder:
-        'Beschreiben Sie das Szenario und die Verwendung der APP, z. B.: XXX-Assistent, der Benutzerfragen zur Nutzung des XXX-Produkts beantwortet',
+        'Beschreibe den Anwendungsfall, z. B.: XXX-Assistent beantwortet Nutzerfragen zur Verwendung des XXX-Produkts.',
     },
     appType: {
       label: 'Typ',
-      simplePlaceholder: 'Geeignet für Einsteiger zur Erstellung eines Assistenten.',
-      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer, um den Workflow des Assistenten anzupassen',
+      simplePlaceholder: 'Geeignet für Einsteiger zur einfachen Assistentenerstellung.',
+      workflowPlaceholder: 'Geeignet für fortgeschrittene Nutzer zur individuellen Workflow-Gestaltung.',
     },
     appTemplate: {
       blankApp: {
         title: 'Leere APP',
       },
       assistantApp: {
-        title: 'Wissensassistent',
-        description: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflows des Assistenten',
+        title: 'Wissens-Assistent',
+        description: 'Geeignet für fortgeschrittene Nutzer zur individuellen Workflow-Gestaltung.',
       },
     },
     aiModel: {
       label: 'AI-Modell',
-      placeholder: 'Bitte ein AI-Modell auswählen',
+      placeholder: 'Bitte AI-Modell auswählen',
     },
     roleSettings: {
-      label: 'System-Prompt',
+      label: 'System Prompt',
       placeholder:
-        'System-Prompt. Sie können Variablen im System referenzieren: {data} ist das im Wissensspeicher gefundene Segment; {question} ist die vom Benutzer gestellte Frage.',
-      tooltip: 'Legen Sie die Rolle oder Anweisungen fest, denen das Modell folgen soll',
+        'System Prompt – du kannst Systemvariablen verwenden: {data} ist der Trefferabschnitt aus der Wissensbasis; {question} ist die vom Benutzer gestellte Frage.',
+      tooltip: 'Rolle oder Instruktionen für das Modell festlegen',
     },
 
     prompt: {
-      label: 'Benutzer-Prompt',
-      noReferences: '（Kein referenziertes Wissen）',
-      references: ' (Referenziertes Wissen)',
+      label: 'User Prompt',
+      noReferences: '(Keine Wissensreferenzen)',
+      references: '(Mit Wissensreferenzen)',
       placeholder:
-        'Benutzer-Prompt. Sie können Variablen im System referenzieren: {data} ist das im Wissensspeicher gefundene Segment; {question} ist die vom Benutzer gestellte Frage',
-      requiredMessage: 'Bitte Benutzer-Prompt eingeben',
+        'User Prompt – du kannst Systemvariablen verwenden: {data} ist der Trefferabschnitt aus der Wissensbasis; {question} ist die vom Benutzer gestellte Frage.',
+      requiredMessage: 'Bitte User Prompt eingeben',
       tooltip:
-        'Die Frage oder der Befehl, den der Benutzer an das Modell richtet',
+        'Die Frage oder Anweisung, die der Benutzer an das Modell richtet',
 
       noReferencesTooltip:
-        'Durch Anpassen des Prompt-Inhalts können Sie die Richtung des Modells steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variable: {question} ist die vom Benutzer gestellte Frage.',
+        'Durch Anpassen des Prompts kannst du die Richtung des Modelldialogs steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Variable: {question} ist die Frage des Benutzers.',
       referencesTooltip:
-        'Durch Anpassen des Prompt-Inhalts können Sie die Richtung des Modells steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variablen: {data} enthält bekannte Informationen aus dem Wissen; {question} ist die vom Benutzer gestellte Frage.',
+        'Durch Anpassen des Prompts kannst du die Richtung des Modelldialogs steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Variablen: {data} enthält bekannte Informationen aus dem Wissen; {question} ist die Benutzerfrage.',
       defaultPrompt: `Bekannte Informationen: {data}
         Frage: {question}
-         Antwortanforderungen:
-         - Bitte verwenden Sie eine präzise und professionelle Ausdrucksweise, um die Frage des Benutzers zu beantworten.
-         `,
+        Antwortanforderungen:
+        - Bitte in klarer und professioneller Sprache auf die Benutzerfrage antworten.
+        `,
     },
     historyRecord: {
-      label: 'Chat-Verlauf',
+      label: 'Chatverlauf',
     },
     relatedKnowledge: {
       label: 'Verknüpftes Wissen',
-      placeholder: 'Verknüpfte Wissenselemente werden hier angezeigt',
+      placeholder: 'Verknüpftes Wissen wird hier angezeigt',
     },
     multipleRoundsDialogue: 'Mehrstufiger Dialog',
 
-    prologue: 'Einleitung',
+    prologue: 'Begrüßung',
     defaultPrologue:
-      'Hallo, ich bin der XXX-Assistent. Sie können mir Fragen zur Verwendung von XXX stellen.\n- Welche Hauptfunktionen hat XXX?\n- Welches LLM unterstützt XXX?\n- Welche Dokumenttypen unterstützt XXX?',
+      'Hallo, ich bin der XXX-Assistent. Du kannst mir Fragen zur Nutzung von XXX stellen.\n- Was sind die Hauptfunktionen von XXX?\n- Welche LLMs unterstützt XXX?\n- Welche Dokumenttypen unterstützt XXX?',
     problemOptimization: {
       label: 'Fragenoptimierung',
       tooltip:
-        'Optimiert die aktuelle Frage basierend auf dem Chat-Verlauf, um die Wissenspunkte besser zuzuordnen.',
+        'Optimiert die aktuelle Frage anhand des bisherigen Chatverlaufs, um Wissenspunkte besser zuzuordnen.',
     },
 
     voiceInput: {
       label: 'Spracheingabe',
-      placeholder: 'Bitte ein Spracherkennungsmodell auswählen',
-      requiredMessage: 'Bitte ein Sprachmodell für die Eingabe auswählen',
+      placeholder: 'Bitte Spracherkennungsmodell auswählen',
+      requiredMessage: 'Bitte Sprachmodell für Eingabe auswählen',
       autoSend: 'Automatisches Senden',
     },
     voicePlay: {
       label: 'Sprachausgabe',
-      placeholder: 'Bitte ein Sprachsynthesemodell auswählen',
-      requiredMessage: 'Bitte ein Modell für die Sprachausgabe auswählen',
+      placeholder: 'Bitte Sprachsynthesemodell auswählen',
+      requiredMessage: 'Bitte Sprachmodell für Ausgabe auswählen',
       autoPlay: 'Automatische Wiedergabe',
-      browser: 'Wiedergabe im Browser (kostenlos)',
+      browser: 'Browser-Wiedergabe (kostenlos)',
       tts: 'TTS-Modell',
       listeningTest: 'Vorschau',
     },
     reasoningContent: {
-      label: 'Ausgabe – Denkprozess',
+      label: 'Gedankengang anzeigen',
       tooltip:
-        'Bitte das Denk-Label basierend auf der Modellausgabe festlegen. Der Inhalt zwischen den Labels wird als Denkprozess erkannt.',
+        'Bitte die Denkmarkierungen basierend auf der Modellausgabe festlegen. Der Inhalt zwischen den Markierungen wird als Denkprozess erkannt.',
       start: 'Start',
       end: 'Ende',
     },
-    mcp_output_enable: 'Ausgabe MCP/Tool-Ausführungsprozess',
+    mcp_output_enable: 'MCP-/Tool-Ausführungsprozess anzeigen',
   },
   generateDialog: {
     label: 'Generieren',
     generatePrompt: 'Prompt generieren',
-    placeholder: 'Bitte das Thema des Prompts eingeben',
-    title: 'Der Prompt wird hier angezeigt',
+    placeholder: 'Bitte Thema des Prompts eingeben',
+    title: 'Der generierte Prompt wird hier angezeigt',
     remake: 'Neu generieren',
     stop: 'Generierung stoppen',
-    continue: 'Weiter generieren',
+    continue: 'Fortsetzen',
     replace: 'Ersetzen',
-    exit: 'Sind Sie sicher, dass Sie beenden und den von der AI erzeugten Inhalt verwerfen möchten?',
-    loading: 'Wird generiert...',
+    exit: 'Möchtest du wirklich beenden und den AI-generierten Inhalt verwerfen?',
+    loading: 'Wird generiert …',
   },
   dialog: {
-    addKnowledge: 'Verknüpftes Wissen hinzufügen',
+    addKnowledge: 'Wissen hinzufügen',
     addKnowledgePlaceholder: 'Das ausgewählte Wissen muss dasselbe Embedding-Modell verwenden',
     selectSearchMode: 'Suchmodus auswählen',
     vectorSearch: 'Vektorsuche',
     vectorSearchTooltip:
-      'Die Vektorsuche basiert auf Distanzberechnungen zwischen Vektoren und eignet sich für große Datenmengen im Wissen.',
+      'Vektorsuche basiert auf Distanzberechnungen und eignet sich für große Wissensmengen.',
     fullTextSearch: 'Volltextsuche',
     fullTextSearchTooltip:
-      'Die Volltextsuche basiert auf Textähnlichkeit und eignet sich für kleine Datenmengen im Wissen.',
+      'Volltextsuche basiert auf Textähnlichkeiten und eignet sich für kleine Wissensmengen.',
     hybridSearch: 'Hybridsuche',
     hybridSearchTooltip:
-      'Die Hybridsuche kombiniert Vektor- und Textähnlichkeit und eignet sich für mittlere Datenmengen im Wissen.',
-    similarityThreshold: 'Ähnlichkeit höher als',
-    similarityTooltip: 'Je höher die Ähnlichkeit, desto stärker die Korrelation.',
-    topReferences: 'Top-N-Segmente',
+      'Hybridsuche kombiniert Vektor- und Textähnlichkeiten und eignet sich für mittlere Wissensmengen.',
+    similarityThreshold: 'Ähnlichkeit größer als',
+    similarityTooltip: 'Je höher die Ähnlichkeit, desto stärker die inhaltliche Verbindung.',
+    topReferences: 'Top-N-Abschnitte',
     maxCharacters: 'Maximale Zeichen pro Referenz',
     noReferencesAction: 'Wenn keine Wissensreferenzen vorhanden sind',
     continueQuestioning: 'Weitere Fragen an das AI-Modell stellen',
-    provideAnswer: 'Antwortinhalt festlegen',
+    provideAnswer: 'Antwortinhalt vorgeben',
     designated_answer:
-      'Hallo, ich bin der XXX-Assistent. Mein Wissen enthält nur Informationen zu XXX-Produkten. Bitte formulieren Sie Ihre Frage um.',
+      'Hallo, ich bin der XXX-Assistent. Mein Wissen umfasst nur Informationen zu XXX-Produkten. Bitte formuliere deine Frage neu.',
     defaultPrompt1:
-      "Der Inhalt in den Klammern () stellt die Frage des Benutzers dar. Bitte ergänzen Sie basierend auf dem Kontext die Benutzerfrage ({question}). Die Ausgabe soll eine vollständige Frage enthalten und diese in das",
-    defaultPrompt2: 'Tag einfügen',
+      'Der Inhalt in den Klammern () steht für die Benutzerfrage. Bitte ergänze die Frage ({question}) anhand des Kontexts und gib sie vollständig aus, eingeklammert in',
+    defaultPrompt2: 'Tag',
   },
   applicationAccess: {
     title: 'APP-Zugriff',
     wecom: 'WeCom',
-    wecomTip: 'Intelligente WeCom-APP erstellen',
-    wecomBot: 'WeCom-Bot',
-    wecomBotTip: 'Intelligenten WeCom-Bot erstellen',
+    wecomTip: 'WeCom-Intelligent-APP erstellen',
+    wecomBot: 'WeCom Bot',
+    wecomBotTip: 'WeCom-Intelligent-Bot erstellen',
     dingtalk: 'DingTalk',
-    dingtalkTip: 'Intelligente DingTalk-APP erstellen',
+    dingtalkTip: 'DingTalk-Intelligent-APP erstellen',
     wechat: 'WeChat',
-    wechatTip: 'Intelligente WeChat-APP erstellen',
+    wechatTip: 'WeChat-Intelligent-APP erstellen',
     lark: 'Lark',
-    larkTip: 'Intelligente Lark-APP erstellen',
+    larkTip: 'Lark-Intelligent-APP erstellen',
     setting: 'Einstellungen',
     callback: 'Callback-Adresse',
-    callbackTip: 'Bitte die Callback-Adresse ausfüllen',
+    callbackTip: 'Bitte Callback-Adresse eintragen',
     wecomPlatform: 'WeCom Open Platform',
     wechatPlatform: 'WeChat Open Platform',
     dingtalkPlatform: 'DingTalk Open Platform',
     larkPlatform: 'Lark Open Platform',
     slack: 'Slack',
-    slackTip: 'Intelligente Slack-APP erstellen',
+    slackTip: 'Slack-Intelligent-APP erstellen',
     wecomSetting: {
       title: 'WeCom-Konfiguration',
       cropId: 'Crop ID',
@@ -203,14 +202,14 @@ export default {
       encodingAesKeyPlaceholder: 'Bitte EncodingAESKey eingeben',
       authenticationSuccessful: 'Erfolgreich',
       urlInfo:
-        '-APP-Verwaltung → Selbst erstellt → Erstellte APP → Nachrichten empfangen → „URL“ für API festlegen',
+        '-APP-Verwaltung → Selbst erstellt → Erstellte APP → Nachrichtenempfang → API-„URL“ festlegen',
     },
     dingtalkSetting: {
       title: 'DingTalk-Konfiguration',
       clientIdPlaceholder: 'Bitte Client ID eingeben',
       clientSecretPlaceholder: 'Bitte Client Secret eingeben',
       urlInfo:
-        '-Auf der Bot-Seite den „Nachrichtenempfangsmodus“ auf HTTP stellen und die obige URL in „Nachrichtenempfangsadresse“ einfügen',
+        '-Auf der Bot-Seite den „Nachrichtenempfangsmodus“ auf HTTP stellen und obige URL als „Empfangsadresse“ eintragen',
     },
     wechatSetting: {
       title: 'WeChat-Konfiguration',
@@ -220,22 +219,22 @@ export default {
       appSecretPlaceholder: 'Bitte APP SECRET eingeben',
       token: 'TOKEN',
       tokenPlaceholder: 'Bitte TOKEN eingeben',
-      aesKey: 'Nachrichtenverschlüsselungsschlüssel',
-      aesKeyPlaceholder: 'Bitte den Nachrichtenverschlüsselungsschlüssel eingeben',
+      aesKey: 'Nachrichten-Verschlüsselungsschlüssel',
+      aesKeyPlaceholder: 'Bitte Verschlüsselungsschlüssel eingeben',
       urlInfo:
-        '-Einstellungen und Entwicklung → Grundkonfiguration → „Server Address URL“ in der Serverkonfiguration',
+        '-Einstellungen & Entwicklung → Basis-Konfiguration → „Serveradresse URL“ in der Server-Konfiguration',
     },
     wecomBotSetting: {
       title: 'WeCom-Bot-Konfiguration',
-      urlInfo: '-Verwaltungstools → Intelligenter Bot → Bot erstellen → API-Modus „URL“ festlegen',
+      urlInfo: '-Verwaltungstools → Smart Bot → Bot erstellen → API-Modus „URL“ eintragen',
     },
     larkSetting: {
       title: 'Lark-Konfiguration',
       appIdPlaceholder: 'Bitte APP ID eingeben',
       appSecretPlaceholder: 'Bitte APP Secret eingeben',
-      verificationTokenPlaceholder: 'Bitte Verifikationstoken eingeben',
+      verificationTokenPlaceholder: 'Bitte Verification Token eingeben',
       urlInfo:
-        '-Ereignisse und Rückrufe → Ereigniskonfiguration → „Anfrageadresse“ der Abonnementmethode konfigurieren',
+        '-Events & Callbacks → Event-Konfiguration → „Request-Adresse“ der Abonnementmethode festlegen',
     },
     slackSetting: {
       title: 'Slack-Konfiguration',
@@ -245,9 +244,9 @@ export default {
     copyUrl: 'Link kopieren und einfügen',
   },
   hitTest: {
-    title: 'Retrieval-Test',
-    text: 'Testen Sie die Trefferwirkung des Wissens basierend auf der angegebenen Suchanfrage.',
-    emptyMessage1: 'Ergebnisse des Retrieval-Tests werden hier angezeigt',
+    title: 'Wissens-Retrieval-Test',
+    text: 'Teste die Trefferqualität des Wissens anhand eines Suchtexts.',
+    emptyMessage1: 'Testergebnisse werden hier angezeigt',
     emptyMessage2: 'Keine passenden Abschnitte gefunden',
   },
   publishTime: 'Veröffentlichungszeit',

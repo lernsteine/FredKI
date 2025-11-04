@@ -21,7 +21,8 @@ export default {
     communication: 'Kommunikation',
     searchResult: '{count} Suchergebnisse für',
     confirmTip: 'Sind Sie sicher, dass Sie das Tool aktualisieren möchten: ',
-    updateStoreToolMessage: 'Das Aktualisieren von Tools kann sich auf verwendete Ressourcen auswirken. Bitte vorsichtig fortfahren.',
+    updateStoreToolMessage:
+      'Das Aktualisieren von Tools kann sich auf genutzte Ressourcen auswirken – bitte mit Vorsicht fortfahren.',
   },
   searchBar: {
     placeholder: 'Nach Toolnamen suchen',
@@ -30,70 +31,68 @@ export default {
     saveMessage: 'Nicht gespeicherte Änderungen gehen verloren. Möchten Sie wirklich beenden?',
   },
   delete: {
-    confirmTitle: 'Löschung des Tools bestätigen:',
+    confirmTitle: 'Löschen des Tools bestätigen:',
     confirmMessage:
-      'Das Löschen dieses Tools führt zu Fehlern in APPs, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig fortfahren.',
+      'Das Löschen dieses Tools führt zu Fehlern in Apps, die darauf verweisen. Bitte mit Vorsicht fortfahren.',
   },
   disabled: {
-    confirmTitle: 'Deaktivierung des Tools bestätigen:',
+    confirmTitle: 'Deaktivieren des Tools bestätigen:',
     confirmMessage:
-      'Das Deaktivieren dieses Tools führt zu Fehlern in APPs, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig fortfahren.',
+      'Das Deaktivieren dieses Tools führt zu Fehlern in Apps, die darauf verweisen. Bitte mit Vorsicht fortfahren.',
   },
 
   form: {
     toolName: {
       label: 'Name',
-      name: 'Toolname',
-      placeholder: 'Bitte den Toolnamen eingeben',
-      requiredMessage: 'Bitte den Toolnamen eingeben',
+      name: 'Tool-Name',
+      placeholder: 'Bitte Tool-Namen eingeben',
+      requiredMessage: 'Bitte Tool-Namen eingeben',
     },
     mcpName: {
       label: 'Name',
       name: 'MCP-Name',
-      placeholder: 'Bitte den MCP-Namen eingeben',
-      requiredMessage: 'Bitte den MCP-Namen eingeben',
+      placeholder: 'Bitte MCP-Namen eingeben',
+      requiredMessage: 'Bitte MCP-Namen eingeben',
     },
     toolDescription: {
-      label: 'Beschreibung',
       placeholder: 'Bitte eine Beschreibung des Tools eingeben',
     },
     mcpDescription: {
-      label: 'Beschreibung',
       placeholder: 'Bitte eine Beschreibung des MCP eingeben',
     },
     paramName: {
       label: 'Parametername',
-      placeholder: 'Bitte den Parameternamen eingeben',
-      requiredMessage: 'Bitte den Parameternamen eingeben',
+      placeholder: 'Bitte Parametername eingeben',
+      requiredMessage: 'Bitte Parametername eingeben',
     },
     dataType: {
       label: 'Datentyp',
     },
     source: {
       label: 'Quelle',
-      reference: 'Referenzparameter',
+      reference: 'Parameterreferenz',
     },
     required: {
       label: 'Erforderlich',
     },
     param: {
-      paramInfo1: 'Wird angezeigt, wenn das Tool verwendet wird',
-      paramInfo2: 'Wird nicht angezeigt, wenn das Tool verwendet wird',
+      paramInfo1: 'Wird bei der Toolnutzung angezeigt',
+      paramInfo2: 'Wird bei der Toolnutzung nicht angezeigt',
       code: 'Inhalt (Python)',
       selectPlaceholder: 'Bitte Parameter auswählen',
-      inputPlaceholder: 'Bitte Parameterwerte eingeben',
+      inputPlaceholder: 'Bitte Parameterwert eingeben',
     },
     mcp: {
       title: 'MCP-Service',
       label: 'MCP-Serverkonfiguration',
       placeholder: 'Bitte MCP-Serverkonfiguration eingeben',
-      tip: 'Unterstützt nur SSE- und Streamable-HTTP-Aufrufmethoden',
+      tip: 'Unterstützt nur SSE- und Streamable-HTTP-Aufrufe',
       requiredMessage: 'Bitte MCP-Serverkonfiguration eingeben',
     },
     debug: {
       run: 'Ausführen',
       output: 'Ausgabe',
-      runResult: 'Ausführungsergebnis',
+      runResult: 'Ergebnis',
       runSuccess: 'Erfolgreich',
       runFailed: 'Fehlgeschlagen',
     },

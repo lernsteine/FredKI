@@ -1,30 +1,30 @@
 export default {
-  title: 'Logdaten',
+  title: 'Betriebsprotokolle',
   table: {
     menu: {
-      label: 'Auswahl'
+      label: 'Menüaktion',
     },
     operate: {
-      label: 'Verlauf'
+      label: 'Vorgang',
     },
     user: {
-      label: 'Benutzer'
+      label: 'Benutzer',
     },
     status: {
       label: 'Status',
       success: 'Erfolgreich',
       fail: 'Fehlgeschlagen',
-      all: 'Alle'
+      all: 'Alle',
     },
     ip_address: {
-      label: 'IP-Adresse'
+      label: 'IP-Adresse',
     },
     opt: {
-      label: 'API-Details'
+      label: 'API-Details',
     },
     operateTime: {
-      label: 'Verlaufszeit'
-    }
+      label: 'Zeitpunkt der Aktion',
+    },
   },
-  close: 'Schließen'
+  close: 'Schließen',
 }

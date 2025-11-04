@@ -1,30 +1,30 @@
 export default {
   title: 'Rollenverwaltung',
-  internalRole: 'Systemintegrierte Rollen',
+  internalRole: 'Systeminterne Rollen',
   customRole: 'Benutzerdefinierte Rollen',
   systemAdmin: 'Systemadministrator',
   workspaceAdmin: 'Workspace-Administrator',
-  user: 'Standardbenutzer',
+  user: 'Normaler Benutzer',
   roleName: 'Rollenname',
   inheritingRole: 'Vererbte Rolle',
   delete: {
     confirmTitle: 'Löschen der Rolle bestätigen:',
     confirmMessage:
-      'Nach dem Löschen werden alle Mitglieder dieser Rolle entfernt. Bitte vorsichtig fortfahren.',
+      'Nach dem Löschen werden alle Mitglieder dieser Rolle entfernt. Bitte mit Vorsicht fortfahren.',
   },
   permission: {
     title: 'Berechtigungskonfiguration',
-    operationTarget: 'Ziel der Aktion',
-    moduleName: 'Modulname'
+    operationTarget: 'Ziel der Operation',
+    moduleName: 'Modulname',
   },
   member: {
     title: 'Mitglieder',
     add: 'Mitglied hinzufügen',
-    workspace: 'Workspace',
+    workspace: 'Arbeitsbereich',
     role: 'Rolle',
     delete: {
       button: 'Entfernen',
-      confirmTitle: 'Soll das Mitglied entfernt werden:',
-    }
-  }
+      confirmTitle: 'Soll das Mitglied entfernt werden?',
+    },
+  },
 }

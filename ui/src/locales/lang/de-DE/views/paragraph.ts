@@ -3,7 +3,7 @@ export default {
   paragraph_count: 'Segmente',
   editParagraph: 'Segment bearbeiten',
   addParagraph: 'Segment hinzufügen',
-  prevAddParagraph: 'Segment darüber einfügen',
+  prevAddParagraph: 'Segment oberhalb einfügen',
   paragraphDetail: 'Segmentdetails',
   character_count: 'Zeichen',
   setting: {
@@ -11,8 +11,8 @@ export default {
     cancelSelected: 'Auswahl aufheben',
   },
   delete: {
-    confirmTitle: 'Löschung des Segments bestätigen:',
-    confirmMessage: 'Das Löschen kann nicht rückgängig gemacht werden. Bitte vorsichtig fortfahren.',
+    confirmTitle: 'Löschen des Segments bestätigen:',
+    confirmMessage: 'Das Löschen kann nicht rückgängig gemacht werden. Bitte mit Vorsicht fortfahren.',
   },
   relatedProblem: {
     title: 'Verwandte Fragen',
@@ -21,7 +21,7 @@ export default {
   form: {
     paragraphTitle: {
       label: 'Titel',
-      placeholder: 'Bitte den Segmenttitel eingeben',
+      placeholder: 'Bitte einen Segmenttitel eingeben',
     },
     content: {
       label: 'Inhalt',

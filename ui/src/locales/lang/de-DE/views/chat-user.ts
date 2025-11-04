@@ -1,12 +1,12 @@
 export default {
   title: 'Chat-Benutzer',
-  syncUsers: 'Benutzer synchronisieren',
-  syncUsersTip: 'Nur neu hinzugefügte Benutzer synchronisieren',
+  syncUsers: 'Benutzer importieren',
+  syncUsersTip: 'Nur neu hinzugefügte Benutzer importieren',
   setUserGroups: 'Benutzergruppen konfigurieren',
   knowledgeTitleTip:
-    'Diese Konfiguration tritt erst in Kraft, nachdem die Chat-Benutzer-Authentifizierung in der zugehörigen Anwendung aktiviert wurde.',
+    'Diese Konfiguration wird erst wirksam, nachdem in der zugehörigen Anwendung die Chat-Benutzer-Authentifizierung aktiviert wurde.',
   applicationTitleTip:
-    'Diese Konfiguration erfordert, dass die Anmeldeauthentifizierung in der Anwendung aktiviert ist.',
+    'Diese Konfiguration erfordert, dass die Login-Authentifizierung in der Anwendung aktiviert ist.',
   autoAuthorization: 'Automatische Autorisierung',
   authorization: 'Autorisierung',
   batchDeleteUser: 'Ausgewählte {count} Benutzer löschen?',
@@ -20,13 +20,13 @@ export default {
     delete: {
       confirmTitle: 'Löschen der Benutzergruppe bestätigen:',
       confirmMessage:
-        'Alle Mitglieder dieser Gruppe werden nach dem Löschen entfernt. Bitte vorsichtig fortfahren!',
+        'Alle Mitglieder dieser Gruppe werden nach dem Löschen entfernt. Bitte mit Vorsicht fortfahren!',
     },
     batchDeleteMember: 'Ausgewählte {count} Mitglieder entfernen?',
   },
   syncMessage: {
     title: '{count} Benutzer erfolgreich synchronisiert',
-    usernameExist: 'Die folgenden Benutzernamen existieren bereits:',
-    nicknameExist: 'Die folgenden Spitznamen existieren bereits:',
+    usernameExist: 'Folgende Benutzernamen existieren bereits:',
+    nicknameExist: 'Folgende Spitznamen existieren bereits:',
   },
 }

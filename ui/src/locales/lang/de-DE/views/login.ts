@@ -1,17 +1,17 @@
 export default {
-  title: 'Anmeldung',
+  title: 'Login',
   loginForm: {
     username: {
       label: 'Benutzername',
       placeholder: 'Bitte Benutzernamen eingeben',
       requiredMessage: 'Bitte Benutzernamen eingeben',
-      lengthMessage: 'Die Länge muss zwischen 4 und 20 Zeichen liegen',
+      lengthMessage: 'Länge muss zwischen 4 und 20 Zeichen liegen',
     },
     password: {
-      label: 'Anmeldepasswort',
+      label: 'Login-Passwort',
       placeholder: 'Bitte Passwort eingeben',
       requiredMessage: 'Bitte Passwort eingeben',
-      lengthMessage: 'Die Länge muss zwischen 6 und 20 Zeichen liegen',
+      lengthMessage: 'Länge muss zwischen 6 und 20 Zeichen liegen',
     },
     captcha: {
       label: 'Verifizierungscode',
@@ -32,12 +32,12 @@ export default {
     },
     email: {
       label: 'E-Mail',
-      placeholder: 'Bitte E-Mail-Adresse eingeben',
-      requiredMessage: 'Bitte E-Mail-Adresse eingeben',
-      validatorEmail: 'Bitte ein gültiges E-Mail-Format eingeben!',
+      placeholder: 'Bitte E-Mail eingeben',
+      requiredMessage: 'Bitte E-Mail eingeben',
+      validatorEmail: 'Bitte eine gültige E-Mail-Adresse eingeben!',
     },
   },
-  jump_tip: 'Sie werden zur Authentifizierungsseite der Quelle weitergeleitet',
+  jump_tip: 'Du wirst zur Authentifizierungsquelle weitergeleitet',
   jump: 'Weiterleiten',
   resetPassword: 'Passwort ändern',
   forgotPassword: 'Passwort vergessen',
@@ -45,15 +45,15 @@ export default {
   buttons: {
     login: 'Anmelden',
     register: 'Registrieren',
-    backLogin: 'Zurück zur Anmeldung',
-    checkCode: 'Jetzt überprüfen',
+    backLogin: 'Zur Anmeldung',
+    checkCode: 'Jetzt prüfen',
   },
   newPassword: 'Neues Passwort',
   enterPassword: 'Bitte neues Passwort eingeben',
   useEmail: 'E-Mail verwenden',
-  moreMethod: 'Weitere Anmeldemethoden',
+  moreMethod: 'Weitere Login-Methoden',
   verificationCode: {
-    placeholder: 'Bitte Verifizierungscode eingeben',
+    placeholder: 'Bitte den Verifizierungscode eingeben',
     getVerificationCode: 'Verifizierungscode anfordern',
     successMessage: 'Verifizierungscode erfolgreich gesendet',
     resend: 'Erneut senden',

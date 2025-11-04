@@ -16,6 +16,7 @@ import chatLog from './chat-log'
 import chatUser from './chat-user'
 import operateLog from './operate-log'
 import shared from './shared'
+
 export default {
   login,
   model,
@@ -34,5 +35,5 @@ export default {
   chatLog,
   chatUser,
   operateLog,
-  shared
+  shared,
 }
