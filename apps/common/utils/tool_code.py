@@ -28,6 +28,7 @@ class ToolExecutor:
         if self.sandbox:
             os.system(f"chown -R {self.user}:root {self.sandbox_path}")
         self.banned_keywords = CONFIG.get("SANDBOX_PYTHON_BANNED_KEYWORDS", 'nothing_is_banned').split(',');
+        self.banned_hosts = CONFIG.get("SANDBOX_PYTHON_BANNED_HOSTS", 'no_host_is_banned');
 
     def _createdir(self):
         old_mask = os.umask(0o077)
@@ -197,7 +198,10 @@ exec({dedent(code)!a})
             file.write(_code)
             os.system(f"chown {self.user}:root {exec_python_file}")
         kwargs = {'cwd': BASE_DIR}
-        kwargs['env'] = {'LD_PRELOAD': '/opt/maxkb-app/apps/sandbox.so'}
+        kwargs['env'] = {
+            'LD_PRELOAD': '/opt/maxkb-app/sandbox/sandbox.so',
+            'MAXKB_SANDBOX_PYTHON_BANNED_HOSTS': self.banned_hosts,
+        }
         subprocess_result = subprocess.run(
             ['su', '-s', python_directory, '-c', "exec(open('" + exec_python_file + "').read())", self.user],
             text=True,
