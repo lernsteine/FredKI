@@ -5,7 +5,7 @@ import os
 import subprocess
 import sys
 from textwrap import dedent
-
+import socket
 import uuid_utils.compat as uuid
 from django.utils.translation import gettext_lazy as _
 
@@ -28,6 +28,15 @@ class ToolExecutor:
         if self.sandbox:
             os.system(f"chown -R {self.user}:root {self.sandbox_path}")
         self.banned_keywords = CONFIG.get("SANDBOX_PYTHON_BANNED_KEYWORDS", 'nothing_is_banned').split(',');
+        banned_hosts = CONFIG.get("SANDBOX_PYTHON_BANNED_HOSTS", '').strip()
+        try:
+            if banned_hosts:
+                hostname = socket.gethostname()
+                local_ip = socket.gethostbyname(hostname)
+                banned_hosts = f"{banned_hosts},{hostname},{local_ip}"
+        except Exception:
+            pass
+        self.banned_hosts = banned_hosts
 
     def _createdir(self):
         old_mask = os.umask(0o077)
@@ -53,10 +62,6 @@ try:
     path_to_exclude = ['/opt/py3/lib/python3.11/site-packages', '/opt/maxkb-app/apps']
     sys.path = [p for p in sys.path if p not in path_to_exclude]
     sys.path += {python_paths}
-    env = dict(os.environ)
-    for key in list(env.keys()):
-        if key in os.environ and (key.startswith('MAXKB') or key.startswith('POSTGRES') or key.startswith('PG') or key.startswith('REDIS') or key == 'PATH'):
-            del os.environ[key]
     locals_v={'{}'}
     keywords={keywords}
     globals_v=globals()
@@ -163,10 +168,6 @@ logging.getLogger("mcp.server").setLevel(logging.ERROR)
 path_to_exclude = ['/opt/py3/lib/python3.11/site-packages', '/opt/maxkb-app/apps']
 sys.path = [p for p in sys.path if p not in path_to_exclude]
 sys.path += {python_paths}
-env = dict(os.environ)
-for key in list(env.keys()):
-    if key in os.environ and (key.startswith('MAXKB') or key.startswith('POSTGRES') or key.startswith('PG') or key.startswith('REDIS') or key == 'PATH'):
-        del os.environ[key]
 exec({dedent(code)!a})
 """
 
@@ -188,6 +189,10 @@ exec({dedent(code)!a})
                     self.user,
                 ],
                 'cwd': self.sandbox_path,
+                'env': {
+                    'LD_PRELOAD': '/opt/maxkb-app/sandbox/sandbox.so',
+                    'SANDBOX_BANNED_HOSTS': self.banned_hosts,
+                },
                 'transport': 'stdio',
             }
         else:
@@ -204,6 +209,10 @@ exec({dedent(code)!a})
             file.write(_code)
             os.system(f"chown {self.user}:root {exec_python_file}")
         kwargs = {'cwd': BASE_DIR}
+        kwargs['env'] = {
+            'LD_PRELOAD': '/opt/maxkb-app/sandbox/sandbox.so',
+            'SANDBOX_BANNED_HOSTS': self.banned_hosts,
+        }
         subprocess_result = subprocess.run(
             ['su', '-s', python_directory, '-c', "exec(open('" + exec_python_file + "').read())", self.user],
             text=True,
