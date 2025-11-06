@@ -1,11 +1,12 @@
 export default {
-  title: 'Betriebsprotokolle',
+  title: 'Aktivitätsprotokoll',
   table: {
     menu: {
       label: 'Menüaktion',
     },
     operate: {
-      label: 'Vorgang',
+      label: 'Aktion',
+      detail: 'Aktionsdetails',
     },
     user: {
       label: 'Benutzer',

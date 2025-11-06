@@ -2,13 +2,13 @@ export default {
   title: 'Fragen',
   createProblem: 'Frage erstellen',
   detailProblem: 'Fragedetails',
-  quickCreateProblem: 'Schnellerstellen',
+  quickCreateProblem: 'Schnelle Fragenerstellung',
   quickCreateName: 'Frage',
   tip: {
-    placeholder: 'Frage eingeben – mehrere Eingaben möglich, eine pro Zeile.',
+    placeholder: 'Bitte Fragen eingeben – mehrere Zeilen werden unterstützt, eine pro Zeile.',
     errorMessage: 'Frage darf nicht leer sein!',
     requiredMessage: 'Bitte eine Frage eingeben',
-    relatedSuccess: 'Erfolgreich',
+    relatedSuccess: 'Mehrfache Verknüpfung der Abschnitte erfolgreich',
   },
 
   setting: {
@@ -19,19 +19,19 @@ export default {
     placeholder: 'Nach Name suchen',
   },
   table: {
-    paragraph_count: 'Verknüpfte Segmente',
+    paragraph_count: 'Verknüpfte Abschnitte',
     updateTime: 'Aktualisierungszeit',
   },
   delete: {
-    confirmTitle: 'Löschen der Frage bestätigen:',
-    confirmMessage1: 'Das Löschen dieser Frage hebt die Verknüpfung von',
-    confirmMessage2: 'Segmenten auf. Bitte mit Vorsicht fortfahren.',
+    confirmTitle: 'Frage löschen:',
+    confirmMessage1: 'Beim Löschen der Frage werden',
+    confirmMessage2: 'verknüpfte Abschnitte aufgehoben. Bitte vorsichtig vorgehen.',
   },
   relateParagraph: {
-    title: 'Mit Segment verknüpfen',
+    title: 'Abschnitte verknüpfen',
     selectDocument: 'Dokument auswählen',
-    placeholder: 'Dokument nach Name suchen',
-    selectedParagraph: 'Ausgewählte Segmente',
-    count: 'Anzahl',
+    placeholder: 'Nach Dokumentname suchen',
+    selectedParagraph: 'Ausgewählte Abschnitte',
+    count: 'Stück',
   },
 }

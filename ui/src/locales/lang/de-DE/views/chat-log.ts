@@ -1,34 +1,34 @@
 export default {
-  title: 'Chat-Protokolle',
+  title: 'Dialogprotokolle',
   delete: {
-    confirmTitle: 'Löschen der Frage bestätigen:',
-    confirmMessage1: 'Durch das Löschen dieser Frage wird die Zuordnung von',
-    confirmMessage2: 'Abschnitten aufgehoben. Bitte mit Vorsicht fortfahren.'
+    confirmTitle: 'Soll die Frage gelöscht werden: ',
+    confirmMessage1: 'Beim Löschen werden die mit der Frage verknüpften ',
+    confirmMessage2: ' Abschnitte entkoppelt. Bitte vorsichtig vorgehen。'
   },
   buttons: {
-    clearStrategy: 'Bereinigungsstrategie',
-    prev: 'Zurück',
-    next: 'Weiter'
+    clearStrategy: 'Strategie zurücksetzen',
+    prev: 'Vorheriger',
+    next: 'Nächster'
   },
   table: {
-    abstract: 'Titel',
+    abstract: 'Zusammenfassung',
     username: 'Benutzer',
-    chat_record_count: 'Nachrichten gesamt',
+    chat_record_count: 'Anzahl der Chat-Fragen',
     user: 'Benutzer',
     feedback: {
       label: 'Nutzerfeedback',
-      star: 'Gefällt mir',
-      trample: 'Gefällt mir nicht'
+      star: 'Zustimmen',
+      trample: 'Ablehnen'
     },
-    mark: 'Markierungen',
-    recenTimes: 'Zeit des letzten Chats'
+    mark: 'Verbesserung markieren',
+    recenTimes: 'Zeit des letzten Dialogs'
   },
-  addToKnowledge: 'Zum Wissen hinzufügen',
-  daysText: 'vor Tagen',
-  selectKnowledge: 'Wissen auswählen',
-  selectKnowledgePlaceholder: 'Bitte Wissen auswählen',
+  addToKnowledge: 'Zur Wissensbasis hinzufügen',
+  daysText: 'Dialogprotokolle von vor Tagen',
+  selectKnowledge: 'Wissensbasis auswählen',
+  selectKnowledgePlaceholder: 'Bitte Wissensbasis auswählen',
   saveToDocument: 'In Dokument speichern',
-  documentPlaceholder: 'Bitte ein Dokument auswählen',
+  documentPlaceholder: 'Bitte Dokument auswählen',
   editContent: 'Inhalt bearbeiten',
   editMark: 'Markierung bearbeiten',
   form: {
@@ -36,7 +36,7 @@ export default {
       placeholder: 'Bitte Inhalt eingeben'
     },
     title: {
-      placeholder: 'Bitte einen Titel für diesen Inhalt vergeben (zur Verwaltung und Anzeige)'
+      placeholder: 'Bitte einen Titel für den aktuellen Inhalt festlegen, um die Verwaltung zu erleichtern'
     }
   }
 }

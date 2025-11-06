@@ -1,97 +1,31 @@
 export default {
-  title: 'Wissen',
-  relatedApplications: 'Verknüpfte App',
-  document_count: 'Dokumente',
-  relatedApp_count: 'verknüpfte Apps',
-  searchBar: {
-    placeholder: 'Nach Name suchen',
-  },
+  title: 'Wissensbasis',
+  document_count: 'Anzahl der Dokumente',
+  relatedApp_count: 'Verknüpfte Anwendungen',
   setting: {
     vectorization: 'Vektorisierung',
     sync: 'Synchronisieren',
   },
   tip: {
     professionalMessage:
-      'Die Community Edition unterstützt bis zu 50 Wissenseinträge. Für mehr Wissen bitte auf die Professional Edition upgraden.',
+      'Die Community Edition unterstützt bis zu 50 Wissensbasen. Für mehr Wissensbasen bitte auf die Professional Edition upgraden.',
     syncSuccess: 'Synchronisierungsauftrag erfolgreich gesendet',
     updateModeMessage:
-      'Nach Änderung des Wissens-Vektormodells muss das Wissen neu vektorisiert werden. Möchtest du trotzdem speichern?',
+      'Nach Änderung des Vektormodells muss die Wissensbasis neu vektorisiert werden. Möchtest du trotzdem speichern?',
   },
   delete: {
-    confirmTitle: 'Löschen des Wissenseintrags bestätigen:',
-    confirmMessage1: 'Dieses Wissen ist verknüpft mit',
-    confirmMessage2: 'APP. Das Löschen ist irreversibel – bitte mit Vorsicht fortfahren.',
+    confirmTitle: 'Wissensbasis löschen: ',
+    confirmMessage1: 'Diese Wissensbasis ist mit ',
+    confirmMessage2: ' Anwendungen verknüpft. Nach dem Löschen kann sie nicht wiederhergestellt werden. Bitte vorsichtig vorgehen.',
   },
   knowledgeType: {
-    label: 'Typ',
-    generalKnowledge: 'Allgemeines Wissen',
-    webKnowledge: 'Web-Wissen',
-    larkKnowledge: 'Lark-Wissen',
-    yuqueKnowledge: 'Yuque-Wissen',
-    generalInfo: 'Lokale Dokumente hochladen',
-    webInfo: 'Textdaten von einer Website synchronisieren',
-    larkInfo: 'Wissen aus Lark-Dokumenten aufbauen',
-    yuqueInfo: 'Wissen aus Yuque-Dokumenten aufbauen',
-    createGeneralKnowledge: 'Allgemeines Wissen erstellen',
-    createWebKnowledge: 'Web-Wissen erstellen',
-    createLarkKnowledge: 'Lark-Wissen erstellen',
-    createYuqueKnowledge: 'Yuque-Wissen erstellen',
-  },
-  form: {
-    knowledgeName: {
-      label: 'Name',
-      placeholder: 'Bitte Wissensnamen eingeben',
-      requiredMessage: 'Bitte Wissensnamen eingeben',
-    },
-    knowledgeDescription: {
-      label: 'Beschreibung',
-      placeholder:
-        'Beschreibe den Inhalt des Wissens. Eine detaillierte Beschreibung hilft der KI, den Inhalt besser zu verstehen und die Treffgenauigkeit zu verbessern.',
-      requiredMessage: 'Bitte Wissensbeschreibung eingeben',
-    },
-    EmbeddingModel: {
-      label: 'Embedding-Modell',
-      placeholder: 'Bitte ein Embedding-Modell auswählen',
-      requiredMessage: 'Bitte ein Embedding-Modell auswählen',
-    },
-
-    source_url: {
-      label: 'Web-Root-URL',
-      placeholder: 'Bitte die Web-Root-URL eingeben',
-      requiredMessage: 'Bitte die Web-Root-URL eingeben',
-    },
-    selector: {
-      label: 'Selector',
-      placeholder: 'Standard ist body; alternativ .classname/#idname/tagname',
-    },
-    file_count_limit: {
-      label: 'Maximale Anzahl gleichzeitig hochgeladener Dateien',
-    },
-    file_size_limit: {
-      label: 'Maximale Größe pro Dokument (MB)',
-      placeholder: 'Abhängig von der Serverkonfiguration, sonst kann es zu Ausfällen kommen',
-    },
-  },
-
-  ResultSuccess: {
-    title: 'Wissen erfolgreich erstellt',
-    paragraph: 'Segmente',
-    paragraph_count: 'Segmente',
-    documentList: 'Dokumentenliste',
-    loading: 'Import läuft',
-    buttons: {
-      toKnowledge: 'Zur Wissensliste zurückkehren',
-      toDocument: 'Zum Dokument wechseln',
-    },
-  },
-  syncWeb: {
-    title: 'Wissen synchronisieren',
-    syncMethod: 'Synchronisierungsmethode',
-    replace: 'Ersetzen & synchronisieren',
-    replaceText: 'Website-Dokumente erneut abrufen und lokale Dokumente ersetzen',
-    complete: 'Vollständige Synchronisierung',
-    completeText:
-      'Alle lokalen Dokumente löschen und Website-Dokumente erneut abrufen',
-    tip: 'Hinweis: Jede Synchronisierung löscht bestehende Daten und ruft neue ab. Bitte mit Vorsicht fortfahren.',
-  },
-}
+    label: 'Typ der Wissensbasis',
+    generalKnowledge: 'Allgemeine Wissensbasis',
+    webKnowledge: 'Web-Wissensbasis',
+    larkKnowledge: 'Feishu-Wissensbasis',
+    yuqueKnowledge: 'Yuque-Wissensbasis',
+    generalInfo: 'Erstelle eine Wissensbasis durch Hochladen von Dateien oder manuelle Eingabe',
+    webInfo: 'Erstelle eine Wissensbasis über Webseitenlinks',
+    larkInfo: 'Erstelle eine Wissensbasis aus Feishu-Dokumenten',
+    yuqueInfo: 'Erstelle eine Wissensbasis aus Yuque-Dokumenten',
+    createGeneralKnowledge: 'Allgemein
