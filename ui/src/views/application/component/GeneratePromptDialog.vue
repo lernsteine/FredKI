@@ -129,68 +129,72 @@ const loading = ref<boolean>(false)
 
 const promptTemplates = {
   INIT_TEMPLATE: `
-请根据用户描述生成一个完整的AI角色人设模板:
+Bitte generieren Sie eine vollständige KI-Vorlage basierend auf der Beschreibung:
 
-用户需求：{userInput}
+Anwendungsname：{application_name}
+Anwendungsbeschreibung：{detail}
+Benutzeranforderungen：{userInput}
 
-重要说明：
-1. 角色设定必须服务于"{userInput}"内容设定应用的核心功能
-2. 允许用户对角色设定的具体内容进行调整和优化
-3. 如果用户要求修改某个技能或部分，在保持应用主题的前提下进行相应调整
+Wichtiger Hinweis:
+1. Der Zeichensatz muss die Kernfunktionalität der Anwendung "{application_name}" erfüllen.
+2. Nutzer dürfen den spezifischen Inhalt des Zeichensatzes anpassen und optimieren.
+3. Bei Änderungswünschen können erforderliche Anpassungen vorgenommen werden.
 
-请按以下格式生成：
+Bitte beachten Sie das folgende Format:
+Diese Regeln müssen eingehalten werden:
+1. Erklärungen, Vorworte und zusätzliche Anweisungen sind untersagt. Es wird nur das Endergebnis ausgegeben.
+2. Bitte beachten Sie das folgende Format. Überschriften und zusätzliche Absätze dürfen nicht weggelassen werden.
+3. \*\*Bei Änderungswünschen zu bestimmten Teilen des Zeichensatzes nehmen wir Anpassungen vor, wobei die Kernfunktionalität der Anwendung erhalten bleibt.\*\*
+4. Wenn die Anfrage des Nutzers nichts mit der Zeichensatzgenerierung zu tun hat (z. B. Smalltalk oder andere Themen), generieren wir primär einen Standardzeichensatz basierend auf den Anwendungsinformationen. 
 
-必须严格遵循以下规则：
-1. **严格禁止输出解释、前言、额外说明**，只输出最终结果。
-2. **严格使用以下格式**，不能缺少标题、不能多出其他段落。
-3. **如果用户要求修改角色设定的某个部分，在保持应用核心功能的前提下进行调整**。
-4. **如果用户需求与角色设定生成完全无关（如闲聊、其他话题），则主要依据应用信息生成标准角色设定，但不完全忽略用户输入，可从中提取有价值的辅助信息（如领域背景、语气风格等）作为次要参考**。
+Wir werden Nutzereingaben jedoch nicht vollständig ignorieren und können wertvolle Zusatzinformationen (wie z. B. Domänenhintergrund, Ton und Stil) als sekundäre Referenz heranziehen.
 
-# 角色:
-角色概述和主要职责的一句话描述
+#Rolle:
+Eine einzeilige Beschreibung der Rolle und der Hauptaufgaben.
 
-## 目标：
-角色的工作目标,如果有多目标可以分点列出,但建议更聚焦1-2个目标
+## Ziel:
+Die Arbeitsziele der Rolle. 
+Falls mehrere Ziele vorhanden sind, können Sie diese in Stichpunkten auflisten. Es empfiehlt sich jedoch, sich auf ein oder zwei zu konzentrieren.
 
-## 核心技能：
-### 技能 1: [技能名称，如作品推荐/信息查询/专业分析等]
-1. [执行步骤1 - 描述该技能的第一个具体操作步骤，包括条件判断和处理方式]
-2. [执行步骤2 - 描述该技能的第二个具体操作步骤，包括如何获取或处理信息]
-3. [执行步骤3 - 描述该技能的最终输出步骤，说明如何呈现结果]
+## Kernkompetenzen：
+### Kompetenz 1: Bezeichnung der Kompetenz, z. B. Arbeitsempfehlung/Informationsabfrage/Fachanalyse usw.]
+1. [Schritt 1 ausführen – Beschreiben Sie den ersten spezifischen Arbeitsschritt der Kompetenz, einschließlich bedingter Beurteilungen und Verarbeitungsmethoden.]
+2. [Schritt 2 ausführen – Beschreiben Sie den zweiten spezifischen Arbeitsschritt der Kompetenz, einschließlich der Informationsbeschaffung und -verarbeitung.]
+3. [Schritt 3 ausführen – Beschreiben Sie den letzten Ausgabeschritt der Kompetenz und erläutern Sie die Ergebnispräsentation.]
 
-===回复示例===
-- 📋 [标识符]: <具体内容格式说明>
-- 🎯 [标识符]: <具体内容格式说明>
-- 💡 [标识符]: <具体内容格式说明>
-===示例结束===
+===Antwortbeispiel===
+- 📋 [Kennung]: <Spezifische Anweisungen zur Inhaltsformatierung>
+- 🎯 [Kennung]: <Spezifische Anweisungen zur Inhaltsformatierung>
+- 💡 [Kennung]: <Spezifische Anweisungen zur Inhaltsformatierung>
+===Ende des Beispiels===
 
-### 技能 2: [技能名称]
-1. [执行步骤1 - 描述触发条件和初始处理方式]
-2. [执行步骤2 - 描述信息获取和深化处理的具体方法]
-3. [执行步骤3 - 描述最终输出的具体要求和格式]
+### Kompetenz 2: [Bezeichnung der Kompetenz]
+1. [Schritt 1 ausführen – Beschreiben Sie die auslösenden Bedingungen und die anfängliche Verarbeitung.
+2. [Schritt 2 ausführen – Beschreiben Sie die spezifischen Methoden zur Erfassung und Weiterverarbeitung von Informationen.]
+3. [Schritt 3 ausführen – Beschreiben Sie die spezifischen Anforderungen und das Format für die endgültige Ausgabe.]
 
-### 技能 3: [技能名称]
-- [核心能力描述 - 说明该技能的主要作用和知识基础]
-- [应用方法 - 描述如何运用该技能为用户提供服务，包括具体的实施方式]
+### Fähigkeit  3: [Name der Fähigkeit]
+- [Beschreibung der Kernkompetenz – Erläutern Sie den Hauptzweck und die Wissensbasis dieser Fähigkeit.]
+- [Anwendungsmethode – Beschreiben Sie, wie diese Fähigkeit zur Bereitstellung von Diensten für Nutzer eingesetzt wird, einschließlich spezifischer Implementierungsmethoden.]
 
-## 工作流：
-1. 描述角色工作流程的第一步
-2. 描述角色工作流程的第二步
-3. 描述角色工作流程的第三步
+## Workflow：
+1. Beschreiben Sie den ersten Schritt des Rollen-Workflows.
+2. Beschreiben Sie den zweiten Schritt des Rollen-Workflows.
+3. Beschreiben Sie den dritten Schritt des Rollen-Workflows.
 
-## 输出格式：
-如果对角色的输出格式有特定要求，可以在这里强调并举例说明想要的输出格式
+## Ausgabeformat：
+Falls Sie spezifische Anforderungen an das Ausgabeformat der Rolle haben, können Sie diese hier hervorheben und Beispiele für das gewünschte Ausgabeformat angeben.
 
 
-## 限制：
-1. **严格限制回答范围**：仅回答与角色设定相关的问题。
-   - 如果用户提问与角色无关，必须使用以下固定格式回复：
-     “对不起，我只能回答与[角色设定]相关的问题，您的问题不在服务范围内。”
-   - 不得提供任何与角色设定无关的回答。
-2. 描述角色在互动过程中需要遵循的限制条件2
-3. 描述角色在互动过程中需要遵循的限制条件3
+## Einschränkungen：
+1. Antwortumfang streng begrenzen: Beantworten Sie nur Fragen, die sich auf die Rolleneinstellung beziehen.
+- Wenn die Frage eines Nutzers nicht mit der Rolle zusammenhängt, muss das folgende feste Antwortformat verwendet werden：
+     “Entschuldigen Sie, ich kann nur Fragen zu [Rolleneinstellung] beantworten. Ihre Frage liegt außerhalb unseres Bereichs.”
+   - Geben Sie keine Antworten, die nicht mit der Rolleneinstellung zusammenhängen.
+2. Beschreiben Sie die Einschränkungen, die der Charakter während der Interaktion einhalten muss.
+3. Beschreiben Sie die Einschränkungen, die der Charakter während der Interaktion einhalten muss.
 
-输出时不得包含任何解释或附加说明，只能返回符合以上格式的内容。
+Die Ausgabe darf keine Erklärungen oder zusätzlichen Anweisungen enthalten. Es dürfen nur Inhalte zurückgegeben werden, die dem oben genannten Format entsprechen.
   `,
 }
 
@@ -401,7 +405,7 @@ function generatePrompt(inputValue: any) {
 const reAnswerClick = () => {
   if (originalUserInput.value) {
     generatePrompt(
-      `上一次回答不满意。请针对原始问题"${originalUserInput.value}"并结合对话记录，严格按照格式规范重新生成。`,
+     `Die vorherige Antwort ist unbefriedigend. Bitte generieren Sie sie basierend auf der ursprünglichen Frage"${originalUserInput.value}" und dem Gesprächsverlauf neu und halten Sie sich dabei strikt an die Formatierungsvorgaben.`,
     )
   }
 }
