@@ -2,6 +2,7 @@
 import ast
 import base64
 import gzip
+import io
 import json
 import os
 import socket
@@ -32,14 +33,17 @@ class ToolExecutor:
         self.sandbox_so_path = f'{self.sandbox_path}/lib/sandbox.so'
         self.process_timeout_seconds = int(CONFIG.get("SANDBOX_PYTHON_PROCESS_TIMEOUT_SECONDS", '3600'))
         try:
-            self._init_dir()
+            self._init_sandbox_dir()
         except Exception as e:
             # 本机忽略异常，容器内不忽略
             maxkb_logger.error(f'Exception: {e}', exc_info=True)
             if self.sandbox:
                 raise e
 
-    def _init_dir(self):
+    def _init_sandbox_dir(self):
+        if not self.sandbox:
+            # 不是sandbox就不初始化目录
+            return
         try:
             # 只初始化一次
             fd = os.open(os.path.join(PROJECT_DIR, 'tmp', 'tool_executor_init_dir.lock'),
@@ -49,17 +53,14 @@ class ToolExecutor:
             # 文件已存在 → 已初始化过
             return
         maxkb_logger.debug("init dir")
-        if self.sandbox:
-            try:
-                os.system("chmod -R g-rwx /dev/shm /dev/mqueue")
-                os.system("chmod o-rwx /run/postgresql")
-            except Exception as e:
-                maxkb_logger.warning(f'Exception: {e}', exc_info=True)
-                pass
+        try:
+            os.system("chmod -R g-rwx /dev/shm /dev/mqueue")
+            os.system("chmod o-rwx /run/postgresql")
+        except Exception as e:
+            maxkb_logger.warning(f'Exception: {e}', exc_info=True)
+            pass
         if CONFIG.get("SANDBOX_TMP_DIR_ENABLED", '0') == "1":
-            tmp_dir_path = os.path.join(self.sandbox_path, 'tmp')
-            os.makedirs(tmp_dir_path, 0o700, exist_ok=True)
-            os.system(f"chown -R {self.user}:root {tmp_dir_path}")
+            os.system("chmod g+rwx /tmp")
         # 初始化sandbox配置文件
         sandbox_lib_path = os.path.dirname(self.sandbox_so_path)
         sandbox_conf_file_path = f'{sandbox_lib_path}/.sandbox.conf'
@@ -74,12 +75,14 @@ class ToolExecutor:
         with open(sandbox_conf_file_path, "w") as f:
             f.write(f"SANDBOX_PYTHON_BANNED_HOSTS={banned_hosts}\n")
             f.write(f"SANDBOX_PYTHON_ALLOW_SUBPROCESS={allow_subprocess}\n")
-        os.system(f"chmod -R 550 {sandbox_lib_path}")
+        os.system(f"chmod -R 550 {self.sandbox_path}")
 
-    def exec_code(self, code_str, keywords):
+    def exec_code(self, code_str, keywords, function_name=None):
         _id = str(uuid.uuid7())
         success = '{"code":200,"msg":"成功","data":exec_result}'
         err = '{"code":500,"msg":str(e),"data":None}'
+        action_function = f'({function_name !a}, locals_v.get({function_name !a}))' if function_name else 'locals_v.popitem()'
+        result_path = f'{self.sandbox_path}/result/{_id}.result'
         python_paths = CONFIG.get_sandbox_python_package_paths().split(',')
         _exec_code = f"""
 try:
@@ -92,7 +95,7 @@ try:
     globals_v={'{}'}
     os.environ.clear()
     exec({dedent(code_str)!a}, globals_v, locals_v)
-    f_name, f = locals_v.popitem()
+    f_name, f = {action_function}
     for local in locals_v:
         globals_v[local] = locals_v[local]
     exec_result=f(**keywords)
@@ -216,7 +219,10 @@ exec({dedent(code)!a})
         else:
             tool_config = {
                 'command': sys.executable,
-                'args': f'import base64,gzip; exec(gzip.decompress(base64.b64decode(\'{compressed_and_base64_encoded_code_str}\')).decode())',
+                'args': [
+                    '-c',
+                    f'import base64,gzip; exec(gzip.decompress(base64.b64decode(\'{compressed_and_base64_encoded_code_str}\')).decode())',
+                ],
                 'transport': 'stdio',
             }
         return tool_config
