@@ -1,18 +1,12 @@
 (function() {
 const guideHtml=`
-<div class="maxkb-mask">
-  <div class="maxkb-content"></div>
-</div>
 <div class="maxkb-tips">
   <div class="maxkb-close">
       <svg style="vertical-align: middle;overflow: hidden;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M9.95317 8.73169L15.5511 3.13376C15.7138 2.97104 15.9776 2.97104 16.1403 3.13376L16.7296 3.72301C16.8923 3.88573 16.8923 4.14955 16.7296 4.31227L11.1317 9.9102L16.7296 15.5081C16.8923 15.6708 16.8923 15.9347 16.7296 16.0974L16.1403 16.6866C15.9776 16.8494 15.7138 16.8494 15.5511 16.6866L9.95317 11.0887L4.35524 16.6866C4.19252 16.8494 3.9287 16.8494 3.76598 16.6866L3.17673 16.0974C3.01401 15.9347 3.01401 15.6708 3.17673 15.5081L8.77465 9.9102L3.17673 4.31227C3.01401 4.14955 3.01401 3.88573 3.17673 3.72301L3.76598 3.13376C3.9287 2.97104 4.19252 2.97104 4.35524 3.13376L9.95317 8.73169Z" fill="#ffffff"></path>
           </svg>
   </div>
-
-  <div class="maxkb-title"> 🌟 Hurra hier bin ich!</div>
-  <p>Lass uns gemeinsam Neues aufbauen,<br/>
-      als Team sind wir erfolgreich!</p>
+<div class="maxkb-title"><br/> 🌟 KI Chat starten!</div>
   <div class="maxkb-button">
       <button>Los geht's</button>
   </div>
