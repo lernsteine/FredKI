@@ -384,24 +384,25 @@
             }}
           </el-button>
         </div>
-        <el-divider style="margin: 16px 0"/>
-        <el-upload
-          v-if="props.applicationDetails.file_upload_setting.local_upload"
-          action="#"
-          multiple
-          :auto-upload="false"
-          :show-file-list="false"
-          :accept="getAcceptList()"
-          :on-change="(file: any, fileList: any) => uploadFile(file, fileList)"
-          v-model:file-list="fileAllList"
-          ref="upload"
-          class="import-button"
-        >
-          <el-button class="w-full url-upload-button">{{
-              $t('chat.uploadFile.localUpload')
-            }}
-          </el-button>
-        </el-upload>
+        <div v-if="props.applicationDetails.file_upload_setting.local_upload">
+          <el-divider style="margin: 16px 0"/>
+          <el-upload
+            action="#"
+            multiple
+            :auto-upload="false"
+            :show-file-list="false"
+            :accept="getAcceptList()"
+            :on-change="(file: any, fileList: any) => uploadFile(file, fileList)"
+            v-model:file-list="fileAllList"
+            ref="upload"
+            class="import-button"
+          >
+            <el-button class="w-full url-upload-button">{{
+                $t('chat.uploadFile.localUpload')
+              }}
+            </el-button>
+          </el-upload>
+        </div>
       </el-card>
     </div>
   </div>
@@ -1119,7 +1120,7 @@ const mime_types = {
   "mid": "audio/midi",
   "midi": "audio/midi",
   "kar": "audio/midi",
-  "mp3": "audio/mp3",
+  "mp3": "audio/mpeg",
   "ogg": "audio/ogg",
   "m4a": "audio/x-m4a",
   "ra": "audio/x-realaudio",
@@ -1239,7 +1240,7 @@ async function saveUrl() {
     try {
       const appId = props.appId || props.applicationDetails?.id;
       const res = await imageApi.getFile(appId, {url});
-      if (!res.data) {
+      if (res.data['status_code'] !== 200) {
         MsgWarning(url + ' ' + t('chat.uploadFile.invalidUrl'));
         return;
       }

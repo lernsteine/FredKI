@@ -29,8 +29,9 @@
                   type="primary"
                   @click="
                     router.push({
-                      path: `/knowledge/import/lark/${id}`,
+                      path: `/knowledge/import/lark/${folderId}`,
                       query: {
+                        id: id,
                         folder_token: knowledgeDetail?.meta.folder_token,
                       },
                     })
@@ -42,7 +43,10 @@
                   type="primary"
                   @click="
                     router.push({
-                      path: `/knowledge/import/workflow/${id}`,
+                      path: `/knowledge/import/workflow/${folderId}`,
+                      query: {
+                        id: id,
+                      },
                     })
                   "
                   >{{ $t('views.document.importDocument') }}
@@ -414,7 +418,7 @@
                   />
                 </span>
                 <el-divider direction="vertical" />
-                <template v-if="knowledgeDetail?.type === 0">
+                <template v-if="knowledgeDetail?.type === 0 || knowledgeDetail?.type === 4">
                   <el-tooltip
                     effect="dark"
                     :content="$t('views.document.setting.cancelVectorization')"
