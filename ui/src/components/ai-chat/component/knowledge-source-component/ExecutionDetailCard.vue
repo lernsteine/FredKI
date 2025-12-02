@@ -1079,6 +1079,111 @@
               </div>
             </div>
           </template>
+          <!-- 文本文件 -->
+          <template v-if="data.type === WorkflowType.DataSourceLocalNode">
+            <div class="card-never border-r-6">
+              <h5 class="p-8-12">
+                {{ $t('common.param.outputParam') }}
+              </h5>
+
+              <div class="p-8-12 border-t-dashed lighter">
+                <div class="mb-8">
+                  {{ data.file_list || '-' }}
+                </div>
+              </div>
+            </div>
+          </template>
+          <!-- 文档分段 -->
+          <template v-if="data.type === WorkflowType.DocumentSplitNode">
+            <div class="card-never border-r-6">
+              <h5 class="p-8-12">
+                {{ $t('common.param.inputParam') }}
+              </h5>
+              <div class="p-8-12 border-t-dashed lighter">
+                <div class="mb-8">
+                  <span class="color-secondary"
+                    >{{ $t('chat.executionDetails.paragraphRules') }}:</span
+                  >
+                  {{ data.split_strategy }}
+                </div>
+                <div class="mb-8">
+                  <span class="color-secondary">{{ $t('common.inputContent') }}:</span>
+                  {{ data.document_list }}
+                </div>
+              </div>
+            </div>
+            <div class="card-never border-r-6 mt-8">
+              <h5 class="p-8-12">
+                {{ $t('common.param.outputParam') }}（{{ $t('chat.executionDetails.documentSplitTip') }}）
+              </h5>
+              <div class="p-8-12 border-t-dashed lighter">
+                <el-radio-group v-model="currentParagraph" class="app-radio-button-group mb-8">
+                  <template
+                    v-for="(paragrapg, ParagraphIndex) in data.paragraph_list"
+                    :key="ParagraphIndex"
+                  >
+                    <el-radio-button :label="paragrapg.name" :value="ParagraphIndex" />
+                  </template>
+                </el-radio-group>
+                <template v-if="data.paragraph_list?.length > 0">
+                  <template
+                    v-for="(paragraph, pId) in data.paragraph_list?.[currentParagraph]?.paragraphs"
+                    :key="pId"
+                  >
+                    <ParagraphCard :data="paragraph" :content="paragraph.content" :index="pId">
+                      <template #footer>
+                        <span class="color-secondary">
+                          {{ $t('common.character') }}：{{ paragraph.content.length }}</span
+                        >
+                      </template>
+                    </ParagraphCard>
+                  </template>
+                </template>
+                <template v-else> -</template>
+              </div>
+            </div>
+          </template>
+          <!-- 知识库写入 -->
+          <template v-if="data.type === WorkflowType.KnowledgeWriteNode">
+            <div class="card-never border-r-6">
+              <h5 class="p-8-12">
+                {{ $t('common.param.inputParam') }}
+              </h5>
+              <div class="p-8-12 border-t-dashed lighter">
+                <span class="color-secondary">{{$t('chat.executionDetails.subBlockLength')}}:</span>
+                {{ data.size }}
+              </div>
+            </div>
+            <div class="card-never border-r-6 mt-8">
+              <h5 class="p-8-12">{{$t('chat.executionDetails.writeContent')}}</h5>
+              <div class="p-8-12 border-t-dashed lighter">
+                <el-radio-group v-model="currentWriteContent" class="app-radio-button-group mb-8">
+                  <template
+                    v-for="(paragrapg, ParagraphIndex) in data.write_content"
+                    :key="ParagraphIndex"
+                  >
+                    <el-radio-button :label="paragrapg.name" :value="ParagraphIndex" />
+                  </template>
+                </el-radio-group>
+                <template v-if="data.write_content?.length > 0">
+                  <template
+                    v-for="(paragraph, pId) in data.write_content?.[currentWriteContent]
+                      ?.paragraphs"
+                    :key="pId"
+                  >
+                    <ParagraphCard :data="paragraph" :content="paragraph.content" :index="pId">
+                      <template #footer>
+                        <span class="color-secondary">
+                          {{ $t('common.character') }}：{{ paragraph.content.length }}</span
+                        >
+                      </template>
+                    </ParagraphCard>
+                  </template>
+                </template>
+                <template v-else> -</template>
+              </div>
+            </div>
+          </template>
           <slot></slot>
         </template>
         <template v-else>
@@ -1106,5 +1211,7 @@ const props = defineProps<{
   data: any
 }>()
 const currentLoopNode = ref(0)
+const currentParagraph = ref(0)
+const currentWriteContent = ref(0)
 </script>
 <style lang="scss" scoped></style>
