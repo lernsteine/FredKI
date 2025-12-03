@@ -42,7 +42,6 @@
         <el-form-item
           :label="$t('views.workflow.nodes.dataSourceLocalNode.maxFileNumber.label')"
           :rules="{
-            type: 'array',
             required: true,
             message: $t('common.inputPlaceholder'),
             trigger: 'change',
@@ -62,7 +61,6 @@
         <el-form-item
           :label="$t('views.workflow.nodes.dataSourceLocalNode.maxFileCountNumber.label')"
           :rules="{
-            type: 'array',
             required: true,
             message: $t('common.inputPlaceholder'),
             trigger: 'change',
@@ -93,9 +91,9 @@ const props = defineProps<{ nodeModel: any }>()
 
 const file_type_list_options = ['TXT', 'DOCX', 'PDF', 'HTML', 'XLS', 'XLSX', 'ZIP', 'CSV']
 const form = {
-  file_type_list: [],
-  file_size_limit: 50,
-  file_count_limit: 100,
+  file_type_list: ['TXT', 'DOCX', 'PDF', 'HTML', 'XLS', 'XLSX', 'ZIP', 'CSV'],
+  file_size_limit: 100,
+  file_count_limit: 50,
 }
 
 const form_data = computed({
