@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import pwd
+import resource
 import uuid_utils.compat as uuid
 from common.utils.logger import maxkb_logger
 from django.utils.translation import gettext_lazy as _
@@ -31,6 +32,7 @@ class ToolExecutor:
             self.user = None
         self.sandbox_so_path = f'{self.sandbox_path}/lib/sandbox.so'
         self.process_timeout_seconds = int(CONFIG.get("SANDBOX_PYTHON_PROCESS_TIMEOUT_SECONDS", '3600'))
+        self.process_limit_mem_mb = int(CONFIG.get("SANDBOX_PYTHON_PROCESS_LIMIT_MEM_MB", '256'))
         try:
             self._init_sandbox_dir()
         except Exception as e:
@@ -101,6 +103,7 @@ try:
     exec_result=f(**keywords)
     builtins.print("\\n{_id}:"+base64.b64encode(json.dumps({success}, default=str).encode()).decode(), flush=True)
 except Exception as e:
+    if isinstance(e, MemoryError): e = Exception("Cannot allocate more memory: exceeded the limit of {self.process_limit_mem_mb} MB.")
     builtins.print("\\n{_id}:"+base64.b64encode(json.dumps({err}, default=str).encode()).decode(), flush=True)
 """
         maxkb_logger.debug(f"Sandbox execute code: {_exec_code}")
@@ -223,8 +226,14 @@ exec({dedent(code)!a})
             'LD_PRELOAD': self.sandbox_so_path,
         }}
         try:
+            def set_resource_limit():
+                if not self.sandbox:
+                    return
+                mem_limit = self.process_limit_mem_mb * 1024 * 1024
+                resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
             subprocess_result = subprocess.run(
                 [python_directory, execute_file],
+                preexec_fn=set_resource_limit,
                 timeout=self.process_timeout_seconds,
                 text=True,
                 capture_output=True, **kwargs)
