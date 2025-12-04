@@ -82,16 +82,16 @@ export default {
   nodes: {
     knowledgeWriteNode: {
       text: '知識庫寫入',
-      label: '知識庫寫入',
+      label: '將輸入的分段列表寫入當前知識庫，並完成向量化處理',
     },
     dataSourceWebNode: {
       label: 'Web網站',
-      text: 'Web網站',
+      text: '輸入根地址自動抓取Web數據（單鏈接對應單文檔），輸出含內容的文檔列表',
       field_label: '文件列表',
     },
     dataSourceLocalNode: {
       label: '本地文件',
-      text: '本地文件',
+      text: '上傳本地文件，輸出文件列表（不解析內容，需配合 “文檔內容提取” 節點解析）',
       fileList: '文件列表',
       fileFormat: {
         label: '支持的文件格式',
@@ -261,12 +261,12 @@ export default {
     },
     documentExtractNode: {
       label: '文檔內容提取',
-      text: '提取文檔中的內容',
+      text: '解析輸入文檔，輸出結構化文檔內容',
       content: '文檔內容',
     },
     documentSplitNode: {
       label: '文檔拆分',
-      text: '將文檔內容拆分為多個分段',
+      text: '按分段策略拆分輸入文檔內容，輸出分段文本列表',
       paragraphList: '分段列表',
       splitStrategy: {
         label: '分段策略',
@@ -283,6 +283,19 @@ export default {
       },
       title1: '分段標題設置為分段的關聯問題',
       title2: '文檔名稱設置為分段的關聯問題',
+    },
+    videoUnderstandNode: {
+      label: '视频理解',
+      text: '识别出视频中的对象、场景等信息回答用户问题',
+      answer: 'AI 回答内容',
+      model: {
+        label: '视觉模型',
+        requiredMessage: '请选择视觉模型',
+      },
+      image: {
+        label: '选择视频',
+        requiredMessage: '请选择视频',
+      },
     },
     imageUnderstandNode: {
       label: '圖片理解',
@@ -456,13 +469,13 @@ export default {
       loopIndex: '下標',
       loopItem: '循環元素',
     },
-    loopBodyNode: { label: '循環體', text: '循環體' },
+    loopBodyNode: {label: '循環體', text: '循環體'},
     loopContinueNode: {
       label: 'Continue',
       text: '用於終止當前循環，執行下次循環',
       isContinue: 'Continue',
     },
-    loopBreakNode: { label: 'Break', text: '終止當前循環，跳出循環體', isBreak: 'Break' },
+    loopBreakNode: {label: 'Break', text: '終止當前循環，跳出循環體', isBreak: 'Break'},
     variableSplittingNode: {
       label: '變量拆分',
       text: '通過配置 JSON Path 表達式，對輸入的 JSON 格式變量進行解析和拆分',
@@ -506,9 +519,6 @@ export default {
   },
   SystemPromptPlaceholder: '系統提示詞，可以引用系統中的變量：如',
   UserPromptPlaceholder: '用戶提示詞，可以引用系統中的變量：如',
-  debug: {
-    executionResult: '執行結果',
-    executionSuccess: '執行成功',
-    executionFailed: '執行失敗',
-  },
+  ExecutionRecord: '執行記錄',
+  debug: {},
 }
