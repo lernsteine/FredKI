@@ -47,6 +47,7 @@ export default {
   classify: 'Classify',
   reason: 'Reason',
   removeSuccess: 'Successful',
+  publish: 'Publish',
   searchBar: {
     placeholder: 'Search by name',
   },
@@ -74,6 +75,7 @@ export default {
     success: 'Successful',
     fail: 'Failed',
     all: 'All',
+    padding: 'Padding',
   },
   param: {
     outputParam: 'Output Parameters',
