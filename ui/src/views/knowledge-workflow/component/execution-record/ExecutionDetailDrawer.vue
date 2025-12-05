@@ -1,11 +1,80 @@
 <template>
-  <el-drawer v-model="visible" size="60%" @close="closeHandle">
+  <el-drawer
+    v-model="visible"
+    size="800px"
+    :modal="false"
+    destroy-on-close
+    :before-close="closeHandle"
+    :close-on-click-modal="false"
+    :close-on-press-escape="false"
+    :show-close="false"
+  >
     <template #header>
-      <h4>{{ $t('views.problem.detailProblem') }}</h4>
+      <div class="flex align-center" style="margin-left: -8px">
+        <el-button class="cursor mr-4" link @click.prevent="visible = false">
+          <el-icon :size="20">
+            <Back />
+          </el-icon>
+        </el-button>
+        <h4>{{ $t('chat.executionDetails.title') }}</h4>
+      </div>
     </template>
     <div>
       <el-scrollbar>
-        <!-- <Result v-model:loading="loading" :knowledge_id="id" :id="action_id" /> -->
+        <h4 class="title-decoration-1 mb-16 mt-4">
+          {{ $t('workflow.ExecutionRecord') }}
+        </h4>
+        <el-card class="mb-24" shadow="never" style="--el-card-padding: 12px 16px">
+          <el-row :gutter="16" class="lighter">
+            <el-col :span="6">
+              <p class="color-secondary mb-4">{{ $t('workflow.initiator') }}</p>
+              <p>{{ props.currentContent?.meta.user_name || '-' }}</p>
+            </el-col>
+            <el-col :span="6">
+              <p class="color-secondary mb-4">{{ $t('common.status.label') }}</p>
+              <p>
+                <el-text
+                  class="color-text-primary"
+                  v-if="props.currentContent?.state === 'SUCCESS'"
+                >
+                  <el-icon class="color-success"><SuccessFilled /></el-icon>
+                  {{ $t('common.status.success') }}
+                </el-text>
+                <el-text
+                  class="color-text-primary"
+                  v-else-if="props.currentContent?.state === 'FAILURE'"
+                >
+                  <el-icon class="color-danger"><CircleCloseFilled /></el-icon>
+                  {{ $t('common.status.fail') }}
+                </el-text>
+                <el-text class="color-text-primary" v-else>
+                  <el-icon class="is-loading color-primary"><Loading /></el-icon>
+                  {{ $t('common.status.padding') }}
+                </el-text>
+              </p>
+            </el-col>
+            <el-col :span="6">
+              <p class="color-secondary mb-4">{{ $t('chat.KnowledgeSource.consumeTime') }}</p>
+              <p>
+                {{
+                  props.currentContent?.run_time != undefined
+                    ? props.currentContent?.run_time + 's'
+                    : '-'
+                }}
+              </p>
+            </el-col>
+            <el-col :span="6">
+              <p class="color-secondary mb-4">{{ $t('chat.executionDetails.createTime') }}</p>
+              <p>{{ datetimeFormat(props.currentContent?.create_time) }}</p>
+            </el-col>
+          </el-row>
+        </el-card>
+        <Result
+          :knowledge_id="props.currentContent.knowledge_id"
+          :id="currentId"
+          is-record
+          v-if="props.currentContent"
+        />
       </el-scrollbar>
     </div>
     <template #footer>
@@ -25,17 +94,15 @@
 import { ref, reactive, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Result from '@/views/knowledge-workflow/component/action/Result.vue'
-import { MsgSuccess, MsgConfirm, MsgError } from '@/utils/message'
-import { loadSharedApi } from '@/utils/dynamics-api/shared-api'
-import permissionMap from '@/permission'
+import { datetimeFormat } from '@/utils/time'
 import { t } from '@/locales'
 const props = withDefaults(
   defineProps<{
     /**
-     * 当前的id
+     * 当前的action_id
      */
     currentId: string
-    currentContent: string
+    currentContent: any
     /**
      * 下一条
      */
@@ -52,12 +119,9 @@ const props = withDefaults(
   {},
 )
 
-const emit = defineEmits(['update:currentId', 'update:currentContent', 'refresh'])
+const emit = defineEmits(['update:currentId', 'update:currentContent'])
 
 const route = useRoute()
-const {
-  params: { id },
-} = route
 
 const apiType = computed(() => {
   if (route.path.includes('shared')) {
@@ -71,34 +135,22 @@ const apiType = computed(() => {
 
 const loading = ref(false)
 const visible = ref(false)
-const action_id = ref<string>('')
 
-function closeHandle() {
-  action_id.value = ''
-}
-
-function getRecord() {
-  if (props.currentId && visible.value) {
-  }
-}
+function closeHandle() {}
 
 watch(
   () => props.currentId,
-  () => {
-    action_id.value = ''
-  },
+  () => {},
 )
 
 watch(visible, (bool) => {
   if (!bool) {
     emit('update:currentId', '')
-    emit('update:currentContent', '')
-    emit('refresh')
+    emit('update:currentContent', null)
   }
 })
 
-const open = (id: string) => {
-  action_id.value = id
+const open = () => {
   visible.value = true
 }
 
