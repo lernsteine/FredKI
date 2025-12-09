@@ -132,7 +132,9 @@ const props = defineProps({
 const emit = defineEmits(['clickNodes', 'onmousedown'])
 
 const apiType = computed(() => {
-  if (route.path.includes('resource-management')) {
+  if (route.path.includes('shared')) {
+    return 'systemShare'
+  } else if (route.path.includes('resource-management')) {
     return 'systemManage'
   } else {
     return 'workspace'
@@ -208,7 +210,7 @@ const toolTreeData = ref<any[]>([])
 const toolList = ref<any[]>([])
 
 async function getToolFolder() {
-  const res: any = await folder.asyncGetFolder(SourceTypeEnum.TOOL, {}, loading)
+  const res: any = await folder.asyncGetFolder(SourceTypeEnum.TOOL, {}, apiType.value, loading)
   toolTreeData.value = res.data
   folder.setCurrentFolder(res.data?.[0] || {})
 }
@@ -217,7 +219,7 @@ async function getToolList() {
   const res = await loadSharedApi({
     type: 'tool',
     isShared: folder.currentFolder?.id === 'share',
-    systemType: 'workspace',
+    systemType: apiType.value,
   }).getToolList({
     folder_id: folder.currentFolder?.id || user.getWorkspaceId(),
     tool_type: activeName.value == 'DATA_SOURCE_TOOL' ? 'DATA_SOURCE' : 'CUSTOM',
@@ -235,7 +237,9 @@ function folderClickHandle(row: any) {
 
 async function handleClick(val: string) {
   if (['DATA_SOURCE_TOOL', 'CUSTOM_TOOL'].includes(val)) {
-    await getToolFolder()
+    if (!route.path.includes('shared')) {
+      await getToolFolder()
+    }
     getToolList()
   }
 }
