@@ -249,7 +249,7 @@ const toolTreeData = ref<any[]>([])
 const toolList = ref<any[]>([])
 
 async function getToolFolder() {
-  const res: any = await folder.asyncGetFolder(SourceTypeEnum.TOOL, {id: props.id}, apiType.value, loading)
+  const res: any = await folder.asyncGetFolder(SourceTypeEnum.TOOL, {source_id: props.id}, apiType.value, loading)
   toolTreeData.value = res.data
   folder.setCurrentFolder(res.data?.[0] || {})
 }
@@ -271,7 +271,7 @@ const applicationTreeData = ref<any[]>([])
 const applicationList = ref<any[]>([])
 
 function getApplicationFolder() {
-  folder.asyncGetFolder(SourceTypeEnum.APPLICATION, {id: props.id}, apiType.value, loading).then((res: any) => {
+  folder.asyncGetFolder(SourceTypeEnum.APPLICATION, {source_id: props.id}, apiType.value, loading).then((res: any) => {
     applicationTreeData.value = res.data
     folder.setCurrentFolder(res.data?.[0] || {})
   })
@@ -299,7 +299,6 @@ function folderClickHandle(row: any) {
 }
 
 async function handleClick(val: string) {
-  console.log(val)
   if (val === 'tool') {
     await getToolFolder()
     getToolList()
