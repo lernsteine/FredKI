@@ -1,31 +1,11 @@
 export default {
-  title: 'Aktivitätsprotokoll',
+  title: 'Betriebsprotokolle',
   table: {
-    menu: {
-      label: 'Menüaktion',
-    },
-    operate: {
-      label: 'Aktion',
-      detail: 'Aktionsdetails',
-    },
-    user: {
-      label: 'Benutzer',
-    },
-    status: {
-      label: 'Status',
-      success: 'Erfolgreich',
-      fail: 'Fehlgeschlagen',
-      all: 'Alle',
-    },
-    ip_address: {
-      label: 'IP-Adresse',
-    },
-    opt: {
-      label: 'API-Details',
-    },
-    operateTime: {
-      label: 'Zeitpunkt der Aktion',
-    },
+    menu: 'Betriebsmenü',
+    detail: 'Betriebsdetails',
+    user: 'Betriebsbenutzer',
+    ip_address: 'IP-Adresse',
+    opt: 'API-Details',
+    operateTime: 'Betriebszeit',
   },
-  close: 'Schließen',
 }
