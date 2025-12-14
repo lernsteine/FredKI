@@ -1,19 +1,21 @@
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import en from 'element-plus/es/locale/lang/en'
 import components from './components'
+import layout from './layout'
 import views from './views'
 import theme from './theme'
-import layout from './layout'
-import dynamicsForm from './dynamics-form'
 import common from './common'
+import dynamicsForm from './dynamics-form'
 import chat from './ai-chat'
+import workflow from './workflow'
 export default {
   lang: 'Deutsch',
-  zhCn,
+  layout,
   views,
   theme,
-  layout,
-  dynamicsForm,
-  common,
-  chat,
   components,
+  en,
+  common,
+  dynamicsForm,
+  chat,
+  workflow
 }
