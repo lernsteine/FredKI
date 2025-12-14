@@ -1,42 +1,40 @@
 export default {
-  title: 'Dialogprotokolle',
+  title: 'Chat-Protokolle',
   delete: {
-    confirmTitle: 'Soll die Frage gelöscht werden: ',
-    confirmMessage1: 'Beim Löschen werden die mit der Frage verknüpften ',
-    confirmMessage2: ' Abschnitte entkoppelt. Bitte vorsichtig vorgehen。'
+    confirmTitle: 'Löschung der Frage bestätigen:',
+    confirmMessage1: 'Das Löschen dieser Frage hebt die Zuordnung zu',
+    confirmMessage2: 'Segmenten auf. Bitte vorsichtig vorgehen.',
   },
   buttons: {
-    clearStrategy: 'Strategie zurücksetzen',
-    prev: 'Vorheriger',
-    next: 'Nächster'
+    clearStrategy: 'Bereinigungsstrategie',
   },
   table: {
-    abstract: 'Zusammenfassung',
+    abstract: 'Titel',
     username: 'Benutzer',
-    chat_record_count: 'Anzahl der Chat-Fragen',
+    chat_record_count: 'Gesamte Nachrichten',
     user: 'Benutzer',
     feedback: {
-      label: 'Nutzerfeedback',
+      label: 'Benutzer-Feedback',
       star: 'Zustimmen',
-      trample: 'Ablehnen'
+      trample: 'Ablehnen',
     },
-    mark: 'Verbesserung markieren',
-    recenTimes: 'Zeit des letzten Dialogs'
+    mark: 'Markierungen',
+    recenTimes: 'Letzte Chat-Zeit',
   },
-  addToKnowledge: 'Zur Wissensbasis hinzufügen',
-  daysText: 'Dialogprotokolle von vor Tagen',
-  selectKnowledge: 'Wissensbasis auswählen',
-  selectKnowledgePlaceholder: 'Bitte Wissensbasis auswählen',
+  addToKnowledge: 'Zum Wissen hinzufügen',
+  daysText: 'Tage her',
+  selectKnowledge: 'Wissen auswählen',
+  selectKnowledgePlaceholder: 'Bitte wählen Sie ein Wissen aus',
   saveToDocument: 'In Dokument speichern',
-  documentPlaceholder: 'Bitte Dokument auswählen',
+  documentPlaceholder: 'Bitte wählen Sie ein Dokument aus',
   editContent: 'Inhalt bearbeiten',
   editMark: 'Markierung bearbeiten',
   form: {
     content: {
-      placeholder: 'Bitte Inhalt eingeben'
+      placeholder: 'Bitte geben Sie den Inhalt ein',
     },
     title: {
-      placeholder: 'Bitte einen Titel für den aktuellen Inhalt festlegen, um die Verwaltung zu erleichtern'
-    }
-  }
+      placeholder: 'Bitte vergeben Sie einen Titel für den aktuellen Inhalt zur besseren Verwaltung und Ansicht',
+    },
+  },
 }
