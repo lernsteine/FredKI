@@ -7,8 +7,8 @@ import {nextTick, defineProps, onBeforeUnmount} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import {getBrowserLang} from '@/locales'
 import useStore from '@/stores'
+
 const WE_COM_ORIGIN = 'https://login.work.weixin.qq.com'
-const LOGIN_SUCCESS_EVENT = 'onLoginSuccess'
 const LOGIN_STATE = 'fit2cloud-wecom-qr'
 const props = defineProps<{
   config: {
@@ -53,41 +53,7 @@ function getLang() {
   return lang === 'en-US' ? 'en' : 'zh'
 }
 
-function safeParse(data: unknown) {
-  try {
-    return typeof data === 'string' ? JSON.parse(data) : data
-  } catch {
-    return null
-  }
-}
-
-async function handleLoginSuccess(code: string) {
-  await chatUser.wecomCallback(code, accessToken)
-
-  router.push({
-    name: 'chat',
-    params: {accessToken},
-    query: route.query,
-  })
-}
-
-function handleWindowMessage(event: MessageEvent) {
-  if (event.origin !== WE_COM_ORIGIN) return
-
-  const payload: any = safeParse(event.data)
-  if (!payload?.args) return
-
-  if (payload.args.name === LOGIN_SUCCESS_EVENT) {
-    const code = payload.args?.data?.code
-    if (!code) return
-
-    handleLoginSuccess(code)
-    cleanup()
-  }
-}
-
 function cleanup() {
-  window.removeEventListener('message', handleWindowMessage)
   iframe?.remove()
   iframe = null
 }
@@ -109,9 +75,25 @@ const init = async () => {
     `&state=${LOGIN_STATE}` +
     `&lang=${getLang()}` +
     `&panel_size=small` +
-    `&redirect_type=callback`
-
-  window.addEventListener('message', handleWindowMessage)
+    `&redirect_type=self`
+  iframe.addEventListener('load', (e) => {
+    console.log('load', iframe)
+    if (iframe?.contentWindow) {
+      iframe.contentWindow.stop()
+      const searchParams = new URLSearchParams(iframe.contentWindow.location.search)
+      const code = searchParams.get('code')
+      if (code) {
+        chatUser.wecomCallback(code, accessToken).then((ok) => {
+          router.push({
+            name: 'chat',
+            params: {accessToken},
+            query: route.query,
+          })
+          cleanup()
+        })
+      }
+    }
+  })
 }
 
 onBeforeUnmount(cleanup)
