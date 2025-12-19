@@ -50,7 +50,6 @@ export default {
       redirectUrlPlaceholder: 'Bitte Weiterleitungs-URL eingeben',
       enableAuthentication: 'OIDC-Authentifizierung aktivieren',
     },
-
     oauth2: {
       title: 'OAuth2',
       authEndpoint: 'Auth-Endpunkt',
@@ -108,7 +107,7 @@ export default {
       callbackWarning: 'Bitte geben Sie eine gültige URL-Adresse ein',
       larkQrCode: 'Lark-Scan-Code-Login',
       dingtalkQrCode: 'DingTalk-Scan-Code-Login',
-      setting: 'Einstellung',
+      setting: ' Einstellung',
       access: 'Zugriff',
     },
   },
@@ -159,4 +158,5 @@ export default {
   setting: 'Anmeldeeinstellung',
   failedTip: 'Als Nächstes das Konto sperren',
   minute: 'Minuten',
+  third_party_user_default_role: 'Standardrollen-Zuweisung für Drittanbieter-Benutzer',
 }
