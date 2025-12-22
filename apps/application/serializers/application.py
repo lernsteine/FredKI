@@ -30,6 +30,7 @@ from application.flow.common import Workflow
 from application.models.application import Application, ApplicationTypeChoices, ApplicationKnowledgeMapping, \
     ApplicationFolder, ApplicationVersion
 from application.models.application_access_token import ApplicationAccessToken
+from application.serializers.common import update_resource_mapping_by_application
 from common import result
 from common.cache_data.application_access_token_cache import del_application_access_token
 from common.database_model_manage.database_model_manage import DatabaseModelManage
@@ -780,6 +781,7 @@ class ApplicationOperateSerializer(serializers.Serializer):
             application_access_token.save()
         else:
             access_token = application_access_token.access_token
+        update_resource_mapping_by_application(self.data.get("application_id"))
         del_application_access_token(access_token)
         return self.one(with_valid=False)
 
@@ -857,7 +859,7 @@ class ApplicationOperateSerializer(serializers.Serializer):
                        'api_key_is_active', 'icon', 'work_flow', 'model_params_setting', 'tts_model_params_setting',
                        'stt_model_params_setting',
                        'mcp_enable', 'mcp_tool_ids', 'mcp_servers', 'mcp_source', 'tool_enable', 'tool_ids',
-                       'mcp_output_enable',
+                       'mcp_output_enable', 'application_enable', 'application_ids',
                        'problem_optimization_prompt', 'clean_time', 'folder_id']
         for update_key in update_keys:
             if update_key in instance and instance.get(update_key) is not None:
