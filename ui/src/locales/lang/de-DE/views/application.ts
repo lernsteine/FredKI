@@ -1,114 +1,116 @@
 export default {
   title: 'APP',
   createApplication: 'Einfache APP erstellen',
-  createWorkFlowApplication: 'Workflow APP erstellen',
+  createWorkFlowApplication: 'Workflow-APP erstellen',
   importApplication: 'APP importieren',
   copyApplication: 'APP kopieren',
   workflow: 'WORKFLOW',
   simple: 'EINFACH',
-  simplePlaceholder: 'Geeignet für Anfänger, um Assistenten mit Formulareinstellungen zu erstellen',
+  simplePlaceholder: 'Geeignet für Einsteiger, um Assistenten über Formulareinstellungen zu erstellen',
   workflowPlaceholder:
-    'Geeignet für fortgeschrittene Benutzer, um komplexe Logik-KI-Assistenten mit Low-Code-Drag-and-Drop zu bauen',
+    'Geeignet für fortgeschrittene Nutzer, um komplexe Logik-KI-Assistenten mit Low-Code-Drag-and-Drop zu bauen',
   appTest: 'Debug-Vorschau',
   operation: {
     addModel: 'Modell hinzufügen',
     toChat: 'Chat',
   },
   delete: {
-    confirmTitle: 'Sind Sie sicher, dass Sie diese APP löschen möchten: ',
+    confirmTitle: 'Möchten Sie diese APP wirklich löschen: ',
     confirmMessage:
-      'Das Löschen dieser APP stellt ihre Dienste nicht mehr zur Verfügung. Bitte gehen Sie vorsichtig vor.',
+      'Nach dem Löschen der APP wird sie nicht mehr zur Verfügung stehen. Bitte gehen Sie vorsichtig vor.',
   },
   tip: {
     publishSuccess: 'Erfolgreich veröffentlicht',
     ExportError: 'Export fehlgeschlagen',
     professionalMessage:
-      'Die Community Edition unterstützt bis zu 5 APPs. Wenn Sie mehr APPs benötigen, upgraden Sie bitte zur Professional Edition.',
-    saveErrorMessage: 'Speichern fehlgeschlagen, bitte überprüfen Sie Ihre Eingabe oder versuchen Sie es später erneut',
-    loadingErrorMessage: 'Laden der Konfiguration fehlgeschlagen, bitte überprüfen Sie Ihre Eingabe oder versuchen Sie es später erneut',
-    noDocPermission: 'Keine Berechtigung, Dokumente zu erstellen',
+      'Die Community Edition unterstützt maximal 5 APPS. Für mehr APPS bitte auf die Professional Edition upgraden.',
+    saveErrorMessage: 'Speichern fehlgeschlagen, bitte Eingaben überprüfen oder später erneut versuchen',
+    loadingErrorMessage: 'Konfiguration konnte nicht geladen werden, bitte Eingaben überprüfen oder später erneut versuchen',
+    noDocPermission: 'Keine Berechtigung zum Erstellen von Dokumenten',
+    confirmUse: 'Möchten Sie wirklich verwenden',
+    overwrite: 'den aktuellen Workflow überschreiben',
   },
 
   form: {
     appName: {
-      placeholder: 'Bitte geben Sie den APP-Namen ein',
+      placeholder: 'Bitte APP-Namen eingeben',
       requiredMessage: 'APP-Name ist erforderlich',
     },
     appDescription: {
       placeholder:
-        'Beschreiben Sie das APP-Szenario und die Nutzung, z. B.: XXX-Assistent, der Benutzerfragen zur Nutzung des XXX-Produkts beantwortet',
+        'Beschreiben Sie das Szenario und den Einsatz der APP, z. B.: XXX-Assistent, der Fragen zu XXX-Produktnutzung beantwortet',
     },
     appType: {
-      simplePlaceholder: 'Geeignet für Anfänger, um Assistenten zu erstellen.',
-      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer, um den Workflow des Assistenten anzupassen',
+      simplePlaceholder: 'Geeignet für Einsteiger, um Assistenten zu erstellen.',
+      workflowPlaceholder: 'Geeignet für fortgeschrittene Nutzer, um den Workflow des Assistenten anzupassen',
     },
     appTemplate: {
       blankApp: {
         title: 'Leere APP',
       },
       assistantApp: {
-        title: 'Wissensassistent',
-        description: 'Geeignet für fortgeschrittene Benutzer, um den Workflow des Assistenten anzupassen',
+        title: 'Wissens-Assistent',
+        description: 'Geeignet für fortgeschrittene Nutzer, um den Workflow des Assistenten anzupassen',
       },
     },
     aiModel: {
       label: 'KI-Modell',
-      placeholder: 'Bitte wählen Sie ein KI-Modell aus',
+      placeholder: 'Bitte KI-Modell auswählen',
     },
     roleSettings: {
       label: 'System-Prompt',
       placeholder:
-        'System-Prompt, Sie können Systemvariablen referenzieren: {data} ist das getroffene Segment in der Wissensbasis; {question} ist die vom Benutzer gestellte Frage.',
-      tooltip: 'Rollen- oder Anweisungen für das Modell festlegen',
+        'System-Prompt, Sie können System-Variablen verwenden: {data} ist der getroffene Wissensabschnitt; {question} ist die gestellte Frage.',
+      tooltip: 'Legen Sie die Rolle oder Anweisungen fest, die das Modell befolgen soll',
     },
 
     prompt: {
       label: 'Benutzer-Prompt',
-      noReferences: '(Keine Referenzwissen)',
-      references: '(Referenzwissen)',
+      noReferences: '（Keine Referenz-Wissen）',
+      references: ' (Referenz-Wissen)',
       placeholder:
-        'Benutzer-Prompt, Sie können Systemvariablen referenzieren: {data} ist das getroffene Segment in der Wissensbasis; {question} ist die vom Benutzer gestellte Frage',
-      requiredMessage: 'Bitte geben Sie den Benutzer-Prompt ein',
-      tooltip: 'Die Frage oder Anweisung, die der Benutzer dem Modell stellt',
+        'Benutzer-Prompt, Sie können System-Variablen verwenden: {data} ist der getroffene Wissensabschnitt; {question} ist die gestellte Frage',
+      requiredMessage: 'Bitte Benutzer-Prompt eingeben',
+      tooltip: 'Die Frage oder der Befehl, den der Benutzer an das Modell stellt',
 
       noReferencesTooltip:
-        'Durch Anpassen des Prompt-Inhalts können Sie die Chat-Richtung des großen Modells leiten. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variablen: {question} ist die vom Benutzer gestellte Frage.',
+        'Durch Anpassen des Prompt-Inhalts können Sie die Richtung des großen Modell-Chats steuern. Dieser Prompt wird am Anfang des Kontexts festgelegt. Verwendete Variablen: {question} ist die gestellte Frage.',
       referencesTooltip:
-        'Durch Anpassen des Prompt-Inhalts können Sie die Chat-Richtung des großen Modells leiten. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variablen: {data} enthält bekannte Informationen aus dem Wissen; {question} ist die vom Benutzer gestellte Frage.',
+        'Durch Anpassen des Prompt-Inhalts können Sie die Richtung des großen Modell-Chats steuern. Dieser Prompt wird am Anfang des Kontexts festgelegt. Verwendete Variablen: {data} enthält bekannte Informationen aus dem Wissen; {question} ist die gestellte Frage.',
       defaultPrompt: `Bekannte Informationen: {data}
-        Frage: {question}
-         Antwortanforderungen:
-         - Bitte verwenden Sie knappe und professionelle Sprache, um die Frage des Benutzers zu beantworten.
-         `,
+Frage: {question}
+Antwortanforderungen:
+- Bitte verwenden Sie knappe und professionelle Sprache, um die Frage des Benutzers zu beantworten.
+`,
     },
     historyRecord: {
       label: 'Chat-Verlauf',
     },
     relatedKnowledge: {
       label: 'Verwandtes Wissen',
-      placeholder: 'Verwandtes Wissen wird hier angezeigt',
+      placeholder: 'Hier wird das ausgewählte Wissen angezeigt',
     },
     multipleRoundsDialogue: 'Mehrere Runden Dialog',
 
-    prologue: 'Prolog',
+    prologue: 'Einführungstext',
     defaultPrologue:
-      'Hallo, ich bin XXX-Assistent. Sie können mich zu Fragen zur Nutzung von XXX befragen.\n- Was sind die Hauptfunktionen von XXX?\n- Welche LLMs unterstützt XXX?\n- Welche Dokumenttypen unterstützt XXX?',
+      'Hallo, ich bin der XXX-Assistent. Sie können mir Fragen zur Nutzung von XXX stellen.\n- Was sind die Hauptfunktionen von XXX?\n- Welche LLMs unterstützt XXX?\n- Welche Dokumenttypen unterstützt XXX?',
     problemOptimization: {
       label: 'Fragenoptimierung',
       tooltip:
-        'Optimieren Sie die aktuelle Frage basierend auf dem historischen Chat, um besser zu Wissenspunkten zu passen.',
+        'Optimierung der aktuellen Frage basierend auf dem Chat-Verlauf, um besser zu Wissenspunkten zu passen.',
     },
 
     voiceInput: {
       label: 'Spracheingabe',
-      placeholder: 'Bitte wählen Sie ein Spracherkennungsmodell aus',
-      requiredMessage: 'Bitte wählen Sie ein Sprach-Eingabemodell aus',
+      placeholder: 'Bitte Spracherkennungsmodell auswählen',
+      requiredMessage: 'Bitte ein Sprach-Eingabemodell auswählen',
       autoSend: 'Automatisches Senden',
     },
     voicePlay: {
       label: 'Sprachwiedergabe',
-      placeholder: 'Bitte wählen Sie ein Sprachsynthese-Modell aus',
-      requiredMessage: 'Bitte wählen Sie ein Sprachwiedergabe-Modell aus',
+      placeholder: 'Bitte Sprachsynthese-Modell auswählen',
+      requiredMessage: 'Bitte ein Sprachwiedergabe-Modell auswählen',
       autoPlay: 'Automatische Wiedergabe',
       browser: 'Browser-Wiedergabe (kostenlos)',
       tts: 'TTS-Modell',
@@ -117,7 +119,7 @@ export default {
     reasoningContent: {
       label: 'Denkprozess ausgeben',
       tooltip:
-        "Bitte legen Sie das Denk-Label basierend auf der Rückgabe des Modells fest, und der Inhalt in der Mitte des Labels wird als Denkprozess erkannt.",
+        'Bitte setzen Sie das Denk-Label basierend auf der Rückgabe des Modells, der Inhalt zwischen den Labels wird als Denkprozess erkannt.',
       start: 'Start',
       end: 'Ende',
     },
@@ -126,18 +128,18 @@ export default {
   generateDialog: {
     label: 'Generieren',
     generatePrompt: 'Prompt generieren',
-    placeholder: 'Bitte geben Sie das Prompt-Thema ein',
+    placeholder: 'Bitte Prompt-Thema eingeben',
     title: 'Der Prompt wird hier angezeigt',
     remake: 'Neu generieren',
     stop: 'Generierung stoppen',
     continue: 'Generierung fortsetzen',
     replace: 'Ersetzen',
-    exit: 'Sind Sie sicher, dass Sie beenden und den KI-generierten Inhalt verwerfen möchten?',
-    loading: 'Wird generiert...',
+    exit: 'Möchten Sie wirklich beenden und den KI-generierten Inhalt verwerfen?',
+    loading: 'Generieren...',
   },
   dialog: {
     addKnowledge: 'Verwandtes Wissen hinzufügen',
-    addKnowledgePlaceholder: 'Das ausgewählte Wissen muss dasselbe Einbettungsmodell verwenden',
+    addKnowledgePlaceholder: 'Das ausgewählte Wissen muss das gleiche Embedding-Modell verwenden',
     selectSearchMode: 'Abrufmodus',
     vectorSearch: 'Vektorsuche',
     vectorSearchTooltip:
@@ -145,98 +147,98 @@ export default {
     fullTextSearch: 'Volltextsuche',
     fullTextSearchTooltip:
       'Volltextsuche ist eine Abrufmethode basierend auf Textähnlichkeit, geeignet für kleine Datenmengen im Wissen.',
-    hybridSearch: 'Hybridsuche',
+    hybridSearch: 'Hybrid-Suche',
     hybridSearchTooltip:
-      'Hybridsuche ist eine Abrufmethode basierend auf sowohl Vektor- als auch Textähnlichkeit, geeignet für mittlere Datenmengen im Wissen.',
+      'Hybrid-Suche ist eine Abrufmethode basierend auf Vektor- und Textähnlichkeit, geeignet für mittlere Datenmengen im Wissen.',
     similarityThreshold: 'Ähnlichkeit höher als',
     similarityTooltip: 'Je höher die Ähnlichkeit, desto stärker die Korrelation.',
-    topReferences: 'Top N Segmente',
+    topReferences: 'Top N Abschnitte',
     maxCharacters: 'Maximale Zeichen pro Referenz',
     noReferencesAction: 'Wenn keine Wissensreferenzen vorhanden sind',
-    continueQuestioning: 'Weiterfragen beim KI-Modell',
+    continueQuestioning: 'Weiterfragen an das KI-Modell',
     provideAnswer: 'Antwortinhalt festlegen',
     designated_answer:
-      'Hallo, ich bin XXX-Assistent. Mein Wissen enthält nur Informationen zu XXX-Produkten. Bitte formulieren Sie Ihre Frage um.',
+      'Hallo, ich bin der XXX-Assistent. Mein Wissen enthält nur Informationen zu XXX-Produkten. Bitte formulieren Sie Ihre Frage um.',
     defaultPrompt1:
-      "Der Inhalt in den Klammern () stellt die Frage des Benutzers dar. Basierend auf dem Kontext, bitte die Frage des Benutzers ({question}) spekulieren und vervollständigen. Die Anforderung ist, eine vollständige Frage auszugeben und sie in",
-    defaultPrompt2: 'Tag zu platzieren',
+      'Der Inhalt in Klammern () stellt die Frage des Benutzers dar. Bitte ergänzen und vervollständigen Sie die Frage des Benutzers basierend auf dem Kontext ({question}). Die Anforderung ist, eine vervollständigte Frage auszugeben und sie in',
+    defaultPrompt2: 'zu setzen',
   },
   applicationAccess: {
     title: 'APP-Zugriff',
     wecom: 'WeCom',
-    wecomTip: 'WeCom intelligente APP erstellen',
+    wecomTip: 'WeCom-intelligente APP erstellen',
     wecomBot: 'WeCom Bot',
-    wecomBotTip: 'WeCom intelligente Bot erstellen',
+    wecomBotTip: 'WeCom-intelligenten Bot erstellen',
     dingtalk: 'DingTalk',
-    dingtalkTip: 'DingTalk intelligente APP erstellen',
+    dingtalkTip: 'DingTalk-intelligente APP erstellen',
     wechat: 'WeChat',
-    wechatTip: 'WeChat intelligente APP erstellen',
+    wechatTip: 'WeChat-intelligente APP erstellen',
     lark: 'Lark',
-    larkTip: 'Lark intelligente APP erstellen',
+    larkTip: 'Lark-intelligente APP erstellen',
     setting: 'Einstellung',
-    callback: 'Rückrufadresse',
-    callbackTip: 'Bitte geben Sie die Rückrufadresse ein',
+    callback: 'Callback-Adresse',
+    callbackTip: 'Bitte Callback-Adresse eingeben',
     wecomPlatform: 'WeCom Open Platform',
     wechatPlatform: 'WeChat Open Platform',
     dingtalkPlatform: 'DingTalk Open Platform',
     larkPlatform: 'Lark Open Platform',
     slack: 'Slack',
-    slackTip: 'Slack intelligente APP erstellen',
+    slackTip: 'Slack-intelligente APP erstellen',
     wecomSetting: {
       title: 'WeCom-Konfiguration',
-      cropId: 'Corp ID',
-      cropIdPlaceholder: 'Bitte geben Sie die Corp ID ein',
-      agentIdPlaceholder: 'Bitte geben Sie die Agent ID ein',
-      secretPlaceholder: 'Bitte geben Sie das Secret ein',
-      tokenPlaceholder: 'Bitte geben Sie das Token ein',
-      encodingAesKeyPlaceholder: 'Bitte geben Sie den EncodingAESKey ein',
+      cropId: 'Crop ID',
+      cropIdPlaceholder: 'Bitte Crop ID eingeben',
+      agentIdPlaceholder: 'Bitte Agent ID eingeben',
+      secretPlaceholder: 'Bitte Secret eingeben',
+      tokenPlaceholder: 'Bitte Token eingeben',
+      encodingAesKeyPlaceholder: 'Bitte EncodingAESKey eingeben',
       authenticationSuccessful: 'Erfolgreich',
       urlInfo:
-        '-APP-Management-Selbst erstellte APP-Nachrichten empfangen-"URL" für API empfangen einstellen',
+        '-APP-Verwaltung-Selbst erstellt-Erstellte APP-Nachrichten empfangen-Setzen der "URL" für den API-Empfang',
     },
     dingtalkSetting: {
       title: 'DingTalk-Konfiguration',
-      clientIdPlaceholder: 'Bitte geben Sie die Client ID ein',
-      clientSecretPlaceholder: 'Bitte geben Sie das Client Secret ein',
+      clientIdPlaceholder: 'Bitte Client ID eingeben',
+      clientSecretPlaceholder: 'Bitte Client Secret eingeben',
       urlInfo:
-        '-Auf der Robot-Seite "Nachrichtenempfangsmodus" auf HTTP-Modus einstellen und die obige URL in die "Nachrichtenempfangsadresse" einfügen',
+        '-Auf der Robot-Seite "Nachrichtenempfangsmodus" auf HTTP setzen und die obenstehende URL in "Nachrichtenempfangsadresse" eintragen',
     },
     wechatSetting: {
       title: 'WeChat-Konfiguration',
       appId: 'APP ID',
-      appIdPlaceholder: 'Bitte geben Sie die APP ID ein',
+      appIdPlaceholder: 'Bitte APP ID eingeben',
       appSecret: 'APP SECRET',
-      appSecretPlaceholder: 'Bitte geben Sie das APP SECRET ein',
+      appSecretPlaceholder: 'Bitte APP SECRET eingeben',
       token: 'TOKEN',
-      tokenPlaceholder: 'Bitte geben Sie das TOKEN ein',
+      tokenPlaceholder: 'Bitte TOKEN eingeben',
       aesKey: 'Nachrichtenverschlüsselungsschlüssel',
-      aesKeyPlaceholder: 'Bitte geben Sie den Nachrichtenverschlüsselungsschlüssel ein',
+      aesKeyPlaceholder: 'Bitte Nachrichtenverschlüsselungsschlüssel eingeben',
       urlInfo:
-        '-Einstellungen und Entwicklung-Basis-Konfiguration-"Serveradresse URL" in der Server-Konfiguration',
+        '-Einstellungen und Entwicklung-Grundkonfiguration-"Server-Adresse URL" in der Server-Konfiguration',
     },
     wecomBotSetting: {
       title: 'WeCom Bot-Konfiguration',
-      urlInfo: '-Management-Tools-Smart Bot-Bot erstellen-API-Modus "URL" erstellen',
+      urlInfo: '-Verwaltungstools-Intelligenter Bot-Bot erstellen-API-Modus "URL" erstellen',
     },
     larkSetting: {
       title: 'Lark-Konfiguration',
-      appIdPlaceholder: 'Bitte geben Sie die APP ID ein',
-      appSecretPlaceholder: 'Bitte geben Sie das APP Secret ein',
-      verificationTokenPlaceholder: 'Bitte geben Sie das Verification Token ein',
+      appIdPlaceholder: 'Bitte APP ID eingeben',
+      appSecretPlaceholder: 'Bitte APP Secret eingeben',
+      verificationTokenPlaceholder: 'Bitte Verifizierungs-Token eingeben',
       urlInfo:
-        '-Ereignisse und Callbacks - Ereignis-Konfiguration - "Anfrageadresse" der Abonnementmethode konfigurieren',
+        '-Events und Callbacks - Ereigniskonfiguration - "Anfrageadresse" der Abonnementmethode konfigurieren',
     },
     slackSetting: {
       title: 'Slack-Konfiguration',
-      signingSecretPlaceholder: 'Bitte geben Sie das Signing Secret ein',
-      botUserTokenPlaceholder: 'Bitte geben Sie das Bot User Token ein',
+      signingSecretPlaceholder: 'Bitte Signing Secret eingeben',
+      botUserTokenPlaceholder: 'Bitte Bot User Token eingeben',
     },
-    copyUrl: 'Link kopieren und einfügen',
+    copyUrl: 'Link kopieren und eintragen',
   },
   hitTest: {
-    title: 'Treffertest',
-    text: 'Testen Sie den Treffereffekt des Wissens basierend auf dem gegebenen Abfragetext.',
-    emptyMessage1: 'Ergebnisse des Treffertests werden hier angezeigt',
+    title: 'Abruf-Test',
+    text: 'Testen Sie die Trefferwirkung des Wissens basierend auf dem eingegebenen Abfragetext.',
+    emptyMessage1: 'Abruf-Test-Ergebnisse werden hier angezeigt',
     emptyMessage2: 'Keine passenden Abschnitte gefunden',
   },
   publishTime: 'Veröffentlichungszeit',
