@@ -107,7 +107,7 @@ export default {
       callbackWarning: 'Bitte geben Sie eine gültige URL-Adresse ein',
       larkQrCode: 'Lark-Scan-Code-Login',
       dingtalkQrCode: 'DingTalk-Scan-Code-Login',
-      setting: ' Einstellung',
+      setting: 'Einstellung',
       access: 'Zugriff',
     },
   },
@@ -143,6 +143,8 @@ export default {
       currentOnly: 'Nur aktuelle Ressource',
       includeAll: 'Alle Unterressourcen einbeziehen',
       effectiveResource: 'Wirksame Ressource',
+      defaultPermission: 'Standardberechtigung',
+      defaultPermissionTip: 'Standardberechtigungen für alle Ressourcen im ausgewählten Workspace',
     },
   },
   resource_management: {
