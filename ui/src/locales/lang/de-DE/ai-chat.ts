@@ -36,6 +36,16 @@ export default {
     continue: 'Fortsetzen',
     stopChat: 'Antwort stoppen',
     startChat: 'Antwort starten',
+    likeTitle: 'Was macht Sie zufrieden?',
+    opposeTitle: 'Bitte teilen Sie uns den Grund für Ihre Unzufriedenheit mit.',
+    vote: {
+      accurate: 'Inhalt ist korrekt',
+      inaccurate: 'Antwort ist ungenau',
+      complete: 'Inhalt ist vollständig',
+      irrelevantAnswer: 'Antwort ist irrelevant',
+      other: 'Andere',
+      placeholder: 'Erzählen Sie uns mehr über Ihre relevanten Erfahrungen',
+    },
   },
   tip: {
     error500Message: 'Entschuldigung, der Dienst befindet sich derzeit in der Wartung. Bitte versuchen Sie es später erneut!',
