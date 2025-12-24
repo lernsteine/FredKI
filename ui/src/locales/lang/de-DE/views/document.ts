@@ -3,7 +3,7 @@ export default {
   importDocument: 'Dokument importieren',
   syncDocument: 'Dokument synchronisieren',
   items: 'Elemente',
-  migrateDocument: 'Migrieren nach',
+  migrateDocument: 'Migration nach',
   setting: {
     migration: 'Verschieben',
     cancelGenerateQuestion: 'Fragen generieren abbrechen',
@@ -15,7 +15,7 @@ export default {
   },
 
   tip: {
-    saveMessage: 'Aktuelle Änderungen wurden nicht gespeichert. Beenden bestätigen?',
+    saveMessage: 'Aktuelle Änderungen wurden nicht gespeichert. Beim Verlassen bestätigen?',
     cancelSuccess: 'Erfolgreich',
     sendMessage: 'Erfolgreich',
     vectorizationSuccess: 'Erfolgreich',
@@ -25,20 +25,20 @@ export default {
     replaceSuccess: 'Erfolgreich',
     fileLimitCountTip1: 'Maximale Anzahl pro Upload',
     fileLimitCountTip2: 'Dateien',
-    fileLimitSizeTip1: 'jede Datei darf nicht überschreiten',
+    fileLimitSizeTip1: 'Jede Datei darf nicht größer sein als',
     toImportDocConfirm:
-      'Der Workflow der aktuellen Wissensbasis ist nicht veröffentlicht, Dokumente können nicht importiert werden. Bitte zuerst den Workflow veröffentlichen.',
+      'Der Workflow der aktuellen Wissensbasis ist nicht veröffentlicht, Dokumente können nicht importiert werden. Bitte veröffentlichen Sie zuerst den Workflow.',
   },
   upload: {
     selectFile: 'Datei auswählen',
     selectFiles: 'Ordner auswählen',
-    uploadMessage: 'Dateien hierher ziehen und ablegen zum Hochladen oder',
+    uploadMessage: 'Dateien hierher ziehen und ablegen oder',
     formats: 'Unterstützte Formate:',
     requiredMessage: 'Bitte laden Sie eine Datei hoch',
     errorMessage1: 'Die Dateigröße überschreitet 100 MB',
     errorMessage2: 'Nicht unterstütztes Dateiformat',
     errorMessage3: 'Datei darf nicht leer sein',
-    errorMessage4: 'Bis zu 50 Dateien können gleichzeitig hochgeladen werden',
+    errorMessage4: 'Es können maximal 50 Dateien gleichzeitig hochgeladen werden',
     template: 'Vorlage',
     download: 'Herunterladen',
   },
@@ -46,21 +46,21 @@ export default {
   fileType: {
     txt: {
       label: 'Textdatei',
-      tip1: '1. Es wird empfohlen, vor dem Hochladen die Segmentmarkierungen in der Datei zu standardisieren.',
-      tip2: '2. Bis zu 50 Dateien können gleichzeitig hochgeladen werden, jede Datei darf 100 MB nicht überschreiten.',
+      tip1: '1. Es wird empfohlen, vor dem Hochladen die Segmentierungsmarker in der Datei zu standardisieren.',
+      tip2: '2. Es können maximal 50 Dateien gleichzeitig hochgeladen werden, jede Datei nicht größer als 100 MB.',
     },
     table: {
       label: 'Tabelle',
-      tip1: '1. Klicken Sie, um die entsprechende Vorlage herunterzuladen und auszufüllen:',
-      tip2: '2. Die erste Zeile muss Spaltenüberschriften sein, die sinnvolle Begriffe enthalten. Jeder Datensatz wird als ein Segment behandelt.',
-      tip3: '3. Jeder Tabellenblatt in der hochgeladenen Datei wird als separates Dokument behandelt, der Blattname dient als Dokumentname.',
-      tip4: '4. Bis zu 50 Dateien können gleichzeitig hochgeladen werden, jede Datei darf 100 MB nicht überschreiten.',
+      tip1: '1. Klicken Sie, um die entsprechende Vorlage herunterzuladen und die Informationen auszufüllen:',
+      tip2: '2. Die erste Zeile muss Spaltenüberschriften sein, und die Spaltenüberschriften müssen sinnvolle Begriffe sein. Jeder Datensatz in der Tabelle wird als ein Segment behandelt.',
+      tip3: '3. Jedes Blatt in der hochgeladenen Tabellendatei wird als ein Dokument behandelt, mit dem Blattnamen als Dokumentnamen.',
+      tip4: '4. Es können maximal 50 Dateien gleichzeitig hochgeladen werden, jede Datei nicht größer als 100 MB.',
     },
     QA: {
-      label: 'QA-Paare',
-      tip1: '1. Klicken Sie, um die entsprechende Vorlage herunterzuladen und auszufüllen:',
-      tip2: '2. Jeder Tabellenblatt in der hochgeladenen Datei wird als separates Dokument behandelt, der Blattname dient als Dokumentname.',
-      tip3: '3. Bis zu 50 Dateien können gleichzeitig hochgeladen werden, jede Datei darf 100 MB nicht überschreiten.',
+      label: 'Frage-Antwort-Paare',
+      tip1: '1. Klicken Sie, um die entsprechende Vorlage herunterzuladen und die Informationen auszufüllen:',
+      tip2: '2. Jedes Blatt in der hochgeladenen Tabellendatei wird als ein Dokument behandelt, mit dem Blattnamen als Dokumentnamen.',
+      tip3: '3. Es können maximal 50 Dateien gleichzeitig hochgeladen werden, jede Datei nicht größer als 100 MB.',
     },
   },
   setRules: {
@@ -70,16 +70,16 @@ export default {
     },
     intelligent: {
       label: 'Automatische Segmentierung (empfohlen)',
-      text: 'Wenn Sie unsicher sind, wie Sie Segmentierungsregeln einstellen sollen, wird die automatische Segmentierung empfohlen.',
+      text: 'Falls Sie unsicher sind, wie Segmentierungsregeln gesetzt werden sollen, wird die automatische Segmentierung empfohlen.',
     },
     advanced: {
       label: 'Erweiterte Segmentierung',
-      text: 'Benutzer können Trennzeichen, Segmentlänge und Bereinigungsregeln individuell an Dokumentstandards anpassen.',
+      text: 'Benutzer können Trennzeichen, Segmentlänge und Bereinigungsregeln nach Dokumentenstandards anpassen.',
     },
     patterns: {
-      label: 'Segmenttrenner',
+      label: 'Segment-Trennzeichen',
       tooltip:
-        'Rekursiv nach den ausgewählten Symbolen in Reihenfolge teilen. Überschreitet das Teilergebnis die Segmentlänge, wird es auf die Segmentlänge gekürzt.',
+        'Rekursiv in der ausgewählten Reihenfolge nach den Symbolen teilen. Wenn das Teilergebnis die Segmentlänge überschreitet, wird es auf die Segmentlänge gekürzt.',
       placeholder: 'Bitte auswählen',
     },
     limit: {
@@ -87,10 +87,10 @@ export default {
     },
     with_filter: {
       label: 'Automatische Bereinigung',
-      text: 'Doppelte Symbole, Leerzeichen, leere Zeilen und Tabulatoren entfernen.',
+      text: 'Doppelte zusätzliche Symbole, Leerzeichen, leere Zeilen und Tab-Wörter entfernen.',
     },
     checkedConnect: {
-      label: 'Bei Import von fragebasierten QA-Paaren Abschnitt „Verwandte Fragen“ hinzufügen.',
+      label: 'Beim Importieren von Frage-Antwort-Paaren einen Abschnitt „Zugehörige Fragen“ hinzufügen.',
     },
   },
   buttons: {
@@ -110,7 +110,7 @@ export default {
     editValue: 'Tag-Wert bearbeiten',
     deleteConfirm: 'Tag löschen bestätigen: ',
     deleteTip:
-      'Nach dem Löschen wird das Tag von allen Ressourcen entfernt, die es verwenden. Bitte mit Vorsicht fortfahren!',
+      'Nach dem Löschen wird das Tag von Ressourcen entfernt, die dieses Tag verwenden. Bitte vorsichtig vorgehen!',
     requiredMessage1: 'Bitte geben Sie ein Tag ein',
     requiredMessage2: 'Bitte geben Sie einen Wert ein',
     requiredMessage3: 'Bitte geben Sie ein Tag oder einen Wert ein',
@@ -126,11 +126,10 @@ export default {
     label: 'Dateistatus',
     SUCCESS: 'Erfolgreich',
     FAILURE: 'Fehlgeschlagen',
-    EMBEDDING: 'Indizierung',
+    EMBEDDING: 'Indexierung',
     PENDING: 'In Warteschlange',
     GENERATE: 'Generierung',
     SYNC: 'Synchronisierung',
-    REVOKE: 'Abbrechen',
     finish: 'Abgeschlossen',
   },
   enableStatus: {
@@ -142,15 +141,15 @@ export default {
     label: 'Synchronisieren',
     confirmTitle: 'Dokument synchronisieren bestätigen?',
     confirmMessage1:
-      'Bei der Synchronisierung werden vorhandene Daten gelöscht und neue abgerufen. Bitte mit Vorsicht fortfahren.',
-    confirmMessage2: 'Synchronisierung nicht möglich, bitte zuerst die Dokument-URL einstellen.',
+      'Bei der Synchronisierung werden vorhandene Daten gelöscht und neue Daten abgerufen. Bitte vorsichtig vorgehen.',
+    confirmMessage2: 'Synchronisierung nicht möglich, bitte zuerst die Dokument-URL festlegen.',
     successMessage: 'Erfolgreich',
   },
   delete: {
     confirmTitle1: 'Stapel-Löschung von',
     confirmTitle2: 'Dokumenten bestätigen?',
     confirmMessage:
-      'Segmente in den ausgewählten Dokumenten werden ebenfalls gelöscht. Bitte mit Vorsicht fortfahren.',
+      'Segmente in den ausgewählten Dokumenten werden ebenfalls gelöscht. Bitte vorsichtig vorgehen.',
     successMessage: 'Erfolgreich',
     confirmTitle3: 'Dokument löschen bestätigen:',
     confirmMessage1: 'Unter diesem Dokument',
@@ -163,12 +162,12 @@ export default {
       requiredMessage: 'Bitte geben Sie eine Dokument-URL ein',
     },
     selector: {
-      label: 'Selektor',
+      label: 'Selector',
       placeholder: 'Standard ist body, Sie können .classname/#idname/tagname eingeben',
     },
     hit_handling_method: {
-      label: 'Abruf-Antwort',
-      tooltip: 'Bei Benutzerfrage übereinstimmende Segmente gemäß eingestellter Methode behandeln.',
+      label: 'Treffer-Behandlung',
+      tooltip: 'Bei Benutzerfragen die getroffenen Segmente gemäß der festgelegten Methode behandeln.',
     },
     similarity: {
       label: 'Ähnlichkeit höher als',
@@ -176,32 +175,32 @@ export default {
       requiredMessage: 'Bitte geben Sie den Ähnlichkeitswert ein',
     },
     allow_download: {
-      label: 'Herunterladen in der Wissensbasis-Quelle erlauben',
+      label: 'Herunterladen in der Wissensquellen erlauben',
     },
   },
   hitHandlingMethod: {
-    optimization: 'Modelloptimierung',
+    optimization: 'Modell-Optimierung',
     directly_return: 'Direkt antworten',
   },
   movePosition: {
     title: 'Position verschieben',
-    moveUp: 'Nach oben verschieben',
-    moveDown: 'Nach unten verschieben',
+    moveUp: 'Nach oben',
+    moveDown: 'Nach unten',
   },
   generateQuestion: {
     title: 'Fragen generieren',
     successMessage: 'Erfolgreich',
-    tip1: 'Das {data} im Prompt ist ein Platzhalter für segmentierten Inhalt, der beim Ausführen durch den segmentierten Inhalt ersetzt wird und an das AI-Modell gesendet wird;',
-    tip2: 'Das AI-Modell generiert relevante Fragen basierend auf dem segmentierten Inhalt. Bitte platzieren Sie die generierten Fragen innerhalb der',
-    tip3: 'Tags, das System verknüpft automatisch die Fragen innerhalb dieser Tags;',
-    tip4: 'Der Generierungseffekt hängt vom gewählten Modell und Prompt ab. Benutzer können anpassen, um das beste Ergebnis zu erzielen.',
+    tip1: 'Das {data} im Prompt ist ein Platzhalter für den segmentierten Inhalt, der beim Ausführen durch den segmentierten Inhalt ersetzt und an das KI-Modell gesendet wird;',
+    tip2: 'Das KI-Modell generiert relevante Fragen basierend auf dem segmentierten Inhalt. Bitte platzieren Sie die generierten Fragen innerhalb der',
+    tip3: 'Tags, und das System verknüpft automatisch die Fragen innerhalb dieser Tags;',
+    tip4: 'Der Generierungseffekt hängt vom ausgewählten Modell und Prompt ab. Benutzer können anpassen, um den besten Effekt zu erzielen.',
     prompt1:
-      'Inhalt: {data}\n \n Bitte fassen Sie das Obige zusammen und generieren Sie 5 Fragen basierend auf der Zusammenfassung. \nAntwortanforderungen: \n - Bitte geben Sie nur Fragen aus; \n - Bitte platzieren Sie jede Frage in',
+      'Inhalt: {data}\n \n Bitte fassen Sie den obigen Text zusammen und generieren Sie 5 Fragen basierend auf der Zusammenfassung. \nAntwortanforderungen: \n - Bitte geben Sie nur Fragen aus; \n - Bitte platzieren Sie jede Frage in',
     prompt2: 'Tag.',
   },
   feishu: {
     selectDocument: 'Dokument auswählen',
-    tip1: 'Nur Dokumente und Tabellen werden unterstützt. Dokumente werden nach Überschriften segmentiert, Tabellen werden vor der Segmentierung in Markdown-Format umgewandelt.',
-    tip2: 'Vor dem Dokumentimport wird empfohlen, die Segmentierungsmarkierungen im Dokument zu standardisieren.',
+    tip1: 'Nur Dokumente und Tabellen werden unterstützt. Dokumente werden basierend auf Überschriften segmentiert, Tabellen werden in Markdown-Format umgewandelt und dann segmentiert.',
+    tip2: 'Vor dem Importieren des Dokuments wird empfohlen, die Dokument-Segmentierungsmarker zu standardisieren.',
   },
 }
