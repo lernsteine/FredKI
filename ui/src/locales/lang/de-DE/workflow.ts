@@ -25,6 +25,7 @@ export default {
     debug: 'Ausführen',
     exit: 'Beenden',
     exitSave: 'Speichern & Beenden',
+    templateCenter: 'Vorlagencenter',
   },
   tip: {
     noData: 'Keine passenden Ergebnisse gefunden',
