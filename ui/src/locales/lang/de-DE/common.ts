@@ -101,7 +101,7 @@ export default {
     customizeUpload: 'Benutzerdefiniertes Hochladen',
     upload: 'Hochladen',
     default: 'Standard-Logo',
-    sizeTip: 'Empfohlene Größe: 32×32 Pixel. Unterstützte Formate: JPG, PNG und GIF. Max. Größe: 10 MB',
+    sizeTip: 'Empfohlene Größe: 32×32 Pixel. Unterstützte Formate: JPG, PNG und GIF. Maximale Größe: 10 MB',
     fileSizeExceeded: 'Dateigröße überschreitet 10 MB',
     uploadImagePrompt: 'Bitte laden Sie ein Bild hoch',
   },
@@ -141,4 +141,5 @@ export default {
     prev: 'Zurück',
     next: 'Weiter',
   },
+  use: 'Verwenden',
 }
