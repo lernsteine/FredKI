@@ -312,7 +312,7 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
         label: 'Vision-Modell',
         requiredMessage: 'Bitte Vision-Modell auswählen',
       },
-      image: {
+      video: {
         label: 'Video auswählen',
         requiredMessage: 'Bitte Video auswählen',
       },
