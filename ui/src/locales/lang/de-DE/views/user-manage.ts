@@ -1,43 +1,46 @@
 export default {
-  title: 'Benutzerverwaltung',
+  title: 'Benutzer',
   createUser: 'Benutzer erstellen',
   editUser: 'Benutzer bearbeiten',
-  roleSetting: 'Rolleneinstellungen',
+  roleSetting: 'Rolleneinstellung',
   addRole: 'Rolle hinzufügen',
   setting: {
-    updatePwd: 'Benutzerpasswort ändern',
+    updatePwd: 'Passwort ändern',
   },
   tip: {
-    professionalMessage: 'Die Community Edition unterstützt maximal 2 Benutzer. Für mehr Benutzer bitte auf die Professional Edition upgraden.',
-    updatePwdSuccess: 'Benutzerpasswort erfolgreich geändert',
+    professionalMessage:
+      'Die Community Edition unterstützt bis zu 2 Benutzer. Für mehr Benutzer upgraden Sie bitte auf die Professional Edition.',
+    updatePwdSuccess: 'Benutzerpasswort erfolgreich aktualisiert',
   },
   delete: {
-    confirmTitle: 'Benutzer löschen:',
-    confirmMessage: 'Beim Löschen eines Benutzers werden die von ihm erstellten Ressourcen (Anwendungen, Wissensbasen, Modelle) nicht gelöscht. Bitte vorsichtig vorgehen.',
+    confirmTitle: 'Löschung des Benutzers bestätigen:',
+    confirmMessage:
+      'Das Löschen dieses Benutzers löscht nicht alle von diesem Benutzer erstellten Ressourcen (APP, Wissensbasis, Modelle). Bitte gehen Sie vorsichtig vor.',
   },
   disabled: {
-    confirmTitle: 'Werkzeug deaktivieren:',
-    confirmMessage: 'Nach dem Deaktivieren schlagen Anfragen in Anwendungen, die dieses Werkzeug referenzieren, fehl. Bitte vorsichtig vorgehen.',
+    confirmTitle: 'Deaktivierung des Tools bestätigen:',
+    confirmMessage:
+      'Das Deaktivieren dieses Tools führt zu Fehlern, wenn APPs, die darauf verweisen, abgefragt werden. Bitte gehen Sie vorsichtig vor.',
   },
   userForm: {
     nick_name: {
       label: 'Name',
       placeholder: 'Bitte Namen eingeben',
-      lengthMessage: 'Länge zwischen 1 und 20 Zeichen',
+      lengthMessage: 'Länge muss zwischen 2 und 20 Zeichen liegen',
     },
-
     phone: {
-      label: 'Telefonnummer',
+      label: 'Telefon',
       placeholder: 'Bitte Telefonnummer eingeben',
-      invalidMessage: 'Ungültiges Telefonnummernformat',
+      invalidMessage: 'Ungültiges Telefonformat',
     },
   },
   source: {
     label: 'Benutzerquelle',
     local: 'Systembenutzer',
-    localCreate: 'Lokal erstellt',
-    wecom: 'Enterprise WeChat',
-    lark: 'Feishu',
+    localCreate: 'Lokal erstellen',
+    wecom: 'WeCom',
+    lark: 'Lark',
     dingtalk: 'DingTalk',
   },
+  settingRole: 'Rolle festlegen',
 }
