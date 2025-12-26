@@ -72,6 +72,10 @@ export default {
     speaking: 'Spricht',
     recorderLoading: 'Wird transkribiert',
     default: 'Geben Sie Ihre Frage ein',
+    holdToTalk: 'Zum Sprechen gedrückt halten',
+    chatting: 'Im Chat',
+    touchChatMessage: 'Loslassen zum Senden, nach oben wischen zum Abbrechen',
+    cancelTouchChat: 'Loslassen zum Abbrechen des Sendens',
   },
   uploadFile: {
     label: 'Datei hochladen',
