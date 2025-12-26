@@ -104,9 +104,16 @@
               <AppIcon iconName="app-setting" class="color-secondary"></AppIcon>
               {{ $t('views.model.modelForm.title.paramSetting') }}
             </el-dropdown-item>
-            <el-dropdown-item @click.stop="openAuthorization(model)" v-if="apiType === 'workspace' && permissionPrecise.auth(model.id)">
+            <el-dropdown-item
+              @click.stop="openAuthorization(model)"
+              v-if="apiType === 'workspace' && permissionPrecise.auth(model.id)"
+            >
               <AppIcon iconName="app-resource-authorization" class="color-secondary"></AppIcon>
               {{ $t('views.system.resourceAuthorization.title') }}
+            </el-dropdown-item>
+            <el-dropdown-item text @click.stop="openResourceMappingDrawer(model)">
+              <AppIcon iconName="app-resource-mapping" class="color-secondary"></AppIcon>
+              {{ $t('views.system.resourceMapping.title', '查看关联资源') }}
             </el-dropdown-item>
             <el-dropdown-item
               divided
@@ -132,6 +139,7 @@
       ref="ResourceAuthorizationDrawerRef"
       v-if="apiType === 'workspace'"
     />
+    <ResourceMappingDrawer ref="resourceMappingDrawerRef"></ResourceMappingDrawer>
   </card-box>
 </template>
 <script setup lang="ts">
@@ -144,13 +152,14 @@ import { modelType } from '@/enums/model'
 import ParamSettingDialog from './ParamSettingDialog.vue'
 import AuthorizedWorkspace from '@/views/system-shared/AuthorizedWorkspaceDialog.vue'
 import ResourceAuthorizationDrawer from '@/components/resource-authorization-drawer/index.vue'
+import ResourceMappingDrawer from '@/components/resource_mapping/index.vue'
 import { SourceTypeEnum } from '@/enums/common'
 import { t } from '@/locales'
 import { i18n_name } from '@/utils/common'
 import permissionMap from '@/permission'
 import { useRoute } from 'vue-router'
 import { loadSharedApi } from '@/utils/dynamics-api/shared-api'
-
+const resourceMappingDrawerRef = ref<InstanceType<typeof ResourceMappingDrawer>>()
 const route = useRoute()
 
 const props = defineProps<{
@@ -161,7 +170,9 @@ const props = defineProps<{
   isSystemShare?: boolean | undefined
   apiType: 'systemShare' | 'workspace' | 'systemManage'
 }>()
-
+const openResourceMappingDrawer = (model: any) => {
+  resourceMappingDrawerRef.value?.open('MODEL', model.id)
+}
 const isSystemShare = computed(() => {
   return props.apiType === 'systemShare'
 })
