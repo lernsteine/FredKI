@@ -15,12 +15,12 @@ export default {
   delete: {
     confirmTitle: 'Löschung des Benutzers bestätigen:',
     confirmMessage:
-      'Das Löschen dieses Benutzers löscht nicht alle von diesem Benutzer erstellten Ressourcen (APP, Wissensbasis, Modelle). Bitte gehen Sie vorsichtig vor.',
+      'Das Löschen dieses Benutzers löscht nicht alle von diesem Benutzer erstellten Ressourcen (Agent, Wissensbasis, Modelle). Bitte gehen Sie vorsichtig vor.',
   },
   disabled: {
     confirmTitle: 'Deaktivierung des Tools bestätigen:',
     confirmMessage:
-      'Das Deaktivieren dieses Tools führt zu Fehlern, wenn APPs, die darauf verweisen, abgefragt werden. Bitte gehen Sie vorsichtig vor.',
+      'Das Deaktivieren dieses Tools führt zu Fehlern, wenn Agenten, die darauf verweisen, abgefragt werden. Bitte gehen Sie vorsichtig vor.',
   },
   userForm: {
     nick_name: {
