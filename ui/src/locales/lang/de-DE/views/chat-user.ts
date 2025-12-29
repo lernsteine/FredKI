@@ -1,29 +1,32 @@
 export default {
-  title: 'Dialogbenutzer',
+  title: 'Chat-Benutzer',
   syncUsers: 'Benutzer importieren',
-  syncUsersTip: 'Nur neue Benutzer importieren',
-  setUserGroups: 'Benutzergruppen festlegen',
-  knowledgeTitleTip: 'Diese Konfiguration wird erst wirksam, wenn die verknüpfte Anwendung die Anmeldung für Dialogbenutzer aktiviert hat',
-  applicationTitleTip: 'Diese Konfiguration wird wirksam, nachdem die Anwendung die Anmeldung aktiviert hat',
+  syncUsersTip: 'Nur neu hinzugefügte Benutzer importieren',
+  setUserGroups: 'Benutzergruppen konfigurieren',
+  knowledgeTitleTip:
+    'Diese Konfiguration wird erst wirksam, nachdem die Chat-Benutzer-Login-Authentifizierung im zugehörigen Agenten aktiviert wurde',
+  applicationTitleTip:
+    'Diese Konfiguration erfordert, dass die Login-Authentifizierung im Agenten aktiviert ist',
   autoAuthorization: 'Automatische Autorisierung',
-  authorization: 'Autorisieren',
+  authorization: 'Autorisierung',
   batchDeleteUser: 'Ausgewählte {count} Benutzer löschen?',
-  settingMethod: 'Einstellungsart',
+  settingMethod: 'Konfigurationsmethode',
   append: 'Anhängen',
   group: {
-    title: 'Benutzergruppe',
+    title: 'Benutzergruppen',
+    name: 'Benutzergruppenname',
     requiredMessage: 'Bitte Benutzergruppe auswählen',
-    name: 'Name der Benutzergruppe',
     usernameOrName: 'Benutzername/Name',
     delete: {
-      confirmTitle: 'Benutzergruppe löschen: ',
-      confirmMessage: 'Nach dem Löschen werden alle Mitglieder dieser Benutzergruppe entfernt. Bitte vorsichtig vorgehen!',
+      confirmTitle: 'Löschung der Benutzergruppe bestätigen:',
+      confirmMessage:
+        'Alle Mitglieder in dieser Gruppe werden nach dem Löschen entfernt. Bitte vorsichtig vorgehen!',
     },
     batchDeleteMember: 'Ausgewählte {count} Mitglieder entfernen?',
   },
   syncMessage: {
-    title: '{count} Benutzer erfolgreich synchronisiert',
-    usernameExist: 'Folgende Benutzernamen existieren bereits:',
-    nicknameExist: 'Folgende Namen existieren bereits:',
+    title: 'Erfolgreich {count} Benutzer synchronisiert',
+    usernameExist: 'Die folgenden Benutzernamen existieren bereits:',
+    nicknameExist: 'Die folgenden Spitznamen existieren bereits:',
   },
 }
