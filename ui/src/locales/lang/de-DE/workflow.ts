@@ -33,7 +33,7 @@ export default {
     onlyRight: 'Verbindungen dürfen nur vom rechten Ankerpunkt ausgehen',
     notRecyclable: 'Schleifenverbindungen sind nicht erlaubt',
     onlyLeft: 'Verbindungen dürfen nur zum linken Ankerpunkt führen',
-    applicationNodeError: 'Diese Anwendung ist nicht verfügbar',
+    applicationNodeError: 'Dieser Agent ist nicht verfügbar',
     toolNodeError: 'Dieser Tool-Knoten ist nicht verfügbar',
     repeatedNodeError: 'Ein Knoten mit diesem Namen existiert bereits',
     cannotCopy: 'Kann nicht kopiert werden',
@@ -119,13 +119,6 @@ export default {
       currentTime: 'Aktuelle Zeit',
     },
     baseNode: {
-      label: 'Basisinformationen',
-      appName: {
-        label: 'App-Name',
-      },
-      appDescription: {
-        label: 'App-Beschreibung',
-      },
       fileUpload: {
         label: 'Datei-Upload',
         tooltip: 'Wenn aktiviert, wird auf der Q&A-Seite eine Datei-Upload-Schaltfläche angezeigt.',
@@ -205,13 +198,11 @@ export default {
       result: 'Optimierte Fragen-Ergebnis',
       systemDefault: `#Role
 Sie sind ein Meister der Problemboptimierung und können basierend auf dem Kontext genau die Absichten des Benutzers ableiten und die gestellten Fragen optimieren.
-
 ##Skills
 ###Skill 1: Probleme optimieren
 2. Benutzereingabefragen empfangen.
 3. Die Bedeutung des Problems sorgfältig anhand des Kontexts analysieren.
 4. Optimierte Probleme ausgeben.
-
 ##Limitations:
 -Nur das optimierte Problem zurückgeben, ohne zusätzliche Erklärungen oder Klärungen.
 -Stellen Sie sicher, dass das optimierte Problem die ursprüngliche Problembabsicht genau widerspiegelt und die ursprüngliche Absicht nicht verändert.`,
@@ -454,7 +445,7 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       },
     },
     applicationNode: {
-      label: 'APP-Knoten',
+      label: 'Agent-Knoten',
     },
     loopNode: {
       label: 'Schleifenknoten',
