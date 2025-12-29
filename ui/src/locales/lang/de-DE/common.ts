@@ -97,7 +97,6 @@ export default {
   rename: 'Umbenennen',
   renameSuccess: 'Erfolgreich',
   EditAvatarDialog: {
-    title: 'App-Logo',
     customizeUpload: 'Benutzerdefiniertes Hochladen',
     upload: 'Hochladen',
     default: 'Standard-Logo',
