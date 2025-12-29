@@ -3,17 +3,17 @@ export default {
   provider: 'Anbieter',
   providerPlaceholder: 'Anbieter auswählen',
   addModel: 'Modell hinzufügen',
-
   delete: {
     confirmTitle: 'Modell löschen:',
     confirmMessage:
-      'Das Löschen des Modells beeinflusst die Ressourcen, die es derzeit verwenden. Bitte vorsichtig vorgehen.',
+      'Das Löschen des Modells wirkt sich auf die aktuell verwendenden Ressourcen aus. Bitte vorsichtig vorgehen.',
+    resourceCountMessage: 'Dieses Modell ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte vorsichtig vorgehen.',
   },
   tip: {
     createSuccessMessage: 'Modell erfolgreich erstellt',
-    createErrorMessage: 'Es gibt Fehler in den grundlegenden Informationen',
+    createErrorMessage: 'Es gibt Fehler in den Basisinformationen',
     errorMessage: 'Variable existiert bereits: ',
-    emptyMessage1: 'Bitte wählen Sie zuerst den Modelltyp und das Basismodell in den grundlegenden Informationen aus',
+    emptyMessage1: 'Bitte zuerst Modelltyp und Basismodell in den Basisinformationen auswählen',
     emptyMessage2: 'Das ausgewählte Modell unterstützt keine Parameter-Einstellungen',
     updateSuccessMessage: 'Modell erfolgreich aktualisiert',
     saveSuccessMessage: 'Modellparameter erfolgreich gespeichert',
@@ -25,8 +25,8 @@ export default {
     publicModel: 'Öffentliche Modelle',
     privateModel: 'Private Modelle',
     LLM: 'LLM',
-    EMBEDDING: 'Einbettungsmodell',
-    RERANKER: 'Rerank',
+    EMBEDDING: 'Embedding-Modell',
+    RERANKER: 'Re-Rank',
     STT: 'Sprache-zu-Text',
     TTS: 'TTS',
     IMAGE: 'Vision-Modell',
@@ -36,7 +36,7 @@ export default {
   },
   modelForm: {
     title: {
-      baseInfo: 'Grundlegende Informationen',
+      baseInfo: 'Basisinformationen',
       advancedInfo: 'Erweiterte Einstellungen',
       modelParams: 'Modellparameter',
       paramSetting: 'Modellparameter-Einstellungen',
@@ -44,7 +44,7 @@ export default {
     },
     modeName: {
       label: 'Modellname',
-      placeholder: 'Einen Namen für das Basismodell festlegen',
+      placeholder: 'Legen Sie einen Namen für das Basismodell fest',
       tooltip: 'Benutzerdefinierter Modellname in MaxKB',
       requiredMessage: 'Modellname darf nicht leer sein',
     },
@@ -56,32 +56,32 @@ export default {
     },
     model_type: {
       label: 'Modelltyp',
-      placeholder: 'Einen Modelltyp auswählen',
-      tooltip1: 'LLM: Ein Inferenzmodell für AI-Chats in der Anwendung.',
-      tooltip2: 'Einbettungsmodell: Ein Modell zur Vektorisierung von Dokumenteninhalten im Wissen.',
-      tooltip3: 'Sprache-zu-Text: Ein Modell für Spracherkennung in der Anwendung.',
-      tooltip4: 'TTS: Ein Modell für Sprachsynthese in der Anwendung.',
+      placeholder: 'Modelltyp auswählen',
+      tooltip1: 'LLM: Ein Inferenzmodell für KI-Chats im Agenten.',
+      tooltip2: 'Embedding-Modell: Ein Modell zur Vektorisierung von Dokumentinhalten in der Wissensbasis.',
+      tooltip3: 'Sprache-zu-Text: Ein Modell für Spracherkennung im Agenten.',
+      tooltip4: 'TTS: Ein Modell für Text-to-Speech im Agenten.',
       tooltip5:
-        'Rerank: Ein Modell zur Neuordnung von Kandidatensegmenten bei Verwendung mehrerer Abrufwege in der erweiterten Orchestrierungsanwendung.',
+        'Re-Rank: Ein Modell zum Neuordnen von Kandidatensegmenten bei Mehrwege-Abruf im fortgeschrittenen Orchestrierungs-Agenten.',
       tooltip6:
-        'Vision-Modell: Ein visuelles Modell für das Verständnis von Bildern in der erweiterten Orchestrierungsanwendung.',
+        'Vision-Modell: Ein visuelles Modell für Bildverstehen im fortgeschrittenen Orchestrierungs-Agenten.',
       tooltip7:
-        'Bildgenerierung: Ein visuelles Modell für die Bildgenerierung in der erweiterten Orchestrierungsanwendung.',
+        'Bildgenerierung: Ein visuelles Modell für Bildgenerierung im fortgeschrittenen Orchestrierungs-Agenten.',
       tooltip8:
-        'Text-zu-Video: Ein visuelles Modell für Text-zu-Video in der Anwendung.',
+        'Text-zu-Video: Ein visuelles Modell für Text-zu-Video im Agenten.',
       tooltip9:
-        'Bild-zu-Video: Ein visuelles Modell für Bild-zu-Video in der Anwendung.',
+        'Bild-zu-Video: Ein visuelles Modell für Bild-zu-Video im Agenten.',
       requiredMessage: 'Modelltyp darf nicht leer sein',
     },
     base_model: {
       label: 'Basismodell',
-      tooltip: 'Für nicht aufgeführte Modelle den Modellnamen eingeben und Enter drücken',
+      tooltip: 'Für nicht aufgeführte Modelle Modellnamen eingeben und Enter drücken',
       placeholder: 'Basismodellnamen eingeben und Enter drücken, um hinzuzufügen',
       requiredMessage: 'Basismodell darf nicht leer sein',
     },
   },
   download: {
-    downloading: 'Wird heruntergeladen...',
+    downloading: 'Lade herunter...',
     cancelDownload: 'Download abbrechen',
   },
 }
