@@ -49,6 +49,8 @@ from maxkb.conf import PROJECT_DIR
 from models_provider.models import Model
 from models_provider.tools import get_model_instance_by_model_workspace_id
 from system_manage.models import WorkspaceUserResourcePermission, AuthTargetType
+from system_manage.models.resource_mapping import ResourceMapping
+from system_manage.serializers.resource_mapping_serializers import ResourceMappingSerializer
 from system_manage.serializers.user_resource_permission import UserResourcePermissionSerializer
 from tools.models import Tool, ToolScope
 from tools.serializers.tool import ToolExportModelSerializer
@@ -71,6 +73,14 @@ def hand_node(node, update_tool_map):
                                                                                              tool_lib_id)
     if node.get('type') == 'search-knowledge-node':
         node.get('properties', {}).get('node_data', {})['knowledge_id_list'] = []
+    if node.get('type') == 'ai-chat-node':
+        node_data = node.get('properties', {}).get('node_data', {})
+        mcp_tool_ids = node_data.get('mcp_tool_ids') or []
+        node_data['mcp_tool_ids'] = [update_tool_map.get(tool_id,
+                                                         tool_id) for tool_id in mcp_tool_ids]
+        tool_ids = node_data.get('tool_ids') or []
+        node_data['tool_ids'] = [update_tool_map.get(tool_id,
+                                                     tool_id) for tool_id in tool_ids]
 
 
 class MKInstance:
@@ -403,12 +413,15 @@ class Query(serializers.Serializer):
         user_id = self.data.get("user_id")
         workspace_manage = is_workspace_manage(user_id, workspace_id)
         is_x_pack_ee = self.is_x_pack_ee()
-        return native_page_search(current_page, page_size, self.get_query_set(instance, workspace_manage, is_x_pack_ee),
-                                  get_file_content(
-                                      os.path.join(PROJECT_DIR, "apps", "application", 'sql',
-                                                   'list_application.sql' if workspace_manage else (
-                                                       'list_application_user_ee.sql' if is_x_pack_ee else 'list_application_user.sql'))),
-                                  )
+        result = native_page_search(current_page, page_size,
+                                    self.get_query_set(instance, workspace_manage, is_x_pack_ee),
+                                    get_file_content(
+                                        os.path.join(PROJECT_DIR, "apps", "application", 'sql',
+                                                     'list_application.sql' if workspace_manage else (
+                                                         'list_application_user_ee.sql' if is_x_pack_ee else 'list_application_user.sql'))),
+                                    )
+
+        return ResourceMappingSerializer().get_resource_count(result)
 
 
 class ApplicationImportRequest(serializers.Serializer):
@@ -770,9 +783,13 @@ class ApplicationOperateSerializer(serializers.Serializer):
     def delete(self, with_valid=True):
         if with_valid:
             self.is_valid()
-        QuerySet(ApplicationVersion).filter(application_id=self.data.get('application_id')).delete()
-        QuerySet(ApplicationKnowledgeMapping).filter(application_id=self.data.get('application_id')).delete()
-        QuerySet(Application).filter(id=self.data.get('application_id')).delete()
+        application_id = self.data.get('application_id')
+        QuerySet(ApplicationVersion).filter(application_id=application_id).delete()
+        QuerySet(ApplicationKnowledgeMapping).filter(application_id=application_id).delete()
+        QuerySet(ResourceMapping).filter(
+            Q(target_id=application_id) | Q(source_id=application_id)
+        ).delete()
+        QuerySet(Application).filter(id=application_id).delete()
         return True
 
     def export(self, with_valid=True):
@@ -781,13 +798,8 @@ class ApplicationOperateSerializer(serializers.Serializer):
                 self.is_valid()
             application_id = self.data.get('application_id')
             application = QuerySet(Application).filter(id=application_id).first()
-            tool_id_list = [node.get('properties', {}).get('node_data', {}).get('tool_lib_id') for node
-                            in
-                            application.work_flow.get('nodes', []) + reduce(lambda x, y: [*x, *y], [
-                                n.get('properties', {}).get('node_data', {}).get('loop_body', {}).get('nodes', []) for n
-                                in
-                                application.work_flow.get('nodes', []) if n.get('type') == 'loop-node'], []) if
-                            node.get('type') == 'tool-lib-node']
+            from application.flow.tools import get_tool_id_list
+            tool_id_list = get_tool_id_list(application.work_flow)
             tool_list = []
             if len(tool_id_list) > 0:
                 tool_list = QuerySet(Tool).filter(id__in=tool_id_list).exclude(scope=ToolScope.SHARED)
@@ -863,7 +875,7 @@ class ApplicationOperateSerializer(serializers.Serializer):
         work_flow_version.save()
         access_token = hashlib.md5(
             str(uuid.uuid7()).encode()).hexdigest()[
-            8:24]
+                       8:24]
         application_access_token = QuerySet(ApplicationAccessToken).filter(
             application_id=application.id).first()
         if application_access_token is None:
@@ -1017,6 +1029,9 @@ class ApplicationOperateSerializer(serializers.Serializer):
                 for n in node.get('properties', {}).get('node_data', {}).get('loop_body', {}).get('nodes', []):
                     hand_node(n, update_tool_map)
         app.work_flow = work_flow
+        application = mk_instance.application
+        app.name = application.get('name')
+        app.desc = application.get('desc')
         app.save()
 
         if len(tool_model_list) > 0:

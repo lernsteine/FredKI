@@ -63,6 +63,7 @@
               <el-upload
                 class="import-button"
                 ref="elUploadRef"
+                accept=".kbwf"
                 :file-list="[]"
                 action="#"
                 multiple
@@ -411,7 +412,6 @@ const importKnowledgeWorkflow = (file: any) => {
   formData.append('file', file.raw)
   const name = file.name.replace('.kbwf', '')
   elUploadRef.value.clearFiles()
-  debugger
   MsgConfirm(
     t('common.tip'),
     `${t('views.application.tip.confirmUse')} ${name} ${t('views.application.tip.overwrite')}?`,

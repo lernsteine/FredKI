@@ -52,6 +52,14 @@ def hand_node(node, update_tool_map):
 
     if node.get('type') == 'search-knowledge-node':
         node.get('properties', {}).get('node_data', {})['knowledge_id_list'] = []
+    if node.get('type') == 'ai-chat-node':
+        node_data = node.get('properties', {}).get('node_data', {})
+        mcp_tool_ids = node_data.get('mcp_tool_ids') or []
+        node_data['mcp_tool_ids'] = [update_tool_map.get(tool_id,
+                                                         tool_id) for tool_id in mcp_tool_ids]
+        tool_ids = node_data.get('tool_ids') or []
+        node_data['tool_ids'] = [update_tool_map.get(tool_id,
+                                                     tool_id) for tool_id in tool_ids]
 
 
 class KnowledgeWorkflowModelSerializer(serializers.ModelSerializer):
@@ -275,7 +283,7 @@ class KnowledgeWorkflowSerializer(serializers.Serializer):
 
     class Import(serializers.Serializer):
         user_id = serializers.UUIDField(required=True, label=_('user id'))
-        workspace_id = serializers.CharField(required=True, label=_('workspace id'))
+        workspace_id = serializers.CharField(required=False, label=_('workspace id'))
         knowledge_id = serializers.UUIDField(required=True, label=_('knowledge id'))
 
         @transaction.atomic
@@ -356,13 +364,13 @@ class KnowledgeWorkflowSerializer(serializers.Serializer):
                         input_field_list=tool.get('input_field_list'),
                         init_field_list=tool.get('init_field_list'),
                         is_active=False if len((tool.get('init_field_list') or [])) > 0 else tool.get('is_active'),
-                        scope=ToolScope.WORKSPACE,
-                        folder_id=workspace_id,
+                        scope=ToolScope.SHARED if workspace_id == 'None' else ToolScope.WORKSPACE,
+                        folder_id='default' if workspace_id == 'None' else workspace_id,
                         workspace_id=workspace_id)
 
     class Export(serializers.Serializer):
         user_id = serializers.UUIDField(required=True, label=_('user id'))
-        workspace_id = serializers.CharField(required=True, label=_('workspace id'))
+        workspace_id = serializers.CharField(required=False, label=_('workspace id'))
         knowledge_id = serializers.UUIDField(required=True, label=_('knowledge id'))
 
         def export(self, with_valid=True):
@@ -372,15 +380,8 @@ class KnowledgeWorkflowSerializer(serializers.Serializer):
                 knowledge_id = self.data.get('knowledge_id')
                 knowledge_workflow = QuerySet(KnowledgeWorkflow).filter(knowledge_id=knowledge_id).first()
                 knowledge = QuerySet(Knowledge).filter(id=knowledge_id).first()
-                tool_id_list = [node.get('properties', {}).get('node_data', {}).get('tool_lib_id') for node
-                                in
-                                knowledge_workflow.work_flow.get('nodes', []) + reduce(lambda x, y: [*x, *y], [
-                                    n.get('properties', {}).get('node_data', {}).get('loop_body', {}).get('nodes', [])
-                                    for n
-                                    in
-                                    knowledge_workflow.work_flow.get('nodes', []) if n.get('type') == 'loop-node'], [])
-                                if
-                                node.get('type') == 'tool-lib-node']
+                from application.flow.tools import get_tool_id_list
+                tool_id_list = get_tool_id_list(knowledge_workflow.work_flow)
                 tool_list = []
                 if len(tool_id_list) > 0:
                     tool_list = QuerySet(Tool).filter(id__in=tool_id_list).exclude(scope=ToolScope.SHARED)
