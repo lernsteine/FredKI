@@ -1,16 +1,18 @@
 export default {
   title: 'Arbeitsbereich',
-  list: 'Liste der Arbeitsbereiche',
-  name: 'Name des Arbeitsbereichs',
-  toWorkspace: 'Zurück zum Arbeitsbereich',
+  list: 'Arbeitsbereichsliste',
+  name: 'Arbeitsbereichsname',
+  toWorkspace: 'Zum Arbeitsbereich zurückkehren',
   delete: {
-    confirmTitle: 'Arbeitsbereich löschen:',
-    confirmContent: 'Nach dem Löschen werden alle Mitglieder dieses Bereichs entfernt. Bitte vorsichtig vorgehen.',
-    confirmContentNotDelete: 'Dieser Arbeitsbereich enthält noch Wissensbasis- oder Anwendungsressourcen und kann daher nicht gelöscht werden.',
+    confirmTitle: 'Löschung des Arbeitsbereichs bestätigen:',
+    confirmContent:
+      'Nach dem Löschen werden alle Mitglieder in diesem Bereich entfernt. Bitte vorsichtig vorgehen.',
+    confirmContentNotDelete:
+      'Dieser Arbeitsbereich enthält Wissensbasis-Ressourcen und Agent-Ressourcen und kann nicht gelöscht werden.',
   },
   member: {
     delete: {
-      confirmTitle: 'Mitglied entfernen:',
+      confirmTitle: 'Entfernung des Mitglieds bestätigen:',
     },
   },
 }
