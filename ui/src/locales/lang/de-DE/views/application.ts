@@ -12,6 +12,7 @@ export default {
   workflowPlaceholder:
     'Geeignet für fortgeschrittene Benutzer, um komplexe logische KI-Assistenten mit Low-Code-Drag-and-Drop zu erstellen',
   appTest: 'Debug-Vorschau',
+  skill: 'Skill',
   operation: {
     addModel: 'Modell hinzufügen',
     toChat: 'Chat',
@@ -20,7 +21,8 @@ export default {
     confirmTitle: 'Sind Sie sicher, dass Sie diesen Agenten löschen möchten: ',
     confirmMessage:
       'Das Löschen dieses Agenten macht seine Dienste nicht mehr verfügbar. Bitte gehen Sie vorsichtig vor.',
-    resourceCountMessage: 'Dieser Agent ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte gehen Sie vorsichtig vor.',
+    resourceCountMessage:
+      'Dieser Agent ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte gehen Sie vorsichtig vor.',
   },
   tip: {
     publishSuccess: 'Erfolgreich veröffentlicht',
@@ -121,7 +123,7 @@ export default {
       start: 'Start',
       end: 'Ende',
     },
-    mcp_output_enable: 'MCP/Tool-Ausführungsprozess ausgeben',
+    mcp_output_enable: 'Ausführungsprozess ausgeben',
   },
   generateDialog: {
     label: 'Generieren',
