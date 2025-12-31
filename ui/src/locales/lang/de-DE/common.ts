@@ -61,7 +61,7 @@ export default {
     existingExtensionsTip: 'Die folgenden Erweiterungen existieren bereits',
     localUpload: 'Lokale Dateien',
     urlUpload: 'URL',
-    uploadMethodTip: 'Bitte wählen Sie die Upload-Methode aus',
+    uploadMethodTip: 'Bitte Upload-Methode auswählen',
   },
   status: {
     label: 'Status',
@@ -85,6 +85,7 @@ export default {
     initParam: 'Startparameter',
     editParam: 'Parameter bearbeiten',
     addParam: 'Parameter hinzufügen',
+    exception: 'Ausnahmeerfassung',
   },
   aggregationStrategy: 'Aggregationsstrategie',
   inputPlaceholder: 'Bitte eingeben',
