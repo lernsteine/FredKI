@@ -22,7 +22,7 @@
         style="background: none"
         class="mr-12"
       >
-        <img :src="resetUrl(currentSource?.icon, resetUrl('./favicon.ico'))" alt="" />
+        <img :src="resetUrl(currentSource?.icon, resetUrl('./favicon.ico'))" alt=""/>
       </el-avatar>
       <ToolIcon
         v-else-if="currentSourceType === 'TOOL'"
@@ -45,9 +45,9 @@
     <div class="flex-between mb-16">
       <div class="flex-between complex-search">
         <el-select class="complex-search__left" v-model="searchType" style="width: 100px">
-          <el-option :label="$t('common.name')" value="resource_name" />
-          <el-option :label="$t('common.creator')" value="user_name" />
-          <el-option :label="$t('common.type')" value="source_type" />
+          <el-option :label="$t('common.name')" value="resource_name"/>
+          <el-option :label="$t('common.creator')" value="user_name"/>
+          <el-option :label="$t('common.type')" value="source_type"/>
         </el-select>
         <el-input
           v-if="searchType === 'resource_name'"
@@ -55,7 +55,7 @@
           :placeholder="$t('common.search')"
           style="width: 220px"
           clearable
-          @keyup.enter="pageResouceMapping()"
+          @keyup.enter="pageResourceMapping()"
         />
         <el-input
           v-if="searchType === 'user_name'"
@@ -63,12 +63,12 @@
           :placeholder="$t('common.search')"
           style="width: 220px"
           clearable
-          @keyup.enter="pageResouceMapping()"
+          @keyup.enter="pageResourceMapping()"
         />
         <el-select
           v-else-if="searchType === 'source_type'"
           v-model="query.source_type"
-          @change="pageResouceMapping()"
+          @change="pageResourceMapping()"
           filterable
           clearable
           multiple
@@ -77,8 +77,8 @@
           collapse-tags-tooltip
           style="width: 220px"
         >
-          <el-option :label="$t('views.application.title')" value="APPLICATION" />
-          <el-option :label="$t('views.knowledge.title')" value="KNOWLEDGE" />
+          <el-option :label="$t('views.application.title')" value="APPLICATION"/>
+          <el-option :label="$t('views.knowledge.title')" value="KNOWLEDGE"/>
         </el-select>
       </div>
     </div>
@@ -89,7 +89,7 @@
       :data="tableData"
       :pagination-config="paginationConfig"
       @sizeChange="handleSizeChange"
-      @changePage="pageResouceMapping"
+      @changePage="pageResourceMapping"
       :maxTableHeight="200"
       :row-key="(row: any) => row.id"
       v-loading="loading"
@@ -99,7 +99,28 @@
         :label="$t('common.name')"
         min-width="120"
         show-overflow-tooltip
-      />
+      >
+        <template #default="{ row }">
+          <div class="flex align-center">
+            <KnowledgeIcon
+              v-if="row.source_type === 'KNOWLEDGE'"
+              class="mr-8"
+              :size="16"
+              :type="row.icon"
+            />
+            <el-avatar
+              v-else-if="row.source_type === 'APPLICATION' && isAppIcon(row?.icon)"
+              shape="square"
+              :size="16" style="background: none"
+              class="mr-8"
+            >
+              <img :src="resetUrl(row?.icon, resetUrl('./favicon.ico'))" alt=""/>
+            </el-avatar>
+
+            <span>{{ row.name }}</span>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="desc"
         min-width="120"
@@ -111,7 +132,75 @@
         min-width="120"
         show-overflow-tooltip
         :label="$t('common.type')"
-      />
+      >
+        <template #default="{ row }">
+          {{
+            row.source_type === 'APPLICATION'
+              ? $t('views.application.title')
+              : $t('views.knowledge.title')
+          }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="workspace_name"
+        min-width="120"
+        show-overflow-tooltip
+        :label="$t('views.workspace.title')"
+        v-if="showWorkspace">
+        <template #header>
+          <div>
+            <span>{{ $t('views.workspace.title') }}</span>
+            <el-popover :width="200" trigger="click" :visible="workspaceVisible">
+              <template #reference>
+                <el-button
+                  style="margin-top: -2px"
+                  :type="workspaceArr && workspaceArr.length > 0 ? 'primary' : ''"
+                  link
+                  @click="workspaceVisible = !workspaceVisible"
+                >
+                  <el-icon>
+                    <Filter/>
+                  </el-icon>
+                </el-button>
+              </template>
+              <div class="filter">
+                <div class="form-item mb-16 ml-4">
+                  <div @click.stop>
+                    <el-input
+                      v-model="filterText"
+                      :placeholder="$t('common.search')"
+                      prefix-icon="Search"
+                      clearable
+                    />
+                    <el-scrollbar height="300" v-if="filterData.length">
+                      <el-checkbox-group
+                        v-model="workspaceArr"
+                        style="display: flex; flex-direction: column"
+                      >
+                        <el-checkbox
+                          v-for="item in filterData"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        />
+                      </el-checkbox-group>
+                    </el-scrollbar>
+                    <el-empty v-else :description="$t('common.noData')"/>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <el-button size="small" @click="filterWorkspaceChange('clear')"
+                >{{ $t('common.clear') }}
+                </el-button>
+                <el-button type="primary" @click="filterWorkspaceChange" size="small"
+                >{{ $t('common.confirm') }}
+                </el-button>
+              </div>
+            </el-popover>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="username"
         min-width="120"
@@ -122,15 +211,17 @@
   </el-drawer>
 </template>
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { loadSharedApi } from '@/utils/dynamics-api/shared-api'
-import { isAppIcon, resetUrl } from '@/utils/common'
+import {ref, reactive, computed, onMounted, watch} from 'vue'
+import {useRoute} from 'vue-router'
+import {loadSharedApi} from '@/utils/dynamics-api/shared-api'
+import {isAppIcon, resetUrl} from '@/utils/common'
 import useStore from '@/stores'
-import { t } from '@/locales'
-import type { Provider } from '@/api/type/model'
+import {t} from '@/locales'
+import type {Provider} from '@/api/type/model'
+import {loadPermissionApi} from "@/utils/dynamics-api/permission-api.ts";
+
 const route = useRoute()
-const { model, user } = useStore()
+const {model, user} = useStore()
 const searchType = ref<string>('resource_name')
 const query = ref<any>({
   resource_name: '',
@@ -155,6 +246,8 @@ const apiType = computed(() => {
   }
 })
 
+const showWorkspace = computed(() => (user.isPE() || user.isEE()) && route.path.includes('shared'))
+
 const currentSourceName = computed(() => {
   if (currentSourceType.value === 'TOOL') {
     return t('views.tool.title')
@@ -165,13 +258,16 @@ const currentSourceName = computed(() => {
   }
 })
 
-const pageResouceMapping = () => {
+const pageResourceMapping = () => {
   const workspaceId = user.getWorkspaceId() || 'default'
   const params: any = {}
   if (query.value[searchType.value]) {
     params[searchType.value] = query.value[searchType.value]
   }
-  loadSharedApi({ type: 'resourceMapping', systemType: apiType.value })
+  if (workspaceArr.value.length > 0) {
+    params.workspace_ids = JSON.stringify(workspaceArr.value)
+  }
+  loadSharedApi({type: 'resourceMapping', systemType: apiType.value})
     .getResourceMapping(
       workspaceId,
       currentSourceType.value,
@@ -188,7 +284,7 @@ const pageResouceMapping = () => {
 
 function handleSizeChange() {
   paginationConfig.current_page = 1
-  pageResouceMapping()
+  pageResourceMapping()
 }
 
 const currentSourceType = ref<string>()
@@ -199,10 +295,11 @@ const open = (source: string, data: any) => {
   currentSourceType.value = source
   currentSourceId.value = data.id
   currentSource.value = data
-  pageResouceMapping()
+  pageResourceMapping()
   if (currentSourceType.value === 'MODEL') {
     getProvider()
   }
+  getWorkspaceList()
 }
 const close = () => {
   visible.value = false
@@ -222,6 +319,45 @@ function getProvider() {
     provider_list.value = res?.data
   })
 }
+
+const workspaceOptions = ref<any[]>([])
+const workspaceVisible = ref(false)
+const workspaceArr = ref<any[]>([])
+
+const filterText = ref('')
+const filterData = ref<any[]>([])
+
+function filterWorkspaceChange(val: string) {
+  if (val === 'clear') {
+    workspaceArr.value = []
+  }
+  filterText.value = ''
+  pageResourceMapping()
+  workspaceVisible.value = false
+}
+
+async function getWorkspaceList() {
+  if (user.isEE()) {
+    const res = await loadPermissionApi('workspace').getSystemWorkspaceList(loading)
+    workspaceOptions.value = res.data.map((item: any) => ({
+      label: item.name,
+      value: item.id,
+    }))
+  }
+}
+
+watch(
+  [() => workspaceOptions.value, () => filterText.value],
+  () => {
+    if (!filterText.value.length) {
+      filterData.value = workspaceOptions.value
+    }
+    filterData.value = workspaceOptions.value.filter((v: any) =>
+      v.label.toLowerCase().includes(filterText.value.toLowerCase()),
+    )
+  },
+  {immediate: true},
+)
 
 defineExpose({
   open,

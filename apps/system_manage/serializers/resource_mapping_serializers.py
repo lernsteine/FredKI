@@ -6,6 +6,7 @@
     @date：2025/4/28 17:17
     @desc:
 """
+import json
 import os
 
 from django.db import models
@@ -13,6 +14,7 @@ from django.db.models import QuerySet
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
+from common.database_model_manage.database_model_manage import DatabaseModelManage
 from common.db.search import native_page_search, get_dynamics_model
 from common.result import Page
 from common.utils.common import get_file_content
@@ -28,6 +30,7 @@ class ResourceMappingSerializer(serializers.Serializer):
         label=_('source Type'),
         child=serializers.CharField(required=False, allow_null=True, allow_blank=True, label=_('source Type')))
     user_name = serializers.CharField(required=False, allow_null=True, allow_blank=True, label=_('creator'))
+    workspace_ids = serializers.CharField(required=False, label=_('workspace_ids'))
 
     def get_query_set(self):
         queryset = QuerySet(model=get_dynamics_model({
@@ -35,7 +38,8 @@ class ResourceMappingSerializer(serializers.Serializer):
             'target_id': models.CharField(),
             "target_type": models.CharField(),
             "u.username": models.CharField(),
-            'rm.source_type': models.CharField()
+            'rm.source_type': models.CharField(),
+            'workspace_id': models.CharField(),
         }))
 
         queryset = queryset.filter(target_id=self.data.get('resource_id'),
@@ -47,12 +51,23 @@ class ResourceMappingSerializer(serializers.Serializer):
             queryset = queryset.filter(**{'u.username__icontains': self.data.get('user_name')})
         if self.data.get("source_type"):
             queryset = queryset.filter(**{'rm.source_type__in': self.data.get('source_type')})
+        if self.data.get('workspace_ids') is not None and len(self.data.get('workspace_ids')) > 0:
+            workspace_ids = json.loads(self.data.get('workspace_ids'))
+            queryset = queryset.filter(**{'workspace_id__in': workspace_ids})
+
         return queryset
 
+    @staticmethod
+    def is_x_pack_ee():
+        workspace_model = DatabaseModelManage.get_model("workspace_model")
+        return workspace_model is not None
+
     def page(self, current_page, page_size):
+        is_x_pack_ee = self.is_x_pack_ee()
         return native_page_search(current_page, page_size, self.get_query_set(), get_file_content(
             os.path.join(PROJECT_DIR, "apps", "system_manage",
-                         'sql', 'list_resource_mapping.sql')), with_table_name=False)
+                         'sql', 'list_resource_mapping_ee.sql' if is_x_pack_ee else 'list_resource_mapping.sql')),
+                                  with_table_name=False)
 
     def get_resource_count(self, result_list):
         """
@@ -86,4 +101,3 @@ class ResourceMappingSerializer(serializers.Serializer):
                         model['resource_count'] = count_dict.get(model_id, 0)
 
         return result_list
-
