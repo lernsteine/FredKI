@@ -327,7 +327,7 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       editGroup: 'Gruppe bearbeiten',
     },
     mcpNode: {
-      label: 'MCP-Knoten',
+      label: 'MCP-Aufruf',
       text: 'Externe MCP-Dienste aufrufen, um Daten zu verarbeiten',
       getToolsSuccess: 'Tools erfolgreich abgerufen',
       getTool: 'Tools abrufen',
@@ -448,7 +448,7 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       label: 'Agent-Knoten',
     },
     loopNode: {
-      label: 'Schleifenknoten',
+      label: 'Schleife',
       text: 'Eine Reihe von Aufgaben durch Einstellung der Schleifenzahl und Logik wiederholen',
       loopType: {
         label: 'Schleifentyp',
