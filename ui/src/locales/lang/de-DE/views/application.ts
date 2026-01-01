@@ -4,12 +4,12 @@ export default {
   createWorkFlowApplication: 'Workflow-Agenten erstellen',
   importApplication: 'Agenten importieren',
   copyApplication: 'Agenten kopieren',
-  workflow: 'WORKFLOW',
   simple: 'EINFACH',
   senior: 'WORKFLOW',
-  simpleAgent: 'EINFACH',
+  simpleAgent: 'Einfacher Agent',
+  AdvancedAgent: 'Fortgeschrittener Agent',
   simplePlaceholder: 'Geeignet für Einsteiger, um Assistenten mit Formulareinstellungen zu erstellen',
-  workflowPlaceholder:
+  advancedPlaceholder:
     'Geeignet für fortgeschrittene Benutzer, um komplexe logische KI-Assistenten mit Low-Code-Drag-and-Drop zu erstellen',
   appTest: 'Debug-Vorschau',
   skill: 'Skill',
