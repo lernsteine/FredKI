@@ -4,7 +4,7 @@
     :class="isActive ? 'active' : ''"
     @click="router.push({ name: menu.name })"
   >
-    <div class="title flex align-center color-secondary">
+    <div class="title flex align-center">
       <AppIcon
         :iconName="isActive ? menu.meta?.iconActive || menu.meta?.icon : menu?.meta?.icon"
         style="font-size: 16px"
@@ -45,9 +45,12 @@ const isActive = computed(() => {
 
   &:hover {
     color: var(--el-color-primary);
+    background-color: var(--app-text-color-light-1);
   }
   &.active {
     background-color: #ffffff;
+    box-shadow: 0px 2px 4px 0px rgba(31, 35, 41, 0.12);
+
     .title {
       color: var(--el-color-primary) !important;
     }
