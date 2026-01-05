@@ -75,7 +75,7 @@ export default {
     success: 'Erfolgreich',
     fail: 'Fehlgeschlagen',
     all: 'Alle',
-    padding: 'Ausstehend',
+    STARTED: 'Ausstehend',
     REVOKED: 'Widerrufen',
     REVOKE: 'Wird widerrufen',
   },
