@@ -28,7 +28,7 @@
         v-else-if="currentSourceType === 'TOOL'"
         class="mr-12"
         :size="24"
-        :type="currentSource.type"
+        :type="currentSource.tool_type"
       />
 
       <span
@@ -94,6 +94,9 @@
       :maxTableHeight="200"
       :row-key="(row: any) => row.id"
       v-loading="loading"
+      :tooltip-options="{
+        popperClass: 'max-w-350',
+      }"
     >
       <el-table-column prop="name" :label="$t('common.name')" min-width="130" show-overflow-tooltip>
         <template #default="{ row }">
@@ -352,7 +355,7 @@ async function getWorkspaceList() {
 const hasResourceWorkspacePermission = (row: any) => {
   return permissionMap[row.source_type.toLowerCase() as 'application' | 'knowledge'][
     'workspace'
-  ].jump_read(row.id)
+  ].jump_read(row.source_id)
 }
 
 const hasResourceSystemManagePermission = (row: any) => {
@@ -403,8 +406,16 @@ function toSetting(row: any) {
       MsgError(t('common.noTargetPermission'))
       return
     }
+    const knowledge_from =
+      from === 'workspace'
+        ? row.folder_id
+        : from === 'shared'
+          ? row.workspace_id === 'None'
+            ? 'shared'
+            : 'resource-management'
+          : from
     const newUrl = router.resolve({
-      path: `/knowledge/${row.source_id}/${from === 'shared' ? (row.workspace_id === 'None' ? 'shared' : 'resource-management') : from}/${row.type}/document`,
+      path: `/knowledge/${row.source_id}/${knowledge_from}/${row.type}/document`,
     }).href
     window.open(newUrl)
   } else if (row.source_type === 'APPLICATION') {
@@ -419,7 +430,7 @@ function toSetting(row: any) {
       window.open(newUrl)
     } else {
       const newUrl = router.resolve({
-        path: `/application/${from}/${row.source_id}/SIMPLE/setting`,
+        path: `/application/${from === 'shared' ? 'resource-management' : from}/${row.source_id}/SIMPLE/setting`,
       }).href
       window.open(newUrl)
     }
