@@ -2,7 +2,7 @@ export default {
   title: 'Chat-Protokolle',
   delete: {
     confirmTitle: 'Löschung der Frage bestätigen:',
-    confirmMessage1: 'Das Löschen dieser Frage hebt die Zuordnung zu',
+    confirmMessage1: 'Das Löschen dieser Frage hebt die Verknüpfung von',
     confirmMessage2: 'Segmenten auf. Bitte vorsichtig vorgehen.',
   },
   buttons: {
@@ -11,7 +11,7 @@ export default {
   table: {
     abstract: 'Titel',
     username: 'Benutzer',
-    chat_record_count: 'Gesamte Nachrichten',
+    chat_record_count: 'Gesamtnachrichten',
     user: 'Benutzer',
     feedback: {
       label: 'Benutzer-Feedback',
@@ -21,20 +21,21 @@ export default {
     mark: 'Markierungen',
     recenTimes: 'Letzte Chat-Zeit',
   },
-  addToKnowledge: 'Zum Wissen hinzufügen',
-  daysText: 'Tage her',
-  selectKnowledge: 'Wissen auswählen',
-  selectKnowledgePlaceholder: 'Bitte wählen Sie ein Wissen aus',
+  addToKnowledge: 'Zur Wissensbasis hinzufügen',
+  daysText: 'Tage zuvor',
+  fileDaysText: 'Die aus der vorherigen Konversation hochgeladene Anlage',
+  selectKnowledge: 'Wissensbasis auswählen',
+  selectKnowledgePlaceholder: 'Bitte Wissensbasis auswählen',
   saveToDocument: 'In Dokument speichern',
-  documentPlaceholder: 'Bitte wählen Sie ein Dokument aus',
+  documentPlaceholder: 'Bitte Dokument auswählen',
   editContent: 'Inhalt bearbeiten',
   editMark: 'Markierung bearbeiten',
   form: {
     content: {
-      placeholder: 'Bitte geben Sie den Inhalt ein',
+      placeholder: 'Bitte Inhalt eingeben',
     },
     title: {
-      placeholder: 'Bitte vergeben Sie einen Titel für den aktuellen Inhalt zur besseren Verwaltung und Ansicht',
+      placeholder: 'Bitte einen Titel für den aktuellen Inhalt festlegen (zur Verwaltung und Ansicht)',
     },
   },
 }
