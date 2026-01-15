@@ -7,6 +7,7 @@ export default {
   apiServiceAddress: 'API-Dienstadresse',
   language: 'Sprache',
   isExpire: 'Lizenz nicht hochgeladen oder abgelaufen',
+  crossSettings: 'Cross-Origin-Einstellungen',
   about: {
     title: 'Über',
     expiredTime: 'Ablaufdatum',
@@ -22,7 +23,7 @@ export default {
     update: 'Aktualisieren',
     authorize: 'Autorisiert',
     inner_admin: 'Systemadministrator',
-    inner_wsm: 'Arbeitsbereichsmanager',
+    inner_wsm: 'Arbeitsbereichs-Manager',
     inner_user: 'Normaler Benutzer',
     root: 'Root-Verzeichnis',
     default_workspace: 'Standard-Arbeitsbereich',
@@ -32,9 +33,9 @@ export default {
     daysLater: 'Tage später',
     hoursLater: 'Stunden später',
     expired: 'abgelaufen',
-    expiringSoon: 'läuft bald ab'
+    expiringSoon: 'läuft bald ab',
   },
   copyright: 'Copyright © 2014-2026 FIT2CLOUD, Alle Rechte vorbehalten.',
   userManualUrl: 'http://docs.maxkb.hk/',
-  forumUrl: 'https://github.com/1Panel-dev/MaxKB/discussions'
+  forumUrl: 'https://github.com/1Panel-dev/MaxKB/discussions',
 }
