@@ -190,6 +190,7 @@ function initMaxkbStyle(root, maxkbId){
       font-size: 14px;
       background: #3370FF;
       z-index: 10001;
+      visibility: hidden;
   }
   #maxkb .maxkb-tips .maxkb-arrow {
       position: absolute;
@@ -204,15 +205,18 @@ function initMaxkbStyle(root, maxkbId){
       {{y_type}}: 33px;
       border-left-color: transparent;
       border-bottom-color: transparent
+      visibility: hidden;
   }
   #maxkb .maxkb-tips .maxkb-title {
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 8px;
+      visibility: hidden;
   }
   #maxkb .maxkb-tips .maxkb-button {
       text-align: right;
       margin-top: 24px;
+      visibility: hidden;
   }
   #maxkb .maxkb-tips .maxkb-button button {
       border-radius: 4px;
@@ -222,6 +226,7 @@ function initMaxkbStyle(root, maxkbId){
       cursor: pointer;
       outline: none;
       border: none;
+      visibility: hidden;
   }
   #maxkb .maxkb-tips .maxkb-button button::after{
       border: none;
@@ -231,6 +236,7 @@ function initMaxkbStyle(root, maxkbId){
       right: 20px;
       top: 20px;
       cursor: pointer;
+      visibility: hidden;
 
   }
   #maxkb-chat-container {
