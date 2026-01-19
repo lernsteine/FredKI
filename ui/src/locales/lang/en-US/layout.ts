@@ -32,10 +32,11 @@ export default {
   time: {
     daysLater: 'days later expire',
     hoursLater: 'hours later expire',
-    neverExpires: 'never expires',
     minutesLater: 'minutes later expire',
     expired: 'expired',
     expiringSoon: 'expiring soon',
+    neverExpires: 'Never expires',
+    daysValid: 'Days valid',
   },
   copyright: 'Copyright © 2014-2026 FIT2CLOUD, All rights reserved.',
   userManualUrl: 'http://docs.maxkb.hk/',
