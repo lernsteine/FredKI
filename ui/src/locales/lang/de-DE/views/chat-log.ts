@@ -2,7 +2,7 @@ export default {
   title: 'Chat-Protokolle',
   delete: {
     confirmTitle: 'Löschung der Frage bestätigen:',
-    confirmMessage1: 'Das Löschen dieser Frage hebt die Verknüpfung von',
+    confirmMessage1: 'Das Löschen dieser Frage hebt die Zuordnung zu',
     confirmMessage2: 'Segmenten auf. Bitte vorsichtig vorgehen.',
   },
   buttons: {
@@ -11,7 +11,7 @@ export default {
   table: {
     abstract: 'Titel',
     username: 'Benutzer',
-    chat_record_count: 'Gesamtnachrichten',
+    chat_record_count: 'Gesamte Nachrichten',
     user: 'Benutzer',
     feedback: {
       label: 'Benutzer-Feedback',
@@ -21,21 +21,30 @@ export default {
     mark: 'Markierungen',
     recenTimes: 'Letzte Chat-Zeit',
   },
-  addToKnowledge: 'Zur Wissensbasis hinzufügen',
-  daysText: 'Tage zuvor',
-  fileDaysText: 'Die aus der vorherigen Konversation hochgeladene Anlage',
-  selectKnowledge: 'Wissensbasis auswählen',
-  selectKnowledgePlaceholder: 'Bitte Wissensbasis auswählen',
+  addToKnowledge: 'Zum Wissen hinzufügen',
+  daysText: 'Tage her',
+  fileDaysText: 'Die Anlage aus dem vorherigen Gespräch',
+  selectKnowledge: 'Wissen auswählen',
+  selectKnowledgePlaceholder: 'Bitte ein Wissen auswählen',
   saveToDocument: 'In Dokument speichern',
-  documentPlaceholder: 'Bitte Dokument auswählen',
+  documentPlaceholder: 'Bitte ein Dokument auswählen',
   editContent: 'Inhalt bearbeiten',
-  editMark: 'Markierung bearbeiten',
+  editMark: 'Markierung / Label bearbeiten',
   form: {
     content: {
       placeholder: 'Bitte Inhalt eingeben',
     },
     title: {
-      placeholder: 'Bitte einen Titel für den aktuellen Inhalt festlegen (zur Verwaltung und Ansicht)',
+      placeholder: 'Bitte einen Titel für den aktuellen Inhalt vergeben (zur Verwaltung und Ansicht)',
     },
   },
+  online: 'Online-Nutzung',
+  apiCall: 'API-Aufruf',
+  enterpriseWechat: 'WeChat Work Anwendung',
+  wechatPublicAccount: 'WeChat öffentliches Konto',
+  lark: 'Lark Anwendung',
+  dingtalk: 'DingTalk Anwendung',
+  enterpriseWechatRobot: 'WeChat Work Bot',
+  slack: 'Slack Bot',
+  trigger: 'Auslöser',
 }
