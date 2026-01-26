@@ -1,5 +1,6 @@
 export default {
   title: 'Auslöser',
+  tip: 'Bei Auslösung ruft das System automatisch die Aufgabenausführung basierend auf den eingestellten Eingabeparametern auf',
   task: 'Aufgabe',
   type: {
     scheduled: 'Zeitgesteuerter Auslöser',
