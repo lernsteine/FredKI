@@ -1,7 +1,30 @@
 export default {
   title: 'Auslöser',
-  tip: 'Bei Auslösung ruft das System automatisch die Aufgabenausführung basierend auf den eingestellten Eingabeparametern auf',
+  tip: 'Bei Auslösung ruft das System automatisch die Ausführung der Aufgabe basierend auf den eingestellten Eingabeparametern auf',
   task: 'Aufgabe',
+  triggerTask: 'Auslöser-Aufgabe',
+  taskExecution: 'Aufgabenausführung',
+  delete: {
+    confirmTitle: 'Löschen des Auslösers bestätigen:',
+    confirmTitle2: 'Auslöser?',
+  },
+  triggerCycle: {
+    title: 'Auslösezyklus',
+    days: 'Tage',
+    daily: 'Täglicher Auslöser',
+    weekly: 'Wöchentlicher Auslöser',
+    monthly: 'Monatlicher Auslöser',
+    interval: 'Intervall-Auslöser',
+    monday: 'Montag',
+    tuesday: 'Dienstag',
+    wednesday: 'Mittwoch',
+    thursday: 'Donnerstag',
+    friday: 'Freitag',
+    saturday: 'Samstag',
+    sunday: 'Sonntag',
+    hours: 'Stunden',
+    minutes: 'Minuten',
+  },
   type: {
     scheduled: 'Zeitgesteuerter Auslöser',
     scheduledDesc: 'Aufgaben monatlich, wöchentlich, täglich oder in Intervallen ausführen',
@@ -16,5 +39,9 @@ export default {
       placeholder: 'Bitte geben Sie den Namen des Auslösers ein',
       requiredMessage: 'Bitte geben Sie den Namen des Auslösers ein',
     },
+    event_url: {
+      label: 'URL in Ihre Anwendung kopieren',
+    },
   },
+  requestParameter: 'Anforderungsparameter',
 }
