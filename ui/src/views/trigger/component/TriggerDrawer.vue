@@ -4,6 +4,10 @@
     :title="is_edit ? $t('views.trigger.editTrigger') : $t('views.trigger.createTrigger')"
     size="600"
     append-to-body
+    :close-on-click-modal="false"
+    :close-on-press-escape="false"
+    :destroy-on-close="true"
+    :before-close="close"
   >
     <el-form
       :model="form"
@@ -30,15 +34,7 @@
           @blur="form.name = form.name?.trim()"
         />
       </el-form-item>
-      <el-form-item
-        :label="$t('common.desc')"
-        prop="desc"
-        :rules="{
-          message: $t('common.inputPlaceholder'),
-          trigger: 'blur',
-          required: true,
-        }"
-      >
+      <el-form-item :label="$t('common.desc')" prop="desc">
         <el-input
           v-model="form.desc"
           type="textarea"
@@ -85,9 +81,14 @@
                   <span class="w-full">{{ $t('views.trigger.triggerCycle.title') }}</span>
                 </el-col>
               </el-row>
-              <el-row style="width: 100%" :gutter="10" class="mb-8">
+              <el-row style="width: 100%" class="mb-8">
                 <el-col :span="24">
-                  <el-cascader v-model="scheduled" :options="options" @change="handleChange" />
+                  <el-cascader
+                    v-model="scheduled"
+                    :options="options"
+                    @change="handleChange"
+                    style="width: 100%"
+                  />
                 </el-col>
               </el-row>
             </div>
@@ -113,7 +114,11 @@
           <el-card v-if="form.trigger_type === 'EVENT'" shadow="never" class="card-never mt-16">
             <el-form-item :label="$t('views.trigger.from.event_url.label')">
               <div class="complex-input flex align-center w-full" style="background-color: #ffffff">
-                <el-input class="complex-input__left" v-bind:modelValue="event_url"></el-input>
+                <el-input
+                  class="complex-input__left"
+                  v-bind:modelValue="event_url"
+                  readonly
+                ></el-input>
 
                 <el-tooltip :content="$t('common.copy')" placement="top">
                   <el-button text @click="copy">
@@ -128,6 +133,7 @@
                 :placeholder="$t('common.inputPlaceholder')"
                 v-model="form.trigger_setting.token"
                 show-password
+                readonly
               >
               </el-input>
             </el-form-item>
@@ -209,7 +215,7 @@
           <!-- 资源端智能体 -->
           <div class="w-full" v-if="resourceType === 'APPLICATION'">
             <template v-for="(item, index) in applicationTask" :key="index">
-              <div class="border border-r-6 white-bg" style="padding: 2px 8px">
+              <div class="border border-r-6 white-bg mb-8" style="padding: 2px 8px">
                 <div class="flex-between">
                   <div class="flex align-center" style="line-height: 20px">
                     <el-avatar
@@ -246,7 +252,7 @@
                 <ApplicationParameter
                   class="mt-8 mb-8"
                   ref="applicationParameterRef"
-                  v-if="showTast === 'agent' + index && applicationDetailsDict[item.source_id]"
+                  v-if="applicationDetailsDict[item.source_id]"
                   :application="applicationDetailsDict[item.source_id]"
                   :trigger="form"
                   v-model="item.parameter"
@@ -291,15 +297,15 @@
                     </span>
                   </div>
                 </div>
+                <ToolParameter
+                  class="mt-8 mb-8"
+                  ref="toolParameterRef"
+                  v-if="showTast === 'tool' + index && toolDetailsDict[item.source_id]"
+                  :tool="toolDetailsDict[item.source_id]"
+                  :trigger="form"
+                  v-model="item.parameter"
+                ></ToolParameter>
               </div>
-              <ToolParameter
-                class="mt-8 mb-8"
-                ref="toolParameterRef"
-                v-if="showTast === 'tool' + index && toolDetailsDict[item.source_id]"
-                :tool="toolDetailsDict[item.source_id]"
-                :trigger="form"
-                v-model="item.parameter"
-              ></ToolParameter>
             </template>
           </div>
         </template>
@@ -435,15 +441,15 @@
                     </span>
                   </div>
                 </div>
+                <ToolParameter
+                  class="mt-8 mb-8"
+                  ref="toolParameterRef"
+                  v-if="showTast === 'tool' + index && toolDetailsDict[item.source_id]"
+                  :tool="toolDetailsDict[item.source_id]"
+                  :trigger="form"
+                  v-model="item.parameter"
+                ></ToolParameter>
               </div>
-              <ToolParameter
-                class="mt-8 mb-8"
-                ref="toolParameterRef"
-                v-if="showTast === 'tool' + index && toolDetailsDict[item.source_id]"
-                :tool="toolDetailsDict[item.source_id]"
-                :trigger="form"
-                v-model="item.parameter"
-              ></ToolParameter>
             </template>
           </div>
         </el-card>
@@ -453,7 +459,7 @@
     <ToolDialog @refresh="toolRefresh" ref="toolDialogRef"></ToolDialog>
     <template #footer>
       <el-button @click="close">{{ $t('common.cancel') }}</el-button>
-      <el-button type="primary" @click="submit">{{
+      <el-button v-if="submitPermission" type="primary" @click="submit">{{
         is_edit ? $t('common.save') : $t('common.create')
       }}</el-button>
     </template>
@@ -474,6 +480,8 @@ import { resetUrl } from '@/utils/common.ts'
 import { t } from '@/locales'
 import { type FormInstance } from 'element-plus'
 import Result from '@/request/Result'
+import { hasPermission } from '@/utils/permission'
+import { PermissionConst, RoleConst } from '@/utils/permission/data'
 
 const emit = defineEmits(['refresh'])
 const props = withDefaults(
@@ -494,6 +502,29 @@ const collapseData = reactive({
   agent: true,
 })
 const showTast = ref<string>('')
+
+const submitPermission = computed(() => {
+  return is_edit.value ? triggerPermissionMap.edit() : triggerPermissionMap.create()
+})
+
+const triggerPermissionMap = {
+  edit: () =>
+    hasPermission(
+      [
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.TRIGGER_EDIT.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
+  create: () =>
+    hasPermission(
+      [
+        RoleConst.WORKSPACE_MANAGE.getWorkspaceRole,
+        PermissionConst.TRIGGER_CREATE.getWorkspacePermissionWorkspaceManageRole,
+      ],
+      'OR',
+    ),
+}
 
 const triggerFormRef = ref<FormInstance>()
 const copy = () => {
@@ -534,6 +565,7 @@ const applicationRefresh = (application_selected: any) => {
         parameter: {},
       })
     })
+  showTast.value = 'agent0'
 }
 const applicationTask = computed(() => {
   return form.value.trigger_task.filter((task: any) => task.source_type === 'APPLICATION')
@@ -572,6 +604,7 @@ const toolRefresh = (tool_selected: any) => {
         parameter: {},
       })
     })
+  showTast.value = 'tool0'
 }
 
 const applicationDialogRef = ref<InstanceType<typeof ApplicationDialog>>()
@@ -686,7 +719,7 @@ const getDefaultValue = () => {
     trigger_task: [],
     trigger_type: 'SCHEDULED',
     trigger_setting: {
-      token: '',
+      token: uuidv4().replace('-', ''),
       body: [],
     },
   }
