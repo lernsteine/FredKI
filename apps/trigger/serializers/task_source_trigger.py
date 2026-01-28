@@ -25,6 +25,7 @@ from common.utils.common import get_file_content
 from knowledge.serializers.common import BatchSerializer
 from maxkb.conf import PROJECT_DIR
 from tools.models import Tool
+from tools.serializers.tool import ToolModelSerializer
 from trigger.models import TriggerTypeChoices, Trigger, TriggerTaskTypeChoices, TriggerTask
 from trigger.serializers.trigger import TriggerModelSerializer, TriggerSerializer, ApplicationTriggerTaskSerializer, \
     ToolTriggerTaskSerializer, TriggerTaskModelSerializer
@@ -111,6 +112,8 @@ class TaskSourceTriggerOperateSerializer(serializers.Serializer):
 
     @transaction.atomic
     def edit(self, instance: Dict, with_valid=True):
+        from trigger.handler.simple_tools import deploy, undeploy
+
         if with_valid:
             self.is_valid(raise_exception=True)
         serializer = TaskSourceTriggerEditRequest(data=instance)
@@ -123,17 +126,28 @@ class TaskSourceTriggerOperateSerializer(serializers.Serializer):
         if not trigger:
             raise serializers.ValidationError(_('Trigger not found'))
         task_source_trigger_edit_field_list = ['name', 'desc', 'trigger_type', 'trigger_setting', 'meta']
+        trigger_deploy_edit_field_list = ['trigger_type', 'trigger_setting']
+
+        need_redeploy = any(field in instance for field in trigger_deploy_edit_field_list)
 
         for field in task_source_trigger_edit_field_list:
             if field in valid_data:
                 setattr(trigger, field, valid_data.get(field))
         trigger.save()
 
+        if need_redeploy:
+            if trigger.is_active:
+                deploy(ToolModelSerializer(trigger).data, **{})
+            else:
+                undeploy(TriggerModelSerializer(trigger).data, **{})
+
         return self.one()
 
     # 删除的是当前trigger_id+source_id+source_type对应的task
     @transaction.atomic
     def delete(self):
+        from trigger.handler.simple_tools import undeploy
+
         self.is_valid(raise_exception=True)
         trigger_id = self.data.get('trigger_id')
         workspace_id = self.data.get('workspace_id')
@@ -148,6 +162,8 @@ class TaskSourceTriggerOperateSerializer(serializers.Serializer):
         if delete_count == 0:
             raise AppApiException(404, _('Task not found'))
         has_other_tasks = TriggerTask.objects.filter(trigger_id=trigger_id).exists()
+
+        undeploy(TriggerModelSerializer(trigger).data, **{})
 
         if not has_other_tasks:
             trigger.delete()

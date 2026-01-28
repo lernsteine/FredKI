@@ -40,7 +40,7 @@ class VolcanicEngineTextToImage(MaxKBBaseModel, BaseTextToImage):
         return VolcanicEngineTextToImage(
             model_version=model_name,
             api_key=model_credential.get('api_key'),
-            api_base=model_credential.get('api_base') or 'https://ark-api.volcengine.com',
+            api_base=model_credential.get('volcanic_api_url') or 'https://ark-api.volcengine.com',
             **optional_params
         )
 
@@ -60,5 +60,8 @@ class VolcanicEngineTextToImage(MaxKBBaseModel, BaseTextToImage):
             prompt=prompt,
             **self.params
         )
-        file_urls.append(imagesResponse.data[0].url)
+        if imagesResponse.data[0].url:
+            file_urls.append(imagesResponse.data[0].url)
+        elif imagesResponse.data[0].b64_json:
+            file_urls.append(imagesResponse.data[0].b64_json)
         return file_urls
