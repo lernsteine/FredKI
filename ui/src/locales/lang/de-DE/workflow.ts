@@ -1,7 +1,7 @@
 export default {
-  node: 'Knoten',
+  title: 'Knoten',
   nodeName: 'Knotenname',
-  baseComponent: 'Basis',
+  baseComponent: 'Grundkomponente',
   nodeSetting: 'Knoteneinstellungen',
   workflow: 'Workflow',
   knowledgeWorkflow: 'Wissens-Workflow',
@@ -16,24 +16,24 @@ export default {
   },
   setting: {
     restoreVersion: 'Vorherige Version wiederherstellen',
-    restoreCurrentVersion: 'Auf diese Version wiederherstellen',
+    restoreCurrentVersion: 'Zu dieser Version wiederherstellen',
     addComponent: 'Hinzufügen',
-    releaseHistory: 'Veröffentlichungsverlauf',
-    autoSave: 'Automatisch speichern',
+    releaseHistory: 'Veröffentlichungshistorie',
+    autoSave: 'Automatisches Speichern',
     latestRelease: 'Neueste Veröffentlichung',
     copyParam: 'Parameter kopieren',
     debug: 'Ausführen',
     exit: 'Beenden',
     exitSave: 'Speichern & Beenden',
-    templateCenter: 'Vorlagencenter',
+    templateCenter: 'Vorlagenzentrum',
   },
   tip: {
-    noData: 'Keine passenden Ergebnisse gefunden',
+    noData: 'Keine zugehörigen Ergebnisse gefunden',
     nameMessage: 'Name darf nicht leer sein!',
-    onlyRight: 'Verbindungen dürfen nur vom rechten Ankerpunkt ausgehen',
+    onlyRight: 'Verbindungen können nur vom rechten Anker hergestellt werden',
     notRecyclable: 'Schleifenverbindungen sind nicht erlaubt',
-    onlyLeft: 'Verbindungen dürfen nur zum linken Ankerpunkt führen',
-    applicationNodeError: 'Dieser Agent ist nicht verfügbar',
+    onlyLeft: 'Verbindungen können nur zum linken Anker hergestellt werden',
+    applicationNodeError: 'Diese Anwendung ist nicht verfügbar',
     toolNodeError: 'Dieser Tool-Knoten ist nicht verfügbar',
     repeatedNodeError: 'Ein Knoten mit diesem Namen existiert bereits',
     cannotCopy: 'Kann nicht kopiert werden',
@@ -42,24 +42,25 @@ export default {
     saveMessage: 'Aktuelle Änderungen wurden nicht gespeichert. Vor dem Beenden speichern?',
   },
   delete: {
-    confirmTitle: 'Diesen Knoten löschen?',
+    confirmTitle: 'Bestätigen Sie die Löschung dieses Knotens?',
     deleteMessage: 'Dieser Knoten kann nicht gelöscht werden',
   },
   control: {
-    zoomOut: 'Herauszoomen',
-    zoomIn: 'Hineinzoomen',
-    fitView: 'An Bildschirm anpassen',
+    zoomOut: 'Verkleinern',
+    zoomIn: 'Vergrößern',
+    fitView: 'An Ansicht anpassen',
     retract: 'Alle einklappen',
     extend: 'Alle ausklappen',
     beautify: 'Automatisch anordnen',
   },
   variable: {
     global: 'Globale Variable',
+    chat: 'Chat-Variable',
     Referencing: 'Referenzierte Variable',
     ReferencingRequired: 'Referenzierte Variable ist erforderlich',
     ReferencingError: 'Ungültige referenzierte Variable',
     NoReferencing: 'Referenzierte Variable existiert nicht',
-    placeholder: 'Bitte Variable auswählen',
+    placeholder: 'Bitte wählen Sie eine Variable aus',
     inputPlaceholder: 'Bitte Variable eingeben',
     loop: 'Schleifenvariable',
   },
@@ -76,7 +77,7 @@ export default {
     baseNodeRequired: 'Basisinformationsknoten ist erforderlich',
     baseNodeOnly: 'Nur ein Basisinformationsknoten erlaubt',
     notInWorkFlowNode: 'Knoten nicht im Workflow',
-    noNextNode: 'Nachfolgeknoten existiert nicht',
+    noNextNode: 'Nächster Knoten existiert nicht',
     nodeUnavailable: 'Knoten nicht verfügbar',
     needConnect1: 'Der Zweig des Knotens muss verbunden werden',
     cannotEndNode: 'Dieser Knoten kann nicht als Endknoten verwendet werden',
@@ -85,16 +86,16 @@ export default {
   nodes: {
     knowledgeWriteNode: {
       label: 'Wissen schreiben',
-      text: 'Die Eingabe-Absatzliste in die aktuelle Wissensbasis schreiben und Vektorisierung durchführen',
+      text: 'Eingabe-Absatzliste in die aktuelle Wissensbasis schreiben und Vektorisierung durchführen',
     },
     dataSourceWebNode: {
       label: 'Website',
-      text: 'Root-URL eingeben, um automatisch Webdaten zu crawlen (ein Link entspricht einem Dokument), Ausgabe einer Dokumentenliste mit Inhalt',
+      text: 'Root-URL eingeben, um Webdaten automatisch zu crawlen (ein Link entspricht einem Dokument), Ausgabe einer Dokumentenliste mit Inhalt',
       field_label: 'Dokumentenliste',
     },
     dataSourceLocalNode: {
       label: 'Lokale Datei',
-      text: 'Lokale Dokumente hochladen, Dokumentenliste ausgeben (Inhalt nicht geparst, muss mit "Dokumentinhalt extrahieren"-Knoten kombiniert werden)',
+      text: 'Lokale Dokumente hochladen, Dokumentenliste ausgeben (Inhalt nicht geparst, muss mit "Dokumentinhalt extrahieren"-Knoten geparst werden)',
       fileList: 'Dateiliste',
       fileFormat: {
         label: 'Unterstützte Dateiformate',
@@ -121,14 +122,14 @@ export default {
     baseNode: {
       fileUpload: {
         label: 'Datei-Upload',
-        tooltip: 'Wenn aktiviert, wird auf der Q&A-Seite eine Datei-Upload-Schaltfläche angezeigt.',
+        tooltip: 'Wenn aktiviert, wird auf der Q&A-Seite ein Datei-Upload-Button angezeigt.',
       },
       FileUploadSetting: {
         title: 'Datei-Upload-Einstellungen',
         maxFiles: 'Maximale Anzahl Dateien pro Upload',
         fileLimit: 'Maximale Größe pro Datei (MB)',
         fileUploadType: {
-          label: 'Erlaubte Dateitypen',
+          label: 'Erlaubte Dateitypen für Upload',
           documentText: 'Benötigt "Dokumentinhalt extrahieren"-Knoten zum Parsen des Dokumentinhalts',
           imageText: 'Benötigt "Bildverstehen"-Knoten zum Parsen des Bildinhalts',
           videoText: 'Benötigt "Videoverstehen"-Knoten zum Parsen des Videoinhalts',
@@ -147,7 +148,7 @@ export default {
       returnContent: {
         label: 'Inhalt zurückgeben',
         tooltip: `Wenn deaktiviert, wird der Inhalt dieses Knotens nicht an den Benutzer ausgegeben.
-                  Wenn der Benutzer die Ausgabe dieses Knotens sehen soll, bitte Schalter aktivieren.`,
+                  Wenn der Benutzer die Ausgabe dieses Knotens sehen soll, bitte den Schalter aktivieren.`,
       },
       defaultPrompt: 'Bekannte Informationen',
       think: 'Denkprozess',
@@ -155,12 +156,16 @@ export default {
     },
     searchKnowledgeNode: {
       label: 'Wissensabruf',
-      text: 'Textinhalte zur Benutzerfrage aus dem Wissen abfragen',
+      text: 'Ermöglicht das Abfragen von textbezogenem Inhalt zu Benutzerfragen aus dem Wissen',
       paragraph_list: 'Liste der abgerufenen Segmente',
       is_hit_handling_method_list: 'Liste der Segmente, die direkte Antwortkriterien erfüllen',
       result: 'Suchergebnis',
       directly_return: 'Inhalt der Segmente, die direkte Antwortkriterien erfüllen',
       searchParam: 'Abrufparameter',
+      showKnowledge: {
+        label: 'Ergebnisse in der Wissensquelle anzeigen',
+        requiredMessage: 'Bitte Parameter einstellen',
+      },
       searchQuestion: {
         label: 'Frage',
         placeholder: 'Bitte Suchfrage auswählen',
@@ -169,7 +174,7 @@ export default {
     },
     searchDocumentNode: {
       label: 'Dokument-Tag-Abruf',
-      text: 'Dokumente suchen, die den Bedingungen anhand des Dokument-Tags im angegebenen Suchbereich entsprechen',
+      text: 'Suche nach Dokumenten, die den Bedingungen entsprechen, basierend auf dem Dokument-Tag im angegebenen Suchbereich',
       selectKnowledge: 'Suchbereich',
       searchSetting: 'Sucheinstellungen',
       custom: 'Manuell',
@@ -177,15 +182,11 @@ export default {
       auto: 'Automatisch',
       autoTooltip: 'Tag-Filterbedingungen automatisch basierend auf der Suchfrage einstellen',
       documentList: 'Dokumentenliste',
-      knowledgeList: 'Wissensbasenliste',
+      knowledgeList: 'Wissensbasisliste',
       result: 'Suchergebnisse',
       searchParam: 'Suchparameter',
       select_variable: 'Variable auswählen',
-      valueMessage: `Wert oder Name `,
-      showKnowledge: {
-        label: 'Ergebnisse in der Wissensquelle anzeigen',
-        requiredMessage: 'Bitte Parameter einstellen',
-      },
+      valueMessage: `Wert oder Name`,
       searchQuestion: {
         label: 'Suchfrage',
         placeholder: 'Bitte Suchfrage auswählen',
@@ -194,22 +195,24 @@ export default {
     },
     questionNode: {
       label: 'Fragenoptimierung',
-      text: 'Aktuelle Frage basierend auf historischen Chat-Datensätzen optimieren, um besser zu Wissenssegmenten zu passen',
+      text: 'Aktuelle Frage basierend auf historischen Chat-Datensätzen optimieren und verbessern, um besser zu Wissenssegmenten zu passen',
       result: 'Optimierte Fragen-Ergebnis',
-      systemDefault: `#Role
-Sie sind ein Meister der Problemboptimierung und können basierend auf dem Kontext genau die Absichten des Benutzers ableiten und die gestellten Fragen optimieren.
-##Skills
-###Skill 1: Probleme optimieren
-2. Benutzereingabefragen empfangen.
-3. Die Bedeutung des Problems sorgfältig anhand des Kontexts analysieren.
+      systemDefault: `#Rolle
+Sie sind ein Meister der Problemboptimierung, geschickt darin, Benutzerabsichten basierend auf Kontext genau zu erschließen und die von Benutzern gestellten Fragen zu optimieren.
+
+##Fähigkeiten
+###Fähigkeit 1: Probleme optimieren
+2. Benutzereingabe-Fragen empfangen.
+3. Die Bedeutung des Problems sorgfältig basierend auf dem Kontext analysieren.
 4. Optimierte Probleme ausgeben.
-##Limitations:
--Nur das optimierte Problem zurückgeben, ohne zusätzliche Erklärungen oder Klärungen.
+
+##Einschränkungen:
+-Nur das optimierte Problem zurückgeben, ohne zusätzliche Erklärung oder Klärung.
 -Stellen Sie sicher, dass das optimierte Problem die ursprüngliche Problembabsicht genau widerspiegelt und die ursprüngliche Absicht nicht verändert.`,
     },
     conditionNode: {
-      label: 'Bedingungsverzweigung',
-      text: 'Verschiedene Knoten basierend auf Bedingungen auslösen',
+      label: 'Bedingter Zweig',
+      text: 'Unterschiedliche Knoten basierend auf Bedingungen auslösen',
       branch_name: 'Zweigname',
       conditions: {
         label: 'Bedingungen',
@@ -221,14 +224,14 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       addBranch: 'Zweig hinzufügen',
     },
     replyNode: {
-      label: 'Feste Antwort',
+      label: 'Festgelegte Antwort',
       text: 'Antwortinhalt festlegen, referenzierte Variablen werden in Strings umgewandelt und ausgegeben',
       replyContent: 'Antwortinhalt',
     },
     rerankerNode: {
       label: 'Mehrwege-Abruf',
-      text: 'Mit einem Re-Ranking-Modell die Abruf-Ergebnisse aus mehreren Wissensquellen verfeinern',
-      result_list: 'Neu sortierte Ergebnisliste',
+      text: 'Ein Re-Ranking-Modell verwenden, um Abruf-Ergebnisse aus mehreren Wissensquellen zu verfeinern',
+      result_list: 'Neu gerankte Ergebnisliste',
       result: 'Re-Ranking-Ergebnis',
       rerankerContent: {
         label: 'Re-Ranking-Inhalt',
@@ -238,21 +241,21 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       ScoreTooltip: 'Je höher der Score, desto stärker die Relevanz.',
       max_paragraph_char_number: 'Maximale Zeichenanzahl',
       reranker_model: {
-        label: 'Re-Rank',
-        placeholder: 'Bitte Re-Rank auswählen',
+        label: 'Rerank',
+        placeholder: 'Bitte ein Rerank auswählen',
       },
     },
     formNode: {
       label: 'Formulareingabe',
-      text: 'Während des Q&A Benutzereingaben sammeln und in nachfolgenden Prozessen verwenden',
+      text: 'Benutzereingaben während Q&A sammeln und in nachfolgenden Prozessen verwenden',
       form_content_format1: 'Hallo, bitte füllen Sie das untenstehende Formular aus:',
-      form_content_format2: 'Nach dem Ausfüllen auf die Schaltfläche [Absenden] klicken.',
+      form_content_format2: 'Klicken Sie nach dem Ausfüllen auf die [Absenden]-Schaltfläche.',
       form_data: 'Gesamter Formularinhalt',
       formContent: {
         label: 'Formular-Ausgabeinhalt',
         requiredMessage:
-          'Bitte legen Sie den Ausgabeinhalt dieses Knotens fest, { form } ist Platzhalter für das Formular.',
-        tooltip: 'Definiert den Ausgabeinhalt dieses Knotens. { form } ist Platzhalter für das Formular',
+          'Bitte den Ausgabeinhalt dieses Knotens einstellen, { form } ist ein Platzhalter für das Formular.',
+        tooltip: 'Den Ausgabeinhalt dieses Knotens definieren. { form } ist ein Platzhalter für das Formular',
       },
       formAllContent: 'Gesamter Formularinhalt',
       formSetting: 'Formularkonfiguration',
@@ -263,28 +266,28 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       content: 'Dokumentinhalt',
     },
     documentSplitNode: {
-      label: 'Dokument aufteilen',
-      text: 'Eingabe-Dokumentinhalt gemäß Segmentierungsstrategie aufteilen, Liste der Segmenttexte ausgeben',
-      paragraphList: 'Liste der aufgeteilten Segmente',
+      label: 'Dokumententeilung',
+      text: 'Eingabedokumentinhalt gemäß der Teilungsstrategie teilen, Liste der geteilten Texte ausgeben',
+      paragraphList: 'Liste der geteilten Segmente',
       splitStrategy: {
-        label: 'Segmentierungsstrategie',
-        placeholder: 'Bitte Segmentierungsstrategie auswählen',
-        requiredMessage: 'Bitte Segmentierungsstrategie auswählen',
+        label: 'Teilungsstrategie',
+        placeholder: 'Bitte Teilungsstrategie auswählen',
+        requiredMessage: 'Bitte Teilungsstrategie auswählen',
       },
       chunk_length: {
         label: 'Blocklänge',
-        tooltip1: 'Kernziel ist das Gleichgewicht zwischen Abrufgenauigkeit und Recall-Effizienz',
+        tooltip1: 'Kernziel ist das Balancieren von Abrufgenauigkeit und Recall-Effizienz',
         tooltip2:
-          'Zu kurze Segmentierung vermeiden: Ein einzelnes Segment <50 Zeichen kann zu semantischer Fragmentierung führen und während des Abrufs aufgrund fehlenden Kontexts die Abfrageabsicht nicht treffen.',
+          'Vermeiden Sie übermäßig kurze Teilung: Ein einzelnes Segment <50 Zeichen kann zu semantischer Fragmentierung führen und möglicherweise bei Abruf aufgrund fehlenden Kontexts die Abfrageabsicht nicht treffen.',
         tooltip3:
-          'Zu lange Segmentierung vermeiden: Ein Block >500 Zeichen erhöht redundante Informationen, verringert die Abrufgenauigkeit und verbraucht mehr Speicher- und Rechenressourcen.',
+          'Vermeiden Sie übermäßige Teilung: Ein Block über 500 Zeichen erhöht redundante Informationen, reduziert Abrufgenauigkeit und verbraucht mehr Speicher- und Rechenressourcen.',
       },
       title1: 'Segmenttitel als zugehörige Frage des Segments setzen',
       title2: 'Dokumentname als zugehörige Frage des Segments setzen',
     },
     imageUnderstandNode: {
       label: 'Bildverstehen',
-      text: 'Bilder analysieren, um Objekte, Szenen zu erkennen und Fragen zu beantworten',
+      text: 'Bilder analysieren, um Objekte, Szenen zu identifizieren und Antworten zu geben',
       answer: 'KI-Inhalt',
       model: {
         label: 'Vision-Modell',
@@ -297,7 +300,7 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
     },
     videoUnderstandNode: {
       label: 'Videoverstehen',
-      text: 'Objekte, Szenen und andere Informationen in Videos erkennen, um Benutzerfragen zu beantworten',
+      text: 'Objekte, Szenen und andere Informationen in Videos identifizieren, um Benutzerfragen zu beantworten',
       answer: 'KI-Antwortinhalt',
       model: {
         label: 'Vision-Modell',
@@ -315,9 +318,9 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
     },
     variableAggregationNode: {
       label: 'Variablenaggregation',
-      text: 'Variablen jeder Gruppe gemäß Aggregationsstrategie aggregieren',
+      text: 'Variablen jeder Gruppe gemäß der Aggregationsstrategie aggregieren',
       Strategy: 'Aggregationsstrategie',
-      placeholder: 'Den ersten nicht-null-Wert jeder Gruppe zurückgeben',
+      placeholder: 'Den ersten nicht-null Wert jeder Gruppe zurückgeben',
       placeholder1: 'Die Menge der Variablen jeder Gruppe zurückgeben',
       group: {
         noneError: 'Name darf nicht leer sein',
@@ -332,9 +335,9 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       getToolsSuccess: 'Tools erfolgreich abgerufen',
       getTool: 'Tools abrufen',
       toolParam: 'Tool-Parameter',
-      mcpServerTip: 'Bitte MCP-Server-Konfiguration im JSON-Format eingeben',
+      mcpServerTip: 'Bitte MCP-Serverkonfiguration im JSON-Format eingeben',
       mcpToolTip: 'Bitte ein Tool auswählen',
-      configLabel: 'MCP-Server-Konfig (nur SSE/Streamable HTTP-Aufrufe unterstützt)',
+      configLabel: 'MCP-Server-Konfiguration (Nur SSE/streambare HTTP-Aufrufe unterstützt)',
       reference: 'MCP referenzieren',
     },
     imageGenerateNode: {
@@ -347,13 +350,13 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       },
       prompt: {
         label: 'Positiver Prompt',
-        tooltip: 'Beschreiben Sie Elemente und visuelle Merkmale, die im generierten Bild gewünscht sind',
+        tooltip: 'Beschreiben Sie Elemente und visuelle Merkmale, die Sie im generierten Bild wünschen',
       },
       negative_prompt: {
         label: 'Negativer Prompt',
-        tooltip: 'Beschreiben Sie Elemente, die aus dem generierten Bild ausgeschlossen werden sollen',
+        tooltip: 'Beschreiben Sie Elemente, die Sie aus dem generierten Bild ausschließen möchten',
         placeholder:
-          'Bitte beschreiben Sie Inhalte, die nicht generiert werden sollen, z. B. Farben, blutiger Inhalt',
+          'Bitte beschreiben Sie Inhalte, die Sie nicht generieren möchten, wie Farben, blutige Inhalte',
       },
     },
     textToVideoGenerate: {
@@ -367,14 +370,14 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       prompt: {
         label: 'Prompt (Positiv)',
         tooltip:
-          'Positiver Prompt, zur Beschreibung gewünschter Elemente und visueller Merkmale im generierten Video',
+          'Positiver Prompt, verwendet um Elemente und visuelle Merkmale zu beschreiben, die im generierten Video erwartet werden',
       },
       negative_prompt: {
         label: 'Prompt (Negativ)',
         tooltip:
-          "Negativer Prompt, zur Beschreibung von Inhalten, die im Video nicht gewünscht sind und die Videogenerierung einschränken können",
+          "Negativer Prompt, verwendet um Inhalte zu beschreiben, die im Video nicht gesehen werden sollen, was die Videogenerierung einschränken kann",
         placeholder:
-          "Bitte beschreiben Sie Videoinhalte, die nicht generiert werden sollen, z. B.: Farben, blutiger Inhalt",
+          "Bitte beschreiben Sie Videoinhalte, die Sie nicht generieren möchten, wie: Farben, blutige Inhalte",
       },
     },
     imageToVideoGenerate: {
@@ -388,14 +391,14 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       prompt: {
         label: 'Prompt (Positiv)',
         tooltip:
-          'Positiver Prompt, zur Beschreibung gewünschter Elemente und visueller Merkmale im generierten Video',
+          'Positiver Prompt, verwendet um Elemente und visuelle Merkmale zu beschreiben, die im generierten Video erwartet werden',
       },
       negative_prompt: {
         label: 'Prompt (Negativ)',
         tooltip:
-          "Negativer Prompt, zur Beschreibung von Inhalten, die im Video nicht gewünscht sind und die Videogenerierung einschränken können",
+          "Negativer Prompt, verwendet um Inhalte zu beschreiben, die im Video nicht gesehen werden sollen, was die Videogenerierung einschränken kann",
         placeholder:
-          "Bitte beschreiben Sie Videoinhalte, die nicht generiert werden sollen, z. B.: Farben, blutiger Inhalt",
+          "Bitte beschreiben Sie Videoinhalte, die Sie nicht generieren möchten, wie: Farben, blutige Inhalte",
       },
       first_frame: {
         label: 'Erstes Frame-Bild',
@@ -419,7 +422,7 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
     },
     textToSpeechNode: {
       label: 'TTS',
-      text: 'Text durch Sprachsynthese-Modell in Audio umwandeln',
+      text: 'Text durch Sprachsynthesemodell in Audio umwandeln',
       tts_model: {
         label: 'Sprachsynthesemodell',
       },
@@ -438,33 +441,33 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       error2: 'Wiederholte Intent',
       placeholder: 'Bitte Klassifikationsoption auswählen',
       classify: {
-        label: 'Intent-Klassifikation',
+        label: 'Intent klassifizieren',
       },
       input: {
         label: 'Eingabe',
       },
     },
     applicationNode: {
-      label: 'Agent-Knoten',
+      label: 'Anwendungs-Knoten',
     },
     loopNode: {
-      label: 'Schleife',
-      text: 'Eine Reihe von Aufgaben durch Einstellung der Schleifenzahl und Logik wiederholen',
+      label: 'Schleifenknoten',
+      text: 'Eine Serie von Aufgaben durch Einstellen der Schleifenzahl und Logik wiederholen',
       loopType: {
         label: 'Schleifentyp',
         requiredMessage: 'Bitte Schleifentyp auswählen',
         arrayLoop: 'Array-Schleife',
         numberLoop: 'Bestimmte Anzahl Schleifen',
-        infiniteLoop: 'Endlosschleife',
+        infiniteLoop: 'Unendliche Schleife',
       },
       loopNumber: {
         label: 'Schleifenzahl',
         requiredMessage: 'Bitte Schleifenzahl eingeben',
       },
       loopArray: {
-        label: 'Schleifenarray',
-        requiredMessage: 'Schleifenarray ist erforderlich',
-        placeholder: 'Bitte Schleifenarray auswählen',
+        label: 'Schleifen-Array',
+        requiredMessage: 'Schleifen-Array ist erforderlich',
+        placeholder: 'Bitte Schleifen-Array auswählen',
       },
       loopSetting: 'Schleifeneinstellungen',
       loopDetail: 'Schleifendetails',
@@ -475,22 +478,22 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       loopItem: 'Schleifenelement',
     },
     loopBodyNode: {
-      label: 'Schleifenrumpf',
-      text: 'Schleifenrumpf',
+      label: 'Schleifenkörper',
+      text: 'Schleifenkörper',
     },
     loopContinueNode: {
-      label: 'Weiter',
-      text: 'Aktuelle Schleife beenden und zur nächsten fortfahren.',
-      isContinue: 'Weiter',
+      label: 'Fortsetzen',
+      text: 'Verwendet, um die aktuelle Schleife zu beenden und zur nächsten überzugehen.',
+      isContinue: 'Fortsetzen',
     },
     loopBreakNode: {
-      label: 'Break',
-      text: 'Aktuelle Schleife beenden und Schleifenrumpf verlassen',
-      isBreak: 'Break',
+      label: 'Unterbrechen',
+      text: 'Aktuelle Schleife beenden und den Schleifenkörper verlassen',
+      isBreak: 'Unterbrechen',
     },
     variableSplittingNode: {
       label: 'Variablenteilung',
-      text: 'Durch Konfiguration von JSON-Path-Ausdrücken die Eingabe-Variable im JSON-Format parsen und teilen',
+      text: 'Durch Konfigurieren von JSON-Path-Ausdrücken die Eingabe-JSON-Format-Variable parsen und teilen',
       result: 'Ergebnis',
       splitVariables: 'Geteilte Variablen',
       inputVariables: 'Eingabevariable',
@@ -500,12 +503,12 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
       expression: {
         label: 'Ausdruck',
         placeholder: 'Bitte Ausdruck eingeben',
-        tooltip: 'Bitte JSON-Path-Ausdrücke zur Teilung von Variablen verwenden, z. B.: $.store.book',
+        tooltip: 'Bitte JSON-Path-Ausdrücke verwenden, um Variablen zu teilen, z.B.: $.store.book',
       },
     },
     parameterExtractionNode: {
       label: 'Parameter-Extraktion',
-      text: 'Mit KI-Modellen strukturierte Parameter extrahieren',
+      text: 'KI-Modelle verwenden, um strukturierte Parameter zu extrahieren',
       extractParameters: {
         label: 'Parameter extrahieren',
         variableListPlaceholder: 'Bitte Extraktionsparameter hinzufügen',
@@ -528,10 +531,12 @@ Sie sind ein Meister der Problemboptimierung und können basierend auf dem Konte
     len_gt: 'Länge größer als',
     len_le: 'Länge kleiner oder gleich',
     len_lt: 'Länge kleiner als',
+    is_true: 'Ist wahr',
+    is_not_true: 'Ist nicht wahr',
   },
-  SystemPromptPlaceholder: 'System-Prompt, kann Systemvariablen referenzieren, z. B.',
-  UserPromptPlaceholder: 'Benutzer-Prompt, kann Systemvariablen referenzieren, z. B.',
-  ExecutionRecord: 'Ausführungsdatensatz',
+  SystemPromptPlaceholder: 'System-Prompt, kann Systemvariablen referenzieren, wie z.B.',
+  UserPromptPlaceholder: 'Benutzer-Prompt, kann Systemvariablen referenzieren, wie z.B.',
+  ExecutionRecord: 'Ausführungsprotokoll',
   initiator: 'Initiator',
   debug: {},
 }
