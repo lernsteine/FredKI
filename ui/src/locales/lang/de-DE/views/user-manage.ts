@@ -9,18 +9,18 @@ export default {
   },
   tip: {
     professionalMessage:
-      'Die Community Edition unterstützt bis zu 2 Benutzer. Für mehr Benutzer upgraden Sie bitte auf die Professional Edition.',
+      'Die Community-Edition unterstützt bis zu 2 Benutzer. Für mehr Benutzer upgraden Sie bitte zur Professional Edition.',
     updatePwdSuccess: 'Benutzerpasswort erfolgreich aktualisiert',
   },
   delete: {
     confirmTitle: 'Löschung des Benutzers bestätigen:',
     confirmMessage:
-      'Das Löschen dieses Benutzers löscht nicht alle von diesem Benutzer erstellten Ressourcen (Agent, Wissensbasis, Modelle). Bitte gehen Sie vorsichtig vor.',
+      'Das Löschen dieses Benutzers löscht nicht alle von diesem Benutzer erstellten Ressourcen (Agenten, Wissen, Modelle). Bitte vorsichtig vorgehen.',
   },
   disabled: {
     confirmTitle: 'Deaktivierung des Tools bestätigen:',
     confirmMessage:
-      'Das Deaktivieren dieses Tools führt zu Fehlern, wenn Agenten, die darauf verweisen, abgefragt werden. Bitte gehen Sie vorsichtig vor.',
+      'Das Deaktivieren dieses Tools führt zu Fehlern, wenn Anwendungen, die darauf verweisen, abgefragt werden. Bitte vorsichtig vorgehen.',
   },
   userForm: {
     nick_name: {
@@ -35,12 +35,13 @@ export default {
     },
   },
   source: {
-    label: 'Benutzerquelle',
+    label: 'Quelle',
     local: 'Systembenutzer',
-    localCreate: 'Lokal erstellen',
+    localCreate: 'Lokal erstellt',
     wecom: 'WeCom',
     lark: 'Lark',
     dingtalk: 'DingTalk',
   },
-  settingRole: 'Rolle festlegen',
+  settingRole: 'Rolle zuweisen',
+  defaultPassword: 'Standard-Passwort',
 }
