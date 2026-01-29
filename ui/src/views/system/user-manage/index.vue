@@ -164,7 +164,7 @@
           v-if="user.isEE() || user.isPE()"
         >
           <template #default="{ row }">
-            <el-popover :width="400">
+            <el-popover :width="500">
               <template #reference>
                 <TagGroup
                   class="cursor"
@@ -174,17 +174,26 @@
                 />
               </template>
               <template #default>
-                <el-table :data="row.role_workspace">
-                  <el-table-column prop="role" :label="$t('views.role.member.role')">
+                <el-table
+                  :data="row.role_workspace"
+                  :tooltip-options="{
+                    popperClass: 'max-w-350',
+                  }"
+                >
+                  <el-table-column prop="role" :label="$t('views.role.member.role')" width="200">
                   </el-table-column>
-                  <el-table-column prop="workspace" :label="$t('views.workspace.title')">
+                  <el-table-column
+                    prop="workspace"
+                    :label="$t('views.workspace.title')"
+                    show-overflow-tooltip
+                  >
                   </el-table-column>
                 </el-table>
               </template>
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column prop="source" width="100" :label="$t('views.userManage.source.label')">
+        <el-table-column prop="source" width="120" :label="$t('views.userManage.source.label')">
           <template #default="{ row }">
             {{
               row.source === 'LOCAL'

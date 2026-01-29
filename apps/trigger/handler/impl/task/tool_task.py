@@ -9,7 +9,6 @@
 import json
 import time
 import traceback
-from typing import Any
 
 import uuid_utils.compat as uuid
 from django.db.models import QuerySet
@@ -21,6 +20,8 @@ from knowledge.models.knowledge_action import State
 from tools.models import Tool
 from trigger.handler.base_task import BaseTriggerTask
 from trigger.models import TaskRecord
+
+executor = ToolExecutor()
 
 
 def get_reference(fields, obj):
@@ -107,6 +108,18 @@ def get_workflow_state(details):
     return State.SUCCESS
 
 
+def _get_result_detail(result):
+    if isinstance(result, dict):
+        result_dict = {k: (str(v)[:500] if len(str(v)) > 500 else v) for k, v in result.items()}
+    elif isinstance(result, list):
+        result_dict = [str(item)[:500] if len(str(item)) > 500 else item for item in result]
+    elif isinstance(result, str):
+        result_dict = result[:500] if len(result) > 500 else result
+    else:
+        result_dict = result
+    return result_dict
+
+
 class ToolTask(BaseTriggerTask):
     def support(self, trigger_task, **kwargs):
         return trigger_task.get('source_type') == 'TOOL'
@@ -115,21 +128,24 @@ class ToolTask(BaseTriggerTask):
         parameter_setting = trigger_task.get('parameter')
         tool_id = trigger_task.get('source_id')
         task_record_id = uuid.uuid7()
-
-        TaskRecord(
-            id=task_record_id,
-            trigger_id=trigger_task.get('trigger'),
-            trigger_task_id=trigger_task.get('id'),
-            source_type="TOOL",
-            source_id=tool_id,
-            task_record_id=task_record_id,
-            meta={'input': parameter_setting, 'output': {}},
-            state=State.STARTED
-        ).save()
-
         start_time = time.time()
         try:
-            tool = QuerySet(Tool).filter(id=tool_id).first()
+            tool = QuerySet(Tool).filter(id=tool_id, is_active=True).first()
+            if not tool:
+                maxkb_logger.info(f"Tool with id {tool_id} not found or inactive.")
+                return
+
+            TaskRecord(
+                id=task_record_id,
+                trigger_id=trigger_task.get('trigger'),
+                trigger_task_id=trigger_task.get('id'),
+                source_type="TOOL",
+                source_id=tool_id,
+                task_record_id=task_record_id,
+                meta={'input': parameter_setting, 'output': {}},
+                state=State.STARTED
+            ).save()
+
             parameters = get_tool_execute_parameters(tool.input_field_list, parameter_setting, kwargs)
             init_params_default_value = {i["field"]: i.get('default_value') for i in tool.init_field_list}
 
@@ -137,10 +153,10 @@ class ToolTask(BaseTriggerTask):
                 all_params = init_params_default_value | json.loads(rsa_long_decrypt(tool.init_params)) | parameters
             else:
                 all_params = init_params_default_value | parameters
-            executor = ToolExecutor()
+
             result = executor.exec_code(tool.code, all_params)
 
-            result_dict = self.get_result_detail(result)
+            result_dict = _get_result_detail(result)
 
             maxkb_logger.debug(f"Tool execution result: {result}")
 
@@ -155,14 +171,3 @@ class ToolTask(BaseTriggerTask):
                 state=State.FAILURE,
                 run_time=time.time() - start_time
             )
-
-    def get_result_detail(self, result) -> dict[Any, str | Any]:
-        if isinstance(result, dict):
-            result_dict = {k: (str(v)[:500] if len(str(v)) > 500 else v) for k, v in result.items()}
-        elif isinstance(result, list):
-            result_dict = [str(item)[:500] if len(str(item)) > 500 else item for item in result]
-        elif isinstance(result, str):
-            result_dict = result[:500] if len(result) > 500 else result
-        else:
-            result_dict = result
-        return result_dict
