@@ -1,6 +1,6 @@
 export default {
   title: 'Wissen',
-  relatedApplications: 'Verknüpfte Agenten',
+  relatedApplications: 'Verknüpfter Agent',
   document_count: 'Dokumente',
   relatedApp_count: 'verknüpfte Agenten',
   setting: {
@@ -16,8 +16,8 @@ export default {
   },
   delete: {
     confirmTitle: 'Löschung des Wissens bestätigen:',
-    confirmMessage1: 'Dieses Wissen ist mit',
-    confirmMessage2: 'Agent verknüpft. Das Löschen ist irreversibel, bitte vorsichtig vorgehen.',
+    confirmMessage1: 'Dieses Wissen ist verknüpft mit',
+    confirmMessage2: 'Agent. Das Löschen ist irreversibel, bitte vorsichtig vorgehen.',
     resourceCountMessage:
       'Dieses Wissen ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte vorsichtig vorgehen.',
   },
@@ -90,7 +90,7 @@ export default {
     documentList: 'Dokumentenliste',
     loading: 'Wird importiert',
     buttons: {
-      toKnowledge: 'Zurück zur Wissensliste',
+      toKnowledge: 'Zur Wissensliste zurückkehren',
       toDocument: 'Zum Dokument gehen',
     },
   },
@@ -105,12 +105,12 @@ export default {
   },
   transform: {
     button: 'Umwandeln',
-    Title: 'In Workflow-Wissensbasis umwandeln',
+    title: 'In Workflow-Wissensbasis umwandeln',
     message1:
       'Sie können Ihre bestehende Wissensbasis jetzt in eine Workflow-Wissensbasis umwandeln – eine offenere und flexiblere Art, die es Ihnen erlaubt, den gesamten Prozess von verschiedenen Datenquellen bis zum Schreiben in die Wissensbasis autonom per Drag-and-Drop-Node-Operationen zu orchestrieren und so den personalisierten Wissensmanagement-Bedarf Ihres Unternehmens zu erfüllen. Sie können die in unserem Paket verfügbaren Datenquellen und Tools nutzen.',
     message2: 'Die neue Verarbeitungsmethode wird auf alle danach importierten Dokumente angewendet.',
-    Tip: 'Hinweis: Die Umwandlung kann nicht rückgängig gemacht werden.',
-    Confirm:
+    tip: 'Hinweis: Die Umwandlung kann nicht rückgängig gemacht werden.',
+    confirm:
       'Sind Sie sicher, dass Sie in die Workflow-Wissensbasis umwandeln möchten? Diese Aktion kann nicht rückgängig gemacht werden. Bitte vorsichtig vorgehen.',
   },
 }
