@@ -1,5 +1,5 @@
 export default {
-  title: 'Knoten',
+  node: 'Knoten',
   nodeName: 'Knotenname',
   baseComponent: 'Grundkomponente',
   nodeSetting: 'Knoteneinstellungen',
@@ -538,5 +538,5 @@ Sie sind ein Meister der Problemboptimierung, geschickt darin, Benutzerabsichten
   UserPromptPlaceholder: 'Benutzer-Prompt, kann Systemvariablen referenzieren, wie z.B.',
   ExecutionRecord: 'Ausführungsprotokoll',
   initiator: 'Initiator',
-  debug: {},
+  abnormalInformation: 'Abnormale Informationen',
 }
