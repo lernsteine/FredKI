@@ -97,6 +97,7 @@ class ApplicationTask(BaseTriggerTask):
             'chat_user_id': chat_user_id,
             'chat_user_type': ChatUserType.ANONYMOUS_USER.value,
             'asker': {'username': "游客"},
+            'ip_address': kwargs.get('body')['ip_address'],
             'source': {
                 'type': ChatSourceChoices.TRIGGER.value
             },
@@ -114,7 +115,7 @@ class ApplicationTask(BaseTriggerTask):
                 "chat_user_id": chat_user_id,
                 'chat_user_type': ChatUserType.ANONYMOUS_USER.value,
                 'application_id': application_id,
-                'ip_address': parameters['ip_address'],
+                'ip_address': kwargs.get('body')['ip_address'],
                 'source': {
                     'type': ChatSourceChoices.TRIGGER.value
                 },

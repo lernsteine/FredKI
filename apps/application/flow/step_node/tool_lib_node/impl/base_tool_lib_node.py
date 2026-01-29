@@ -265,7 +265,7 @@ class BaseToolLibNodeNode(IToolLibNode):
             result = function_executor.exec_code(tool_lib.code, all_params)
             result_dict = _get_result_detail(result)
             QuerySet(ToolRecord).filter(id=task_record_id).update(
-                state=State.SUCCESS,
+                state=State.SUCCESS.value,
                 run_time=time.time() - start_time,
                 meta={'input': all_params, 'output': result_dict}
             )
@@ -274,8 +274,9 @@ class BaseToolLibNodeNode(IToolLibNode):
         except Exception as e:
             maxkb_logger.error(f"Tool execution error: {traceback.format_exc()}")
             QuerySet(ToolRecord).filter(id=task_record_id).update(
-                state=State.FAILURE,
-                run_time=time.time() - start_time
+                state=State.FAILURE.value,
+                run_time=time.time() - start_time,
+                meta={'input': all_params, 'output': 'Error: ' + str(e)}
             )
 
     def upload_knowledge_file(self, file):
