@@ -536,7 +536,6 @@ Sie sind ein Meister der Problemboptimierung, geschickt darin, Benutzerabsichten
   },
   SystemPromptPlaceholder: 'System-Prompt, kann Systemvariablen referenzieren, wie z.B.',
   UserPromptPlaceholder: 'Benutzer-Prompt, kann Systemvariablen referenzieren, wie z.B.',
-  ExecutionRecord: 'Ausführungsprotokoll',
   initiator: 'Initiator',
   abnormalInformation: 'Abnormale Informationen',
 }
