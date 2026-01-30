@@ -22,7 +22,7 @@
     <div>
       <el-scrollbar>
         <h4 class="title-decoration-1 mb-16 mt-4">
-          {{ $t('workflow.ExecutionRecord') }}
+          {{ $t('common.ExecutionRecord.title') }}
         </h4>
         <el-card class="mb-24" shadow="never" style="--el-card-padding: 12px 16px">
           <el-row :gutter="16" class="lighter">
@@ -103,7 +103,21 @@
         <h4 class="title-decoration-1 mb-16 mt-4">
           {{ $t('chat.executionDetails.title') }}
         </h4>
-        <template v-for="(item, index) in arraySort(detail ?? [], 'index')" :key="index">
+        <template v-if="taskRecordDetails && taskRecordDetails.state === 'TRIGGER_ERROR'">
+          <div class="card-never border-r-6 mb-12">
+            <h5 class="p-8-12">触发器入参</h5>
+            <div class="p-8-12 border-t-dashed lighter">
+              {{ taskRecordDetails.meta.input }}
+            </div>
+          </div>
+          <div class="card-never border-r-6 mb-12">
+            <h5 class="p-8-12">错误信息</h5>
+            <div class="p-8-12 border-t-dashed lighter">
+              {{ taskRecordDetails.meta.err_message }}
+            </div>
+          </div>
+        </template>
+        <template v-else v-for="(item, index) in arraySort(detail ?? [], 'index')" :key="index">
           <ExecutionDetailCard :data="item"> </ExecutionDetailCard>
         </template>
       </el-scrollbar>
@@ -165,7 +179,7 @@ const apiType = computed(() => {
     return 'workspace'
   }
 })
-
+const taskRecordDetails = ref<any>()
 const detail = ref<any>(null)
 
 const loading = ref(false)
@@ -176,7 +190,9 @@ function closeHandle() {}
 watch(
   () => props.currentId,
   () => {
-     getDetail()
+    if (props.currentId) {
+      getDetail()
+    }
   },
 )
 
@@ -195,7 +211,10 @@ function getDetail() {
       props.currentContent?.id,
     )
     .then((ok) => {
-      detail.value = Object.values(ok.data.details)
+      if (ok.data.details) {
+        detail.value = Object.values(ok.data.details)
+      }
+      taskRecordDetails.value = ok.data
     })
 }
 

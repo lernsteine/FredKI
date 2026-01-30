@@ -34,7 +34,6 @@ from common.utils.rsa_util import rsa_long_decrypt, rsa_long_encrypt
 from common.utils.tool_code import ToolExecutor
 from knowledge.models import File, FileSourceType, Knowledge
 from maxkb.const import PROJECT_DIR
-from role_setting.models import Workspace
 from system_manage.models import AuthTargetType, WorkspaceUserResourcePermission
 from system_manage.models.resource_mapping import ResourceMapping
 from system_manage.serializers.resource_mapping_serializers import ResourceMappingSerializer
@@ -533,7 +532,10 @@ class ToolSerializer(serializers.Serializer):
                     is_active=instance.get('is_active'))
             return self.one()
 
+        @transaction.atomic
         def delete(self):
+            from trigger.handler.simple_tools import deploy
+
             self.is_valid(raise_exception=True)
             tool = QuerySet(Tool).filter(id=self.data.get('id')).first()
             if tool.template_id is None and tool.icon != '':
@@ -541,6 +543,16 @@ class ToolSerializer(serializers.Serializer):
             QuerySet(WorkspaceUserResourcePermission).filter(target=tool.id).delete()
             QuerySet(Tool).filter(id=self.data.get('id')).delete()
             ResourceMapping.objects.filter(target_id=self.data.get('id')).delete()
+            QuerySet(ToolRecord).filter(tool_id=self.data.get('id')).delete()
+            trigger_ids = QuerySet(TriggerTask).filter(
+                source_type="TOOL", source_id=self.data.get('id')
+            ).values('trigger_id')
+            QuerySet(TriggerTask).filter(source_type="TOOL", source_id=self.data.get('id')).delete()
+            for trigger_id in trigger_ids:
+                trigger = Trigger.objects.filter(id=trigger_id['trigger_id']).first()
+                if trigger and trigger.is_active:
+                    deploy(trigger, **{})
+
 
         def one(self):
             self.is_one_valid(raise_exception=True)
@@ -906,7 +918,7 @@ class ToolSerializer(serializers.Serializer):
             application_subquery = Application.objects.filter(id=OuterRef('source_id')).values('name')[:1]
             knowledge_subquery = Knowledge.objects.filter(id=OuterRef('source_id')).values('name')[:1]
             trigger_subquery = Trigger.objects.filter(id=OuterRef('source_id')).values('name')[:1]
-            workspace_subquery = Workspace.objects.filter(id=OuterRef('workspace_id')).values('name')[:1]
+            trigger_type_subquery = Trigger.objects.filter(id=OuterRef('source_id')).values('trigger_type')[:1]
 
             query_set = QuerySet(ToolRecord)
             query_set = query_set.filter(
@@ -920,7 +932,19 @@ class ToolSerializer(serializers.Serializer):
                     output_field=CharField()
                 )
             ).annotate(
-                workspace_name=Subquery(workspace_subquery)
+                trigger_type=Case(
+                    When(source_type='TRIGGER', then=Subquery(trigger_type_subquery)),
+                    default=Value(''),
+                    output_field=CharField()
+                )
+            ).annotate(
+                tool_name=Subquery(
+                    Tool.objects.filter(id=OuterRef('tool_id')).values('name')[:1]
+                )
+            ).annotate(
+                tool_icon=Subquery(
+                    Tool.objects.filter(id=OuterRef('tool_id')).values('icon')[:1]
+                )
             )
             if self.data.get('source_type'):
                 query_set = query_set.filter(Q(source_type=self.data.get('source_type', '')))
@@ -939,7 +963,9 @@ class ToolSerializer(serializers.Serializer):
                 lambda record: {
                     **ToolRecordModelSerializer(record).data,
                     'source_name': record.source_name,
-                    'workspace_name': record.workspace_name,
+                    'tool_name': record.tool_name,
+                    'tool_icon': record.tool_icon,
+                    'trigger_type': record.trigger_type,
                 }
             )
 
