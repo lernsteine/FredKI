@@ -4,6 +4,7 @@ export default {
   task: 'Aufgabe',
   triggerTask: 'Auslöser-Aufgabe',
   taskExecution: 'Aufgabenausführung',
+  triggerSource: 'Auslöser-Quelle',
   delete: {
     confirmTitle: 'Löschen des Auslösers bestätigen:',
     confirmTitle2: 'Auslöser?',
