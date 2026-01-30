@@ -127,6 +127,7 @@ export default {
     paragraphRules: 'Absatzregeln',
     writeContent: 'Geschriebener Inhalt',
     cancel: 'Ausführung abbrechen',
+    errLog: 'Fehlerprotokoll',
     cancelExecutionTip: 'Möchten Sie die ausgewählte Aufgabe wirklich abbrechen?',
   },
   KnowledgeSource: {
