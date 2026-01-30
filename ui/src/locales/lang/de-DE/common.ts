@@ -24,7 +24,7 @@ export default {
   add: 'Hinzufügen',
   refresh: 'Aktualisieren',
   search: 'Suchen',
-  clear: 'Löschen / Leeren',
+  clear: 'Leeren',
   upgrade: 'Upgrade',
   createDate: 'Erstellungsdatum',
   createTime: 'Erstellungszeit',
@@ -144,4 +144,8 @@ export default {
     next: 'Nächster Schritt',
   },
   use: 'Verwenden',
+  ExecutionRecord: {
+    title: 'Ausführungsprotokoll',
+    subTitle: 'Ausführungsprotokoll anzeigen',
+  },
 }
