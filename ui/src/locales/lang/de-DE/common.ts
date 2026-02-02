@@ -148,4 +148,5 @@ export default {
     title: 'Ausführungsprotokoll',
     subTitle: 'Ausführungsprotokoll anzeigen',
   },
+  sourceType: 'Quellentyp',
 }
