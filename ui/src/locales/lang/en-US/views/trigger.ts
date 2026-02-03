@@ -2,6 +2,7 @@ export default {
   title: 'Trigger',
   tip: 'When triggered, the system will automatically call task execution based on the input parameters settings',
   task: 'Task',
+  nextTime: 'Next Execution Time',
   triggerTask: 'Trigger Task',
   taskExecution: 'Task Execution',
   triggerSource: 'Trigger Source',
@@ -45,4 +46,6 @@ export default {
     },
   },
   requestParameter: 'Request Parameters',
+  triggerParam: 'Trigger Input Parameters',
+  errorMsg: 'Error Message',
 }

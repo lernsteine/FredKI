@@ -329,6 +329,18 @@
                     <AppIcon iconName="app-operate-log" class="color-secondary"></AppIcon>
                     {{ $t('views.tool.mcpConfig') }}
                   </el-dropdown-item>
+
+                  <el-dropdown-item
+                    @click.stop="openTriggerDrawer(row)"
+                    v-if="
+                      row.tool_type === 'CUSTOM' &&
+                      permissionPrecise.trigger_read() &&
+                      row.is_active
+                    "
+                  >
+                    <AppIcon iconName="app-trigger" class="color-secondary"></AppIcon>
+                    {{ $t('views.trigger.title') }}
+                  </el-dropdown-item>
                   <el-dropdown-item
                     text
                     @click.stop="openResourceMappingDrawer(row)"
@@ -340,7 +352,7 @@
                   <el-dropdown-item
                     text
                     @click.stop="openToolRecordDrawer(row)"
-                    v-if="permissionPrecise.relate_map()"
+                    v-if="permissionPrecise.record()"
                   >
                     <AppIcon iconName="app-schedule-report" class="color-secondary" />
                     {{ $t('common.ExecutionRecord.subTitle') }}
@@ -373,7 +385,11 @@
     <McpToolConfigDialog ref="McpToolConfigDialogRef" @refresh="refresh" />
     <ResourceAuthorizationDrawer :type="SourceTypeEnum.TOOL" ref="ResourceAuthorizationDrawerRef" />
     <ResourceMappingDrawer ref="resourceMappingDrawerRef"></ResourceMappingDrawer>
-    <ToolRecordDrawer ref="toolRecordDrawerRef"/>
+    <ToolRecordDrawer ref="toolRecordDrawerRef" />
+    <ResourceTriggerDrawer
+      ref="resourceTriggerDrawerRef"
+      :source="SourceTypeEnum.TOOL"
+    ></ResourceTriggerDrawer>
   </div>
 </template>
 
@@ -387,6 +403,7 @@ import ToolFormDrawer from '@/views/tool/ToolFormDrawer.vue'
 import McpToolFormDrawer from '@/views/tool/McpToolFormDrawer.vue'
 import DataSourceToolFormDrawer from '@/views/tool/DataSourceToolFormDrawer.vue'
 import ResourceAuthorizationDrawer from '@/components/resource-authorization-drawer/index.vue'
+import ResourceTriggerDrawer from '@/views/trigger/ResourceTriggerDrawer.vue'
 import { t } from '@/locales'
 import { SourceTypeEnum } from '@/enums/common'
 import { resetUrl } from '@/utils/common'
@@ -398,8 +415,8 @@ import UserApi from '@/api/user/user.ts'
 import { MsgSuccess, MsgConfirm, MsgError } from '@/utils/message'
 import permissionMap from '@/permission'
 import McpToolConfigDialog from '@/views/tool/component/McpToolConfigDialog.vue'
-import ResourceMappingDrawer from "@/components/resource_mapping/index.vue";
-import ToolRecordDrawer from "@/views/tool/execution-record/TriggerRecordDrawer.vue";
+import ResourceMappingDrawer from '@/components/resource_mapping/index.vue'
+import ToolRecordDrawer from '@/views/tool/execution-record/TriggerRecordDrawer.vue'
 
 const { user } = useStore()
 
@@ -459,6 +476,11 @@ const MoreFilledPermission = (row: any) => {
     permissionPrecise.value.relate_map() ||
     (row.init_field_list?.length > 0 && permissionPrecise.value.edit())
   )
+}
+
+const resourceTriggerDrawerRef = ref<InstanceType<typeof ResourceTriggerDrawer>>()
+const openTriggerDrawer = (data: any) => {
+  resourceTriggerDrawerRef.value?.open(data)
 }
 
 const ResourceAuthorizationDrawerRef = ref()
@@ -712,7 +734,6 @@ const toolRecordDrawerRef = ref<InstanceType<typeof ToolRecordDrawer>>()
 const openToolRecordDrawer = (data: any) => {
   toolRecordDrawerRef.value?.open(data)
 }
-
 
 onMounted(() => {
   getWorkspaceList()

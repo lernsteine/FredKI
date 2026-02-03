@@ -2,6 +2,7 @@ export default {
   title: '觸發器',
   tip: '觸發時系統將會根據入參設置自動調用任務執行',
   task: '任務',
+  nextTime: '下次執行時間',
   triggerTask: '觸發任務',
   taskExecution: '任務執行',
   triggerSource: '觸發來源',
@@ -45,4 +46,6 @@ export default {
     },
   },
   requestParameter: '請求參數',
+  triggerParam: '觸發器入參',
+  errorMsg: '錯誤信息',
 }
