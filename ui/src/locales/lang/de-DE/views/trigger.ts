@@ -2,6 +2,7 @@ export default {
   title: 'Auslöser',
   tip: 'Bei Auslösung ruft das System automatisch die Ausführung der Aufgabe basierend auf den eingestellten Eingabeparametern auf',
   task: 'Aufgabe',
+  nextTime: 'Nächste Ausführungszeit',
   triggerTask: 'Auslöser-Aufgabe',
   taskExecution: 'Aufgabenausführung',
   triggerSource: 'Auslöser-Quelle',
@@ -45,4 +46,6 @@ export default {
     },
   },
   requestParameter: 'Anforderungsparameter',
+  triggerParam: 'Eingabeparameter des Auslösers',
+  errorMsg: 'Fehlermeldung',
 }
