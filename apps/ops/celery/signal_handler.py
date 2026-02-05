@@ -2,6 +2,7 @@
 #
 import logging
 import os
+import uuid_utils.compat as uuid
 
 from celery import subtask
 from celery.signals import (
@@ -36,13 +37,13 @@ def init_scheduler():
     for job in trigger_jobs:
         parts = job.id.split(':')
         if len(parts) >= 2:
-            trigger_id = parts[1]  # 提取 trigger_id
+            trigger_id = uuid.UUID(parts[1])  # 提取 trigger_id
             trigger_ids_from_jobs.add(trigger_id)
             job_id_to_trigger_id[job.id] = trigger_id
 
     # 获取所有有效的 Trigger ID
     valid_trigger_ids = set(Trigger.objects.filter(
-        id__in=trigger_ids_from_jobs
+        id__in=trigger_ids_from_jobs, is_active=True
     ).values_list('id', flat=True))
 
     # 找出需要删除的 job (trigger 已不存在的)
