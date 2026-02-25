@@ -1,5 +1,4 @@
 export default {
-  title: 'Chat',
   mine: 'Meine',
   logoutContent: 'Das Abmelden führt nicht zum Verlust von Daten. Sie können sich weiterhin in dieses Konto einloggen.',
   confirmModification: 'Änderung bestätigen',
@@ -144,4 +143,6 @@ export default {
     questionPadded: 'Erweiterte Frage',
   },
   editTitle: 'Titel bearbeiten',
+  share: 'Teilen',
+  copyLinkText: 'Link kopieren',
 }
