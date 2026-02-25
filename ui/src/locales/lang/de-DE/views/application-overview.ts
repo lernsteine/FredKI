@@ -4,8 +4,6 @@ export default {
     publicAccessLink: 'Öffentliche URL',
     openText: 'Ein',
     closeText: 'Aus',
-    copyLinkText: 'Link kopieren',
-    refreshLinkText: 'Link aktualisieren',
     demo: 'Vorschau',
     embedInWebsite: 'Einbettungscode erhalten',
     accessControl: 'Zugriffssteuerung',
