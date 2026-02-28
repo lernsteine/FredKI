@@ -1,5 +1,4 @@
 export default {
-  title: 'Dokument',
   uploadDocument: 'Dokument hochladen',
   importDocument: 'Dokument importieren',
   syncDocument: 'Dokument synchronisieren',
@@ -102,6 +101,7 @@ export default {
     key: 'Tag',
     value: 'Wert',
     addTag: 'Tag hinzufügen',
+    noTag: 'Kein Tag',
     setting: 'Tag-Einstellungen',
     create: 'Tag erstellen',
     createValue: 'Tag-Wert erstellen',
