@@ -152,6 +152,7 @@ export default {
     management: 'Verwalten',
   },
   default_login: 'Standard-Anmeldemethode',
+  login_method: 'Anmeldemethode',
   display_code: 'Anmelde-Verifizierungscode-Einstellung für Konten',
   loginFailed: 'Anmeldung fehlgeschlagen',
   loginFailedMessage: 'Verifizierungscode nach zweimaligem Fehlschlag anzeigen',
