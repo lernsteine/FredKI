@@ -237,29 +237,10 @@ def to_stream_response_simple(stream_event):
 
 
 tool_message_json_template = """
-```json
 %s
-```
 """
 
-tool_message_complete_template = """
-<details>
-    <summary>
-        <strong>Called MCP Tool: <em>%s</em></strong>
-    </summary>
-
-**Input:**
-%s
-
-**Output:**
-%s
-
-</details>
-
-"""
-
-
-def generate_tool_message_complete(name, input_content, output_content):
+def generate_tool_message_complete(icon, name, input_content, output_content):
     """生成包含输入和输出的工具消息模版"""
     # 格式化输入
     if '```' not in input_content:
@@ -276,8 +257,16 @@ def generate_tool_message_complete(name, input_content, output_content):
             output_formatted = output_content
     else:
         output_formatted = output_content
-
-    return tool_message_complete_template % (name, input_formatted, output_formatted)
+    content = {
+        "icon": icon,
+        "title": name,
+        "type": "simple-tool-calls",
+        "content": {
+            "input": input_formatted,
+            "output": output_formatted
+        }
+    }
+    return f'<tool_calls_render>{json.dumps(content)}</tool_calls_render>'
 
 
 # 全局单例事件循环
@@ -341,6 +330,7 @@ async def _initialize_skills(mcp_servers, temp_dir):
                 continue
             # get_bytes 可能也涉及 IO，也用 sync_to_async 包装
             file_bytes = await sync_to_async(file.get_bytes)()
+            params = skill_file.get('params', {})
             with zipfile.ZipFile(io.BytesIO(file_bytes), 'r') as zip_ref:
                 members = [
                     m for m in zip_ref.namelist()
@@ -350,6 +340,25 @@ async def _initialize_skills(mcp_servers, temp_dir):
                     if ".." in member or member.startswith("/"):
                         raise ValueError(f"非法路径: {member}")
                 zip_ref.extractall(skills_dir, members=members)
+
+                # 获取技能解压后的顶级目录名
+                top_level_dirs = set()
+                for member in members:
+                    parts = member.split('/')
+                    if parts[0]:
+                        top_level_dirs.add(parts[0])
+
+                # 将 params 写入每个顶级目录下的 .env 文件
+                if params:
+                    env_lines = []
+                    for key, value in params.items():
+                        # 对含空格或特殊字符的值加引号
+                        env_lines.append(f'{key}={value}')
+                    env_content = '\n'.join(env_lines) + '\n'
+                    for top_dir in top_level_dirs:
+                        env_path = os.path.join(skills_dir, top_dir, '.env')
+                        with open(env_path, 'w', encoding='utf-8') as f:
+                            f.write(env_content)
 
         os.system("chmod -R g+rx " + temp_dir)  # 确保技能目录可访问
 
@@ -472,6 +481,7 @@ async def _yield_mcp_response(chat_model, message_list, mcp_servers, mcp_output_
                     except Exception as e:
                         tool_result = chunk[0].content
                     content = generate_tool_message_complete(
+                        tool_info.get('icon', ''),
                         tool_info['name'],
                         tool_info['input'],
                         tool_result
@@ -501,6 +511,7 @@ async def _yield_mcp_response(chat_model, message_list, mcp_servers, mcp_output_
 
 async def save_tool_record(tool_id, tool_info, tool_result, source_id, source_type):
     tool = await sync_to_async(lambda: QuerySet(Tool).filter(id=tool_id).first())()
+    tool_info['icon'] = tool.icon
     tool_record = ToolRecord(
         id=uuid.uuid7(),
         workspace_id=tool.workspace_id,
@@ -560,7 +571,8 @@ async def anext_async(agen):
 target_source_node_mapping = {
     'TOOL': {'tool-lib-node': lambda n: [n.get('properties').get('node_data').get('tool_lib_id')],
              'ai-chat-node': lambda n: [*(n.get('properties').get('node_data').get('mcp_tool_ids') or []),
-                                        *(n.get('properties').get('node_data').get('tool_ids') or [])],
+                                        *(n.get('properties').get('node_data').get('tool_ids') or []),
+                                        *(n.get('properties').get('node_data').get('skill_tool_ids') or [])],
              'mcp-node': lambda n: [n.get('properties').get('node_data').get('mcp_tool_id')]
              },
     'MODEL': {'ai-chat-node': lambda n: [n.get('properties').get('node_data').get('model_id')],
@@ -615,10 +627,16 @@ def get_workflow_resource(workflow, node_handle):
 
 
 application_instance_field_call_dict = {
-    'TOOL': [lambda instance: instance.mcp_tool_ids or [], lambda instance: instance.tool_ids or []],
-    'MODEL': [lambda instance: [instance.model_id] if instance.model_id else [],
-              lambda instance: [instance.tts_model_id] if instance.tts_model_id else [],
-              lambda instance: [instance.stt_model_id] if instance.stt_model_id else []]
+    'TOOL': [
+        lambda instance: instance.mcp_tool_ids or [],
+        lambda instance: instance.skill_tool_ids or [],
+        lambda instance: instance.tool_ids or []
+    ],
+    'MODEL': [
+        lambda instance: [instance.model_id] if instance.model_id else [],
+        lambda instance: [instance.tts_model_id] if instance.tts_model_id else [],
+        lambda instance: [instance.stt_model_id] if instance.stt_model_id else []
+    ]
 }
 knowledge_instance_field_call_dict = {
     'MODEL': [lambda instance: [instance.embedding_model_id] if instance.embedding_model_id else []],
@@ -666,8 +684,9 @@ def get_tool_id_list(workflow):
         elif node.get('type') == 'ai-chat-node':
             node_data = node.get('properties', {}).get('node_data', {})
             mcp_tool_ids = node_data.get('mcp_tool_ids') or []
+            skill_tool_ids = node_data.get('skill_tool_ids') or []
             tool_ids = node_data.get('tool_ids') or []
-            for _id in mcp_tool_ids + tool_ids:
+            for _id in mcp_tool_ids + tool_ids + skill_tool_ids:
                 _result.append(_id)
         elif node.get('type') == 'mcp-node':
             mcp_tool_id = node.get('properties', {}).get('node_data', {}).get('mcp_tool_id')
