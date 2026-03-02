@@ -3,13 +3,9 @@ export default {
   all: 'Alle',
   createTool: 'Tool erstellen',
   editTool: 'Tool bearbeiten',
-  createMcpTool: 'MCP erstellen',
-  editMcpTool: 'MCP bearbeiten',
   copyTool: 'Tool kopieren',
-  copyMcpTool: 'MCP kopieren',
   importTool: 'Tool importieren',
-  settingTool: 'Tool konfigurieren',
-  mcpConfig: 'MCP-Dienst-Konfiguration',
+  settingTool: 'Tool einstellen',
   updatedVersion: 'Aktualisierte Version',
   dataSource: {
     title: 'Datenquelle',
@@ -24,28 +20,49 @@ export default {
     createFromToolStore: 'Aus Tool-Store erstellen',
     internal: 'Im System integriert',
     recommend: 'Empfohlen',
-    webSearch: 'Websuche',
+    webSearch: 'Web-Suche',
     databaseQuery: 'Datenbankabfrage',
     image: 'Bild',
     developer: 'Entwickler',
     communication: 'Kommunikation',
     searchResult: '{count} Suchergebnisse für',
-    confirmTip: 'Sind Sie sicher, dass Sie das Tool aktualisieren möchten: ',
-    updateStoreToolMessage: 'Das Aktualisieren von Tools kann sich auf genutzte Ressourcen auswirken, gehen Sie vorsichtig vor.',
+    confirmTip: 'Tool wirklich aktualisieren: ',
+    updateStoreToolMessage: 'Das Aktualisieren von Tools kann verwendete Ressourcen beeinflussen, bitte vorsichtig vorgehen.',
+  },
+  mcp: {
+    title: 'MCP-Dienst',
+    label: 'MCP-Server-Konfiguration',
+    placeholder: 'Bitte MCP-Server-Konfiguration eingeben',
+    tip: 'Unterstützt nur SSE- und streambare HTTP-Aufrufmethoden',
+    requiredMessage: 'Bitte MCP-Server-Konfiguration eingeben',
+    createMcpTool: 'MCP erstellen',
+    editMcpTool: 'MCP bearbeiten',
+    copyMcpTool: 'MCP kopieren',
+    mcpConfig: 'MCP-Dienst-Konfiguration',
+  },
+  skill: {
+    title: 'Skill',
+    copySkillTool: 'Skill kopieren',
+    createSkillTool: 'Skill erstellen',
+    editSkillTool: 'Skill bearbeiten',
+    initParamPlaceholder: 'Parameter, die beim Aktivieren des Skills konfiguriert werden müssen',
+    skillFile: 'Skill-Datei',
+    reUpload: 'Erneut hochladen',
   },
   tip: {
-    saveMessage: 'Nicht gespeicherte Änderungen gehen verloren. Sind Sie sicher, dass Sie beenden möchten?',
+    saveMessage: 'Nicht gespeicherte Änderungen gehen verloren. Möchten Sie wirklich beenden?',
   },
   delete: {
     confirmTitle: 'Löschung des Tools bestätigen:',
     confirmMessage:
-      'Das Löschen dieses Tools führt zu Fehlern bei Agenten, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
-    resourceCountMessage: 'Dieses Tool ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte vorsichtig vorgehen.',
+      'Das Löschen dieses Tools führt zu Fehlern in Anwendungen, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
+    resourceCountMessage:
+      'Dieses Tool ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte vorsichtig vorgehen.',
   },
   disabled: {
     confirmTitle: 'Deaktivierung des Tools bestätigen:',
     confirmMessage:
-      'Das Deaktivieren dieses Tools führt zu Fehlern bei Agenten, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
+      'Das Deaktivieren dieses Tools führt zu Fehlern in Anwendungen, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
   },
   form: {
     toolName: {
@@ -57,12 +74,6 @@ export default {
       name: 'MCP-Name',
       placeholder: 'Bitte MCP-Namen eingeben',
       requiredMessage: 'Bitte MCP-Namen eingeben',
-    },
-    toolDescription: {
-      placeholder: 'Bitte eine Beschreibung des Tools eingeben',
-    },
-    mcpDescription: {
-      placeholder: 'Bitte eine Beschreibung des MCP eingeben',
     },
     paramName: {
       label: 'Parametername',
@@ -76,29 +87,19 @@ export default {
       label: 'Quelle',
       reference: 'Referenzparameter',
     },
-    required: {
-      label: 'Erforderlich',
-    },
     param: {
-      paramInfo1: 'Wird bei der Tool-Nutzung angezeigt',
-      paramInfo2: 'Wird bei der Tool-Nutzung nicht angezeigt',
+      paramInfo1: 'Wird bei der Verwendung des Tools angezeigt',
+      paramInfo2: 'Wird bei der Verwendung des Tools nicht angezeigt',
       code: 'Inhalt (Python)',
       selectPlaceholder: 'Bitte Parameter auswählen',
       inputPlaceholder: 'Bitte Parameterwerte eingeben',
-    },
-    mcp: {
-      title: 'MCP-Dienst',
-      label: 'MCP-Server-Konfiguration',
-      placeholder: 'Bitte MCP-Server-Konfiguration eingeben',
-      tip: 'Unterstützt nur SSE- und Streamable-HTTP-Aufrufmethoden',
-      requiredMessage: 'Bitte MCP-Server-Konfiguration eingeben',
     },
     debug: {
       run: 'Ausführen',
       output: 'Ausgabe',
       runResult: 'Ausführungsergebnis',
       runSuccess: 'Erfolgreich',
-      runFailed: 'Fehlgeschlagen',
+      runFailed: 'Ausführung fehlgeschlagen',
     },
   },
 }
