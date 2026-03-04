@@ -497,7 +497,7 @@ h5 {
 }
 
 .info-tag {
-  background: var(--app-text-color-light-1);
+  background: rgba(var(--el-text-color-primary-rgb), 0.1);
   color: var(--app-text-color-secondary);
   border: none;
 }
