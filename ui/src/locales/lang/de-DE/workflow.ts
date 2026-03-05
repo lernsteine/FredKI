@@ -40,6 +40,7 @@ export default {
     copyError: 'Knoten bereits kopiert',
     paramErrorMessage: 'Parameter existiert bereits: ',
     saveMessage: 'Aktuelle Änderungen wurden nicht gespeichert. Vor dem Beenden speichern?',
+    searchPlaceholder: 'Bitte Knotenname eingeben',
   },
   delete: {
     confirmTitle: 'Bestätigen Sie die Löschung dieses Knotens?',
