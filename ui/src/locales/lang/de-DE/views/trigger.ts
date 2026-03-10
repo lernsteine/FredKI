@@ -26,6 +26,10 @@ export default {
     sunday: 'Sonntag',
     hours: 'Stunden',
     minutes: 'Minuten',
+    cronExpression: 'Cron-Ausdruck',
+    switchCycle: 'Zum Auslösezyklus wechseln',
+    switchCron: 'Zum Cron-Ausdruck wechseln',
+    placeholder: 'Bitte Cron-Ausdruck eingeben (z. B. 0 0 1 * *)'
   },
   type: {
     scheduled: 'Zeitgesteuerter Auslöser',
