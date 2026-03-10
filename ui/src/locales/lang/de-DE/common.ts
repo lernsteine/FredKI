@@ -38,6 +38,7 @@ export default {
   paramSetting: 'Parameter-Einstellungen',
   name: 'Name',
   creator: 'Ersteller',
+  createdIn: 'erstellt in',
   author: 'Autor',
   debug: 'Debug',
   required: 'Erforderlich',
