@@ -523,6 +523,7 @@ Sie sind ein Meister der Problemboptimierung, geschickt darin, Benutzerabsichten
     contain: 'Enthält',
     not_contain: 'Enthält nicht',
     eq: 'Gleich',
+    not_eq: 'Nicht gleich',
     ge: 'Größer oder gleich',
     gt: 'Größer als',
     le: 'Kleiner oder gleich',
