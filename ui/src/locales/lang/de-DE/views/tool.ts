@@ -27,7 +27,7 @@ export default {
     communication: 'Kommunikation',
     searchResult: '{count} Suchergebnisse für',
     confirmTip: 'Tool wirklich aktualisieren: ',
-    updateStoreToolMessage: 'Das Aktualisieren von Tools kann verwendete Ressourcen beeinflussen, bitte vorsichtig vorgehen.',
+    updateStoreToolMessage: 'Das Aktualisieren von Tools kann aktuell genutzte Ressourcen beeinflussen, bitte vorsichtig vorgehen.',
   },
   mcp: {
     title: 'MCP-Dienst',
@@ -41,12 +41,12 @@ export default {
     mcpConfig: 'MCP-Dienst-Konfiguration',
   },
   skill: {
-    title: 'Skill',
-    copySkillTool: 'Skill kopieren',
-    createSkillTool: 'Skill erstellen',
-    editSkillTool: 'Skill bearbeiten',
-    initParamPlaceholder: 'Parameter, die beim Aktivieren des Skills konfiguriert werden müssen',
-    skillFile: 'Skill-Datei',
+    title: 'Fähigkeiten',
+    copySkillTool: 'Fähigkeit kopieren',
+    createSkillTool: 'Fähigkeit erstellen',
+    editSkillTool: 'Fähigkeit bearbeiten',
+    initParamPlaceholder: 'Parameter, die beim Aktivieren der Fähigkeit konfiguriert werden müssen',
+    skillFile: 'Fähigkeits-Datei',
     reUpload: 'Erneut hochladen',
   },
   tip: {
@@ -55,14 +55,14 @@ export default {
   delete: {
     confirmTitle: 'Löschung des Tools bestätigen:',
     confirmMessage:
-      'Das Löschen dieses Tools führt zu Fehlern in Anwendungen, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
+      'Das Löschen dieses Tools führt zu Fehlern in Agenten, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
     resourceCountMessage:
       'Dieses Tool ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte vorsichtig vorgehen.',
   },
   disabled: {
     confirmTitle: 'Deaktivierung des Tools bestätigen:',
     confirmMessage:
-      'Das Deaktivieren dieses Tools führt zu Fehlern in Anwendungen, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
+      'Das Deaktivieren dieses Tools führt zu Fehlern in Agenten, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
   },
   form: {
     toolName: {
