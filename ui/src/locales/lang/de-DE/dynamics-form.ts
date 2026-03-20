@@ -1,4 +1,5 @@
 export default {
+  title: 'Eingabefeld',
   input_type_list: {
     TextInput: 'Eingabe',
     PasswordInput: 'Passwort',
@@ -6,72 +7,73 @@ export default {
     SwitchInput: 'Schalter',
     SingleSelect: 'Einfachauswahl',
     MultiSelect: 'Mehrfachauswahl',
-    DatePicker: 'Datumsauswahl',
+    DatePicker: 'Datums-Auswahl',
     JsonInput: 'JSON',
     RadioCard: 'Radio-Karte',
-    RadioRow: 'Radio-Zeile',
+    RadioRow: 'Radio-Reihe',
     UploadInput: 'Datei-Upload',
     TextareaInput: 'Mehrzeilige Eingabe',
-    MultiRow: 'Mehrzeilige Tabelle',
+    MultiRow: 'Mehrere Zeilen',
+    Model: 'Modell',
   },
   default: {
     label: 'Standardwert',
-    placeholder: 'Bitte geben Sie einen Standardwert ein',
-    requiredMessage: ' ist eine erforderliche Eigenschaft',
+    placeholder: 'Bitte Standardwert eingeben',
+    requiredMessage: ' ist ein Pflichtfeld',
     show: 'Standardwert anzeigen',
   },
   tip: {
     requiredMessage: 'darf nicht leer sein',
-    jsonMessage: 'Falsches JSON-Format',
+    jsonMessage: 'Ungültiges JSON-Format',
   },
   paramForm: {
     field: {
       label: 'Parameter',
-      placeholder: 'Bitte geben Sie einen Parameter ein',
-      requiredMessage: 'Parameter ist eine erforderliche Eigenschaft',
-      requiredMessage2: 'Nur Buchstaben, Zahlen und Unterstriche sind erlaubt',
+      placeholder: 'Bitte Parameter eingeben',
+      requiredMessage: 'Parameter ist ein Pflichtfeld',
+      requiredMessage2: 'Nur Buchstaben, Zahlen und Unterstriche erlaubt',
     },
     name: {
       label: 'Name',
-      placeholder: 'Bitte geben Sie einen Namen ein',
-      requiredMessage: 'Name ist eine erforderliche Eigenschaft',
+      placeholder: 'Bitte Namen eingeben',
+      requiredMessage: 'Name ist ein Pflichtfeld',
     },
     tooltip: {
       label: 'Tooltip',
-      placeholder: 'Bitte geben Sie einen Tooltip ein',
+      placeholder: 'Bitte Tooltip eingeben',
     },
     required: {
-      label: 'Erforderlich',
-      requiredMessage: 'Erforderlich ist eine erforderliche Eigenschaft',
+      label: 'Pflichtfeld',
+      requiredMessage: 'Pflichtfeld ist ein Pflichtfeld',
     },
     input_type: {
       label: 'Typ',
-      placeholder: 'Bitte wählen Sie einen Typ aus',
-      requiredMessage: 'Typ ist eine erforderliche Eigenschaft',
+      placeholder: 'Bitte Typ auswählen',
+      requiredMessage: 'Typ ist ein Pflichtfeld',
     },
   },
   DatePicker: {
     placeholder: 'Datum auswählen',
     year: 'Jahr',
     month: 'Monat',
-    date: 'Tag',
+    date: 'Datum',
     datetime: 'Datum und Uhrzeit',
     dataType: {
-      label: 'Datumstyp',
-      placeholder: 'Bitte wählen Sie einen Datumstyp aus',
+      label: 'Datentyp',
+      placeholder: 'Bitte Datentyp auswählen',
     },
     format: {
       label: 'Format',
-      placeholder: 'Bitte wählen Sie ein Format aus',
+      placeholder: 'Bitte Format auswählen',
     },
   },
   Select: {
     label: 'Optionswert',
-    placeholder: 'Bitte geben Sie einen Optionswert ein',
+    placeholder: 'Bitte Optionswert eingeben',
   },
   tag: {
-    label: 'Tag',
-    placeholder: 'Bitte geben Sie ein Optionslabel ein',
+    label: 'Bezeichnung',
+    placeholder: 'Bitte Bezeichnung eingeben',
   },
   Slider: {
     showInput: {
@@ -91,18 +93,18 @@ export default {
   TextInput: {
     length: {
       label: 'Textlänge',
-      minRequired: 'Minimallänge ist erforderlich',
-      maxRequired: 'Maximallänge ist erforderlich',
+      minRequired: 'Minimale Länge ist erforderlich',
+      maxRequired: 'Maximale Länge ist erforderlich',
       requiredMessage1: 'Länge muss zwischen',
       requiredMessage2: 'und',
       requiredMessage3: 'Zeichen liegen',
-      requiredMessage4: 'Textlänge ist ein erforderlicher Parameter',
+      requiredMessage4: 'Textlänge ist ein Pflichtparameter',
     },
   },
   UploadInput: {
     limit: {
-      label: 'Maximale Anzahl von Dateien pro Upload',
-      required: 'Maximale Anzahl von Dateien ist erforderlich',
+      label: 'Maximale Anzahl Dateien pro Upload',
+      required: 'Maximale Dateianzahl ist erforderlich',
     },
     max_file_size: {
       label: 'Maximale Dateigröße (MB)',
@@ -115,14 +117,11 @@ export default {
   },
   AssignmentMethod: {
     label: 'Zuweisungsmethode',
-    custom: {
-      label: 'Benutzerdefiniert',
-    },
     ref_variables: {
       label: 'Referenzvariablen',
-      popover: 'Variablenwerte müssen dem',
-      json_format: 'JSON-Format entsprechen',
-      popover_label: 'Label',
+      popover: 'Variablenwerte müssen dem Format entsprechen',
+      json_format: 'JSON-Format',
+      popover_label: 'Bezeichnung',
       popover_value: 'Wert',
       popover_default: 'Ist Standard',
     },
