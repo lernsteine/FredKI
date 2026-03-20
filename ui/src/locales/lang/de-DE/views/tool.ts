@@ -42,9 +42,9 @@ export default {
   },
   skill: {
     title: 'Fähigkeiten',
-    copySkillTool: 'Fähigkeit kopieren',
-    createSkillTool: 'Fähigkeit erstellen',
-    editSkillTool: 'Fähigkeit bearbeiten',
+    copySkillTool: 'Fähigkeiten kopieren',
+    createSkillTool: 'Fähigkeiten erstellen',
+    editSkillTool: 'Fähigkeiten bearbeiten',
     initParamPlaceholder: 'Parameter, die beim Aktivieren der Fähigkeit konfiguriert werden müssen',
     skillFile: 'Fähigkeits-Datei',
     reUpload: 'Erneut hochladen',
