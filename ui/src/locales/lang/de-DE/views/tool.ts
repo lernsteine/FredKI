@@ -7,6 +7,10 @@ export default {
   importTool: 'Tool importieren',
   settingTool: 'Tool einstellen',
   updatedVersion: 'Aktualisierte Version',
+  toolWorkflow: {
+    creatToolWorkflow: 'Workflow erstellen',
+    toActiveTip: 'Kann nicht aktiviert werden. Bitte zuerst den Workflow veröffentlichen.',
+  },
   dataSource: {
     title: 'Datenquelle',
     createDataSource: 'Datenquelle erstellen',
@@ -66,14 +70,18 @@ export default {
   },
   form: {
     toolName: {
-      name: 'Tool-Name',
+      label: 'Tool-Name',
       placeholder: 'Bitte Tool-Namen eingeben',
       requiredMessage: 'Bitte Tool-Namen eingeben',
     },
     mcpName: {
-      name: 'MCP-Name',
       placeholder: 'Bitte MCP-Namen eingeben',
       requiredMessage: 'Bitte MCP-Namen eingeben',
+    },
+    workflowName: {
+      label: 'Workflow-Name',
+      placeholder: 'Bitte Workflow-Namen eingeben',
+      requiredMessage: 'Bitte Workflow-Namen eingeben',
     },
     paramName: {
       label: 'Parametername',
