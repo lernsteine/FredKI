@@ -61,6 +61,7 @@ export default {
     ReferencingRequired: 'Referenzierte Variable ist erforderlich',
     ReferencingError: 'Ungültige referenzierte Variable',
     NoReferencing: 'Referenzierte Variable existiert nicht',
+    placeholder_key: 'Schlüssel eingeben',
     placeholder: 'Bitte wählen Sie eine Variable aus',
     inputPlaceholder: 'Bitte Variable eingeben',
     loop: 'Schleifenvariable',
@@ -323,6 +324,7 @@ Sie sind ein Meister der Problemboptimierung, geschickt darin, Benutzerabsichten
       Strategy: 'Aggregationsstrategie',
       placeholder: 'Den ersten nicht-null Wert jeder Gruppe zurückgeben',
       placeholder1: 'Die Menge der Variablen jeder Gruppe zurückgeben',
+      placeholder2: 'Das Dictionary der Variablen jeder Gruppe zurückgeben',
       group: {
         noneError: 'Name darf nicht leer sein',
         dupError: 'Name darf nicht dupliziert werden',
