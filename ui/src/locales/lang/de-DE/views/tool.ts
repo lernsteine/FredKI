@@ -10,6 +10,7 @@ export default {
   toolWorkflow: {
     creatToolWorkflow: 'Workflow erstellen',
     toActiveTip: 'Kann nicht aktiviert werden. Bitte zuerst den Workflow veröffentlichen.',
+    debugResult: 'Debug-Ergebnisse',
   },
   dataSource: {
     title: 'Datenquelle',
