@@ -1,5 +1,4 @@
 export default {
-  title: 'Eingabefeld',
   input_type_list: {
     TextInput: 'Eingabe',
     PasswordInput: 'Passwort',
@@ -15,6 +14,7 @@ export default {
     TextareaInput: 'Mehrzeilige Eingabe',
     MultiRow: 'Mehrere Zeilen',
     Model: 'Modell',
+    Knowledge: 'Wissen',
   },
   default: {
     label: 'Standardwert',
