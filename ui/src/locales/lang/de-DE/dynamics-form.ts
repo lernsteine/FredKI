@@ -51,6 +51,10 @@ export default {
       placeholder: 'Bitte Typ auswählen',
       requiredMessage: 'Typ ist ein Pflichtfeld',
     },
+    desc: {
+      label: 'Beschreibung',
+      placeholder: 'Bitte Beschreibung eingeben',
+    },
   },
   DatePicker: {
     placeholder: 'Datum auswählen',
