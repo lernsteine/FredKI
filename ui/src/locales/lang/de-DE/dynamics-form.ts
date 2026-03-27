@@ -131,13 +131,13 @@ export default {
     },
   },
   ModelConstructor: {
-    optionalModel: {
-      label: 'Optionales Modell',
-      required: 'Bitte optionale Modelle auswählen',
-    },
-    defaultModel: {
-      label: 'Standardmodell',
-      required: 'Bitte Standardmodell auswählen',
-    },
+    optionalModel: 'Optionales Modell',
+    defaultModel: 'Standardmodell',
+    modelPlaceholder: 'Bitte Modell eingeben',
+  },
+  KnowledgeConstructor: {
+    optionalModel: 'Optionales Modell',
+    defaultModel: 'Standardmodell',
+    modelPlaceholder: 'Bitte Modell eingeben',
   },
 }
