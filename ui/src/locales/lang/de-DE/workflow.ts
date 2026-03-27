@@ -506,7 +506,7 @@ Sie sind ein Meister der Problemboptimierung, geschickt darin, Benutzerabsichten
       expression: {
         label: 'Ausdruck',
         placeholder: 'Bitte Ausdruck eingeben',
-        tooltip: 'Bitte JSON-Path-Ausdrücke verwenden, um Variablen zu teilen, z.B.: $.store.book',
+        tooltip: 'Bitte JSON-Path-Ausdrücke verwenden, um Variablen zu teilen, z.B.: $.store.book <a href="https://pypi.org/project/jsonpath-ng/1.8.0/" target="_blank" class="expression_tip">Klicken Sie für Details ➜ pypi.org</a>',
       },
     },
     parameterExtractionNode: {
