@@ -7,7 +7,13 @@ export default {
   importTool: 'Tool importieren',
   settingTool: 'Tool einstellen',
   updatedVersion: 'Aktualisierte Version',
+  generateCodeDialog: {
+    generatePrompt: 'Python-Code generieren',
+    placeholder: 'Bitte Thema eingeben',
+    title: 'Der Python-Code wird hier angezeigt',
+  },
   toolWorkflow: {
+    title: 'Workflow',
     creatToolWorkflow: 'Workflow erstellen',
     toActiveTip: 'Kann nicht aktiviert werden. Bitte zuerst den Workflow veröffentlichen.',
     debugResult: 'Debug-Ergebnisse',
