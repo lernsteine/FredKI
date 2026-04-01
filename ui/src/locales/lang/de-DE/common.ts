@@ -113,6 +113,7 @@ export default {
   username: 'Benutzername',
   importCreate: 'Importieren und erstellen',
   detail: 'Details',
+  total: 'Gesamt',
   selected: 'Ausgewählt',
   notFound: {
     title: '404',
