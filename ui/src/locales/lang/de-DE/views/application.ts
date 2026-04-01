@@ -18,6 +18,7 @@ export default {
   },
   delete: {
     confirmTitle: 'Möchten Sie diesen Agenten wirklich löschen: ',
+    confirmTitle2: 'Agenten?',
     confirmMessage:
       'Nach dem Löschen dieses Agenten stehen seine Dienste nicht mehr zur Verfügung. Bitte vorsichtig vorgehen.',
     resourceCountMessage:
