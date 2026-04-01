@@ -12,10 +12,11 @@ export default {
       'Die Community-Edition unterstützt bis zu 50 Wissensbasen. Für mehr Wissensbasen upgraden Sie bitte zur Professional Edition.',
     syncSuccess: 'Synchronisierungsaufgabe erfolgreich gesendet',
     updateModeMessage:
-      'Nach Änderung des Vektormodells für das Wissen muss das Wissen neu vektorisiert werden. Möchten Sie das Speichern fortsetzen?',
+      'Nach Änderung des Vektormodells für das Wissen müssen Sie das Wissen vektorisieren. Möchten Sie trotzdem speichern?',
   },
   delete: {
     confirmTitle: 'Löschung des Wissens bestätigen:',
+    confirmTitle2: 'Wissensbasen?',
     confirmMessage1: 'Dieses Wissen ist verknüpft mit',
     confirmMessage2: 'Agent. Das Löschen ist irreversibel, bitte vorsichtig vorgehen.',
     resourceCountMessage:
@@ -30,56 +31,56 @@ export default {
     yuqueKnowledge: 'Yuque-Wissen',
     generalInfo: 'Lokale Dokumente hochladen',
     webInfo: 'Textdaten von einer Website synchronisieren',
-    larkInfo: 'Wissen durch Lark-Dokumente aufbauen',
-    yuqueInfo: 'Wissen durch Yuque-Dokumente aufbauen',
+    larkInfo: 'Wissen über Lark-Dokumente aufbauen',
+    yuqueInfo: 'Wissen über Yuque-Dokumente aufbauen',
     createGeneralKnowledge: 'Allgemeines Wissen erstellen',
     createWebKnowledge: 'Web-Wissen erstellen',
     createLarkKnowledge: 'Lark-Wissen erstellen',
     createYuqueKnowledge: 'Yuque-Wissen erstellen',
     createWorkflowKnowledge: 'Workflow-Wissen erstellen',
-    workflowInfo: 'Wissensbasis durch benutzerdefinierte Workflow-Methoden aufbauen',
+    workflowInfo: 'Aufbau einer Wissensbasis über benutzerdefinierte Workflow-Methoden',
   },
   form: {
     knowledgeName: {
       label: 'Name',
-      placeholder: 'Bitte geben Sie den Namen des Wissens ein',
-      requiredMessage: 'Bitte geben Sie den Namen des Wissens ein',
+      placeholder: 'Bitte Namen des Wissens eingeben',
+      requiredMessage: 'Bitte Namen des Wissens eingeben',
     },
     knowledgeDescription: {
       label: 'Beschreibung',
       placeholder:
-        'Beschreiben Sie den Inhalt des Wissens. Eine detaillierte Beschreibung hilft der KI, den Inhalt besser zu verstehen und verbessert die Genauigkeit sowie Trefferquote beim Abruf.',
-      requiredMessage: 'Bitte geben Sie die Beschreibung des Wissens ein',
+        'Beschreiben Sie den Inhalt des Wissens. Eine detaillierte Beschreibung hilft der KI, den Inhalt besser zu verstehen und die Genauigkeit der Inhaltsabrufung sowie die Trefferquote zu verbessern.',
+      requiredMessage: 'Bitte Beschreibung des Wissens eingeben',
     },
     EmbeddingModel: {
       label: 'Einbettungsmodell',
-      placeholder: 'Bitte wählen Sie ein Einbettungsmodell aus',
-      requiredMessage: 'Bitte wählen Sie das Einbettungsmodell aus',
+      placeholder: 'Bitte Einbettungsmodell auswählen',
+      requiredMessage: 'Bitte Einbettungsmodell auswählen',
     },
     source_url: {
       label: 'Web-Root-URL',
-      placeholder: 'Bitte geben Sie die Web-Root-URL ein',
-      requiredMessage: 'Bitte geben Sie die Web-Root-URL ein',
+      placeholder: 'Bitte Web-Root-URL eingeben',
+      requiredMessage: 'Bitte Web-Root-URL eingeben',
     },
     selector: {
       label: 'Selektor',
       placeholder: 'Standard ist body, kann .classname/#idname/tagname eingegeben werden',
     },
     file_count_limit: {
-      label: 'Maximale Anzahl hochgeladener Dateien auf einmal',
+      label: 'Maximale Anzahl Dateien pro Upload',
     },
     file_size_limit: {
-      label: 'Maximale Größe jedes Dokuments (MB)',
-      placeholder: 'Empfehlung basierend auf Serverkonfiguration, sonst kann der Dienst ausfallen',
+      label: 'Maximale Größe pro Dokument (MB)',
+      placeholder: 'Empfehlung basierend auf Server-Konfiguration, andernfalls kann es zu Dienstunterbrechungen kommen',
     },
     appTemplate: {
       blank: {
-        title: 'Leer erstellen',
+        title: 'Leere Erstellung',
       },
       basic: {
-        title: 'Grundvorlage',
+        title: 'Basis-Vorlage',
         description:
-          'Unterstützt grundlegende Workflow-Vorlagen für lokale Dateien, Lark-Dokumente und Website-Datenquellen',
+          'Unterstützt grundlegende Workflow-Vorlagen für lokale Dateien, Lark-Dokumente und Webseiten-Datenquellen',
       },
     },
   },
@@ -90,27 +91,27 @@ export default {
     documentList: 'Dokumentenliste',
     loading: 'Wird importiert',
     buttons: {
-      toKnowledge: 'Zur Wissensliste zurückkehren',
-      toDocument: 'Zum Dokument gehen',
+      toKnowledge: 'Zur Wissensliste',
+      toDocument: 'Zum Dokument',
     },
   },
   syncWeb: {
     title: 'Wissen synchronisieren',
-    syncMethod: 'Synchronisationsmethode',
-    replace: 'Ersetzende Synchronisation',
-    replaceText: 'Website-Dokumente neu abrufen und die Dokumente im lokalen Wissen ersetzen',
-    complete: 'Vollständige Synchronisation',
-    completeText: 'Alle Dokumente im lokalen Wissen löschen und Website-Dokumente neu abrufen',
-    tip: 'Hinweis: Bei jeder Synchronisation werden bestehende Daten gelöscht und neue abgerufen. Bitte vorsichtig vorgehen.',
+    syncMethod: 'Synchronisierungsmethode',
+    replace: 'Ersetzen-Synchronisierung',
+    replaceText: 'Webseiten-Dokumente erneut abrufen und die lokalen Dokumente ersetzen',
+    complete: 'Vollständige Synchronisierung',
+    completeText: 'Alle lokalen Dokumente löschen und Webseiten-Dokumente neu abrufen',
+    tip: 'Hinweis: Alle Synchronisierungen löschen vorhandene Daten und holen neue Daten. Bitte vorsichtig vorgehen.',
   },
   transform: {
     button: 'Umwandeln',
     title: 'In Workflow-Wissensbasis umwandeln',
     message1:
-      'Sie können Ihre bestehende Wissensbasis jetzt in eine Workflow-Wissensbasis umwandeln – eine offenere und flexiblere Art, die es Ihnen erlaubt, den gesamten Prozess von verschiedenen Datenquellen bis zum Schreiben in die Wissensbasis autonom per Drag-and-Drop-Node-Operationen zu orchestrieren und so den personalisierten Wissensmanagement-Bedarf Ihres Unternehmens zu erfüllen. Sie können die in unserem Paket verfügbaren Datenquellen und Tools nutzen.',
-    message2: 'Die neue Verarbeitungsmethode wird auf alle danach importierten Dokumente angewendet.',
+      'Sie können Ihre bestehende Wissensbasis jetzt in eine Workflow-Wissensbasis umwandeln – einen offeneren und flexibleren Typ, der es Ihnen ermöglicht, den gesamten Prozess von verschiedenen Datenquellen bis zum Schreiben in die Wissensbasis per Drag-and-Drop autonom zu orchestrieren und so die individuellen Wissensmanagement-Anforderungen Ihres Unternehmens zu erfüllen. Sie können die in unserem Paket verfügbaren Datenquellen und Tools nutzen.',
+    message2: 'Die neue Verarbeitungsmethode wird auf alle zukünftig importierten Dokumente angewendet.',
     tip: 'Hinweis: Die Umwandlung kann nicht rückgängig gemacht werden.',
     confirm:
-      'Sind Sie sicher, dass Sie in die Workflow-Wissensbasis umwandeln möchten? Diese Aktion kann nicht rückgängig gemacht werden. Bitte vorsichtig vorgehen.',
+      'Möchten Sie wirklich in die Workflow-Wissensbasis umwandeln? Diese Aktion kann nicht rückgängig gemacht werden. Bitte vorsichtig vorgehen.',
   },
 }
