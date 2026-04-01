@@ -44,7 +44,7 @@ from system_manage.models import AuthTargetType, WorkspaceUserResourcePermission
 from system_manage.models.resource_mapping import ResourceMapping
 from system_manage.serializers.resource_mapping_serializers import ResourceMappingSerializer
 from system_manage.serializers.user_resource_permission import UserResourcePermissionSerializer
-from tools.models import Tool, ToolScope, ToolFolder, ToolType, ToolRecord, ToolWorkflowVersion
+from tools.models import Tool, ToolScope, ToolFolder, ToolType, ToolRecord
 from tools.models.tool_workflow import ToolWorkflow
 from trigger.models import TriggerTask, Trigger
 from users.serializers.user import is_workspace_manage
@@ -399,6 +399,25 @@ class ToolSerializer(serializers.Serializer):
                 # 校验代码是否包括禁止的关键字
                 if instance.get('tool_type') == ToolType.MCP:
                     ToolExecutor().validate_mcp_transport(instance.get('code', ''))
+
+            # 处理 work_flow_template
+            if instance.get('work_flow_template') is not None:
+                template_instance = instance.get('work_flow_template')
+                download_url = template_instance.get('downloadUrl')
+                # 查找匹配的版本名称
+                res = requests.get(download_url, timeout=5)
+                tool = ToolSerializer.Import(data={
+                    'file': bytes_to_uploaded_file(res.content, 'file.tool'),
+                    'user_id': self.data.get('user_id'),
+                    'workspace_id': self.data.get('workspace_id'),
+                    'folder_id': str(instance.get('folder_id', self.data.get('workspace_id'))),
+                }).import_(name=instance.get('name'))
+
+                try:
+                    requests.get(template_instance.get('downloadCallbackUrl'), timeout=5)
+                except Exception as e:
+                    maxkb_logger.error(f"callback appstore tool download error: {e}")
+                return tool
 
             tool_id = uuid.uuid7()
             Tool(
@@ -808,7 +827,7 @@ class ToolSerializer(serializers.Serializer):
                 }).auth_resource_batch([t.id for t in tool_model_list])
 
         @transaction.atomic
-        def import_(self, scope=ToolScope.WORKSPACE):
+        def import_(self, scope=ToolScope.WORKSPACE, name=None):
             self.is_valid()
 
             user_id = self.data.get('user_id')
@@ -837,7 +856,7 @@ class ToolSerializer(serializers.Serializer):
                 code = skill_file_id
             tool_model = Tool(
                 id=tool_id,
-                name=tool.get('name'),
+                name=name or tool.get('name'),
                 desc=tool.get('desc'),
                 code=code,
                 user_id=user_id,
@@ -860,7 +879,9 @@ class ToolSerializer(serializers.Serializer):
                 'auth_target_type': AuthTargetType.TOOL.value
             }).auth_resource(str(tool_id))
 
-            return True
+            return ToolSerializer.Operate(data={
+                'id': tool_id, 'workspace_id': self.data.get('workspace_id')
+            }).one()
 
     class IconOperate(serializers.Serializer):
         id = serializers.UUIDField(required=True, label=_("function ID"))
@@ -1070,13 +1091,6 @@ class ToolSerializer(serializers.Serializer):
             )
             tool.save()
 
-            if tool_data.get('tool_type') == ToolType.WORKFLOW:
-                tool_data['id'] = tool_id
-                ToolSerializer.Import(
-                    data={'file': bytes_to_uploaded_file(b''), **self.data},
-                ).import_workflow_tools(
-                    tool_data, workspace_id=self.data.get('workspace_id'), user_id=self.data.get('user_id')
-                )
             # 自动授权给创建者
             UserResourcePermissionSerializer(data={
                 'workspace_id': self.data.get('workspace_id'),
@@ -1098,7 +1112,6 @@ class ToolSerializer(serializers.Serializer):
         icon = serializers.CharField(required=True, label=_("icon"), allow_null=True, allow_blank=True)
         versions = serializers.ListField(required=True, label=_("versions"), child=serializers.DictField())
 
-        @transaction.atomic
         def update_tool(self, with_valid=True):
             if with_valid:
                 self.is_valid(raise_exception=True)
@@ -1132,16 +1145,6 @@ class ToolSerializer(serializers.Serializer):
             tool.version = version_name
             # tool.is_active = False
             tool.save()
-
-            if tool_data.get('tool_type') == ToolType.WORKFLOW:
-                tool_data['id'] = tool.id
-                QuerySet(ToolWorkflow).filter(tool_id=tool_data['id']).delete()
-                QuerySet(ToolWorkflowVersion).filter(tool_id=tool_data['id']).delete()
-                ToolSerializer.Import(
-                    data={'file': bytes_to_uploaded_file(b''), **self.data},
-                ).import_workflow_tools(
-                    tool_data, workspace_id=self.data.get('workspace_id'), user_id=self.data.get('user_id')
-                )
             try:
                 requests.get(self.data.get('download_callback_url'), timeout=5)
             except Exception as e:
