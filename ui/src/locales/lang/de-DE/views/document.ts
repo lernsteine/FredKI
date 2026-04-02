@@ -107,7 +107,6 @@ export default {
     unrelate: 'Verknüpfung aufheben',
     relatedDoc: 'Verknüpfte Dokumente',
     unrelatedDoc: 'Nicht verknüpfte Dokumente',
-    tagLinkTitle: 'Tag: Tag-Wert',
     setting: 'Tag-Einstellungen',
     create: 'Tag erstellen',
     createValue: 'Tag-Wert erstellen',
@@ -179,9 +178,8 @@ export default {
       placeholder: 'Segmentinhalt direkt zurückgeben',
       requiredMessage: 'Bitte geben Sie den Ähnlichkeitswert ein',
     },
-    allow_download: {
-      label: 'Herunterladen in der Wissensbasis-Quelle erlauben',
-    },
+    allow_download: 'Herunterladen in der Wissensbasis-Quelle erlauben',
+    allow_preview: 'Vorschau in der Wissensbasis-Quelle erlauben',
   },
   hitHandlingMethod: {
     optimization: 'Modelloptimierung',
