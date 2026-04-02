@@ -74,7 +74,7 @@ export default {
   disabled: {
     confirmTitle: 'Deaktivierung des Tools bestätigen:',
     confirmMessage:
-      'Das Deaktivieren dieses Tools führt zu Fehlern in Agenten, die darauf verweisen, wenn sie abgefragt werden. Bitte vorsichtig vorgehen.',
+      'Das Deaktivieren dieses Tools führt zu Fehlern in Ressourcen, die darauf verweisen, wenn sie ausgeführt werden. Bitte vorsichtig vorgehen.',
   },
   form: {
     toolName: {
