@@ -73,7 +73,7 @@ def hand_node(node, update_tool_map):
                                                      tool_id) for tool_id in tool_ids]
         skill_tool_ids = node_data.get('skill_tool_ids') or []
         node_data['skill_tool_ids'] = [update_tool_map.get(tool_id,
-                                                     tool_id) for tool_id in skill_tool_ids]
+                                                           tool_id) for tool_id in skill_tool_ids]
     if node.get('type') == 'mcp-node':
         mcp_tool_id = (node.get('properties', {}).get('node_data', {}).get('mcp_tool_id') or '')
         node.get('properties', {}).get('node_data', {})['mcp_tool_id'] = update_tool_map.get(mcp_tool_id,
@@ -788,7 +788,8 @@ class ToolSerializer(serializers.Serializer):
                         template_id=tool.get('template_id'),
                         input_field_list=tool.get('input_field_list'),
                         init_field_list=tool.get('init_field_list'),
-                        is_active=False if len((tool.get('init_field_list') or [])) > 0 else tool.get('is_active'),
+                        is_active=False if (len((tool.get('init_field_list') or [])) > 0 or tool.get(
+                            'tool_type') == ToolType.WORKFLOW) else tool.get('is_active'),
                         tool_type=tool.get('tool_type', 'CUSTOM') or 'CUSTOM',
                         scope=ToolScope.SHARED if workspace_id == 'None' else ToolScope.WORKSPACE,
                         folder_id=folder_id if folder_id else 'default' if workspace_id == 'None' else workspace_id,
@@ -813,6 +814,7 @@ class ToolSerializer(serializers.Serializer):
                 tool_list = tool.get('tool_list') or []
             else:
                 tool_list = [{**tool, 'id': str(uuid.uuid7())} for tool in tool.get('tool_list') or []]
+            tool_list = {tool.get('id'): tool for tool in tool_list}.values()
             update_tool_map = {}
             if len(tool_list) > 0:
                 tool_id_list = reduce(lambda x, y: [*x, *y],
