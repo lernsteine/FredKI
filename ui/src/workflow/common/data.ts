@@ -99,8 +99,8 @@ export const toolBaseNode = {
 export const toolStartNode = {
   id: WorkflowType.ToolStartNode,
   type: WorkflowType.ToolStartNode,
-  x: 360,
-  y: 2761.3875,
+  x: 280,
+  y: 3301,
   text: '',
   properties: {
     height: 728.375,
@@ -942,7 +942,7 @@ export const toolLoopMenuNodes = [
   },
   {
     label: t('workflow.nodes.classify.businessLogic'),
-    list: [conditionNode, replyNode, loopContinueNode, loopBreakNode],
+    list: [conditionNode, formNode, replyNode, loopContinueNode, loopBreakNode],
   },
   {
     label: t('workflow.nodes.classify.dataProcessing'),
