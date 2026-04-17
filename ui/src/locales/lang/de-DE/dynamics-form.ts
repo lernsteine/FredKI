@@ -6,32 +6,32 @@ export default {
     SwitchInput: 'Schalter',
     SingleSelect: 'Einfachauswahl',
     MultiSelect: 'Mehrfachauswahl',
-    DatePicker: 'Datums-Auswahl',
+    DatePicker: 'Datumsauswahl',
     JsonInput: 'JSON',
     RadioCard: 'Radio-Karte',
-    RadioRow: 'Radio-Reihe',
+    RadioRow: 'Radio-Zeile',
     UploadInput: 'Datei-Upload',
     TextareaInput: 'Mehrzeilige Eingabe',
-    MultiRow: 'Mehrere Zeilen',
+    MultiRow: 'Mehrzeilig',
     Model: 'Modell',
-    Knowledge: 'Wissen',
+    Knowledge: 'Wissensdatenbank',
   },
   default: {
-    label: 'Standardwert',
+    label: 'Standard',
     placeholder: 'Bitte Standardwert eingeben',
     requiredMessage: ' ist ein Pflichtfeld',
-    show: 'Standardwert anzeigen',
+    show: 'Standard anzeigen',
   },
   tip: {
     requiredMessage: 'darf nicht leer sein',
-    jsonMessage: 'Ungültiges JSON-Format',
+    jsonMessage: 'Falsches JSON-Format',
   },
   paramForm: {
     field: {
       label: 'Parameter',
       placeholder: 'Bitte Parameter eingeben',
       requiredMessage: 'Parameter ist ein Pflichtfeld',
-      requiredMessage2: 'Nur Buchstaben, Zahlen und Unterstriche erlaubt',
+      requiredMessage2: 'Nur Buchstaben, Zahlen und Unterstriche sind erlaubt',
     },
     name: {
       label: 'Name',
@@ -56,6 +56,18 @@ export default {
       placeholder: 'Bitte Beschreibung eingeben',
     },
   },
+  TreeSelect: {
+    label: 'Baumauswahl',
+    select: 'Option',
+    allowMultipleSelections: 'Mehrfachauswahl erlauben',
+    addDialog: {
+      addFirstOption: 'Stammoption hinzufügen',
+      addSubOptions: 'Unteroption hinzufügen',
+      require: 'Bitte mindestens einen vollständigen Eintrag eingeben',
+      nodeNotFound: 'Übergeordneter Knoten nicht gefunden',
+      tagRequire: 'Beschriftung und Wert dürfen nicht leer sein',
+    },
+  },
   DatePicker: {
     placeholder: 'Datum auswählen',
     year: 'Jahr',
@@ -63,8 +75,8 @@ export default {
     date: 'Datum',
     datetime: 'Datum und Uhrzeit',
     dataType: {
-      label: 'Datentyp',
-      placeholder: 'Bitte Datentyp auswählen',
+      label: 'Datumstyp',
+      placeholder: 'Bitte Datumstyp auswählen',
     },
     format: {
       label: 'Format',
@@ -76,8 +88,8 @@ export default {
     placeholder: 'Bitte Optionswert eingeben',
   },
   tag: {
-    label: 'Bezeichnung',
-    placeholder: 'Bitte Bezeichnung eingeben',
+    label: 'Beschriftung',
+    placeholder: 'Bitte Optionsbeschriftung eingeben',
   },
   Slider: {
     showInput: {
@@ -85,8 +97,8 @@ export default {
     },
     valueRange: {
       label: 'Wertebereich',
-      minRequired: 'Minimalwert ist erforderlich',
-      maxRequired: 'Maximalwert ist erforderlich',
+      minRequired: 'Mindestwert ist erforderlich',
+      maxRequired: 'Höchstwert ist erforderlich',
     },
     step: {
       label: 'Schrittweite',
@@ -97,8 +109,8 @@ export default {
   TextInput: {
     length: {
       label: 'Textlänge',
-      minRequired: 'Minimale Länge ist erforderlich',
-      maxRequired: 'Maximale Länge ist erforderlich',
+      minRequired: 'Mindestlänge ist erforderlich',
+      maxRequired: 'Maximallänge ist erforderlich',
       requiredMessage1: 'Länge muss zwischen',
       requiredMessage2: 'und',
       requiredMessage3: 'Zeichen liegen',
@@ -108,7 +120,7 @@ export default {
   UploadInput: {
     limit: {
       label: 'Maximale Anzahl Dateien pro Upload',
-      required: 'Maximale Dateianzahl ist erforderlich',
+      required: 'Maximale Anzahl Dateien ist erforderlich',
     },
     max_file_size: {
       label: 'Maximale Dateigröße (MB)',
@@ -123,9 +135,9 @@ export default {
     label: 'Zuweisungsmethode',
     ref_variables: {
       label: 'Referenzvariablen',
-      popover: 'Variablenwerte müssen dem Format entsprechen',
+      popover: 'Variablenwerte müssen dem',
       json_format: 'JSON-Format',
-      popover_label: 'Bezeichnung',
+      popover_label: 'Beschriftung',
       popover_value: 'Wert',
       popover_default: 'Ist Standard',
     },
