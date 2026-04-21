@@ -41,6 +41,7 @@ export default {
     paramErrorMessage: 'Parameter existiert bereits: ',
     saveMessage: 'Aktuelle Änderungen wurden nicht gespeichert. Vor dem Beenden speichern?',
     searchPlaceholder: 'Bitte Knotennamen eingeben',
+    disabled: 'Der Knoten wurde deaktiviert',
   },
   delete: {
     confirmTitle: 'Diesen Knoten wirklich löschen?',
@@ -504,7 +505,8 @@ Sie sind ein Meister der Problemoptimierung und können Benutzerabsichten aus de
       expression: {
         label: 'Ausdruck',
         placeholder: 'Bitte Ausdruck eingeben',
-        tooltip: 'Bitte JSON-Path-Ausdrücke verwenden, um Variablen aufzuteilen, z. B.: $.store.book <a href="https://pypi.org/project/jsonpath-ng/1.8.0/" target="_blank" class="expression_tip">Details hier ➜ pypi.org</a>',
+        tooltip:
+          'Bitte JSON-Path-Ausdrücke verwenden, um Variablen aufzuteilen, z. B.: $.store.book <a href="https://pypi.org/project/jsonpath-ng/1.8.0/" target="_blank" class="expression_tip">Details hier ➜ pypi.org</a>',
       },
     },
     parameterExtractionNode: {
