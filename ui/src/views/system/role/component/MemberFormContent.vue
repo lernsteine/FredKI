@@ -23,6 +23,7 @@
             filterable
             remote
             :remote-method="(query: any) => handleRemoteSearch(query, element, model)"
+            :filter-method="!model.selectProps?.remoteMethod ? (query: any) => filterLocalOptions(query, element, model) : undefined"
             :loading="loadingStates[`${index}-${model.path}`]"
             multiple
             :reserve-keyword="false"
@@ -117,6 +118,13 @@ async function handleRemoteSearch(query: string, element: any, model: FormItemMo
   } finally {
     loadingStates[key] = false
   }
+}
+
+async function filterLocalOptions(query: string, element: any, model: FormItemModel) {
+  const options = model.selectProps?.options || []
+  element[`_${model.path}_options`] = options.filter((opt: any) =>
+    opt.label.toLowerCase().includes(query.toLowerCase()),
+  )
 }
 
 function handleAdd() {
