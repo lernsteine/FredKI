@@ -7,20 +7,20 @@ export default {
   simple: 'EINFACH',
   senior: 'WORKFLOW',
   simpleAgent: 'Einfacher Agent',
-  AdvancedAgent: 'Fortgeschrittener Agent',
+  AdvancedAgent: 'Erweiterter Agent',
   simplePlaceholder: 'Erstellen Sie schnell intelligente Agenten mit Basisfunktionen über Formulareinstellungen',
   advancedPlaceholder:
     'Nutzen Sie Low-Code Drag-and-Drop-Methoden, um komplexe Logik und funktionsreiche Agenten flexibel zu orchestrieren',
   appTest: 'Debug-Vorschau',
   operation: {
     addModel: 'Modell hinzufügen',
-    toChat: 'Chatten',
+    toChat: 'Chat',
   },
   delete: {
     confirmTitle: 'Sind Sie sicher, dass Sie diesen Agenten löschen möchten: ',
     confirmTitle2: 'Agenten?',
     confirmMessage:
-      'Wenn Sie diesen Agenten löschen, werden seine Dienste nicht mehr zur Verfügung stehen. Bitte gehen Sie mit Vorsicht vor.',
+      'Das Löschen dieses Agenten bedeutet, dass seine Dienste nicht mehr zur Verfügung stehen. Bitte gehen Sie mit Vorsicht vor.',
     resourceCountMessage:
       'Dieser Agent ist mit {count} Ressourcen verknüpft und wird nach dem Löschen nicht mehr verfügbar sein. Bitte gehen Sie mit Vorsicht vor.',
   },
@@ -29,8 +29,8 @@ export default {
     ExportError: 'Export fehlgeschlagen',
     professionalMessage:
       'Die Community Edition unterstützt bis zu 5 Agenten. Wenn Sie mehr Agenten benötigen, führen Sie bitte ein Upgrade auf die Professional Edition durch.',
-    saveErrorMessage: 'Speichern fehlgeschlagen, bitte überprüfen Sie Ihre Eingabe oder versuchen Sie es später erneut',
-    loadingErrorMessage: 'Konfiguration konnte nicht geladen werden, bitte überprüfen Sie Ihre Eingabe oder versuchen Sie es später erneut',
+    saveErrorMessage: 'Speichern fehlgeschlagen, bitte prüfen Sie Ihre Eingabe oder versuchen Sie es später erneut',
+    loadingErrorMessage: 'Konfiguration konnte nicht geladen werden, bitte prüfen Sie Ihre Eingabe oder versuchen Sie es später erneut',
     noDocPermission: 'Keine Berechtigung zum Erstellen von Dokumenten',
     confirmUse: 'Sind Sie sicher, dass Sie dies verwenden möchten?',
     overwrite: 'den aktuellen Workflow überschreiben',
@@ -46,21 +46,20 @@ export default {
     scheduledTriggerTip: 'Nach Erreichen der eingestellten Zeit werden automatisch alle Konversationen innerhalb des Zyklus extrahiert, um ein Gedächtnis zu generieren',
     cronExpressionInvalid: 'Cron-Ausdruck ist ungültig',
     tips1: `Nach der Aktivierung werden neue Konversationen ab dem Aktivierungszeitpunkt aufgezeichnet und periodisch ein Gedächtnis generiert, das über`,
-    tips2: `Variablen im System-Prompt aufgerufen werden kann.
-Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer gelöscht, und bei erneuter Aktivierung beginnt die Aufzeichnung ab dem Aktivierungspunkt von vorn.`,
+    tips2: `Variablen im System-Prompt aufgerufen werden kann. Nach der Deaktivierung wird das Langzeitgedächtnis der Benutzer gelöscht; eine Reaktivierung beginnt die Aufzeichnung ab dem neuen Aktivierungszeitpunkt.`,
   },
   form: {
     appName: {
       placeholder: 'Bitte geben Sie den Namen des Agenten ein',
-      requiredMessage: 'Name des Agenten ist erforderlich',
+      requiredMessage: 'Agenten-Name ist erforderlich',
     },
     appDescription: {
       placeholder:
-        'Beschreiben Sie das Szenario und den Einsatz des Agenten, z. B.: XXX-Assistent beantwortet Benutzerfragen zur Nutzung des Produkts XXX',
+        'Beschreiben Sie das Szenario und den Nutzen des Agenten, z. B.: XXX-Assistent beantwortet Benutzerfragen zur Nutzung von XXX-Produkten',
     },
     appType: {
       simplePlaceholder: 'Geeignet für Anfänger, um Assistenten zu erstellen.',
-      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer, um den Workflow des Assistenten anzupassen',
+      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer, um den Workflow des Assistenten anzupassen.',
     },
     appTemplate: {
       blankApp: {
@@ -68,7 +67,7 @@ Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer ge
       },
       assistantApp: {
         title: 'Wissens-Assistent',
-        description: 'Geeignet für fortgeschrittene Benutzer, um den Workflow des Assistenten anzupassen',
+        description: 'Geeignet für fortgeschrittene Benutzer, um den Workflow des Assistenten anzupassen.',
       },
     },
     aiModel: {
@@ -78,31 +77,31 @@ Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer ge
     roleSettings: {
       label: 'System-Prompt',
       placeholder:
-        'System-Prompt; Sie können auf Systemvariablen verweisen: {data} ist der gefundene Abschnitt in der Wissensdatenbank; {question} ist die Frage des Benutzers.',
+        'System-Prompt, Sie können auf Systemvariablen verweisen: {data} ist das gefundene Segment in der Wissensdatenbank; {question} ist die Frage des Benutzers; {memory} ist das Gedächtnis nach Aktivierung des Langzeitgedächtnisses.',
       tooltip: 'Legen Sie die Rolle oder Anweisungen fest, denen das Modell folgen soll',
     },
 
     prompt: {
-      label: 'Benutzer-Prompt',
-      noReferences: '（Kein Referenzwissen）',
-      references: ' (Mit Referenzwissen)',
+      label: 'User-Prompt',
+      noReferences: '（Keine Wissensreferenzen）',
+      references: ' (Mit Wissensreferenzen)',
       placeholder:
-        'Benutzer-Prompt; Sie können auf Systemvariablen verweisen: {data} ist der gefundene Abschnitt in der Wissensdatenbank; {question} ist die Frage des Benutzers',
-      requiredMessage: 'Bitte geben Sie einen Benutzer-Prompt ein',
+        'User-Prompt, Sie können auf Systemvariablen verweisen: {data} ist das gefundene Segment in der Wissensdatenbank; {question} ist die Frage des Benutzers',
+      requiredMessage: 'Bitte geben Sie einen User-Prompt ein',
       tooltip: 'Die Frage oder der Befehl, den der Benutzer an das Modell stellt',
 
       noReferencesTooltip:
-        'Durch Anpassen des Prompts können Sie die Richtung des KI-Chats steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variablen: {question} ist die Frage des Benutzers.',
+        'Durch Anpassen des Prompts können Sie die Richtung des Chats steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variablen: {question} ist die Frage des Benutzers.',
       referencesTooltip:
-        'Durch Anpassen des Prompts können Sie die Richtung des KI-Chats steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variablen: {data} enthält Informationen aus dem Wissen; {question} ist die Frage des Benutzers.',
+        'Durch Anpassen des Prompts können Sie die Richtung des Chats steuern. Dieser Prompt wird am Anfang des Kontexts fixiert. Verwendete Variablen: {data} enthält Informationen aus dem Wissen; {question} ist die Frage des Benutzers.',
       defaultPrompt: `Bekannte Informationen: {data}
         Frage: {question}
-        Antwortanforderungen:
-        - Bitte verwenden Sie eine präzise und professionelle Sprache, um die Frage des Benutzers zu beantworten.
-        `,
+          Antwortanforderungen:
+          - Bitte verwenden Sie eine prägnante und professionelle Sprache, um die Frage des Benutzers zu beantworten.
+          `,
     },
     historyRecord: {
-      label: 'Chat-Verlauf',
+      label: 'Chatverlauf',
     },
     relatedKnowledge: {
       label: 'Zugehöriges Wissen',
@@ -116,7 +115,7 @@ Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer ge
     problemOptimization: {
       label: 'Fragen-Optimierung',
       tooltip:
-        'Optimiert die aktuelle Frage basierend auf dem Chat-Verlauf, um Wissenspunkte besser zu finden.',
+        'Optimieren Sie die aktuelle Frage basierend auf dem bisherigen Chatverlauf, um Wissenspunkte besser zu finden.',
     },
 
     voiceInput: {
@@ -137,7 +136,7 @@ Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer ge
     reasoningContent: {
       label: 'Denkprozess ausgeben',
       tooltip:
-        "Bitte legen Sie die Thinking-Tags basierend auf der Rückgabe des Modells fest. Der Inhalt zwischen den Tags wird als Denkprozess erkannt.",
+        "Bitte legen Sie das Thinking-Label basierend auf der Rückgabe des Modells fest. Der Inhalt zwischen den Labels wird als Denkprozess erkannt.",
       start: 'Start',
       end: 'Ende',
     },
@@ -146,13 +145,13 @@ Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer ge
   generateDialog: {
     label: 'Generieren',
     generatePrompt: 'Prompt generieren',
-    placeholder: 'Bitte geben Sie das Thema des Prompts ein',
+    placeholder: 'Bitte geben Sie das Prompt-Thema ein',
     title: 'Der Prompt wird hier angezeigt',
     remake: 'Neu generieren',
     stop: 'Generierung stoppen',
     continue: 'Generierung fortsetzen',
     replace: 'Ersetzen',
-    exit: 'Sind Sie sicher, dass Sie den Vorgang abbrechen und die KI-generierten Inhalte verwerten möchten?',
+    exit: 'Sind Sie sicher, dass Sie abbrechen und die KI-generierten Inhalte verwerten möchten?',
     loading: 'Generiere...',
   },
   dialog: {
@@ -161,20 +160,20 @@ Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer ge
     selectSearchMode: 'Abrufmodus',
     vectorSearch: 'Vektorsuche',
     vectorSearchTooltip:
-      'Die Vektorsuche ist eine Abrufmethode basierend auf Vektordistanzberechnungen, geeignet für große Datenmengen im Wissen.',
+      'Die Vektorsuche ist eine Methode basierend auf Vektordistanzberechnungen, geeignet für große Datenmengen im Wissen.',
     fullTextSearch: 'Volltextsuche',
     fullTextSearchTooltip:
-      'Die Volltextsuche ist eine Abrufmethode basierend auf Textähnlichkeit, geeignet für kleine Datenmengen im Wissen.',
+      'Die Volltextsuche basiert auf Textähnlichkeit, geeignet für kleine Datenmengen im Wissen.',
     hybridSearch: 'Hybride Suche',
     hybridSearchTooltip:
-      'Die hybride Suche basiert sowohl auf Vektor- als auch auf Textähnlichkeit, geeignet für mittlere Datenmengen im Wissen.',
+      'Die hybride Suche kombiniert Vektor- und Textähnlichkeit, geeignet für mittlere Datenmengen im Wissen.',
     similarityThreshold: 'Ähnlichkeit höher als',
     similarityTooltip: 'Je höher die Ähnlichkeit, desto stärker die Korrelation.',
     topReferences: 'Top N Segmente',
     maxCharacters: 'Maximale Zeichen pro Referenz',
     noReferencesAction: 'Wenn keine Wissensreferenzen vorhanden sind',
-    continueQuestioning: 'Frage weiterhin an das KI-Modell stellen',
-    provideAnswer: 'Bestimmte Antwort festlegen',
+    continueQuestioning: 'Weiterhin das KI-Modell befragen',
+    provideAnswer: 'Spezifischen Antwortinhalt festlegen',
     designated_answer:
       'Hallo, ich bin der XXX-Assistent. Mein Wissen enthält nur Informationen zu XXX-Produkten. Bitte formulieren Sie Ihre Frage um.',
     defaultPrompt1:
@@ -204,59 +203,59 @@ Nach der Deaktivierung wird das Langzeitgedächtnis der Konversationsbenutzer ge
     slackTip: 'Slack-Agent erstellen',
     wecomSetting: {
       title: 'WeCom Konfiguration',
-      cropId: 'Corporation ID',
-      cropIdPlaceholder: 'Bitte geben Sie die Corporation ID ein',
-      agentIdPlaceholder: 'Bitte geben Sie die Agent ID ein',
-      secretPlaceholder: 'Bitte geben Sie das Secret ein',
-      tokenPlaceholder: 'Bitte geben Sie das Token ein',
-      encodingAesKeyPlaceholder: 'Bitte geben Sie den EncodingAESKey ein',
+      cropId: 'Crop ID',
+      cropIdPlaceholder: 'Bitte Crop ID eingeben',
+      agentIdPlaceholder: 'Bitte Agent ID eingeben',
+      secretPlaceholder: 'Bitte Secret eingeben',
+      tokenPlaceholder: 'Bitte Token eingeben',
+      encodingAesKeyPlaceholder: 'Bitte EncodingAESKey eingeben',
       authenticationSuccessful: 'Erfolgreich',
       urlInfo:
-        '-APP Management-Eigenbau-Erstellte APP-Nachrichten empfangen-Setzen Sie die vom API empfangene "URL"',
+        '-APP-Management-Eigenbau-Erstellte APP-Nachrichten empfangen-Setzen Sie die vom API empfangene "URL"',
     },
     dingtalkSetting: {
       title: 'DingTalk Konfiguration',
-      clientIdPlaceholder: 'Bitte geben Sie die Client ID ein',
-      clientSecretPlaceholder: 'Bitte geben Sie das Client Secret ein',
+      clientIdPlaceholder: 'Bitte Client ID eingeben',
+      clientSecretPlaceholder: 'Bitte Client Secret eingeben',
       urlInfo:
-        '-Stellen Sie auf der Roboter-Seite den "Nachrichten-Empfangsmodus" auf HTTP-Modus um und tragen Sie die obige URL in die "Empfangsadresse" ein',
+        '-Stellen Sie auf der Roboter-Seite den "Nachrichtenempfangsmodus" auf HTTP-Modus um und tragen Sie die obige URL in die "Empfangsadresse" ein',
     },
     wechatSetting: {
       title: 'WeChat Konfiguration',
       appId: 'APP ID',
-      appIdPlaceholder: 'Bitte geben Sie die APP ID ein',
+      appIdPlaceholder: 'Bitte APP ID eingeben',
       appSecret: 'APP SECRET',
-      appSecretPlaceholder: 'Bitte geben Sie das APP SECRET ein',
+      appSecretPlaceholder: 'Bitte APP SECRET eingeben',
       token: 'TOKEN',
-      tokenPlaceholder: 'Bitte geben Sie das TOKEN ein',
+      tokenPlaceholder: 'Bitte TOKEN eingeben',
       aesKey: 'Verschlüsselungsschlüssel',
-      aesKeyPlaceholder: 'Bitte geben Sie den Schlüssel zur Nachrichtenverschlüsselung ein',
+      aesKeyPlaceholder: 'Bitte den Schlüssel für die Nachrichtenverschlüsselung eingeben',
       urlInfo:
-        '-Einstellungen & Entwicklung-Basiskonfiguration-"Server-Adresse URL" in der Serverkonfiguration',
+        '-Einstellungen und Entwicklung-Basiskonfiguration-"Server-Adresse URL" in der Serverkonfiguration',
     },
     wecomBotSetting: {
       title: 'WeCom Bot Konfiguration',
-      urlInfo: '-Management Tools-Smart Bot-Bot erstellen-API-Modus "URL" erstellen',
+      urlInfo: '-Management-Tools-Smart Bot-Bot erstellen-API-Modus erstellt "URL"',
     },
     larkSetting: {
       title: 'Lark Konfiguration',
-      appIdPlaceholder: 'Bitte geben Sie die APP ID ein',
-      appSecretPlaceholder: 'Bitte geben Sie das APP Secret ein',
-      verificationTokenPlaceholder: 'Bitte geben Sie das Verifizierungs-Token ein',
+      appIdPlaceholder: 'Bitte APP ID eingeben',
+      appSecretPlaceholder: 'Bitte APP Secret eingeben',
+      verificationTokenPlaceholder: 'Bitte Verifizierungs-Token eingeben',
       urlInfo:
-        '-Ereignisse und Callbacks - Ereigniskonfiguration - Konfigurieren Sie die "Anfrageadresse" der Abonnementmethode',
+        '-Events und Callbacks - Event-Konfiguration - Konfigurieren Sie die "Anfrage-Adresse" der Abonnement-Methode',
     },
     slackSetting: {
       title: 'Slack Konfiguration',
-      signingSecretPlaceholder: 'Bitte geben Sie das Signing Secret ein',
-      botUserTokenPlaceholder: 'Bitte geben Sie das Bot User Token ein',
+      signingSecretPlaceholder: 'Bitte Signing Secret eingeben',
+      botUserTokenPlaceholder: 'Bitte Bot User Token eingeben',
     },
     copyUrl: 'Link kopieren und einfügen',
   },
   hitTest: {
-    title: 'Abruf-Test',
-    text: 'Testen Sie die Trefferquote der Wissensdatenbank basierend auf einem Suchtext.',
-    emptyMessage1: 'Ergebnisse des Abruf-Tests werden hier angezeigt',
+    title: 'Abruftest',
+    text: 'Testen Sie den Abrufeffekt des Wissens basierend auf einem gegebenen Suchtext.',
+    emptyMessage1: 'Ergebnisse des Abruftests werden hier angezeigt',
     emptyMessage2: 'Keine passenden Abschnitte gefunden',
   },
   publishTime: 'Veröffentlichungszeitpunkt',
