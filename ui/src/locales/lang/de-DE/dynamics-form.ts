@@ -14,12 +14,12 @@ export default {
     TextareaInput: 'Mehrzeilige Eingabe',
     MultiRow: 'Mehrzeilig',
     Model: 'Modell',
-    Knowledge: 'Wissensdatenbank',
+    Knowledge: 'Wissen',
   },
   default: {
     label: 'Standard',
-    placeholder: 'Bitte Standardwert eingeben',
-    requiredMessage: ' ist ein Pflichtfeld',
+    placeholder: 'Bitte geben Sie einen Standardwert ein',
+    requiredMessage: ' ist eine erforderliche Eigenschaft',
     show: 'Standard anzeigen',
   },
   tip: {
@@ -29,43 +29,44 @@ export default {
   paramForm: {
     field: {
       label: 'Parameter',
-      placeholder: 'Bitte Parameter eingeben',
-      requiredMessage: 'Parameter ist ein Pflichtfeld',
+      placeholder: 'Bitte geben Sie einen Parameter ein',
+      requiredMessage: 'Parameter ist eine erforderliche Eigenschaft',
       requiredMessage2: 'Nur Buchstaben, Zahlen und Unterstriche sind erlaubt',
     },
     name: {
       label: 'Name',
-      placeholder: 'Bitte Namen eingeben',
-      requiredMessage: 'Name ist ein Pflichtfeld',
+      placeholder: 'Bitte geben Sie einen Namen ein',
+      requiredMessage: 'Name ist eine erforderliche Eigenschaft',
     },
     tooltip: {
       label: 'Tooltip',
-      placeholder: 'Bitte Tooltip eingeben',
+      placeholder: 'Bitte geben Sie einen Tooltip ein',
     },
     required: {
-      label: 'Pflichtfeld',
-      requiredMessage: 'Pflichtfeld ist ein Pflichtfeld',
+      label: 'Erforderlich',
+      requiredMessage: 'Erforderlich ist eine erforderliche Eigenschaft',
     },
     input_type: {
       label: 'Typ',
-      placeholder: 'Bitte Typ auswählen',
-      requiredMessage: 'Typ ist ein Pflichtfeld',
+      placeholder: 'Bitte wählen Sie einen Typ aus',
+      requiredMessage: 'Typ ist eine erforderliche Eigenschaft',
     },
     desc: {
       label: 'Beschreibung',
-      placeholder: 'Bitte Beschreibung eingeben',
+      placeholder: 'Bitte geben Sie eine Beschreibung ein',
     },
   },
   TreeSelect: {
     label: 'Baumauswahl',
     select: 'Option',
+    selectRequired: 'Optionen sind erforderlich',
     allowMultipleSelections: 'Mehrfachauswahl erlauben',
     addDialog: {
       addFirstOption: 'Stammoption hinzufügen',
       addSubOptions: 'Unteroption hinzufügen',
-      require: 'Bitte mindestens einen vollständigen Eintrag eingeben',
+      require: 'Bitte geben Sie mindestens einen vollständigen Eintrag ein',
       nodeNotFound: 'Übergeordneter Knoten nicht gefunden',
-      tagRequire: 'Beschriftung und Wert dürfen nicht leer sein',
+      tagRequire: 'Bezeichnung und Wert dürfen nicht leer sein',
     },
   },
   DatePicker: {
@@ -76,20 +77,20 @@ export default {
     datetime: 'Datum und Uhrzeit',
     dataType: {
       label: 'Datumstyp',
-      placeholder: 'Bitte Datumstyp auswählen',
+      placeholder: 'Bitte wählen Sie einen Datumstyp aus',
     },
     format: {
       label: 'Format',
-      placeholder: 'Bitte Format auswählen',
+      placeholder: 'Bitte wählen Sie ein Format aus',
     },
   },
   Select: {
     label: 'Optionswert',
-    placeholder: 'Bitte Optionswert eingeben',
+    placeholder: 'Bitte geben Sie einen Optionswert ein',
   },
   tag: {
-    label: 'Beschriftung',
-    placeholder: 'Bitte Optionsbeschriftung eingeben',
+    label: 'Bezeichnung',
+    placeholder: 'Bitte geben Sie eine Optionsbezeichnung ein',
   },
   Slider: {
     showInput: {
@@ -114,13 +115,13 @@ export default {
       requiredMessage1: 'Länge muss zwischen',
       requiredMessage2: 'und',
       requiredMessage3: 'Zeichen liegen',
-      requiredMessage4: 'Textlänge ist ein Pflichtparameter',
+      requiredMessage4: 'Textlänge ist ein erforderlicher Parameter',
     },
   },
   UploadInput: {
     limit: {
-      label: 'Maximale Anzahl Dateien pro Upload',
-      required: 'Maximale Anzahl Dateien ist erforderlich',
+      label: 'Maximale Anzahl von Dateien pro Upload',
+      required: 'Maximale Anzahl von Dateien ist erforderlich',
     },
     max_file_size: {
       label: 'Maximale Dateigröße (MB)',
@@ -137,7 +138,7 @@ export default {
       label: 'Referenzvariablen',
       popover: 'Variablenwerte müssen dem',
       json_format: 'JSON-Format',
-      popover_label: 'Beschriftung',
+      popover_label: 'Bezeichnung',
       popover_value: 'Wert',
       popover_default: 'Ist Standard',
     },
@@ -145,11 +146,11 @@ export default {
   ModelConstructor: {
     optionalModel: 'Optionales Modell',
     defaultModel: 'Standardmodell',
-    modelPlaceholder: 'Bitte Modell eingeben',
+    modelPlaceholder: 'Bitte geben Sie ein Modell ein',
   },
   KnowledgeConstructor: {
     optionalModel: 'Optionales Modell',
     defaultModel: 'Standardmodell',
-    modelPlaceholder: 'Bitte Modell eingeben',
+    modelPlaceholder: 'Bitte geben Sie ein Modell ein',
   },
 }
