@@ -62,16 +62,16 @@ def generate_content(input_variable, variable_list):
     return value
 
 
-def json_loads(response, expected_fields):
+def json_loads(response, variable_list):
     if not response or not isinstance(response, str):
-        return {field: None for field in expected_fields}
+        return generate_example(variable_list)
 
     cleaned = response.strip()
 
     extraction_strategies = [
         lambda: json.loads(cleaned),
         lambda: json.loads(re.search(r'```(?:json)?\s*(\{.*?\})\s*```', cleaned, re.DOTALL).group(1)),
-        lambda: json.loads(re.search(r'(\{[\s\S]*\})', cleaned).group(1)),
+        lambda: json.loads(re.search(r'(\{.*\})', cleaned, flags=re.DOTALL).group(1)),
     ]
     for strategy in extraction_strategies:
         try:
@@ -79,7 +79,7 @@ def json_loads(response, expected_fields):
             return result
         except:
             continue
-    return generate_example(expected_fields)
+    return generate_example(variable_list)
 
 
 class BaseParameterExtractionNode(IParameterExtractionNode):
