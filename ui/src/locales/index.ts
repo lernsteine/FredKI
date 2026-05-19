@@ -30,7 +30,7 @@ const DEFAULT_EXTERNAL_LOCALES = [
 const languages = usePreferredLanguages()
 
 export function getBrowserLang() {
-  const browserLang = navigator.language || languages.value[0] || 'en-US'
+  const browserLang = navigator.language || languages.value[0] || 'de-DE'
 
   if (browserLang === 'zh-HK' || browserLang === 'zh-TW') {
     return 'zh-Hant'
@@ -40,7 +40,7 @@ export function getBrowserLang() {
     return 'zh-CN'
   }
 
-  return 'en-US'
+  return 'de-DE'
 }
 
 function generateLangModuleMap() {
