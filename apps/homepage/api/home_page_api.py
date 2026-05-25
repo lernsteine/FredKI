@@ -15,7 +15,43 @@ from drf_spectacular.utils import (
 )
 from rest_framework import serializers
 
+from application.api.application_stats import ApplicationStatsResult
 from common.mixins.api_mixin import APIMixin
+
+
+class ApplicationMonitoringAPI(APIMixin):
+    @staticmethod
+    def get_parameters():
+        return [OpenApiParameter(
+            name="workspace_id",
+            description="工作空间id",
+            type=OpenApiTypes.STR,
+            location='path',
+            required=True,
+        ),
+            OpenApiParameter(
+                name="application_id",
+                description="application ID",
+                type=OpenApiTypes.STR,
+                required=False,
+            ),
+            OpenApiParameter(
+                name="start_time",
+                description="start Time",
+                type=OpenApiTypes.STR,
+                required=True,
+            ),
+            OpenApiParameter(
+                name="end_time",
+                description="end Time",
+                type=OpenApiTypes.STR,
+                required=True,
+            ),
+        ]
+
+    @staticmethod
+    def get_response():
+        return ApplicationStatsResult
 
 
 class RankingBaseAPI(APIMixin):
@@ -182,6 +218,32 @@ class ApplicationAggregationAPI(APIMixin):
                 location=OpenApiParameter.PATH,
                 required=True,
                 description=_("Workspace ID"),
+            ),
+        ]
+
+
+class TokensAggregationAPI(APIMixin):
+    @staticmethod
+    def get_parameters():
+        return [
+            OpenApiParameter(
+                name="workspace_id",
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.PATH,
+                required=True,
+                description=_("Workspace ID"),
+            ),
+            OpenApiParameter(
+                name="start_time",
+                description="start Time",
+                type=OpenApiTypes.STR,
+                required=True,
+            ),
+            OpenApiParameter(
+                name="end_time",
+                description="end Time",
+                type=OpenApiTypes.STR,
+                required=True,
             ),
         ]
 
