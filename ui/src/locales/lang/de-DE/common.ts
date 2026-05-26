@@ -155,4 +155,5 @@ export default {
     'Wissensbasis erfolgreich importiert. Die Dokumente wurden noch nicht vektorisiert. Bitte konfigurieren Sie das Embedding-Modell und vektorisieren Sie die Dokumente.',
   import: 'Importieren',
   other: 'Andere',
+  moreSettings: 'Weitere Einstellungen',
 }
