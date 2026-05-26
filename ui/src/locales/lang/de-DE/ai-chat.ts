@@ -144,4 +144,5 @@ export default {
   editTitle: 'Titel bearbeiten',
   share: 'Teilen',
   copyLinkText: 'Link kopieren',
+  userInputSetting: 'Einstellung externer Parameter (bis zu 3 können angezeigt werden)',
 }
