@@ -6,6 +6,7 @@ export default {
   setting: {
     vectorization: 'Vektorisierung',
     sync: 'Synchronisieren',
+    tokenize: 'Tokenisieren',
   },
   tip: {
     professionalMessage:
