@@ -706,9 +706,9 @@
                     effect="dark"
                     :content="$t('views.knowledge.setting.vectorization')"
                     placement="top"
-                    v-if="permissionPrecise.vector(id)"
+                    v-else
                   >
-                    <span class="mr-4">
+                    <span class="mr-4"  v-if="permissionPrecise.vector(id)">
                       <el-button type="primary" text @click.stop="refreshDocument(row)">
                         <AppIcon iconName="app-document-refresh" style="font-size: 16px"></AppIcon>
                       </el-button>
@@ -743,7 +743,7 @@
                   >
                     <span class="mr-4" v-if="permissionPrecise.doc_vector(id)">
                       <el-button type="primary" text @click.stop="tokenizeDocument(row)">
-                        <AppIcon iconName="app-document-refresh" style="font-size: 16px"></AppIcon>
+                        <AppIcon iconName="app-document-wordIndexing" style="font-size: 16px"></AppIcon>
                       </el-button>
                     </span>
                   </el-tooltip>
