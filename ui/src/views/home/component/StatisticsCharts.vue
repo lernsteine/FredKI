@@ -183,6 +183,7 @@ const daterange = ref({
   start_time: '',
   end_time: '',
 })
+
 function changeDayHandle(val: number | string) {
   if (val !== 'other') {
     daterange.value.start_time = beforeDay(val)
@@ -298,6 +299,7 @@ function getAgentList(query: string) {
     agentOptions.value = res.data.records
   })
 }
+
 function changeAgent(val: string) {
   application_id.value = val
   getDetail()
@@ -316,6 +318,7 @@ function getDetail() {
       data.value = res.data
     })
 }
+
 onMounted(() => {
   changeDayHandle(history_day.value)
   getAgentList('')
