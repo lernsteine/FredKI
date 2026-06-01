@@ -7,6 +7,7 @@ import common from './common'
 import dynamicsForm from './dynamics-form'
 import aiChat from './ai-chat'
 import workflow from './workflow'
+import home from './home.ts'
 export default {
   lang: 'Deutsch',
   layout,
