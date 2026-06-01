@@ -145,4 +145,7 @@ export default {
   share: 'Teilen',
   copyLinkText: 'Link kopieren',
   userInputSetting: 'Einstellung externer Parameter (bis zu 3 können angezeigt werden)',
+  executing: 'Wird ausgeführt',
+  userInputSettingTip:
+    'Nur die Komponententypen Model, Knowledge, Switch, Date, TreeSelect, Single Select und Multi Select werden unterstützt',
 }
