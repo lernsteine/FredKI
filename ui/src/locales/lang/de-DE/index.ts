@@ -18,5 +18,6 @@ export default {
   common,
   dynamicsForm,
   aiChat,
-  workflow
+  workflow,
+  home,
 }
