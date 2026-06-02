@@ -1189,6 +1189,6 @@ class SwitchLanguageSerializer(serializers.Serializer):
         # 这个是一个list 完事是对象 key是语言的key value是语言的value  我只需要提取语言的key就行
         support_keys = [lang[0] for lang in support_language_list]
         # support_language_list = ['zh-CN', 'zh-Hant', 'en-US'] en_US,ja,zh_CN,zh_Hant
-        if not support_keys.__contains__(language):
-            raise AppApiException(500, _('language only support:') + ','.join(support_keys))
+        #if not support_keys.__contains__(language):
+        #    raise AppApiException(500, _('language only support:') + ','.join(support_keys))
         QuerySet(User).filter(id=self.data.get('user_id')).update(language=language)
