@@ -491,7 +491,10 @@ class ToolSerializer(serializers.Serializer):
                 ).import_(name=instance.get("name"), source="template")
 
                 try:
-                    requests.get(template_instance.get("downloadCallbackUrl"), timeout=5)
+                    download_callback_url = template_instance.get("downloadCallbackUrl", "")
+                    if not download_callback_url.startswith("https://apps.fit2cloud.com"):
+                       raise AppApiException(500, _("Illegal download callback url"))
+                    requests.get(download_callback_url, timeout=5)
                 except Exception as e:
                     maxkb_logger.error(f"callback appstore tool download error: {e}")
                 return tool
@@ -1117,7 +1120,8 @@ class ToolSerializer(serializers.Serializer):
                 is_active=False,
             )
             # 校验代码是否包括禁止的关键字
-            ToolExecutor().validate_mcp_transport(code)
+            if tool.get("tool_type") == ToolType.MCP:
+                ToolExecutor().validate_mcp_transport(code)
             tool_model.save()
             if tool.get("tool_type") == ToolType.WORKFLOW:
                 tool["id"] = tool_id
