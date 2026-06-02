@@ -148,4 +148,5 @@ export default {
   executing: 'Wird ausgeführt',
   userInputSettingTip:
     'Nur die Komponententypen Model, Knowledge, Switch, Date, TreeSelect, Single Select und Multi Select werden unterstützt',
+  remainingParamsMenuTitle: 'Menütitel für verbleibende Parameter',
 }
