@@ -16,6 +16,9 @@ export default {
     replace: 'Ersetzen',
   },
   tip: {
+    exportSimultaneously: 'Quelldateien exportieren',
+    exportSimultaneouslyTip:
+      'Wenn diese Option aktiviert ist, werden die Originaldateien zusammen mit der ZIP-Datei gepackt, sodass beim Import die Dateizuordnungen automatisch wiederhergestellt werden können. Wenn deaktiviert, wird nur der Textinhalt exportiert.',
     saveMessage: 'Aktuelle Änderungen wurden nicht gespeichert. Verlassen bestätigen?',
     cancelSuccess: 'Erfolgreich',
     sendMessage: 'Erfolgreich',
