@@ -73,6 +73,7 @@ export default {
     draggablePosition: 'Verschiebbare Position',
     showHistory: 'Chat-Verlauf anzeigen',
     displayGuide: 'Guide-Bild anzeigen (Schwebemodus)',
+    share: 'Teilen von Chat-Protokollen erlauben',
     disclaimer: 'Haftungsausschluss',
     disclaimerValue: 'Dieser Inhalt wurde von einer KI generiert und dient nur zu Informationszwecken.',
     chatBackground: 'Chat-Hintergrund',
