@@ -151,6 +151,7 @@ export default {
     subTitle: 'Ausführungsprotokoll ansehen',
   },
   sourceType: 'Quellentyp',
+  source: 'Quelle',
   knowledgeImportTip:
     'Wissensbasis erfolgreich importiert. Die Dokumente wurden noch nicht vektorisiert. Bitte konfigurieren Sie das Embedding-Modell und vektorisieren Sie die Dokumente.',
   import: 'Importieren',
