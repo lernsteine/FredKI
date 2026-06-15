@@ -69,6 +69,7 @@ export default {
     label: 'Status',
     enable: 'Aktivieren',
     disable: 'Deaktivieren',
+    enableStatus: 'Aktivierungsstatus',
     enabled: 'Aktiviert',
     disabled: 'Deaktiviert',
     enableSuccess: 'Erfolgreich',
