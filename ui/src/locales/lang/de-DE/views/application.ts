@@ -4,6 +4,8 @@ export default {
   createWorkFlowApplication: 'Workflow-Agent erstellen',
   importApplication: 'Agent importieren',
   copyApplication: 'Agent kopieren',
+  batchClearStrategyTip:
+    'Diese Aktion aktualisiert die Chat-Protokoll-Bereinigungsstrategie für alle ausgewählten Agenten.',
   simple: 'EINFACH',
   senior: 'WORKFLOW',
   simpleAgent: 'Einfacher Agent',
@@ -63,7 +65,7 @@ Bei Deaktivierung wird das Langzeitgedächtnis der Gesprächsbenutzer gelöscht.
     },
     appType: {
       simplePlaceholder: 'Geeignet für Einsteiger zum Erstellen eines Assistenten.',
-      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflow des Assistenten',
+      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflows des Assistenten',
     },
     appTemplate: {
       blankApp: {
@@ -71,7 +73,7 @@ Bei Deaktivierung wird das Langzeitgedächtnis der Gesprächsbenutzer gelöscht.
       },
       assistantApp: {
         title: 'Wissensassistent',
-        description: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflow des Assistenten',
+        description: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflows des Assistenten',
       },
     },
     aiModel: {
