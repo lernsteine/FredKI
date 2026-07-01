@@ -139,6 +139,7 @@ export default {
     uploadStatus: '{success} von {total} Dateien abgeschlossen',
     failedStatus: '{count} Dateien fehlgeschlagen',
     uploading: 'Wird hochgeladen',
+    allSuccess: 'Alle erfolgreich',
   },
   AssignmentMethod: {
     label: 'Zuweisungsmethode',
