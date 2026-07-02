@@ -40,6 +40,7 @@ export default {
     uploadMessage: 'Ziehen Sie Dateien hierher zum Hochladen oder',
     formats: 'Unterstützte Formate:',
     requiredMessage: 'Bitte laden Sie eine Datei hoch',
+    noSuccessFileMessage: 'Es wurden keine Dateien erfolgreich hochgeladen. Bitte erneut hochladen.',
     errorMessage1: 'Die Dateigröße überschreitet 100 MB',
     errorMessage2: 'Nicht unterstütztes Dateiformat',
     errorMessage3: 'Datei darf nicht leer sein',
