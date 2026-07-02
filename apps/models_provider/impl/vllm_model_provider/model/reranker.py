@@ -19,9 +19,10 @@ class VllmBgeReranker(MaxKBBaseModel, BaseDocumentCompressor):
         super().__init__(**kwargs)
         self.api_key = kwargs.get('api_key')
         self.model = kwargs.get('model')
-        self.params = kwargs.get('params')
+        self.params = dict(kwargs.get('params') or {})
         self.api_url = kwargs.get('api_url')
         self.top_n = kwargs.get('top_n', 3)
+        self.params.pop('top_n', None)
         self.client = cohere.ClientV2(kwargs.get('api_key'), base_url=kwargs.get('api_url'))
 
     @staticmethod
@@ -31,12 +32,14 @@ class VllmBgeReranker(MaxKBBaseModel, BaseDocumentCompressor):
     @staticmethod
     def new_instance(model_type, model_name, model_credential: Dict[str, object], **model_kwargs):
         r_url = model_credential.get('api_url')[:-3] if model_credential.get('api_url').endswith('/v1') else model_credential.get('api_url')
+        optional_params = MaxKBBaseModel.filter_optional_params(model_kwargs)
+        top_n = optional_params.pop('top_n', 3)
         return VllmBgeReranker(
             model=model_name,
             api_key=model_credential.get('api_key'),
             api_url=r_url,
-            params=model_kwargs,
-            **model_kwargs
+            top_n=top_n,
+            params=optional_params,
         )
 
     def compress_documents(self, documents: Sequence[Document], query: str, callbacks: Optional[Callbacks] = None) -> \
