@@ -570,7 +570,7 @@ class UserManageSerializer(serializers.Serializer):
                 .distinct()
             )
         else:
-            user_ids = User.objects.values_list('id', flat=True)
+            user_ids = User.objects.filter(role__in=RoleConstants.USER.name).values_list('id', flat=True)
 
         query_set = User.objects.filter(id__in=user_ids)
         if nick_name:
@@ -601,7 +601,6 @@ class UserManageSerializer(serializers.Serializer):
                     user_dict[user_id] = {
                         'id': user_id,
                         'nick_name': relation.user.nick_name,
-                        'email': relation.user.email,
                         'roles': [relation.role.role_name]
                     }
                 else:
@@ -614,7 +613,6 @@ class UserManageSerializer(serializers.Serializer):
             {
                 'id': user.id,
                 'nick_name': user.nick_name,
-                'email': user.email,
                 'roles': [RoleConstants.USER.name]
             } for user in user_list
         ]
