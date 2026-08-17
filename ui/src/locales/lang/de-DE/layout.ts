@@ -39,6 +39,6 @@ export default {
     daysValid: 'Gültige Tage',
   },
   copyright: 'Copyright © 2014-2026 FIT2CLOUD, Alle Rechte vorbehalten.',
-  userManualUrl: 'http://docs.maxkb.hk/',
+  userManualUrl: 'https://team.lernsteine.com/index.php/apps/collectives/p/tzyo6b3wTdaCocN/Dokumentation-zu-FredKI-8/',
   forumUrl: 'https://github.com/1Panel-dev/MaxKB/discussions',
 }
