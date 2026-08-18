@@ -3,7 +3,8 @@
 import datetime
 
 from django.db import transaction
-from django.db.models import Q, Max
+from django.db.models import CharField, Q, Max
+from django.db.models.functions import Cast
 from django.utils import timezone
 
 from application.models import Application, Chat, ChatRecord, ApplicationChatUserStats
@@ -45,6 +46,48 @@ def clean_chat_log_job_lock():
     maxkb_logger.info(_('end clean chat log'))
 
 
+def delete_orphan_chats(orphan_chat_ids):
+    if not orphan_chat_ids:
+        return
+
+    orphan_chats = list(Chat.objects.filter(id__in=orphan_chat_ids))
+
+    # 按 (application_id, chat_user_id) 收集孤儿会话的用户，
+    # 仅当该用户在该应用下不再有其它会话时才删除其访问统计，避免误删其他应用或仍活跃用户的统计
+    app_user_ids = {}
+    for chat in orphan_chats:
+        if chat.chat_user_id:
+            chat_user_id = str(chat.chat_user_id)
+            app_user_ids.setdefault(chat.application_id, set()).add(chat_user_id)
+
+    if app_user_ids:
+        all_user_ids = set()
+        for user_ids in app_user_ids.values():
+            all_user_ids.update(user_ids)
+
+        remaining_keys = Chat.objects.filter(
+            application_id__in=app_user_ids.keys(),
+            chat_user_id__in=all_user_ids,
+        ).exclude(id__in=orphan_chat_ids).values_list('application_id', 'chat_user_id').distinct()
+
+        remaining_app_user_ids = {}
+        for app_id, user_id in remaining_keys:
+            remaining_app_user_ids.setdefault(app_id, set()).add(user_id)
+
+        for app_id, user_ids in app_user_ids.items():
+            user_ids_to_delete = user_ids - remaining_app_user_ids.get(app_id, set())
+            if user_ids_to_delete:
+                ApplicationChatUserStats.objects.annotate(
+                    chat_user_id_str=Cast('chat_user_id', output_field=CharField(max_length=128))
+                ).filter(
+                    application_id=app_id,
+                    chat_user_id_str__in=user_ids_to_delete,
+                ).delete()
+
+    deleted_chat_count, _ = Chat.objects.filter(id__in=orphan_chat_ids).delete()
+    maxkb_logger.info(f'[clean_chat_log] delete orphan chats, count={deleted_chat_count}')
+
+
 def clean_method(query_conditions, clean_log=True):
     batch_size = 500
     while True:
@@ -75,6 +118,7 @@ def clean_method(query_conditions, clean_log=True):
             deleted_count = 0
             if clean_log:
                 deleted_count = ChatRecord.objects.filter(id__in=chat_record_ids).delete()[0]
+                maxkb_logger.info(f'[clean_chat_log] delete chat_records, count={deleted_count}')
 
                 from django.db.models import Count
                 updated_counts = ChatRecord.objects.filter(chat_id__in=chat_ids) \
@@ -87,49 +131,20 @@ def clean_method(query_conditions, clean_log=True):
                     count = count_map.get(chat_id, 0)  # 如果没有记录则为0
                     Chat.objects.filter(id=chat_id).update(chat_record_count=count)
 
-                # 删除没有关联 ChatRecord 的 Chat
-                chats = Chat.objects.filter(
-                    chatrecord__isnull=True,
-                    id__in=chat_ids,
-                )
-                orphan_chats = list(chats)
-                orphan_chat_ids = [chat.id for chat in orphan_chats]
-
-                # 按 (application_id, chat_user_id) 收集孤儿会话的用户，
-                # 仅当该用户在该应用下不再有其它会话时才删除其访问统计，避免误删其他应用或仍活跃用户的统计
-                app_user_ids = {}
-                for chat in orphan_chats:
-                    if chat.chat_user_id:
-                        app_user_ids.setdefault(chat.application_id, set()).add(str(chat.chat_user_id))
-
-                if app_user_ids:
-                    all_user_ids = set()
-                    for user_ids in app_user_ids.values():
-                        all_user_ids.update(user_ids)
-
-                    # 一次查询找出仍存在其它会话的 (application_id, chat_user_id)
-                    remaining_keys = Chat.objects.filter(
-                        application_id__in=app_user_ids.keys(),
-                        chat_user_id__in=all_user_ids,
-                    ).exclude(id__in=orphan_chat_ids).values_list('application_id', 'chat_user_id').distinct()
-
-                    remaining_app_user_ids = {}
-                    for app_id, user_id in remaining_keys:
-                        remaining_app_user_ids.setdefault(app_id, set()).add(user_id)
-
-                    for app_id, user_ids in app_user_ids.items():
-                        user_ids_to_delete = user_ids - remaining_app_user_ids.get(app_id, set())
-                        if user_ids_to_delete:
-                            ApplicationChatUserStats.objects.filter(
-                                application_id=app_id,
-                                chat_user_id__in=user_ids_to_delete,
-                            ).delete()
-
-                Chat.objects.filter(id__in=orphan_chat_ids).delete()
+                # 删除已经没有关联 ChatRecord 的 Chat
+                orphan_chat_ids = [chat_id for chat_id in chat_ids if count_map.get(chat_id, 0) == 0]
+                delete_orphan_chats(orphan_chat_ids)
             File.objects.filter(loid__in=[file.loid for file in files_to_delete]).delete()
 
             if deleted_count < batch_size:
                 break
+
+    if clean_log:
+        orphan_chat_ids = list(
+            Chat.objects.filter(chatrecord__isnull=True).values_list('id', flat=True)
+        )
+        maxkb_logger.info(f'[clean_chat_log] final orphan_chat_count={len(orphan_chat_ids)}')
+        delete_orphan_chats(orphan_chat_ids)
 
 
 def run():
