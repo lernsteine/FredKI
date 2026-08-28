@@ -5,7 +5,7 @@ export default {
   importApplication: 'Agent importieren',
   copyApplication: 'Agent kopieren',
   batchClearStrategyTip:
-    'Diese Aktion aktualisiert die Chat-Protokoll-Bereinigungsstrategie für alle ausgewählten Agenten.',
+    'Diese Aktion aktualisiert die Chat-Protokoll-Bereinigungsrichtlinie für die ausgewählten Agenten im Batch.',
   simple: 'EINFACH',
   senior: 'WORKFLOW',
   simpleAgent: 'Einfacher Agent',
@@ -52,6 +52,9 @@ export default {
     tips1: `Nach Aktivierung werden neue Gespräche ab dem Aktivierungszeitpunkt aufgezeichnet und periodisch Gedächtnis generiert, das über`,
     tips2: `Variablen im System-Prompt aufgerufen werden kann.
 Bei Deaktivierung wird das Langzeitgedächtnis der Gesprächsbenutzer gelöscht. Bei erneuter Aktivierung wird die Akkumulation ab dem Aktivierungszeitpunkt fortgesetzt.`,
+    defaultModel: 'Standardmodell',
+    custom: 'Benutzerdefiniert',
+    modelRequiredMessage: 'Bitte wählen Sie ein Langzeitgedächtnis-Modell aus',
   },
   form: {
     appName: {
@@ -65,7 +68,7 @@ Bei Deaktivierung wird das Langzeitgedächtnis der Gesprächsbenutzer gelöscht.
     },
     appType: {
       simplePlaceholder: 'Geeignet für Einsteiger zum Erstellen eines Assistenten.',
-      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflows des Assistenten',
+      workflowPlaceholder: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflow des Assistenten',
     },
     appTemplate: {
       blankApp: {
@@ -73,7 +76,7 @@ Bei Deaktivierung wird das Langzeitgedächtnis der Gesprächsbenutzer gelöscht.
       },
       assistantApp: {
         title: 'Wissensassistent',
-        description: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflows des Assistenten',
+        description: 'Geeignet für fortgeschrittene Benutzer zur Anpassung des Workflow des Assistenten',
       },
     },
     aiModel: {
@@ -124,6 +127,8 @@ Antwortanforderungen:
       placeholder: 'Bitte Spracherkennungsmodell auswählen',
       requiredMessage: 'Bitte Sprach-Eingabemodell auswählen',
       autoSend: 'Automatisches Senden',
+      defaultModel: 'Standardmodell',
+      custom: 'Benutzerdefiniert',
     },
     voicePlay: {
       label: 'Sprachwiedergabe',
@@ -133,6 +138,8 @@ Antwortanforderungen:
       browser: 'Browser-Wiedergabe (kostenlos)',
       tts: 'TTS-Modell',
       listeningTest: 'Vorschau',
+      defaultModel: 'Standardmodell',
+      custom: 'Benutzerdefiniert',
     },
     reasoningContent: {
       label: 'Denkprozess ausgeben',
