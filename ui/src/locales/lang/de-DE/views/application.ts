@@ -55,6 +55,7 @@ Bei Deaktivierung wird das Langzeitgedächtnis der Gesprächsbenutzer gelöscht.
     defaultModel: 'Standardmodell',
     custom: 'Benutzerdefiniert',
     modelRequiredMessage: 'Bitte wählen Sie ein Langzeitgedächtnis-Modell aus',
+    modelSettingTip: 'Das Modell kann unter „Langzeitgedächtnis-Einstellungen“ konfiguriert werden',
   },
   form: {
     appName: {
