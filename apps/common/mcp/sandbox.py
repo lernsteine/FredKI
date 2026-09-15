@@ -9,16 +9,18 @@ from pathlib import Path
 
 from mcp.types import Implementation
 
+from common.mcp.config import remote_connection
+from maxkb.const import CONFIG
+
 
 BOOTSTRAP_KEY = "maxkbSandbox"
-REMOTE_FIELDS = {"transport", "url", "headers", "timeout", "sse_read_timeout", "terminate_on_close"}
 
 
 def sandbox_settings():
-    from maxkb.const import CONFIG
-
-    if not sys.platform.startswith("linux") or not bool(int(CONFIG.get("SANDBOX", 1))):
-        raise ValueError("External MCP requires an enabled Linux sandbox")
+    if not bool(int(CONFIG.get("SANDBOX", 1))):
+        raise ValueError("MCP sandbox is disabled")
+    if not sys.platform.startswith("linux"):
+        raise ValueError("MCP sandbox requires Linux; set SANDBOX=0 for local development")
     account = pwd.getpwnam("sandbox")
     sandbox_home = Path(CONFIG.get("SANDBOX_HOME", "/opt/maxkb-app/sandbox"))
     library = sandbox_home / "lib/sandbox.so"
@@ -36,19 +38,16 @@ def sandbox_settings():
     }
 
 
-def sandbox_connection(config, networks):
+def sandbox_connection(config):
     settings = sandbox_settings()
     # Release builds replace source files with adjacent, sourceless .pyc files.
     # Search only our installed directory, never a user-controlled module path.
-    worker = PathFinder.find_spec("mcp_sandbox_worker", [str(Path(__file__).parent)])
+    worker = PathFinder.find_spec("sandbox_worker", [str(Path(__file__).parent)])
     if worker is None or worker.origin is None or Path(worker.origin).suffix not in (".py", ".pyc"):
         raise RuntimeError("MCP sandbox worker is missing or has an unsupported format")
     # Only transport data goes to the remote client. In particular, ignore user
     # command/env/factory/session_kwargs fields and never deserialize Python code.
-    remote = {key: value for key, value in config.items() if key in REMOTE_FIELDS}
-    bootstrap = {"connection": remote, "networks": [str(network) for network in networks]}
-    # Check serializability before launching, and detach from mutable input.
-    bootstrap = json.loads(json.dumps(bootstrap, allow_nan=False))
+    bootstrap = {"connection": remote_connection(config)}
     return {
         "transport": "stdio",
         "command": sys.executable,
