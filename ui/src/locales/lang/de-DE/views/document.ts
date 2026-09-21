@@ -24,6 +24,7 @@ export default {
     sendMessage: 'Erfolgreich',
     vectorizationSuccess: 'Erfolgreich',
     nameMessage: 'Dokumentenname darf nicht leer sein!',
+    nameInvalidCharacters: 'Dokumentenname darf folgende Zeichen nicht enthalten: : \\ / ? * [ ]',
     importMessage: 'Erfolgreich',
     migrationSuccess: 'Erfolgreich',
     replaceSuccess: 'Erfolgreich',
@@ -95,7 +96,7 @@ export default {
       text: 'Doppelte Symbole, Leerzeichen, Leerzeilen und Tabulatoren entfernen.',
     },
     checkedConnect: {
-      label: 'Beim Import "Verwandte Fragen"-Abschnitt für Frage-Antwort-Paare hinzufügen.',
+      label: 'Beim Import „Verwandte Fragen“-Abschnitt für Frage-Antwort-Paare hinzufügen.',
     },
   },
   buttons: {
