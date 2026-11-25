@@ -40,10 +40,11 @@ from common.handle.base_to_response import BaseToResponse
 from common.handle.impl.response.openai_to_response import OpenaiToResponse
 from common.handle.impl.response.system_to_response import SystemToResponse
 from common.utils.common import flat_map, get_file_content, is_valid_uuid
+from common.utils.file_reference import validate_chat_file_references
 from knowledge.models import Document, Paragraph
 from maxkb.conf import PROJECT_DIR
 from models_provider.models import Model, Status
-from models_provider.tools import get_model_instance_by_model_workspace_id
+from models_provider.tools import get_model_by_id, get_model_instance_by_model_workspace_id
 from system_manage.models.resource_mapping import ResourceMapping
 
 
@@ -205,11 +206,8 @@ class PromptGenerateSerializer(serializers.Serializer):
 
         messages[-1]['content'] = q
         SUPPORTED_MODEL_TYPES = ["LLM", "IMAGE"]
-        model_exist = QuerySet(Model).filter(
-            id=model_id,
-            model_type__in=SUPPORTED_MODEL_TYPES
-        ).exists()
-        if not model_exist:
+        model = get_model_by_id(model_id, workspace_id)
+        if model.model_type not in SUPPORTED_MODEL_TYPES:
             raise Exception(_("Model does not exist or is not an LLM model"))
 
         def process():
@@ -482,7 +480,7 @@ class ChatSerializers(serializers.Serializer):
                     raise ChatException(500, _("The chat user is not authorized."))
 
     def chat(self, instance: dict, base_to_response: BaseToResponse = SystemToResponse(),
-             check_chat_record: bool = True):
+             check_chat_record: bool = True, check_file_access: bool = True):
         super().is_valid(raise_exception=True)
         ChatMessageSerializers(data=instance).is_valid(raise_exception=True)
         chat_info = self.get_chat_info()
@@ -504,6 +502,9 @@ class ChatSerializers(serializers.Serializer):
         self.is_valid_chat_id(chat_info)
         if not self.data.get('debug'):
             self.is_valid_chat_user()
+        if check_file_access:
+            validate_chat_file_references(instance, self.data.get('chat_user_id'), chat_info.application_id,
+                                          chat_info.chat_id)
         if chat_info.application.type == ApplicationTypeChoices.SIMPLE:
             self.is_valid_application_simple(raise_exception=True, chat_info=chat_info)
             return self.chat_simple(chat_info, instance, base_to_response)
