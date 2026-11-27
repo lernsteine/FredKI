@@ -9,10 +9,12 @@
 import os
 import re
 import zipfile
+from itertools import chain
 from typing import List
 
 import uuid_utils.compat as uuid
-from django.db.models import QuerySet
+from django.db.models import CharField, Q, QuerySet
+from django.db.models.functions import Cast
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
@@ -25,12 +27,12 @@ from application.flow.tools import (
 from common.config.embedding_config import ModelManage
 from common.db.search import native_search
 from common.db.sql_execute import sql_execute, update_execute
-from common.exception.app_exception import AppApiException
+from common.exception.app_exception import AppApiException, AppUnauthorizedFailed
 from common.utils.common import get_file_content
 from common.utils.fork import Fork
 from common.utils.logger import maxkb_logger
 from knowledge.models import Document, KnowledgeWorkflow, KnowledgeWorkflowVersion, KnowledgeType
-from knowledge.models import Paragraph, Problem, ProblemParagraphMapping, Knowledge, File
+from knowledge.models import Paragraph, Problem, ProblemParagraphMapping, Knowledge, File, FileSourceType
 from maxkb.conf import PROJECT_DIR
 from models_provider.tools import get_model, get_model_default_params
 from system_manage.models.resource_mapping import ResourceMapping, ResourceType
@@ -55,6 +57,17 @@ class MetaSerializer(serializers.Serializer):
 
 class BatchSerializer(serializers.Serializer):
     id_list = serializers.ListField(required=True, child=serializers.UUIDField(required=True), label=_('id list'))
+
+    @classmethod
+    def scoped_ids(cls, ids, queryset):
+        batch = cls(data={'id_list': ids})
+        batch.is_valid(raise_exception=True)
+        ids = list(dict.fromkeys(str(item) for item in batch.validated_data['id_list']))
+        # Evaluate the rows, including any requested row locks, before the first side effect.
+        matched = list(queryset.filter(id__in=ids).order_by('id').values_list('id', flat=True))
+        if len(matched) != len(ids):
+            raise AppUnauthorizedFailed(403, _('No permission to access'))
+        return ids
 
     def is_valid(self, *, model=None, raise_exception=False):
         super().is_valid(raise_exception=True)
@@ -185,8 +198,13 @@ def is_valid_uuid(s):
         return False
 
 
-def write_image(zip_path: str, image_list: List[str]):
-    for image in image_list:
+def write_image(zip_path: str, paragraph_images: List[List[str]], knowledge_id):
+    document_ids = Document.objects.filter(knowledge_id=knowledge_id).values_list(Cast('id', CharField()), flat=True)
+    files = File.objects.filter(
+        Q(source_type=FileSourceType.KNOWLEDGE, source_id=knowledge_id)
+        | Q(source_type=FileSourceType.DOCUMENT, source_id__in=document_ids)
+    )
+    for image in chain.from_iterable(paragraph_images):
         # Match (./oss/file/<id>) from both image syntax and regular links/HTML src
         src_match = re.search(r'\bsrc=["\'](\./oss/(?:file|image)/[^"\']+)["\']', image)
         paren_match = re.search(r'\(\./oss/(?:file|image)/([^)]+)\)', image)
@@ -199,7 +217,7 @@ def write_image(zip_path: str, image_list: List[str]):
             continue
         if not is_valid_uuid(image_id):
             continue
-        file = QuerySet(File).filter(id=image_id).first()
+        file = files.filter(id=image_id).first()
         if file is None:
             continue
         zip_inner_path = os.path.join('oss', 'file', image_id)

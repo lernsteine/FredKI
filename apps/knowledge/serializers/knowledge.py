@@ -570,8 +570,7 @@ class KnowledgeSerializer(serializers.Serializer):
             with TemporaryDirectory() as tempdir:
                 knowledge_file = os.path.join(tempdir, "knowledge.xlsx")
                 workbook.save(knowledge_file)
-                for r in res:
-                    write_image(tempdir, r)
+                write_image(tempdir, res, knowledge.id)
                 zip_dir(tempdir, zip_buffer)
             response.write(zip_buffer.getvalue())
             return response
@@ -663,8 +662,7 @@ class KnowledgeSerializer(serializers.Serializer):
                 knowledge_file_path = os.path.join(tempdir, "knowledge.xlsx")
                 workbook.save(knowledge_file_path)
 
-                for r in res:
-                    write_image(tempdir, r)
+                write_image(tempdir, res, knowledge.id)
 
                 source_file_path_set = set()
                 source_file_export_list = []
@@ -1496,31 +1494,18 @@ class KnowledgeSerializer(serializers.Serializer):
             return True
 
     class Tags(serializers.Serializer):
-        workspace_id = serializers.CharField(required=True, label=_("workspace id"))
-        user_id = serializers.UUIDField(required=True, label=_("user id"))
         knowledge_ids = serializers.ListField(
             required=True, label=_("knowledge ids"), child=serializers.UUIDField(required=True, label=_("id"))
         )
 
-        def list(self):
+        def list(self, authorized_knowledge):
             self.is_valid(raise_exception=True)
-            if self.data.get("name"):
-                name = self.data.get("name")
-                tags = (
-                    QuerySet(Tag)
-                    .filter(knowledge_id__in=self.data.get("knowledge_ids"))
-                    .filter(Q(key__icontains=name) | Q(value__icontains=name))
-                    .values("key", "value", "id", "create_time", "update_time")
-                    .order_by("create_time", "key", "value")
-                )
-            else:
-                # 获取所有标签，按创建时间排序保持稳定顺序
-                tags = (
-                    QuerySet(Tag)
-                    .filter(knowledge_id__in=self.data.get("knowledge_ids"))
-                    .values("key", "value", "id", "create_time", "update_time")
-                    .order_by("create_time", "key", "value")
-                )
+            tags = (
+                QuerySet(Tag)
+                .filter(knowledge__in=authorized_knowledge.filter(id__in=self.validated_data["knowledge_ids"]))
+                .values("key", "value", "id", "create_time", "update_time")
+                .order_by("create_time", "key", "value")
+            )
 
             # 按key分组
             grouped_tags = defaultdict(list)
@@ -1560,11 +1545,11 @@ class KnowledgeBatchOperateSerializer(serializers.Serializer):
     @transaction.atomic
     def batch_delete(self, instance: Dict, with_valid=True):
         if with_valid:
-            BatchSerializer(data=instance).is_valid(model=Knowledge, raise_exception=True)
             self.is_valid(raise_exception=True)
-        id_list = instance.get("id_list")
         workspace_id = self.data.get("workspace_id")
-        knowledge_query_set = QuerySet(Knowledge).filter(id__in=id_list, workspace_id=workspace_id)
+        knowledge_query_set = QuerySet(Knowledge).filter(workspace_id=workspace_id)
+        id_list = BatchSerializer.scoped_ids(instance.get("id_list"), knowledge_query_set.select_for_update())
+        knowledge_query_set = knowledge_query_set.filter(id__in=id_list)
 
         # 删除所有关联
         document_query_set = QuerySet(Document).filter(knowledge__in=knowledge_query_set)
